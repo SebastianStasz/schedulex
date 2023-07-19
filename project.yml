@@ -1,0 +1,51 @@
+# Documentation
+# https://github.com/yonaskolb/XcodeGen/blob/master/Docs/ProjectSpec.md
+
+name: Schedulex
+
+options:
+  minimumXcodeGenVersion: 2.24
+  bundleIdPrefix: sebastian-staszczyk
+  groupSortPosition: bottom
+  platform: iOS
+  deploymentTarget:
+    iOS: 17.0
+
+targets:
+  Schedulex:
+    scheme:
+      testTargets:
+        - name: SchedulexTests
+          parallelizable: true
+      gatherCoverageData: true
+    templates:
+      - Schedulex
+    dependencies:
+      - package: Domain
+      - package: Widgets
+
+  SchedulexTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - SchedulexTests
+    scheme:
+      testTargets:
+        - SchedulexTests
+      gatherCoverageData: true
+    settings:
+      INFOPLIST_FILE: Schedulex/Info.plist
+    dependencies:
+      - target: Schedulex
+
+targetTemplates:
+  Schedulex:
+    platform: iOS
+    type: application
+    sources: [Schedulex]
+    settings:
+      INFOPLIST_FILE: Schedulex/Info.plist
+
+localPackages:
+  - ./Packages/Domain
+  - ./Packages/Widgets
