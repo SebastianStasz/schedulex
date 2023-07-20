@@ -23,6 +23,12 @@ targets:
     dependencies:
       - package: Domain
       - package: Widgets
+      - package: Firebase
+        product: FirebaseAuth
+      - package: Firebase
+        product: FirebaseFirestore
+      - package: Firebase
+        product: FirebaseFirestoreSwift
 
   SchedulexTests:
     type: bundle.unit-test
@@ -37,6 +43,12 @@ targets:
       INFOPLIST_FILE: Schedulex/Info.plist
     dependencies:
       - target: Schedulex
+      - package: Firebase
+        product: FirebaseAuth
+      - package: Firebase
+        product: FirebaseFirestore
+      - package: Firebase
+        product: FirebaseFirestoreSwift
 
 targetTemplates:
   Schedulex:
@@ -49,3 +61,8 @@ targetTemplates:
 localPackages:
   - ./Packages/Domain
   - ./Packages/Widgets
+
+packages:
+  Firebase:
+    url: https://github.com/firebase/firebase-ios-sdk
+    from: 10.0.0
