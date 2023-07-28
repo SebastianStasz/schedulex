@@ -23,6 +23,7 @@ targets:
     dependencies:
       - package: Domain
       - package: Widgets
+      - package: SchedulexFirebase
       - package: Firebase
         product: FirebaseAuth
       - package: Firebase
@@ -61,6 +62,7 @@ targetTemplates:
 localPackages:
   - ./Packages/Domain
   - ./Packages/Widgets
+  - ./Packages/SchedulexFirebase
 
 packages:
   Firebase:
