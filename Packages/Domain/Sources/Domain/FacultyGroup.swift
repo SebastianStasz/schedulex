@@ -7,8 +7,10 @@
 
 import Foundation
 
-public struct FacultyGroup: Identifiable, Decodable {
+public struct FacultyGroup: Hashable, Decodable {
     public let name: String
 
-    public var id: String { name }
+    public init(name: String) {
+        self.name = name
+    }
 }

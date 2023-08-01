@@ -5,6 +5,7 @@
 //  Created by Sebastian Staszczyk on 31/07/2023.
 //
 
+import Domain
 import SwiftUI
 
 struct TabBarView: View {
@@ -15,6 +16,12 @@ struct TabBarView: View {
 
             NavigationStack {
                 SchoolView()
+                    .navigationDestination(for: Faculty.self) {
+                        FacultyGroupsList(faculty: $0)
+                    }
+                    .navigationDestination(for: FacultyGroup.self) {
+                        Text($0.name)
+                    }
             }
             .tabItem { Label("UEK", systemImage: "graduationcap") }
         }

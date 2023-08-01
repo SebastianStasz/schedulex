@@ -7,12 +7,10 @@
 
 import Foundation
 
-public struct School: Identifiable, Decodable {
+public struct School: Decodable {
     public let name: String
     public let city: String
     public let faculties: [Faculty]
     public let pavilions: [Pavilion]
     public let teacherGroups: [TeacherGroup]
-
-    public var id: String { name }
 }

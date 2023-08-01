@@ -7,11 +7,9 @@
 
 import Foundation
 
-public struct Faculty: Identifiable, Decodable {
+public struct Faculty: Hashable, Decodable {
     public let name: String
     public let groups: [FacultyGroup]
-
-    public var id: String { name }
 
     public var numberOfGroups: Int {
         groups.count
@@ -25,5 +23,10 @@ public struct Faculty: Identifiable, Decodable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         name = try container.decode(String.self, forKey: .faculty)
         groups = try container.decode([FacultyGroup].self, forKey: .groups)
+    }
+
+    public init(name: String, groups: [FacultyGroup]) {
+        self.name = name
+        self.groups = groups
     }
 }

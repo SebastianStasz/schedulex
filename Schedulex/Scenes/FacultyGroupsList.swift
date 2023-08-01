@@ -10,23 +10,25 @@ import SwiftUI
 
 struct FacultyGroupsList: View {
     @State private var searchText = ""
-    let groups: [FacultyGroup]
+    let faculty: Faculty
 
     var body: some View {
-        List(filteredGroups) {
-            BaseListItem(title: $0.name)
+        List(filteredGroups, id: \.self) { group in
+            NavigationLink(value: group) {
+                BaseListItem(title: group.name)
+            }
         }
-        .navigationTitle("Groups")
+        .navigationTitle(faculty.name)
         .searchable(text: $searchText)
     }
 
     private var filteredGroups: [FacultyGroup] {
-        groups.filterUserSearch(text: searchText, by: { $0.name })
+        faculty.groups.filterUserSearch(text: searchText, by: { $0.name })
     }
 }
 
 struct FacultyGroupsList_Previews: PreviewProvider {
     static var previews: some View {
-        FacultyGroupsList(groups: [])
+        FacultyGroupsList(faculty: .sample)
     }
 }
