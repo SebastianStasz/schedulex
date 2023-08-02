@@ -15,7 +15,7 @@ struct FacultyGroupsList: View {
     var body: some View {
         List(filteredGroups, id: \.self) { group in
             NavigationLink(value: group) {
-                BaseListItem(title: group.name)
+                BaseListItem(title: group.name, caption: "\(group.numberOfEvents) events")
             }
         }
         .navigationTitle(faculty.name)

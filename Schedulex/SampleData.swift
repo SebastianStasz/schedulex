@@ -14,6 +14,8 @@ extension Faculty {
 
 extension FacultyGroup {
     static var samples: [FacultyGroup] {
-        [FacultyGroup(name: "ZIIAS1-1111"), FacultyGroup(name: "ZIIAS1-1112"), FacultyGroup(name: "ZIIAS1-1113")]
+        [FacultyGroup(name: "ZIIAS1-1111", numberOfEvents: 208),
+         FacultyGroup(name: "ZIIAS1-1112", numberOfEvents: 145),
+         FacultyGroup(name: "ZIIAS1-1113", numberOfEvents: 231)]
     }
 }
