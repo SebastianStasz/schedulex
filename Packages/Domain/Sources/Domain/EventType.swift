@@ -8,9 +8,22 @@
 import Foundation
 
 public enum EventType: String, Hashable, Decodable {
+    case test
     case exam
     case lecture
-    case excercises
+    case colloquium
+    case exercises
+    case project
     case languageCourse
+    case electiveLecture
     case tutorials
+    case seminar
+    case parlour
+    case eventMoved
+    case reservation
+    case laboratory
+    case electiveParlour
+    case postgraduateStudies
+    case electiveExercises
+    case elearningExercises
 }

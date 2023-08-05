@@ -9,12 +9,16 @@ import Foundation
 
 public struct FacultyGroup: Hashable, Decodable {
     public let name: String
-    public let events: [Event]
+    public let facultyDocument: String
     public let numberOfEvents: Int
 
-    public init(name: String, events: [Event], numberOfEvents: Int) {
+    public init(name: String, facultyDocument: String, numberOfEvents: Int) {
         self.name = name
-        self.events = events
+        self.facultyDocument = facultyDocument
         self.numberOfEvents = numberOfEvents
     }
+}
+
+public struct FacultyGroupEvents: Decodable {
+    public let events: [Event]
 }

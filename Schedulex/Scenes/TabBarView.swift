@@ -20,7 +20,7 @@ struct TabBarView: View {
                         FacultyGroupsList(faculty: $0)
                     }
                     .navigationDestination(for: FacultyGroup.self) {
-                        Text($0.name)
+                        FacultyGroupView(facultyGroup: $0)
                     }
             }
             .tabItem { Label("UEK", systemImage: "graduationcap") }
