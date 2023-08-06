@@ -13,5 +13,5 @@ public struct Event: Hashable, Decodable {
     public let name: String
     public let place: String?
     public let teacher: String
-    public let type: EventType
+    public let type: String
 }
