@@ -27,7 +27,7 @@ struct SchoolView: View {
             }
         }
         .navigationTitle("UEK")
-        .searchable(text: $searchText, prompt: "Faculties or groups")
+        .searchable(text: $searchText, prompt: "Faculty or group")
         .task { school = try? await FirestoreService().getCracowUniversityOfEconomics() }
     }
 

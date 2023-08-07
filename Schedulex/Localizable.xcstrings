@@ -1,0 +1,36 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "Dashboard" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pulpit"
+          }
+        }
+      }
+    },
+    "Faculty or group" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kierunek lub grupa"
+          }
+        }
+      }
+    },
+    "UEK" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "UEK"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

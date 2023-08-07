@@ -21,3 +21,7 @@ extension FacultyGroup {
          FacultyGroup(name: "ZIIAS1-1113", facultyDocument: "Applied Informatics", numberOfEvents: 231)]
     }
 }
+
+extension Event {
+    static let sample = Event(startDate: .now, endDate: .now, name: "Probability and Statistics", place: "Place", teacher: "dr Some Name", type: "Lecture")
+}
