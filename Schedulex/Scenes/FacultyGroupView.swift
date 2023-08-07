@@ -9,16 +9,42 @@ import Domain
 import SwiftUI
 import SchedulexFirebase
 
+struct ListSection<T: Hashable>: Identifiable {
+    let title: String
+    let items: [T]
+
+    var id: String { title }
+}
+
 struct FacultyGroupView: View {
     @State private var facultyGroupEvents: FacultyGroupEvents?
     let facultyGroup: FacultyGroup
 
     var body: some View {
-        List(facultyGroupEvents?.events ?? [], id: \.self) { event in
-            BaseListItem(title: event.name, caption: event.teacher)
+        List(listSections ?? []) { section in
+            Section(section.title) {
+                ForEach(section.items, id: \.self) { 
+                    FacultyGroupListItemView(event: $0)
+                }
+            }
         }
         .navigationTitle(facultyGroup.name)
         .task { facultyGroupEvents = try? await FirestoreService().getCracowUniversityOfEconomicsEvents(for: facultyGroup)}
+    }
+
+    private var listSections: [ListSection<Event>]? {
+        facultyGroupEvents?.events
+            .filter { $0.startDate != nil }
+            .reduce(into: [ListSection<Event>](), { result, event in
+                let date = event.startDateWithoutTime!.formatted(date: .long, time: .omitted)
+                if let sectionIndex = result.firstIndex(where: { $0.title == date }) {
+                    let items = result[sectionIndex].items
+                    result.remove(at: sectionIndex)
+                    result.append(ListSection(title: date, items: items + [event]))
+                } else {
+                    result.append(ListSection(title: date, items: [event]))
+                }
+            })
     }
 }
 
