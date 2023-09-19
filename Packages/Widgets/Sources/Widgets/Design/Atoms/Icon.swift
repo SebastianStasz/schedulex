@@ -9,7 +9,9 @@ public enum Icon: String, Identifiable, CaseIterable {
     case tabBar1 = "house"
     case tabBar2 = "graduationcap"
 
-    public var id: String { rawValue }
+    public var id: String {
+        rawValue
+    }
 
     var name: String {
         switch self {
