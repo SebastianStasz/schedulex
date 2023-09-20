@@ -18,4 +18,5 @@ class RootStore: ObservableObject {
     let viewDidAppear = PassthroughSubject<Void, Never>()
     let viewWillDisappear = PassthroughSubject<Void, Never>()
     let viewDidDisappear = PassthroughSubject<Void, Never>()
+    let viewWillAppearForTheFirstTime = PassthroughSubject<Void, Never>()
 }

@@ -6,13 +6,15 @@
 //
 
 import SwiftUI
+import SchedulexFirebase
 
 class SwiftUIViewController<VM: ViewModel, View: RootView>: UIHostingController<View> where VM.Store == View.Store {
     private weak var store: RootStore?
+    private var isFirstAppear = true
     let viewModel: VM
 
     init(viewModel: VM) {
-        let store = viewModel.makeStore()
+        let store = viewModel.makeStore(storage: FirestoreService())
         let view = View(store: store)
         self.store = store
         self.viewModel = viewModel
@@ -27,6 +29,10 @@ class SwiftUIViewController<VM: ViewModel, View: RootView>: UIHostingController<
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         store?.viewWillAppear.send()
+        if isFirstAppear {
+            isFirstAppear = false
+            store?.viewWillAppearForTheFirstTime.send()
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
