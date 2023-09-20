@@ -13,6 +13,10 @@ enum ColorStyle: CaseIterable {
     case grayShade1
     case accentPrimary
     case textPrimary
+    case blueShade1
+    case blueShade2
+    case blueShade3
+    case blueShade4
 
     var name: String {
         switch self {
@@ -26,6 +30,14 @@ enum ColorStyle: CaseIterable {
             return "accent_primary"
         case .textPrimary:
             return "text_primary"
+        case .blueShade1:
+            return "blue_shade_1"
+        case .blueShade2:
+            return "blue_shade_2"
+        case .blueShade3:
+            return "blue_shade_3"
+        case .blueShade4:
+            return "blue_shade_4"
         }
     }
 

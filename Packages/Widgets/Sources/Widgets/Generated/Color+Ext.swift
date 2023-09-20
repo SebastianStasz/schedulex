@@ -13,6 +13,10 @@ public extension UIColor {
     static let grayShade1 = ColorStyle.grayShade1.uiColor
     static let accentPrimary = ColorStyle.accentPrimary.uiColor
     static let textPrimary = ColorStyle.textPrimary.uiColor
+    static let blueShade1 = ColorStyle.blueShade1.uiColor
+    static let blueShade2 = ColorStyle.blueShade2.uiColor
+    static let blueShade3 = ColorStyle.blueShade3.uiColor
+    static let blueShade4 = ColorStyle.blueShade4.uiColor
 }
 
 public extension Color {
@@ -21,4 +25,8 @@ public extension Color {
     static let grayShade1 = ColorStyle.grayShade1.color
     static let accentPrimary = ColorStyle.accentPrimary.color
     static let textPrimary = ColorStyle.textPrimary.color
+    static let blueShade1 = ColorStyle.blueShade1.color
+    static let blueShade2 = ColorStyle.blueShade2.color
+    static let blueShade3 = ColorStyle.blueShade3.color
+    static let blueShade4 = ColorStyle.blueShade4.color
 }
