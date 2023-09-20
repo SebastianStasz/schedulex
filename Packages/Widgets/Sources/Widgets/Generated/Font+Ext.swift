@@ -11,5 +11,5 @@ public extension Font {
     static let titleSmall = Typography.titleSmall.font
     static let bodyMedium = Typography.bodyMedium.font
     static let body = Typography.body.font
-    static let footnote = Typography.footnote.font
+    static var note = Typography.note.font
 }

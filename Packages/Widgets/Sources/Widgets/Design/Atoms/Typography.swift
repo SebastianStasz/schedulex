@@ -11,7 +11,7 @@ enum Typography: CaseIterable {
     case titleSmall
     case bodyMedium
     case body
-    case footnote
+    case note
 
     var name: String {
         switch self {
@@ -21,8 +21,8 @@ enum Typography: CaseIterable {
             return "Body medium"
         case .body:
             return "Body"
-        case .footnote:
-            return "Footnote"
+        case .note:
+            return "Note"
         }
     }
 
@@ -34,7 +34,7 @@ enum Typography: CaseIterable {
             return .system(size: 17, weight: .semibold)
         case .body:
             return .system(size: 17)
-        case .footnote:
+        case .note:
             return .system(size: 13)
         }
     }
