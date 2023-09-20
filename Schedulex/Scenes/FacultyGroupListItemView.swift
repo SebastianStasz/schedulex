@@ -8,25 +8,42 @@
 import Domain
 import SwiftUI
 
+extension Date {
+    func toTime() -> String {
+        formatted(date: .omitted, time: .shortened)
+    }
+}
+
 struct FacultyGroupListItemView: View {
     let event: Event
     
     var body: some View {
-        HStack {
-            VStack(alignment: .leading, spacing: 4) {
-                Text(event.name ?? "")
+        VStack(spacing: 0) {
+            HStack {
+                VStack(alignment: .leading, spacing: 6) {
+                    if let startDate = event.startDate, let endDate = event.endDate {
+                        Text("\(startDate.toTime()) - \(endDate.toTime())")
+                            .font(.caption)
+                    }
+                    
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text(event.name ?? "")
 
-                Text(event.teacher ?? "")
-                    .font(.caption2)
-                    .foregroundColor(.gray)
+                        if let place = event.place {
+                            Text(place)
+                                .font(.caption2)
+                                .foregroundColor(.gray)
+                        }
+                    }
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.vertical, 10)
 
-            if let date = event.startDate {
-                Text(date.formatted(date: .omitted, time: .shortened))
-            }
+            Rectangle()
+                .frame(height: 1)
+                .opacity(0.1)
         }
-        .padding(.vertical, 6)
     }
 }
 

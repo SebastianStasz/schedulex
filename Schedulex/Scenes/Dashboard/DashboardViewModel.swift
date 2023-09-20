@@ -6,9 +6,10 @@
 //
 
 import Foundation
+import SchedulexFirebase
 
 struct DashboardViewModel: ViewModel {
-    func makeStore() -> DashboardStore {
+    func makeStore(storage: FirestoreService) -> DashboardStore {
         let store = DashboardStore()
         return store
     }

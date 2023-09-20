@@ -11,32 +11,18 @@ struct SchoolView: RootView {
     @ObservedObject var store: SchoolStore
 
     var rootBody: some View {
-        Text("Test")
-//        List {
-//            ForEach(faculties, id: \.self) { faculty in
-//                NavigationLink(value: faculty) {
-//                    BaseListItem(title: faculty.name, caption: "\(faculty.numberOfGroups) groups")
-//                }
-//            }
-//            ForEach(facultyGroups, id: \.self) { group in
-//                NavigationLink(value: group) {
-//                    BaseListItem(title: group.name, caption: "\(group.numberOfEvents) events")
-//                }
-//            }
-//        }
-//        .navigationTitle("UEK")
-//        .searchable(text: $store.searchText, prompt: "Faculty or group")
-//        .task { school = try? await FirestoreService().getCracowUniversityOfEconomics() }
+        List {
+            ForEach(store.faculties, id: \.self) { faculty in
+                BaseListItem(title: faculty.name, caption: "\(faculty.numberOfGroups) groups")
+            }
+            ForEach(store.facultyGroups, id: \.self) { group in
+                BaseListItem(title: group.name, caption: "\(group.numberOfEvents) events")
+                Text("test")
+            }
+        }
+        .navigationTitle("UEK")
+        .searchable(text: $store.searchText, prompt: "Faculty or group")
     }
-
-//    private var faculties: [Faculty] {
-//        school?.faculties.filterUserSearch(text: searchText, by: { $0.name }) ?? []
-//    }
-//
-//    private var facultyGroups: [FacultyGroup] {
-//        guard searchText.count > 1 else { return [] }
-//        return school?.faculties.flatMap { $0.groups }.filterUserSearch(text: searchText, by: { $0.name }) ?? []
-//    }
 }
 
 struct SchoolView_Previews: PreviewProvider {

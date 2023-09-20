@@ -21,12 +21,23 @@ struct FacultyGroupView: View {
     let facultyGroup: FacultyGroup
 
     var body: some View {
-        List(listSections ?? []) { section in
-            Section(section.title) {
-                ForEach(section.items, id: \.self) { 
-                    FacultyGroupListItemView(event: $0)
+        ScrollView {
+            VStack(alignment: .leading, spacing: 0) {
+                ForEach(listSections ?? []) { section in
+                    Section {
+                        ForEach(section.items, id: \.self) {
+                            FacultyGroupListItemView(event: $0)
+                        }
+                    } header: {
+                        Text(section.title)
+                            .foregroundStyle(.secondary)
+                            .padding(.bottom, 12)
+                            .padding(.top, 24)
+                    }
+
                 }
             }
+            .padding(.horizontal, 12)
         }
         .navigationTitle(facultyGroup.name)
         .task { facultyGroupEvents = try? await FirestoreService().getCracowUniversityOfEconomicsEvents(for: facultyGroup)}

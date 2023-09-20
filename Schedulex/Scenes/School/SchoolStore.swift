@@ -9,6 +9,7 @@ import Domain
 import Foundation
 
 final class SchoolStore: RootStore {
-    @Published var school: School?
+    @Published var faculties: [Faculty] = []
+    @Published var facultyGroups: [FacultyGroup] = []
     @Published var searchText = ""
 }
