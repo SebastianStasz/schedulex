@@ -18,6 +18,7 @@ final public class FirestoreService {
         let document = try await db.collection("schools").document("cracow_university_of_economics").getDocument()
         return try! document.data(as: School.self)
     }
+
     public func getCracowUniversityOfEconomicsEvents(for group: FacultyGroup) async throws -> FacultyGroupEvents {
         let document = try await db.collection("schools").document("cracow_university_of_economics").collection("faculties").document(group.facultyDocument).collection("groups").document(group.name.lowercased()).getDocument()
         return try! document.data(as: FacultyGroupEvents.self)
