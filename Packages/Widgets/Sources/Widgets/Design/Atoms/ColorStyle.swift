@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-enum ColorStyle: CaseIterable {
+public enum ColorStyle: CaseIterable {
     case backgroundPrimary
     case backgroundSecondary
     case grayShade1

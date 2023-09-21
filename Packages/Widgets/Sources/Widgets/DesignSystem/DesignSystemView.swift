@@ -25,6 +25,6 @@ struct DesignSystemView<Content: View>: View {
 
 #Preview {
     DesignSystemView(title: "View title") {
-        Text("Custom content")
+        Text("Custom content", style: .body)
     }
 }

@@ -12,8 +12,7 @@ private struct DesignSystemComponent: ViewModifier {
 
     func body(content: Content) -> some View {
         VStack(alignment: .leading, spacing: .medium) {
-            Text(name)
-                .font(.body)
+            Text(name, style: .body)
             content
         }
     }

@@ -12,7 +12,7 @@ struct SpacingDesignSystemView: View {
         DesignSystemView(title: "Spacing") {
             ForEach(Spacing.allCases, id: \.name) { spacing in
                 Rectangle()
-                    .fill(Color.grayShade1)
+                    .fill(.grayShade1)
                     .frame(height: spacing.value)
                     .designSystemComponent(name: getName(for: spacing))
             }

@@ -11,8 +11,7 @@ struct TypographyDesignSystemView: View {
     var body: some View {
         DesignSystemView(title: "Typography") {
             ForEach(Typography.allCases, id: \.name) { typography in
-                Text(typography.name)
-                    .font(typography.font)
+                Text(typography.name, style: typography)
             }
         }
     }

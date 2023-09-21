@@ -27,7 +27,7 @@ enum DesignSystemListItem: String, CaseIterable {
         case .spacing:
             SpacingDesignSystemView()
         case .icon:
-            Text("Icons")
+            Text("Icons", style: .body)
         }
     }
 }
