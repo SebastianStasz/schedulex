@@ -28,7 +28,7 @@ struct DayPickerItemView: View {
 
     private var border: some View {
         RoundedRectangle(cornerRadius: 12)
-            .stroke(Color.grayShade1.opacity(0.5), lineWidth: 1)
+            .stroke(Color.grayShade1.opacity(0.4), lineWidth: 1)
             .opacity(isSelected ? 0 : 1)
     }
 

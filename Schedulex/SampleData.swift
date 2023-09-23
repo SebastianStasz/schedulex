@@ -9,7 +9,7 @@ import Domain
 import Foundation
 
 extension Faculty {
-    static let sample = Faculty(name: "Applied Informatics", groups: FacultyGroup.samples)
+    static let sample = Faculty(name: "Applied Informatics", type: .faculty, groups: FacultyGroup.samples)
 }
 
 extension FacultyGroup {

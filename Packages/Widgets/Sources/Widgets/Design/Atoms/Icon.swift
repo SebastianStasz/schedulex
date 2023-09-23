@@ -6,8 +6,7 @@
 //
 
 public enum Icon: String, Identifiable, CaseIterable {
-    case tabBar1 = "house"
-    case tabBar2 = "graduationcap"
+    case closeButton
 
     public var id: String {
         rawValue
@@ -15,10 +14,8 @@ public enum Icon: String, Identifiable, CaseIterable {
 
     var name: String {
         switch self {
-        case .tabBar1:
-            return "tabBar1"
-        case .tabBar2:
-            return "tabBar2"
+        case .closeButton:
+            return "xmark.circle.fill"
         }
     }
 }

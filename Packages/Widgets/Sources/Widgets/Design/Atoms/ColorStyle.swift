@@ -42,7 +42,7 @@ public enum ColorStyle: CaseIterable {
     }
 
     var uiColor: UIColor {
-        UIColor(named: name)!
+        UIColor(named: name, in: .module, compatibleWith: .current)!
     }
 
     var color: Color {

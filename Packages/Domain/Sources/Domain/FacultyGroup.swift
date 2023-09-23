@@ -21,4 +21,8 @@ public struct FacultyGroup: Hashable, Decodable {
 
 public struct FacultyGroupEvents: Decodable {
     public let events: [Event]
+
+    public init(events: [Event]) {
+        self.events = events
+    }
 }
