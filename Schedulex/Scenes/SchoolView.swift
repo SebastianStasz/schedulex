@@ -35,11 +35,26 @@ struct SchoolView: View {
                 FacultyGroupView(facultyGroup: $0)
             }
             .searchable(text: $searchText, prompt: "Faculty or group")
+            .overlay { loadingIndicatorOrEmptyState }
             .navigationTitle("UEK")
             .baseListStyle()
             .closeButton()
         }
         .task { school = try? await FirestoreService().getCracowUniversityOfEconomics() }
+    }
+
+    @ViewBuilder
+    private var loadingIndicatorOrEmptyState: some View {
+        if school == nil {
+            ProgressView()
+                .progressViewStyle(.circular)
+        } else if isSearchEmpty {
+            EmptyStateView()
+        }
+    }
+
+    private var isSearchEmpty: Bool {
+        !searchText.isEmpty && faculties.isEmpty && facultyGroups.isEmpty
     }
 
     private var faculties: [Faculty] {

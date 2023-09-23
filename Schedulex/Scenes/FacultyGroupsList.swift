@@ -18,8 +18,17 @@ struct FacultyGroupsList: View {
                 BaseListItem(title: group.name, caption: "\(group.numberOfEvents) events")
             }
         }
+        .searchable(text: $searchText, prompt: "Grupa")
         .navigationTitle(faculty.name)
-        .searchable(text: $searchText)
+        .overlay { emptyState }
+        .baseListStyle()
+    }
+
+    @ViewBuilder
+    private var emptyState: some View {
+        if !searchText.isEmpty && filteredGroups.isEmpty {
+            EmptyStateView()
+        }
     }
 
     private var filteredGroups: [FacultyGroup] {
