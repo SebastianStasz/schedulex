@@ -11,5 +11,5 @@ import SchedulexFirebase
 protocol ViewModel {
     associatedtype Store
 
-    func makeStore(storage: FirestoreService) -> Store
+    func makeStore() -> Store
 }

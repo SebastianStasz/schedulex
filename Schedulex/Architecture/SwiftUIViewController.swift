@@ -14,7 +14,7 @@ class SwiftUIViewController<VM: ViewModel, View: RootView>: UIHostingController<
     let viewModel: VM
 
     init(viewModel: VM) {
-        let store = viewModel.makeStore(storage: FirestoreService())
+        let store = viewModel.makeStore()
         let view = View(store: store)
         self.store = store
         self.viewModel = viewModel

@@ -9,9 +9,10 @@ import SwiftUI
 
 public struct DayPickerView: View {
     let dates: [Date]
+    let shouldScrollToDay: Bool
     @Binding var selectedDate: Date
 
-    public init(startDate: Date, endDate: Date, selection: Binding<Date>) {
+    public init(startDate: Date, endDate: Date, shouldScrollToDay: Bool = false, selection: Binding<Date>) {
         var dates: [Date] = []
         var date = startDate
         while date <= endDate {
@@ -19,19 +20,33 @@ public struct DayPickerView: View {
             date = Calendar.current.date(byAdding: .day, value: 1, to: date)!
         }
         self.dates = dates
+        self.shouldScrollToDay = shouldScrollToDay
         _selectedDate = selection
     }
 
     public var body: some View {
         ScrollView(.horizontal) {
-            LazyHStack(spacing: .large) {
-                ForEach(dates, id: \.self) { date in
-                    DayPickerItemView(date: date, isSelected: date.isSameDay(as: selectedDate))
-                        .frame(width: dayPickerItemWidth)
-                        .onTapGesture { selectedDate = date }
+            ScrollViewReader { proxy in
+                LazyHStack(spacing: .large) {
+                    ForEach(dates, id: \.self) { date in
+                        DayPickerItemView(date: date, isSelected: date.isSameDay(as: selectedDate))
+                            .frame(width: dayPickerItemWidth)
+                            .onTapGesture { selectedDate = date }
+                            .id(date.formatted(style: .dateLong))
+                            .onChange(of: selectedDate) { date in
+                                if shouldScrollToDay {
+                                    withAnimation(.easeInOut) {
+                                        proxy.scrollTo(date.formatted(style: .dateLong), anchor: .center)
+                                    }
+                                }
+                            }
+                    }
+                }
+                .padding(.horizontal, .medium)
+                .onAppear {
+                    proxy.scrollTo(selectedDate.formatted(style: .dateLong), anchor: .center)
                 }
             }
-            .padding(.horizontal, .medium)
         }
         .scrollIndicators(.hidden)
     }
