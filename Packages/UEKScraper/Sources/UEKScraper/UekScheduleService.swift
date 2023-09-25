@@ -14,9 +14,8 @@ public struct UekScheduleService {
 
     public init () {}
 
-    public func getFacultyGroupEvents() async throws -> FacultyGroupEvents {
-        let url = "https://planzajec.uek.krakow.pl/index.php?typ=G&id=188731&okres=3"
-        let events = try await getEvents(from: url)
+    public func getFacultyGroupEvents(for facultyGroup: FacultyGroup) async throws -> FacultyGroupEvents {
+        let events = try await getEvents(from: facultyGroup.facultyUrl)
         return FacultyGroupEvents(events: events)
     }
 
