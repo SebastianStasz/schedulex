@@ -7,15 +7,17 @@
 
 import Foundation
 
-public struct FacultyGroup: Hashable, Decodable {
+public struct FacultyGroup: Hashable, Codable {
     public let name: String
-    public let facultyDocument: String
     public let numberOfEvents: Int
+    public let facultyDocument: String
+    public let facultyUrl: String
 
-    public init(name: String, facultyDocument: String, numberOfEvents: Int) {
+    public init(name: String, numberOfEvents: Int, facultyDocument: String, facultyUrl: String) {
         self.name = name
-        self.facultyDocument = facultyDocument
         self.numberOfEvents = numberOfEvents
+        self.facultyDocument = facultyDocument
+        self.facultyUrl = facultyUrl
     }
 }
 

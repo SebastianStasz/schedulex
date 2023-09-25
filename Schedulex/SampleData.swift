@@ -13,12 +13,12 @@ extension Faculty {
 }
 
 extension FacultyGroup {
-    static let sample = FacultyGroup(name: "ZIIAS1-1111", facultyDocument: "Applied Informatics", numberOfEvents: 208)
+    static let sample = FacultyGroup(name: "ZIIAS1-1111", numberOfEvents: 208, facultyDocument: "Applied Informatics", facultyUrl: "")
 
     static var samples: [FacultyGroup] {
-        [FacultyGroup(name: "ZIIAS1-1111", facultyDocument: "Applied Informatics", numberOfEvents: 208),
-         FacultyGroup(name: "ZIIAS1-1112", facultyDocument: "Applied Informatics", numberOfEvents: 145),
-         FacultyGroup(name: "ZIIAS1-1113", facultyDocument: "Applied Informatics", numberOfEvents: 231)]
+        [FacultyGroup(name: "ZIIAS1-1111", numberOfEvents: 208, facultyDocument: "Applied Informatics", facultyUrl: ""),
+         FacultyGroup(name: "ZIIAS1-1112", numberOfEvents: 145, facultyDocument: "Applied Informatics", facultyUrl: ""),
+         FacultyGroup(name: "ZIIAS1-1113", numberOfEvents: 231, facultyDocument: "Applied Informatics", facultyUrl: "")]
     }
 }
 
