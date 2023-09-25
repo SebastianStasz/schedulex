@@ -13,9 +13,10 @@ public struct DayPickerView: View {
     @Binding var selectedDate: Date
 
     public init(startDate: Date, endDate: Date, shouldScrollToDay: Bool = false, selection: Binding<Date>) {
+        let endDate = Calendar.current.date(byAdding: .day, value: 1, to: endDate)!
         var dates: [Date] = []
         var date = startDate
-        while date <= endDate {
+        while date < endDate {
             dates.append(date)
             date = Calendar.current.date(byAdding: .day, value: 1, to: date)!
         }
