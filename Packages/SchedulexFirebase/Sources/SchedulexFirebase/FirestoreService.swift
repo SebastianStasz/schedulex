@@ -10,17 +10,22 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 final public class FirestoreService {
-    private let db = Firestore.firestore()
+    private lazy var db = Firestore.firestore()
+    private var school: School?
 
     public init() {}
 
     public func getCracowUniversityOfEconomics() async throws -> School {
-        let document = try await db.collection("schools").document("cracow_university_of_economics").getDocument()
-        return try! document.data(as: School.self)
+        if let school {
+            return school
+        }
+        return try await fetchCracowUniversityOfEconomics()
     }
 
-    public func getCracowUniversityOfEconomicsEvents(for group: FacultyGroup) async throws -> FacultyGroupEvents {
-        let document = try await db.collection("schools").document("cracow_university_of_economics").collection("faculties").document(group.facultyDocument).collection("groups").document(group.name.lowercased()).getDocument()
-        return try document.data(as: FacultyGroupEvents.self)
+    private func fetchCracowUniversityOfEconomics() async throws -> School {
+        let document = try await db.collection("schools").document("cracow_university_of_economics").getDocument()
+        let school = try! document.data(as: School.self)
+        self.school = school
+        return school
     }
 }
