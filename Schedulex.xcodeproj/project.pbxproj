@@ -7,215 +7,380 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		92D883482A67109A0060DDC4 /* SchedulexApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D883472A67109A0060DDC4 /* SchedulexApp.swift */; };
-		92D8834A2A67109A0060DDC4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D883492A67109A0060DDC4 /* ContentView.swift */; };
-		92D8834C2A67109C0060DDC4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92D8834B2A67109C0060DDC4 /* Assets.xcassets */; };
-		92D8834F2A67109C0060DDC4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92D8834E2A67109C0060DDC4 /* Preview Assets.xcassets */; };
+		0112FD584507FA69E719D918 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 71AA9B1DB06E568EEC9075D9 /* FirebaseAuth */; };
+		1688B97EC37CA9978CF57B97 /* EventCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C098067CF014B09BA0B4FD5F /* EventCardView.swift */; };
+		1A22709BCA54BE9991E547D9 /* SwiftUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5E2CF0D98A53C21519D722 /* SwiftUIViewController.swift */; };
+		1A574750EDCA6AD3EE2D7E02 /* SchedulexTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571F6680D8FFCDC5260429D3 /* SchedulexTests.swift */; };
+		250AFB8DE4862E0E6D00D571 /* UEKScraper in Frameworks */ = {isa = PBXBuildFile; productRef = 5098976EC6B597F4B3E1119E /* UEKScraper */; };
+		273FC8EE2F7A053FACFB985B /* Publisher+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F68FCF21387A4DF54A564B7 /* Publisher+Ext.swift */; };
+		2E93881B647276B754851FC9 /* Navigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4944F4020880AB2518054A /* Navigator.swift */; };
+		32C27A6EA34AF992DD43B95C /* Domain in Frameworks */ = {isa = PBXBuildFile; productRef = F40945E597BC452247607BA0 /* Domain */; };
+		3F39BC2A1261BD64B48F5AC7 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 95C4D48AF943D2F2F6589B96 /* Localizable.xcstrings */; };
+		415E87E937F47B1943F7FCF3 /* CombineUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225011E902E1215CC95EAE8D /* CombineUtils.swift */; };
+		4EA703C0371EAD4906328D45 /* NavigationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D173A1545AA8BFB7DA9EE7 /* NavigationPresenter.swift */; };
+		5BD86ABD5730B0C68D57B22C /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 978DD0F4308A3B8643D97EDD /* SwiftSoup */; };
+		673157DE0A238909BF2A6058 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 81FC03B7E42F1333ABEBCB65 /* FirebaseFirestore */; };
+		68EC373A16D0ACEC3544F49D /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D95AE47FF48D30DFD2C8668 /* String+Ext.swift */; };
+		71CEA06BF938CDF515B1D2EA /* SchoolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEDCDFE0CEFA1858064F0D0 /* SchoolView.swift */; };
+		8AE3DBB5FE6E5294E8E589AA /* RootStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF179E137FEFC71D8EC8B67D /* RootStore.swift */; };
+		92BC40332AC0A1010078DB82 /* ObservedFacultyGroupsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BC40322AC0A1010078DB82 /* ObservedFacultyGroupsView.swift */; };
+		92BC40352AC0A74D0078DB82 /* Array+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BC40342AC0A74D0078DB82 /* Array+Ext.swift */; };
+		98C603AEAAC28B224199E45F /* DashboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731AD10DD5756DB83C754274 /* DashboardViewModel.swift */; };
+		9CE313102E1A27E1C252DB01 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A9101C1DBC17EF683E5176C0 /* GoogleService-Info.plist */; };
+		9D23F10F052FAA686511E8DA /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 34EB969AC40FA15803A99087 /* FirebaseFirestoreSwift */; };
+		A4E1C1384FEBC9CE15C00FC6 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 525CED24C69F59C370BA2DD0 /* FirebaseFirestoreSwift */; };
+		A67C235C541DDF9B01057A16 /* Widgets in Frameworks */ = {isa = PBXBuildFile; productRef = 797986CEBD5E71DC9F526EB5 /* Widgets */; };
+		A7F43C9B928E639CDAFC2B62 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5327606AA4DF041B6E6EAC60 /* ViewModel.swift */; };
+		AA0F83617FD7A159BCC20D03 /* FacultyGroupsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895AEF4068F026BCF7CE484C /* FacultyGroupsList.swift */; };
+		B1F31EE9A3E4A481A9EA7D4D /* FacultyGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F572635ADBAD931CB8591D /* FacultyGroupView.swift */; };
+		B7296EE12D31A063148CCA79 /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A98D51DE9F53D75B7533E4D /* SampleData.swift */; };
+		C80A118ECE5DC7412EF2AF64 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FBFB144DFBCCFE8BAD4A10 /* DashboardView.swift */; };
+		CD88E2B3AE4753DF56D91232 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C36B3A9B60E45F5A2D83FF /* EmptyStateView.swift */; };
+		CED7DB86A4EA2A9DD2D208F8 /* BaseListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BB6C87BF94ABEC190A8C94 /* BaseListItem.swift */; };
+		DD4E8B562B86E3DE79167C2F /* SchedulexFirebase in Frameworks */ = {isa = PBXBuildFile; productRef = BE71EE201F5BABF18DDB83B3 /* SchedulexFirebase */; };
+		E030DEFC1310E7B1135AADE2 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C914CAB91AD3171CA41332 /* RootView.swift */; };
+		E54DF1222722BF845F02E406 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 036020D225C9DC400B70FB92 /* FirebaseAuth */; };
+		E9B80710E72F33E008D53BF0 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 8517B9D52BC760EF2871FE88 /* FirebaseFirestore */; };
+		EAEBDEA0D43B19F63B6B44B4 /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B52C416846D35F0470823E1 /* Presenter.swift */; };
+		EF14438DED3F633F52C944AD /* SchedulexApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1BDC96A8C3E93A21D2E8B57 /* SchedulexApp.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		956DF6462609C5E44A3DCB5A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2D90FD66EEB84307D0F7E122 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BF33F38F8B45B12BFE9EE77B;
+			remoteInfo = Schedulex;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
-		92D883442A67109A0060DDC4 /* Schedulex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Schedulex.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		92D883472A67109A0060DDC4 /* SchedulexApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulexApp.swift; sourceTree = "<group>"; };
-		92D883492A67109A0060DDC4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		92D8834B2A67109C0060DDC4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		92D8834E2A67109C0060DDC4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		07F572635ADBAD931CB8591D /* FacultyGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacultyGroupView.swift; sourceTree = "<group>"; };
+		1B05CDDBE7688DBB2F9946DE /* Domain */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Domain; path = Packages/Domain; sourceTree = SOURCE_ROOT; };
+		225011E902E1215CC95EAE8D /* CombineUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineUtils.swift; sourceTree = "<group>"; };
+		22AAD69A8FFE3230927F22EB /* UEKScraper */ = {isa = PBXFileReference; lastKnownFileType = folder; name = UEKScraper; path = Packages/UEKScraper; sourceTree = SOURCE_ROOT; };
+		2B91428411FC15C487DD95A9 /* SchedulexFirebase */ = {isa = PBXFileReference; lastKnownFileType = folder; name = SchedulexFirebase; path = Packages/SchedulexFirebase; sourceTree = SOURCE_ROOT; };
+		2E5E2CF0D98A53C21519D722 /* SwiftUIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIViewController.swift; sourceTree = "<group>"; };
+		2F68FCF21387A4DF54A564B7 /* Publisher+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publisher+Ext.swift"; sourceTree = "<group>"; };
+		4E3A4FD5CD76DD94586055F7 /* Schedulex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Schedulex.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5327606AA4DF041B6E6EAC60 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		571F6680D8FFCDC5260429D3 /* SchedulexTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulexTests.swift; sourceTree = "<group>"; };
+		6A98D51DE9F53D75B7533E4D /* SampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; };
+		731AD10DD5756DB83C754274 /* DashboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewModel.swift; sourceTree = "<group>"; };
+		76CABAB85E8A4A297F9440EF /* SchedulexTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = SchedulexTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7B52C416846D35F0470823E1 /* Presenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presenter.swift; sourceTree = "<group>"; };
+		895AEF4068F026BCF7CE484C /* FacultyGroupsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacultyGroupsList.swift; sourceTree = "<group>"; };
+		92BC40322AC0A1010078DB82 /* ObservedFacultyGroupsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservedFacultyGroupsView.swift; sourceTree = "<group>"; };
+		92BC40342AC0A74D0078DB82 /* Array+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Ext.swift"; sourceTree = "<group>"; };
+		95C4D48AF943D2F2F6589B96 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		97BB6C87BF94ABEC190A8C94 /* BaseListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseListItem.swift; sourceTree = "<group>"; };
+		9D95AE47FF48D30DFD2C8668 /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
+		9DEDCDFE0CEFA1858064F0D0 /* SchoolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolView.swift; sourceTree = "<group>"; };
+		A3FBFB144DFBCCFE8BAD4A10 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
+		A745DC4B06BB6D1619EC985F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		A9101C1DBC17EF683E5176C0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		BA4944F4020880AB2518054A /* Navigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
+		C098067CF014B09BA0B4FD5F /* EventCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCardView.swift; sourceTree = "<group>"; };
+		C1BDC96A8C3E93A21D2E8B57 /* SchedulexApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulexApp.swift; sourceTree = "<group>"; };
+		C23B82A9C07AE4CFE9BEF43D /* Widgets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Widgets; path = Packages/Widgets; sourceTree = SOURCE_ROOT; };
+		C8D173A1545AA8BFB7DA9EE7 /* NavigationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationPresenter.swift; sourceTree = "<group>"; };
+		D2C914CAB91AD3171CA41332 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		D8C36B3A9B60E45F5A2D83FF /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
+		FF179E137FEFC71D8EC8B67D /* RootStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		92D883412A67109A0060DDC4 /* Frameworks */ = {
+		29678C0B2BE07DE9720BFBAF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				32C27A6EA34AF992DD43B95C /* Domain in Frameworks */,
+				A67C235C541DDF9B01057A16 /* Widgets in Frameworks */,
+				DD4E8B562B86E3DE79167C2F /* SchedulexFirebase in Frameworks */,
+				250AFB8DE4862E0E6D00D571 /* UEKScraper in Frameworks */,
+				5BD86ABD5730B0C68D57B22C /* SwiftSoup in Frameworks */,
+				0112FD584507FA69E719D918 /* FirebaseAuth in Frameworks */,
+				673157DE0A238909BF2A6058 /* FirebaseFirestore in Frameworks */,
+				9D23F10F052FAA686511E8DA /* FirebaseFirestoreSwift in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2BD07D6E76C963B95B7E79A2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E54DF1222722BF845F02E406 /* FirebaseAuth in Frameworks */,
+				E9B80710E72F33E008D53BF0 /* FirebaseFirestore in Frameworks */,
+				A4E1C1384FEBC9CE15C00FC6 /* FirebaseFirestoreSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		92D8833B2A6710990060DDC4 = {
+		025719C4C77162264F4C6042 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
-				92D883462A67109A0060DDC4 /* Schedulex */,
-				92D883452A67109A0060DDC4 /* Products */,
+				C8D173A1545AA8BFB7DA9EE7 /* NavigationPresenter.swift */,
+				BA4944F4020880AB2518054A /* Navigator.swift */,
+				7B52C416846D35F0470823E1 /* Presenter.swift */,
 			);
+			path = Navigation;
 			sourceTree = "<group>";
 		};
-		92D883452A67109A0060DDC4 /* Products */ = {
+		0BED5DE639CF3766E7892586 /* Schedulex */ = {
 			isa = PBXGroup;
 			children = (
-				92D883442A67109A0060DDC4 /* Schedulex.app */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		92D883462A67109A0060DDC4 /* Schedulex */ = {
-			isa = PBXGroup;
-			children = (
-				92D883472A67109A0060DDC4 /* SchedulexApp.swift */,
-				92D883492A67109A0060DDC4 /* ContentView.swift */,
-				92D8834B2A67109C0060DDC4 /* Assets.xcassets */,
-				92D8834D2A67109C0060DDC4 /* Preview Content */,
+				97BB6C87BF94ABEC190A8C94 /* BaseListItem.swift */,
+				A9101C1DBC17EF683E5176C0 /* GoogleService-Info.plist */,
+				A745DC4B06BB6D1619EC985F /* Info.plist */,
+				95C4D48AF943D2F2F6589B96 /* Localizable.xcstrings */,
+				6A98D51DE9F53D75B7533E4D /* SampleData.swift */,
+				9D95AE47FF48D30DFD2C8668 /* String+Ext.swift */,
+				C1BDC96A8C3E93A21D2E8B57 /* SchedulexApp.swift */,
+				E9ED5314A8F74ABF03936332 /* Architecture */,
+				7A85823E04CC00AAB7C93BD2 /* Extensions */,
+				C13F62D5EA79522FECA52EED /* Scenes */,
 			);
 			path = Schedulex;
 			sourceTree = "<group>";
 		};
-		92D8834D2A67109C0060DDC4 /* Preview Content */ = {
+		527196370DA6444368DD7E91 = {
 			isa = PBXGroup;
 			children = (
-				92D8834E2A67109C0060DDC4 /* Preview Assets.xcassets */,
+				72F80F6708020A97031D5E28 /* Packages */,
+				0BED5DE639CF3766E7892586 /* Schedulex */,
+				99232F0AC9E6020F3ADB3C6B /* SchedulexTests */,
+				85B0A2CAB36A41367FCB1D18 /* Products */,
 			);
-			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		72F80F6708020A97031D5E28 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				1B05CDDBE7688DBB2F9946DE /* Domain */,
+				2B91428411FC15C487DD95A9 /* SchedulexFirebase */,
+				22AAD69A8FFE3230927F22EB /* UEKScraper */,
+				C23B82A9C07AE4CFE9BEF43D /* Widgets */,
+			);
+			name = Packages;
+			sourceTree = SOURCE_ROOT;
+		};
+		7A85823E04CC00AAB7C93BD2 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				225011E902E1215CC95EAE8D /* CombineUtils.swift */,
+				2F68FCF21387A4DF54A564B7 /* Publisher+Ext.swift */,
+				92BC40342AC0A74D0078DB82 /* Array+Ext.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		85B0A2CAB36A41367FCB1D18 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4E3A4FD5CD76DD94586055F7 /* Schedulex.app */,
+				76CABAB85E8A4A297F9440EF /* SchedulexTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		99232F0AC9E6020F3ADB3C6B /* SchedulexTests */ = {
+			isa = PBXGroup;
+			children = (
+				571F6680D8FFCDC5260429D3 /* SchedulexTests.swift */,
+			);
+			path = SchedulexTests;
+			sourceTree = "<group>";
+		};
+		C13F62D5EA79522FECA52EED /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				D8C36B3A9B60E45F5A2D83FF /* EmptyStateView.swift */,
+				895AEF4068F026BCF7CE484C /* FacultyGroupsList.swift */,
+				07F572635ADBAD931CB8591D /* FacultyGroupView.swift */,
+				9DEDCDFE0CEFA1858064F0D0 /* SchoolView.swift */,
+				92BC40322AC0A1010078DB82 /* ObservedFacultyGroupsView.swift */,
+				E77A93C3C90B3CCA65FAB751 /* Dashboard */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		E77A93C3C90B3CCA65FAB751 /* Dashboard */ = {
+			isa = PBXGroup;
+			children = (
+				731AD10DD5756DB83C754274 /* DashboardViewModel.swift */,
+				A3FBFB144DFBCCFE8BAD4A10 /* DashboardView.swift */,
+				C098067CF014B09BA0B4FD5F /* EventCardView.swift */,
+			);
+			path = Dashboard;
+			sourceTree = "<group>";
+		};
+		E9ED5314A8F74ABF03936332 /* Architecture */ = {
+			isa = PBXGroup;
+			children = (
+				FF179E137FEFC71D8EC8B67D /* RootStore.swift */,
+				D2C914CAB91AD3171CA41332 /* RootView.swift */,
+				2E5E2CF0D98A53C21519D722 /* SwiftUIViewController.swift */,
+				5327606AA4DF041B6E6EAC60 /* ViewModel.swift */,
+				025719C4C77162264F4C6042 /* Navigation */,
+			);
+			path = Architecture;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		92D883432A67109A0060DDC4 /* Schedulex */ = {
+		668B5420D3367A83E57EBAD9 /* SchedulexTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 92D883522A67109C0060DDC4 /* Build configuration list for PBXNativeTarget "Schedulex" */;
+			buildConfigurationList = A986E5AA92D2D2826E559226 /* Build configuration list for PBXNativeTarget "SchedulexTests" */;
 			buildPhases = (
-				92D883402A67109A0060DDC4 /* Sources */,
-				92D883412A67109A0060DDC4 /* Frameworks */,
-				92D883422A67109A0060DDC4 /* Resources */,
+				3A7A08497965146703128084 /* Sources */,
+				2BD07D6E76C963B95B7E79A2 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9E744A33296DCEF066321BBC /* PBXTargetDependency */,
+			);
+			name = SchedulexTests;
+			packageProductDependencies = (
+				036020D225C9DC400B70FB92 /* FirebaseAuth */,
+				8517B9D52BC760EF2871FE88 /* FirebaseFirestore */,
+				525CED24C69F59C370BA2DD0 /* FirebaseFirestoreSwift */,
+			);
+			productName = SchedulexTests;
+			productReference = 76CABAB85E8A4A297F9440EF /* SchedulexTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		BF33F38F8B45B12BFE9EE77B /* Schedulex */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 15C90D0DF5466E498092969E /* Build configuration list for PBXNativeTarget "Schedulex" */;
+			buildPhases = (
+				089B7B6AE2742F2532EACF82 /* Sources */,
+				148416F065A4E76CE071EB2B /* Resources */,
+				29678C0B2BE07DE9720BFBAF /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = Schedulex;
+			packageProductDependencies = (
+				F40945E597BC452247607BA0 /* Domain */,
+				797986CEBD5E71DC9F526EB5 /* Widgets */,
+				BE71EE201F5BABF18DDB83B3 /* SchedulexFirebase */,
+				5098976EC6B597F4B3E1119E /* UEKScraper */,
+				978DD0F4308A3B8643D97EDD /* SwiftSoup */,
+				71AA9B1DB06E568EEC9075D9 /* FirebaseAuth */,
+				81FC03B7E42F1333ABEBCB65 /* FirebaseFirestore */,
+				34EB969AC40FA15803A99087 /* FirebaseFirestoreSwift */,
+			);
 			productName = Schedulex;
-			productReference = 92D883442A67109A0060DDC4 /* Schedulex.app */;
+			productReference = 4E3A4FD5CD76DD94586055F7 /* Schedulex.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		92D8833C2A6710990060DDC4 /* Project object */ = {
+		2D90FD66EEB84307D0F7E122 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1500;
-				LastUpgradeCheck = 1500;
-				TargetAttributes = {
-					92D883432A67109A0060DDC4 = {
-						CreatedOnToolsVersion = 15.0;
-					};
-				};
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
 			};
-			buildConfigurationList = 92D8833F2A6710990060DDC4 /* Build configuration list for PBXProject "Schedulex" */;
+			buildConfigurationList = 36BAFB1D18F82C8239827307 /* Build configuration list for PBXProject "Schedulex" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				Base,
+				en,
 			);
-			mainGroup = 92D8833B2A6710990060DDC4;
-			productRefGroup = 92D883452A67109A0060DDC4 /* Products */;
+			mainGroup = 527196370DA6444368DD7E91;
+			packageReferences = (
+				3B025413F1A6A857E5330E4B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				B84AC3C71E34738BC7631797 /* XCRemoteSwiftPackageReference "SwiftSoup" */,
+			);
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				92D883432A67109A0060DDC4 /* Schedulex */,
+				BF33F38F8B45B12BFE9EE77B /* Schedulex */,
+				668B5420D3367A83E57EBAD9 /* SchedulexTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		92D883422A67109A0060DDC4 /* Resources */ = {
+		148416F065A4E76CE071EB2B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				92D8834F2A67109C0060DDC4 /* Preview Assets.xcassets in Resources */,
-				92D8834C2A67109C0060DDC4 /* Assets.xcassets in Resources */,
+				9CE313102E1A27E1C252DB01 /* GoogleService-Info.plist in Resources */,
+				3F39BC2A1261BD64B48F5AC7 /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		92D883402A67109A0060DDC4 /* Sources */ = {
+		089B7B6AE2742F2532EACF82 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				92D8834A2A67109A0060DDC4 /* ContentView.swift in Sources */,
-				92D883482A67109A0060DDC4 /* SchedulexApp.swift in Sources */,
+				EF14438DED3F633F52C944AD /* SchedulexApp.swift in Sources */,
+				CED7DB86A4EA2A9DD2D208F8 /* BaseListItem.swift in Sources */,
+				92BC40352AC0A74D0078DB82 /* Array+Ext.swift in Sources */,
+				415E87E937F47B1943F7FCF3 /* CombineUtils.swift in Sources */,
+				98C603AEAAC28B224199E45F /* DashboardViewModel.swift in Sources */,
+				C80A118ECE5DC7412EF2AF64 /* DashboardView.swift in Sources */,
+				92BC40332AC0A1010078DB82 /* ObservedFacultyGroupsView.swift in Sources */,
+				CD88E2B3AE4753DF56D91232 /* EmptyStateView.swift in Sources */,
+				1688B97EC37CA9978CF57B97 /* EventCardView.swift in Sources */,
+				B1F31EE9A3E4A481A9EA7D4D /* FacultyGroupView.swift in Sources */,
+				AA0F83617FD7A159BCC20D03 /* FacultyGroupsList.swift in Sources */,
+				4EA703C0371EAD4906328D45 /* NavigationPresenter.swift in Sources */,
+				2E93881B647276B754851FC9 /* Navigator.swift in Sources */,
+				EAEBDEA0D43B19F63B6B44B4 /* Presenter.swift in Sources */,
+				273FC8EE2F7A053FACFB985B /* Publisher+Ext.swift in Sources */,
+				8AE3DBB5FE6E5294E8E589AA /* RootStore.swift in Sources */,
+				E030DEFC1310E7B1135AADE2 /* RootView.swift in Sources */,
+				B7296EE12D31A063148CCA79 /* SampleData.swift in Sources */,
+				71CEA06BF938CDF515B1D2EA /* SchoolView.swift in Sources */,
+				68EC373A16D0ACEC3544F49D /* String+Ext.swift in Sources */,
+				1A22709BCA54BE9991E547D9 /* SwiftUIViewController.swift in Sources */,
+				A7F43C9B928E639CDAFC2B62 /* ViewModel.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3A7A08497965146703128084 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1A574750EDCA6AD3EE2D7E02 /* SchedulexTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin XCBuildConfiguration section */
-		92D883502A67109C0060DDC4 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu17;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
-				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-			};
-			name = Debug;
+/* Begin PBXTargetDependency section */
+		9E744A33296DCEF066321BBC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BF33F38F8B45B12BFE9EE77B /* Schedulex */;
+			targetProxy = 956DF6462609C5E44A3DCB5A /* PBXContainerItemProxy */;
 		};
-		92D883512A67109C0060DDC4 /* Release */ = {
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		26A795D362D08199ED3651F9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -245,8 +410,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -255,95 +419,253 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
-				VALIDATE_PRODUCT = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
-		92D883532A67109C0060DDC4 /* Debug */ = {
+		2B879FCCC65802D0441A09C3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		3437D570E4CA393931681369 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = Schedulex/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "sebastian-staszczyk.SchedulexTests";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Schedulex.app/Schedulex";
+			};
+			name = Release;
+		};
+		5BCAAC171F52F39D02B0354D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Schedulex/Preview Content\"";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = 7TDCFNV5T6;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_FILE = Schedulex/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.sebastianstaszczyk.Schedulex;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "sebastian-staszczyk.Schedulex";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		A684184A75BFB64A5A30E736 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = Schedulex/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "sebastian-staszczyk.SchedulexTests";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Schedulex.app/Schedulex";
+			};
+			name = Debug;
+		};
+		B4F57DC2288535199A72652A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = 7TDCFNV5T6;
+				INFOPLIST_FILE = Schedulex/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "sebastian-staszczyk.Schedulex";
+				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		92D883542A67109C0060DDC4 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Schedulex/Preview Content\"";
-				DEVELOPMENT_TEAM = 7TDCFNV5T6;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.sebastianstaszczyk.Schedulex;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		92D8833F2A6710990060DDC4 /* Build configuration list for PBXProject "Schedulex" */ = {
+		15C90D0DF5466E498092969E /* Build configuration list for PBXNativeTarget "Schedulex" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				92D883502A67109C0060DDC4 /* Debug */,
-				92D883512A67109C0060DDC4 /* Release */,
+				B4F57DC2288535199A72652A /* Debug */,
+				5BCAAC171F52F39D02B0354D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
-		92D883522A67109C0060DDC4 /* Build configuration list for PBXNativeTarget "Schedulex" */ = {
+		36BAFB1D18F82C8239827307 /* Build configuration list for PBXProject "Schedulex" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				92D883532A67109C0060DDC4 /* Debug */,
-				92D883542A67109C0060DDC4 /* Release */,
+				2B879FCCC65802D0441A09C3 /* Debug */,
+				26A795D362D08199ED3651F9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
+		};
+		A986E5AA92D2D2826E559226 /* Build configuration list for PBXNativeTarget "SchedulexTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A684184A75BFB64A5A30E736 /* Debug */,
+				3437D570E4CA393931681369 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		3B025413F1A6A857E5330E4B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.0.0;
+			};
+		};
+		B84AC3C71E34738BC7631797 /* XCRemoteSwiftPackageReference "SwiftSoup" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scinfu/SwiftSoup";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.6.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		036020D225C9DC400B70FB92 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3B025413F1A6A857E5330E4B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		34EB969AC40FA15803A99087 /* FirebaseFirestoreSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3B025413F1A6A857E5330E4B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestoreSwift;
+		};
+		5098976EC6B597F4B3E1119E /* UEKScraper */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = UEKScraper;
+		};
+		525CED24C69F59C370BA2DD0 /* FirebaseFirestoreSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3B025413F1A6A857E5330E4B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestoreSwift;
+		};
+		71AA9B1DB06E568EEC9075D9 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3B025413F1A6A857E5330E4B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		797986CEBD5E71DC9F526EB5 /* Widgets */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Widgets;
+		};
+		81FC03B7E42F1333ABEBCB65 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3B025413F1A6A857E5330E4B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		8517B9D52BC760EF2871FE88 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3B025413F1A6A857E5330E4B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		978DD0F4308A3B8643D97EDD /* SwiftSoup */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B84AC3C71E34738BC7631797 /* XCRemoteSwiftPackageReference "SwiftSoup" */;
+			productName = SwiftSoup;
+		};
+		BE71EE201F5BABF18DDB83B3 /* SchedulexFirebase */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SchedulexFirebase;
+		};
+		F40945E597BC452247607BA0 /* Domain */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Domain;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
-	rootObject = 92D8833C2A6710990060DDC4 /* Project object */;
+	rootObject = 2D90FD66EEB84307D0F7E122 /* Project object */;
 }

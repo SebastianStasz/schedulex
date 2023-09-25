@@ -12,11 +12,16 @@ let package = Package(
             name: "UEKScraper",
             targets: ["UEKScraper"]),
     ],
+    dependencies: [
+        .package(name: "Domain", path: "../Domain")
+    ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "UEKScraper"),
+            name: "UEKScraper",
+            dependencies: ["Domain"]
+        ),
         .testTarget(
             name: "UEKScraperTests",
             dependencies: ["UEKScraper"]),

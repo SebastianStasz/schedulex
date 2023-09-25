@@ -9,7 +9,7 @@ options:
   groupSortPosition: bottom
   platform: iOS
   deploymentTarget:
-    iOS: 17.0
+    iOS: 16.0
 
 targets:
   Schedulex:
