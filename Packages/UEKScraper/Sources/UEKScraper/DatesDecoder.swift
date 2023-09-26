@@ -21,8 +21,8 @@ struct DatesDecoder {
     }
 
     private func getDate(date: String, time: String, hourRange: Range<Int>, minutesRange: Range<Int>) -> Date {
-        let hour = Int(time[3..<5])!
-        let minutes = Int(time[6..<8])!
+        let hour = Int(time[hourRange])!
+        let minutes = Int(time[minutesRange])!
         let date = formatter.date(from: date)!
         let startDate = Calendar.current.date(bySettingHour: hour, minute: minutes, second: 0, of: date)
         return startDate!
