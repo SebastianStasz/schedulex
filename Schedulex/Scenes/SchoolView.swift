@@ -11,43 +11,55 @@ import SwiftUI
 import Widgets
 
 struct SchoolView: View {
+    let service: FirestoreService
     @State private var school: School?
     @State private var searchText = ""
 
     var body: some View {
-        NavigationStack {
-            List {
-                ForEach(faculties, id: \.self) { faculty in
-                    NavigationLink(value: faculty) {
-                        BaseListItem(title: faculty.name, caption: "\(faculty.numberOfGroups) groups")
+        List {
+            if school != nil {
+                Section("For everyone") {
+                    ForEach(globalSectionIFaculties, id: \.self) { faculty in
+                        NavigationLink(value: faculty) {
+                            BaseListItem(title: faculty.name, caption: "\(faculty.numberOfGroups) groups")
+                        }
                     }
                 }
-                ForEach(facultyGroups, id: \.self) { group in
-                    NavigationLink(value: group) {
-                        BaseListItem(title: group.name, caption: "\(group.numberOfEvents) events")
+                Section("Faculties") {
+                    ForEach(faculties, id: \.self) { faculty in
+                        NavigationLink(value: faculty) {
+                            BaseListItem(title: faculty.name, caption: "\(faculty.numberOfGroups) groups")
+                        }
+                    }
+                    ForEach(facultyGroups, id: \.self) { group in
+                        NavigationLink(value: group) {
+                            BaseListItem(title: group.name, caption: "\(group.numberOfEvents) events")
+                        }
+                    }
+                }
+                Section("Other") {
+                    ForEach(otherSectionFaculties, id: \.self) { faculty in
+                        NavigationLink(value: faculty) {
+                            BaseListItem(title: faculty.name, caption: "\(faculty.numberOfGroups) groups")
+                        }
                     }
                 }
             }
-            .navigationDestination(for: Faculty.self) {
-                FacultyGroupsList(faculty: $0)
-            }
-            .navigationDestination(for: FacultyGroup.self) {
-                FacultyGroupView(facultyGroup: $0)
-            }
-            .searchable(text: $searchText, prompt: "Faculty or group")
-            .overlay { loadingIndicatorOrEmptyState }
-            .navigationTitle("UEK")
-            .baseListStyle()
-            .closeButton()
         }
-        .task { school = try? await FirestoreService().getCracowUniversityOfEconomics() }
+        .task { school = try? await service.getCracowUniversityOfEconomics() }
+        .searchable(text: $searchText, prompt: "Faculty or group")
+        .overlay { loadingIndicatorOrEmptyState }
+        .navigationTitle("UEK")
+        .baseListStyle()
     }
 
     @ViewBuilder
     private var loadingIndicatorOrEmptyState: some View {
         if school == nil {
             ProgressView()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .progressViewStyle(.circular)
+                .background(Color(uiColor: .systemGroupedBackground))
         } else if isSearchEmpty {
             EmptyStateView()
         }
@@ -57,8 +69,16 @@ struct SchoolView: View {
         !searchText.isEmpty && faculties.isEmpty && facultyGroups.isEmpty
     }
 
+    private var globalSectionIFaculties: [Faculty] {
+        school?.faculties.filter { $0.type == .global } ?? []
+    }
+
+    private var otherSectionFaculties: [Faculty] {
+        school?.faculties.filter { $0.type == .other } ?? []
+    }
+
     private var faculties: [Faculty] {
-        school?.faculties.filterUserSearch(text: searchText, by: { $0.name }) ?? []
+        school?.faculties.filter { $0.type == .faculty }.filterUserSearch(text: searchText, by: { $0.name }) ?? []
     }
 
     private var facultyGroups: [FacultyGroup] {
@@ -69,6 +89,6 @@ struct SchoolView: View {
 
 struct SchoolView_Previews: PreviewProvider {
     static var previews: some View {
-        SchoolView()
+        SchoolView(service: FirestoreService())
     }
 }

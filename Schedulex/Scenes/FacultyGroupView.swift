@@ -7,7 +7,8 @@
 
 import Domain
 import SwiftUI
-import SchedulexFirebase
+import UEKScraper
+import Widgets
 
 struct ListSection<T: Hashable>: Identifiable {
     let title: String
@@ -17,37 +18,47 @@ struct ListSection<T: Hashable>: Identifiable {
 }
 
 struct FacultyGroupView: View {
+    @AppStorage("subscribedFacultyGroups") private var subscribedGroups: [FacultyGroup] = []
     @State private var facultyGroupEvents: FacultyGroupEvents?
     let facultyGroup: FacultyGroup
 
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
+                Button(isGroupSubscribed ? "Obserwowane" : "Dodaj do obserwowanych") {
+                    guard !isGroupSubscribed else { return }
+                    subscribedGroups.append(facultyGroup)
+                }
                 ForEach(listSections ?? []) { section in
                     Section {
-                        ForEach(section.items, id: \.self) {
-                            FacultyGroupListItemView(event: $0)
+                        VStack(spacing: .medium) {
+                            ForEach(section.items, id: \.self) {
+                                EventCardView(event: $0)
+                            }
                         }
                     } header: {
-                        Text(section.title)
+                        Text(section.title, style: .body)
                             .foregroundStyle(.secondary)
                             .padding(.bottom, 12)
                             .padding(.top, 24)
                     }
-
                 }
             }
             .padding(.horizontal, 12)
         }
         .navigationTitle(facultyGroup.name)
-        .task { facultyGroupEvents = try? await FirestoreService().getCracowUniversityOfEconomicsEvents(for: facultyGroup)}
+        .task { facultyGroupEvents = try? await UekScheduleService().getFacultyGroupEvents(for: facultyGroup) }
+    }
+
+    private var isGroupSubscribed: Bool {
+        subscribedGroups.contains(facultyGroup)
     }
 
     private var listSections: [ListSection<Event>]? {
         facultyGroupEvents?.events
             .filter { $0.startDate != nil }
             .reduce(into: [ListSection<Event>](), { result, event in
-                let date = event.startDateWithoutTime!.formatted(date: .long, time: .omitted)
+                let date = event.startDateWithoutTime!.formatted(style: .dateLong)
                 if let sectionIndex = result.firstIndex(where: { $0.title == date }) {
                     let items = result[sectionIndex].items
                     result.remove(at: sectionIndex)
