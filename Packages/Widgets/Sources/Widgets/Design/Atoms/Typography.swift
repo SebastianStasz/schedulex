@@ -11,6 +11,7 @@ public enum Typography: CaseIterable {
     case titleSmall
     case bodyMedium
     case body
+    case callout
     case note
 
     var name: String {
@@ -21,6 +22,8 @@ public enum Typography: CaseIterable {
             return "Body medium"
         case .body:
             return "Body"
+        case .callout:
+            return "Callout"
         case .note:
             return "Note"
         }
@@ -34,6 +37,8 @@ public enum Typography: CaseIterable {
             return .system(size: 17, weight: .semibold)
         case .body:
             return .system(size: 17)
+        case .callout:
+            return .system(size: 16, weight: .medium)
         case .note:
             return .system(size: 13)
         }

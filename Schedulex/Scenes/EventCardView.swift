@@ -22,15 +22,18 @@ struct EventCardView: View {
                 .foregroundStyle(.blueShade1)
                 .font(.note)
 
-                VStack(alignment: .leading, spacing: .micro) {
-                    Text(event.name ?? "", style: .body)
+                VStack(alignment: .leading, spacing: .small) {
+                    Text(event.name ?? "", style: .callout)
+                        .lineLimit(2, reservesSpace: true)
                         .foregroundStyle(.blueShade1)
 
-                    Text(event.place ?? "", style: .note)
-                        .foregroundStyle(.blueShade2)
-                    
-                    Text(event.type ?? "", style: .note)
-                        .foregroundStyle(.blueShade2)
+                    VStack(alignment: .leading, spacing: .micro) {
+                        Text(event.place ?? "", style: .note)
+                            .foregroundStyle(.blueShade2)
+
+                        Text(event.type ?? "", style: .note)
+                            .foregroundStyle(.blueShade2)
+                    }
                 }
             }
             .frame(maxWidth: .infinity, alignment: .leading)

@@ -28,10 +28,7 @@ struct DashboardView: View {
                     .padding(.bottom, .medium)
                     .background(.backgroundSecondary)
 
-                    Rectangle()
-                        .fill(.grayShade1)
-                        .frame(height: 1)
-                        .opacity(0.15)
+                    separator()
 
                     ScrollView {
                         VStack(spacing: .medium) {
@@ -39,7 +36,7 @@ struct DashboardView: View {
                                 EventCardView(event: event)
                             }
                         }
-                        .padding(.top, .large)
+                        .padding(.vertical, .large)
                         .padding(.horizontal, .medium)
                         .background(.backgroundPrimary)
                     }
@@ -67,17 +64,16 @@ struct DashboardView: View {
             .sheet(isPresented: $isDatePickerPresented) { datePicker }
             .sheet(isPresented: $isSchedulesSheetPresented) { ObservedFacultyGroupsView(service: service) }
         }
-
-        .doubleNavigationTitle(title: viewModel.title, subtitle: viewModel.subtitle)
         .toolbar(.hidden)
-        .task {
-            Task {
-                try await viewModel.fetchEvents(for: subscribedGroups)
-            }
-        }
-//        .onChange(of: subscribedGroups) {
-//            viewModel.fetchEvents(for: $0)
-//        }
+        .doubleNavigationTitle(title: viewModel.title, subtitle: viewModel.subtitle)
+        .task { Task { try await viewModel.fetchEvents(for: subscribedGroups) } }
+    }
+
+    private func separator() -> some View {
+        Rectangle()
+            .fill(.grayShade1)
+            .frame(height: 1)
+            .opacity(0.1)
     }
 
     @ViewBuilder
