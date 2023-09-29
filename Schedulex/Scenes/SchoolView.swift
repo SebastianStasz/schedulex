@@ -18,49 +18,44 @@ struct SchoolView: View {
     var body: some View {
         List {
             if school != nil {
-                Section("For everyone") {
-                    ForEach(globalSectionIFaculties, id: \.self) { faculty in
-                        NavigationLink(value: faculty) {
-                            BaseListItem(title: faculty.name, caption: "\(faculty.numberOfGroups) groups")
-                        }
+                if searchText.isEmpty {
+                    Section("For everyone") {
+                        ForEach(globalSectionFaculties, content: facultyListRow)
                     }
-                }
-                Section("Faculties") {
-                    ForEach(faculties, id: \.self) { faculty in
-                        NavigationLink(value: faculty) {
-                            BaseListItem(title: faculty.name, caption: "\(faculty.numberOfGroups) groups")
-                        }
+                    Section("Faculties") {
+                        ForEach(faculties, content: facultyListRow)
                     }
-                    ForEach(facultyGroups, id: \.self) { group in
-                        NavigationLink(value: group) {
-                            BaseListItem(title: group.name, caption: "\(group.numberOfEvents) events")
-                        }
+                    Section("Other") {
+                        ForEach(facultyGroups, content: facultyGroupListRow)
                     }
-                }
-                Section("Other") {
-                    ForEach(otherSectionFaculties, id: \.self) { faculty in
-                        NavigationLink(value: faculty) {
-                            BaseListItem(title: faculty.name, caption: "\(faculty.numberOfGroups) groups")
-                        }
-                    }
+                } else {
+                    ForEach(faculties, content: facultyListRow)
+                    ForEach(facultyGroups, content: facultyGroupListRow)
                 }
             }
         }
         .task { school = try? await service.getCracowUniversityOfEconomics() }
-        .searchable(text: $searchText, prompt: "Faculty or group")
+        .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "Faculty or group")
         .overlay { loadingIndicatorOrEmptyState }
+        .baseListStyle(isLoading: school == nil)
         .navigationTitle("UEK")
-        .baseListStyle()
+    }
+
+    private func facultyListRow(faculty: Faculty) -> some View {
+        NavigationLink(value: faculty) {
+            BaseListItem(title: faculty.name, caption: "\(faculty.numberOfGroups) groups")
+        }
+    }
+
+    private func facultyGroupListRow(group: FacultyGroup) -> some View {
+        NavigationLink(value: group) {
+            BaseListItem(title: group.name, caption: "\(group.numberOfEvents) events")
+        }
     }
 
     @ViewBuilder
     private var loadingIndicatorOrEmptyState: some View {
-        if school == nil {
-            ProgressView()
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .progressViewStyle(.circular)
-                .background(Color(uiColor: .systemGroupedBackground))
-        } else if isSearchEmpty {
+         if isSearchEmpty {
             EmptyStateView()
         }
     }
@@ -69,21 +64,27 @@ struct SchoolView: View {
         !searchText.isEmpty && faculties.isEmpty && facultyGroups.isEmpty
     }
 
-    private var globalSectionIFaculties: [Faculty] {
-        school?.faculties.filter { $0.type == .global } ?? []
+    private var globalSectionFaculties: [Faculty] {
+        school?.faculties.filter { $0.type == .global }.sorted(by: { $0.name < $1.name }) ?? []
     }
 
     private var otherSectionFaculties: [Faculty] {
-        school?.faculties.filter { $0.type == .other } ?? []
+        school?.faculties.filter { $0.type == .other }.sorted(by: { $0.name < $1.name }) ?? []
     }
 
     private var faculties: [Faculty] {
-        school?.faculties.filter { $0.type == .faculty }.filterUserSearch(text: searchText, by: { $0.name }) ?? []
+        school?.faculties
+            .filter { $0.type == .faculty }
+            .filterUserSearch(text: searchText, by: { $0.name })
+            .sorted(by: { $0.name < $1.name }) ?? []
     }
 
     private var facultyGroups: [FacultyGroup] {
         guard searchText.count > 1 else { return [] }
-        return school?.faculties.flatMap { $0.groups }.filterUserSearch(text: searchText, by: { $0.name }) ?? []
+        return school?.faculties
+            .flatMap { $0.groups }
+            .filterUserSearch(text: searchText, by: { $0.name })
+            .sorted(by: { $0.name < $1.name }) ?? []
     }
 }
 

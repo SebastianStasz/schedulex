@@ -30,7 +30,7 @@ struct EventsDecoder {
             let type = columnsData[3]
             let teacher = columnsData[4]
             let place = columnsData[5]
-            if shouldOmitEvent(eventName: name, eventPlace: place) {
+            if shouldOmitEvent(eventName: name, eventPlace: place, eventType: type) {
                 return nil
             }
             let dates = datesDecoder.getDates(date: date, time: time)
@@ -40,7 +40,7 @@ struct EventsDecoder {
         }
     }
 
-    private func shouldOmitEvent(eventName: String, eventPlace: String) -> Bool {
-        eventName.contains("grupa przedmiotów") || eventPlace == "Wybierz swoją grupę językową"
+    private func shouldOmitEvent(eventName: String, eventPlace: String, eventType: String) -> Bool {
+        eventName.contains("grupa przedmiotów") || eventPlace == "Wybierz swoją grupę językową" || eventType == "lektorat"
     }
 }

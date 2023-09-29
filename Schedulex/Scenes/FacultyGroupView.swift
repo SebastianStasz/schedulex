@@ -24,29 +24,30 @@ struct FacultyGroupView: View {
 
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 0) {
-                Button(isGroupSubscribed ? "Obserwowane" : "Dodaj do obserwowanych") {
-                    guard !isGroupSubscribed else { return }
-                    subscribedGroups.append(facultyGroup)
-                }
-                ForEach(listSections ?? []) { section in
-                    Section {
-                        VStack(spacing: .medium) {
-                            ForEach(section.items, id: \.self) {
-                                EventCardView(event: $0)
-                            }
+//            Button(isGroupSubscribed ? "Obserwowane" : "Dodaj do obserwowanych") {
+//                guard !isGroupSubscribed else { return }
+//                subscribedGroups.append(facultyGroup)
+//            }
+            ForEach(listSections ?? []) { section in
+                Section {
+                    VStack(spacing: .medium) {
+                        ForEach(section.items, id: \.self) {
+                            EventCardView(event: $0)
                         }
-                    } header: {
-                        Text(section.title, style: .body)
-                            .foregroundStyle(.secondary)
-                            .padding(.bottom, 12)
-                            .padding(.top, 24)
                     }
+                } header: {
+                    Text(section.title, style: .body)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .foregroundStyle(.secondary)
+                        .padding(.bottom, 12)
+                        .padding(.top, 24)
                 }
             }
-            .padding(.horizontal, 12)
         }
+        .padding(.horizontal, 12)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .navigationTitle(facultyGroup.name)
+        .baseListStyle(isLoading: facultyGroupEvents == nil)
         .task { facultyGroupEvents = try? await UekScheduleService().getFacultyGroupEvents(for: facultyGroup) }
     }
 

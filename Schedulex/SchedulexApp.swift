@@ -17,7 +17,7 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
     }
 
     private func configureBackButtonAppearance() {
-        var config = UIImage.SymbolConfiguration(paletteColors: [.textPrimary])
+        var config = UIImage.SymbolConfiguration(paletteColors: [.label])
         config = config.applying(UIImage.SymbolConfiguration(font: .systemFont(ofSize: 18, weight: .medium)))
 
         let backButtonImage = UIImage(systemName: "arrow.backward", withConfiguration: config)?

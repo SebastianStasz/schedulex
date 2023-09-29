@@ -11,9 +11,9 @@ import Widgets
 import SchedulexFirebase
 
 struct ObservedFacultyGroupsView: View {
-    let service: FirestoreService
     @AppStorage("subscribedFacultyGroups") private var subscribedGroups: [FacultyGroup] = []
     @State private var groupToDelete: FacultyGroup?
+    let service: FirestoreService
 
     private var isGroupDeleteConfirmationPresented: Binding<Bool> {
         Binding(get: { groupToDelete != nil }, set: { _ in groupToDelete = nil })
@@ -21,7 +21,7 @@ struct ObservedFacultyGroupsView: View {
 
     var body: some View {
         NavigationStack {
-            List(subscribedGroups, id: \.self) { facultyGroup in
+            List(subscribedGroups) { facultyGroup in
                 BaseListItem(title: facultyGroup.name, caption: "\(facultyGroup.numberOfEvents) events")
                     .contextMenu {
                         Button(role: .destructive, action: { groupToDelete = facultyGroup }) {
@@ -47,22 +47,24 @@ struct ObservedFacultyGroupsView: View {
             .confirmationDialog("Do you want to unfollow group \(groupToDelete?.name ?? "")?", isPresented: isGroupDeleteConfirmationPresented, titleVisibility: .visible) {
                 Button("Unfollow", role: .destructive, action: deleteGroup)
             }
-            .toolbar {
-                ToolbarItem(placement: .primaryAction) {
-                    NavigationLink(value: "SchoolView") {
-                        Label("Add", systemImage: "plus")
-                            .font(.title2)
-                    }
-                }
-            }
+            .baseListStyle(isEmpty: subscribedGroups.isEmpty)
             .navigationTitle("Obserwowane")
-            .baseListStyle()
+            .toolbar { toolbarContent }
+        }
+    }
+
+    private var toolbarContent: some ToolbarContent {
+        ToolbarItem(placement: .primaryAction) {
+            NavigationLink(value: "SchoolView") {
+                Label("Add", systemImage: "plus")
+                    .font(.title2)
+            }
         }
     }
 
     private func deleteGroup() {
         guard let groupToDelete else { return }
-        subscribedGroups.removeAll(where: { $0.name == groupToDelete.name })
+        subscribedGroups.removeAll { $0.name == groupToDelete.name }
         self.groupToDelete = nil
     }
 }

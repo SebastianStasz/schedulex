@@ -7,10 +7,12 @@
 
 import Foundation
 
-public struct Faculty: Hashable, Decodable {
+public struct Faculty: Identifiable, Hashable, Decodable {
     public let name: String
     public let type: FacultyType
     public let groups: [FacultyGroup]
+
+    public var id: String { name }
 
     public var numberOfGroups: Int {
         groups.count

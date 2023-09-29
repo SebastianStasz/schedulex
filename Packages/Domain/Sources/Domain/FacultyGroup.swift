@@ -7,11 +7,13 @@
 
 import Foundation
 
-public struct FacultyGroup: Hashable, Codable {
+public struct FacultyGroup: Identifiable, Hashable, Codable {
     public let name: String
     public let numberOfEvents: Int
     public let facultyDocument: String
     public let facultyUrl: String
+
+    public var id: String { name }
 
     public init(name: String, numberOfEvents: Int, facultyDocument: String, facultyUrl: String) {
         self.name = name

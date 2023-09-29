@@ -42,31 +42,15 @@ struct DashboardView: View {
                     }
                 }
             }
-            .overlay {
-                if viewModel.selectedDateEvents.isEmpty {
-                    Text("No events here", style: .body)
-                        .foregroundStyle(.grayShade1)
-                }
-            }
-            .toolbar {
-                ToolbarItem(placement: .bottomBar) {
-                    HStack(spacing: 0) {
-                        TextButton("Schedules") { isSchedulesSheetPresented = true }
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                        TextButton("Today") { viewModel.selectedDate = .now }
-                            .frame(maxWidth: .infinity)
-                        TextButton("Calendar") { isDatePickerPresented = true }
-                            .frame(maxWidth: .infinity, alignment: .trailing)
-                    }
-                    .padding(.horizontal, .micro)
-                }
-            }
-            .sheet(isPresented: $isDatePickerPresented) { datePicker }
-            .sheet(isPresented: $isSchedulesSheetPresented) { ObservedFacultyGroupsView(service: service) }
+            .overlay { loadingIndicatorOrEmptyState }
+            .toolbar { toolbarContent }
         }
         .toolbar(.hidden)
         .doubleNavigationTitle(title: viewModel.title, subtitle: viewModel.subtitle)
-        .task { Task { try await viewModel.fetchEvents(for: subscribedGroups) } }
+        .sheet(isPresented: $isSchedulesSheetPresented) { ObservedFacultyGroupsView(service: service) }
+        .sheet(isPresented: $isDatePickerPresented) { datePicker }
+        .onChange(of: subscribedGroups) { _ in fetchEvents() }
+        .task { fetchEvents() }
     }
 
     private func separator() -> some View {
@@ -86,6 +70,39 @@ struct DashboardView: View {
                 .presentationDragIndicator(.visible)
                 .tint(Color.accentPrimary)
         }
+    }
+
+    @ViewBuilder
+    private var loadingIndicatorOrEmptyState: some View {
+        if viewModel.isLoading {
+            ProgressView()
+        } else if viewModel.selectedDateEvents.isEmpty {
+            Text("No events here", style: .body)
+                .foregroundStyle(.grayShade1)
+        }
+    }
+
+    private var toolbarContent: some ToolbarContent {
+        ToolbarItem(placement: .bottomBar) {
+            HStack(spacing: 0) {
+                TextButton("Schedules") { isSchedulesSheetPresented = true }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                TextButton("Today") { viewModel.selectedDate = .now }
+                    .frame(maxWidth: .infinity)
+                TextButton("Calendar", action: showDatePicker)
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+            }
+            .padding(.horizontal, .micro)
+        }
+    }
+
+    private func showDatePicker() {
+        guard !viewModel.isLoading && !viewModel.selectedDateEvents.isEmpty else { return }
+        isDatePickerPresented = true
+    }
+
+    private func fetchEvents() {
+        Task { try await viewModel.fetchEvents(for: subscribedGroups) }
     }
 }
 

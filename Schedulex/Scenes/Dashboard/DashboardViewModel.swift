@@ -16,6 +16,7 @@ final class DashboardViewModel: ObservableObject {
     @Published private(set) var selectedDateEvents: [Event] = []
     @Published private(set) var startDate: Date?
     @Published private(set) var endDate: Date?
+    @Published private(set) var isLoading = true
 
     @Published private var allEvents: [Event] = []
     @Published var selectedDate: Date = .now
@@ -34,12 +35,14 @@ final class DashboardViewModel: ObservableObject {
     }
 
     func fetchEvents(for facultyGroups: [FacultyGroup]) async throws {
+        isLoading = true
         var events: [Event] = []
         for facultyGroup in facultyGroups {
             let facultyGroupEvents = try await service.getFacultyGroupEvents(for: facultyGroup)
             events.append(contentsOf: facultyGroupEvents.events)
         }
         allEvents = events
+        isLoading = false
     }
 
     func bind() {

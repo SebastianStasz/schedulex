@@ -13,15 +13,15 @@ struct FacultyGroupsList: View {
     let faculty: Faculty
 
     var body: some View {
-        List(filteredGroups, id: \.self) { group in
+        List(filteredGroups) { group in
             NavigationLink(value: group) {
                 BaseListItem(title: group.name, caption: "\(group.numberOfEvents) events")
             }
         }
-        .searchable(text: $searchText, prompt: "Grupa")
+        .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "Grupa")
         .navigationTitle(faculty.name)
         .overlay { emptyState }
-        .baseListStyle()
+        .baseListStyle(isEmpty: faculty.groups.isEmpty)
     }
 
     @ViewBuilder
