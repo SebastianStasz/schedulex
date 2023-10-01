@@ -1,6 +1,17 @@
 // main
 "today" = "Today";
 "calendar" = "Calendar";
-"schedules" = "Schedules";
+"my_groups" = "My groups";
+"group" = "Group";
+"faculties" = "Faculties";
+"unfollow" = "Unfollow";
+"unfollow_group_question" = "Do you want to unfollow group";
+"selected_date" = "Selected date";
 "observed_title" = "Observed";
+"no_events_message" = "No events here";
+"other_header" = "Other";
+"for_everyone_header" = "For everyone";
+"faculty_or_group_prompt" = "Faculty or group";
+"x_groups" = "groups";
+"x_events" = "events";
 

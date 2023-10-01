@@ -1,16 +1,17 @@
 //
-//  SchoolView.swift
+//  FacultiesListView.swift
 //  Schedulex
 //
 //  Created by Sebastian Staszczyk on 30/08/2023.
 //
 
 import Domain
+import Resources
 import SchedulexFirebase
 import SwiftUI
 import Widgets
 
-struct SchoolView: View {
+struct FacultiesListView: View {
     let service: FirestoreService
     @State private var school: School?
     @State private var searchText = ""
@@ -19,13 +20,13 @@ struct SchoolView: View {
         List {
             if school != nil {
                 if searchText.isEmpty {
-                    Section("For everyone") {
+                    Section(L10n.forEveryoneHeader) {
                         ForEach(globalSectionFaculties, content: facultyListRow)
                     }
-                    Section("Faculties") {
+                    Section(L10n.faculties) {
                         ForEach(faculties, content: facultyListRow)
                     }
-                    Section("Other") {
+                    Section(L10n.otherHeader) {
                         ForEach(facultyGroups, content: facultyGroupListRow)
                     }
                 } else {
@@ -35,7 +36,7 @@ struct SchoolView: View {
             }
         }
         .task { school = try? await service.getCracowUniversityOfEconomics() }
-        .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "Faculty or group")
+        .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: L10n.facultyOrGroupPrompt)
         .overlay { loadingIndicatorOrEmptyState }
         .baseListStyle(isLoading: school == nil)
         .navigationTitle("UEK")
@@ -43,13 +44,13 @@ struct SchoolView: View {
 
     private func facultyListRow(faculty: Faculty) -> some View {
         NavigationLink(value: faculty) {
-            BaseListItem(title: faculty.name, caption: "\(faculty.numberOfGroups) groups")
+            BaseListItem(title: faculty.name, caption: "\(faculty.numberOfGroups) " + L10n.xGroups)
         }
     }
 
     private func facultyGroupListRow(group: FacultyGroup) -> some View {
         NavigationLink(value: group) {
-            BaseListItem(title: group.name, caption: "\(group.numberOfEvents) events")
+            BaseListItem(title: group.name, caption: "\(group.numberOfEvents) " + L10n.xEvents)
         }
     }
 
@@ -90,6 +91,6 @@ struct SchoolView: View {
 
 struct SchoolView_Previews: PreviewProvider {
     static var previews: some View {
-        SchoolView(service: FirestoreService())
+        FacultiesListView(service: FirestoreService())
     }
 }

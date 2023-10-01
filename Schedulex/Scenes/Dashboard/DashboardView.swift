@@ -6,9 +6,10 @@
 //
 
 import Domain
+import Resources
+import SchedulexFirebase
 import SwiftUI
 import Widgets
-import SchedulexFirebase
 
 struct DashboardView: View {
     @AppStorage("subscribedFacultyGroups") private var subscribedGroups: [FacultyGroup] = []
@@ -31,9 +32,9 @@ struct DashboardView: View {
                     separator()
 
                     ScrollView {
-                        VStack(spacing: .medium) {
-                            ForEach(viewModel.selectedDateEvents, id: \.self) { event in
-                                EventCardView(event: event)
+                        LazyVStack(spacing: .medium) {
+                            ForEach(viewModel.selectedDateEvents, id: \.self) {
+                                EventCardView(event: $0)
                             }
                         }
                         .padding(.vertical, .large)
@@ -69,7 +70,7 @@ struct DashboardView: View {
     @ViewBuilder
     private var datePicker: some View {
         if let startDate = viewModel.startDate, let endDate = viewModel.endDate {
-            DatePicker("Select date", selection: $viewModel.selectedDate, in: startDate...endDate, displayedComponents: .date)
+            DatePicker(L10n.selectedDate, selection: $viewModel.selectedDate, in: startDate...endDate, displayedComponents: .date)
                 .datePickerStyle(.graphical)
                 .padding(.horizontal, .medium)
                 .presentationDetents([.height(380)])
@@ -83,7 +84,7 @@ struct DashboardView: View {
         if viewModel.isLoading {
             ProgressView()
         } else if !viewModel.isEmpty && viewModel.selectedDateEvents.isEmpty {
-            Text("No events here", style: .body)
+            Text(L10n.noEventsMessage, style: .body)
                 .foregroundStyle(.grayShade1)
         }
     }
@@ -91,11 +92,11 @@ struct DashboardView: View {
     private var toolbarContent: some ToolbarContent {
         ToolbarItem(placement: .bottomBar) {
             HStack(spacing: 0) {
-                TextButton("Schedules") { isSchedulesSheetPresented = true }
+                TextButton(L10n.myGroups) { isSchedulesSheetPresented = true }
                     .frame(maxWidth: .infinity, alignment: .leading)
-                TextButton("Today") { viewModel.selectedDate = .now }
+                TextButton(L10n.today) { viewModel.selectedDate = .now }
                     .frame(maxWidth: .infinity)
-                TextButton("Calendar", action: showDatePicker)
+                TextButton(L10n.calendar, action: showDatePicker)
                     .frame(maxWidth: .infinity, alignment: .trailing)
             }
             .padding(.horizontal, .micro)

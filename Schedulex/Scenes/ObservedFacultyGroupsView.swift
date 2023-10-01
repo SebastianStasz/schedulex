@@ -6,9 +6,10 @@
 //
 
 import Domain
+import Resources
+import SchedulexFirebase
 import SwiftUI
 import Widgets
-import SchedulexFirebase
 
 struct ObservedFacultyGroupsView: View {
     @AppStorage("subscribedFacultyGroups") private var subscribedGroups: [FacultyGroup] = []
@@ -22,7 +23,7 @@ struct ObservedFacultyGroupsView: View {
     var body: some View {
         NavigationStack {
             List(subscribedGroups) { facultyGroup in
-                BaseListItem(title: facultyGroup.name, caption: "\(facultyGroup.numberOfEvents) events")
+                BaseListItem(title: facultyGroup.name, caption: "\(facultyGroup.numberOfEvents) " + L10n.xEvents)
                     .contextMenu {
                         Button(role: .destructive, action: { groupToDelete = facultyGroup }) {
                             Label("Unfollow", systemImage: "trash.fill")
@@ -42,20 +43,24 @@ struct ObservedFacultyGroupsView: View {
                 FacultyGroupView(facultyGroup: $0)
             }
             .navigationDestination(for: String.self) { _ in
-                SchoolView(service: service)
+                FacultiesListView(service: service)
             }
-            .confirmationDialog("Do you want to unfollow group \(groupToDelete?.name ?? "")?", isPresented: isGroupDeleteConfirmationPresented, titleVisibility: .visible) {
-                Button("Unfollow", role: .destructive, action: deleteGroup)
+            .confirmationDialog(unfollowGroupQuestion, isPresented: isGroupDeleteConfirmationPresented, titleVisibility: .visible) {
+                Button(L10n.unfollow, role: .destructive, action: deleteGroup)
             }
             .baseListStyle(isEmpty: subscribedGroups.isEmpty)
-            .navigationTitle("Obserwowane")
+            .navigationTitle(L10n.observedTitle)
             .toolbar { toolbarContent }
         }
     }
 
+    private var unfollowGroupQuestion: String {
+        L10n.unfollowGroupQuestion + " \(groupToDelete?.name ?? "")?"
+    }
+
     private var toolbarContent: some ToolbarContent {
         ToolbarItem(placement: .primaryAction) {
-            NavigationLink(value: "SchoolView") {
+            NavigationLink(value: "FacultiesListView") {
                 Label("Add", systemImage: "plus")
                     .font(.title2)
             }

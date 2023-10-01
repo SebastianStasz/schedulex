@@ -8,6 +8,7 @@
 import Combine
 import Domain
 import Foundation
+import Resources
 import UEKScraper
 import Widgets
 
@@ -31,7 +32,7 @@ final class DashboardViewModel: ObservableObject {
     }
 
     var subtitle: String {
-        selectedDate.isSameDay(as: .now) ? "Today" : "Selected date"
+        selectedDate.isSameDay(as: .now) ? L10n.today : L10n.selectedDate
     }
 
     var isEmpty: Bool {
