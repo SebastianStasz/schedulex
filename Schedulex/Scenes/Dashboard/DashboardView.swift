@@ -40,6 +40,12 @@ struct DashboardView: View {
                         .padding(.horizontal, .medium)
                         .background(.backgroundPrimary)
                     }
+                } else {
+                    Rectangle()
+                        .fill(Color.backgroundSecondary)
+                        .frame(height: .medium)
+                    separator()
+                    Spacer()
                 }
             }
             .overlay { loadingIndicatorOrEmptyState }
@@ -76,7 +82,7 @@ struct DashboardView: View {
     private var loadingIndicatorOrEmptyState: some View {
         if viewModel.isLoading {
             ProgressView()
-        } else if viewModel.selectedDateEvents.isEmpty {
+        } else if !viewModel.isEmpty && viewModel.selectedDateEvents.isEmpty {
             Text("No events here", style: .body)
                 .foregroundStyle(.grayShade1)
         }

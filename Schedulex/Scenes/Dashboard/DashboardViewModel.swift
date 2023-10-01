@@ -34,6 +34,10 @@ final class DashboardViewModel: ObservableObject {
         selectedDate.isSameDay(as: .now) ? "Today" : "Selected date"
     }
 
+    var isEmpty: Bool {
+        allEvents.isEmpty
+    }
+
     func fetchEvents(for facultyGroups: [FacultyGroup]) async throws {
         isLoading = true
         var events: [Event] = []
