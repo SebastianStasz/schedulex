@@ -16,24 +16,23 @@ struct EventCardView: View {
         HStack(spacing: 0) {
             HStack(alignment: .top, spacing: .medium) {
                 VStack(alignment: .leading, spacing: .micro) {
-                    Text(event.startDate?.formatted(.dateTime.hour(.twoDigits(amPM: .abbreviated)).minute(.twoDigits)) ?? "")
-                    Text(event.endDate?.formatted(.dateTime.hour(.twoDigits(amPM: .abbreviated)).minute(.twoDigits)) ?? "")
+                    Text(event.startDate?.formatted(style: .timeOnly) ?? "")
+                    Text(event.endDate?.formatted(style: .timeOnly) ?? "")
                 }
                 .foregroundStyle(.blueShade1)
                 .font(.note)
 
                 VStack(alignment: .leading, spacing: .small) {
                     Text(event.name ?? "", style: .callout)
-                        .lineLimit(2, reservesSpace: true)
+                        .lineLimit(2)
                         .foregroundStyle(.blueShade1)
 
                     VStack(alignment: .leading, spacing: .micro) {
+                        Text(event.teacher ?? "", style: .note)
                         Text(event.place ?? "", style: .note)
-                            .foregroundStyle(.blueShade2)
-
                         Text(event.type ?? "", style: .note)
-                            .foregroundStyle(.blueShade2)
                     }
+                    .foregroundStyle(.blueShade2)
                 }
             }
             .frame(maxWidth: .infinity, alignment: .leading)

@@ -9,11 +9,14 @@ import Foundation
 
 public enum DateStyle {
     case dateLong
+    case timeOnly
 
     func formatDate(_ date: Date) -> String {
         switch self {
         case .dateLong:
             return date.formatted(date: .long, time: .omitted)
+        case .timeOnly:
+            return date.formatted(.dateTime.hour(.twoDigits(amPM: .abbreviated)).minute(.twoDigits))
         }
     }
 }

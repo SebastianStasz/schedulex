@@ -27,7 +27,7 @@ struct FacultiesListView: View {
                         ForEach(faculties, content: facultyListRow)
                     }
                     Section(L10n.otherHeader) {
-                        ForEach(facultyGroups, content: facultyGroupListRow)
+                        ForEach(otherSectionFaculties, content: facultyListRow)
                     }
                 } else {
                     ForEach(faculties, content: facultyListRow)

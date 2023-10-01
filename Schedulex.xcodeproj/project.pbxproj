@@ -22,7 +22,7 @@
 		5BD86ABD5730B0C68D57B22C /* UEKScraper in Frameworks */ = {isa = PBXBuildFile; productRef = 5098976EC6B597F4B3E1119E /* UEKScraper */; };
 		673157DE0A238909BF2A6058 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 71AA9B1DB06E568EEC9075D9 /* FirebaseAuth */; };
 		68EC373A16D0ACEC3544F49D /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D95AE47FF48D30DFD2C8668 /* String+Ext.swift */; };
-		71CEA06BF938CDF515B1D2EA /* SchoolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEDCDFE0CEFA1858064F0D0 /* SchoolView.swift */; };
+		71CEA06BF938CDF515B1D2EA /* FacultiesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEDCDFE0CEFA1858064F0D0 /* FacultiesListView.swift */; };
 		7A90DA499302800CAF69DD45 /* SchedulexApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9650DFCA36730CAE6E4E59 /* SchedulexApp.swift */; };
 		8AE3DBB5FE6E5294E8E589AA /* RootStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF179E137FEFC71D8EC8B67D /* RootStore.swift */; };
 		8FD5913E8FDA52F6C0A6242C /* Array+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24B9C450635173CAE31AC09 /* Array+Ext.swift */; };
@@ -76,7 +76,7 @@
 		97BB6C87BF94ABEC190A8C94 /* BaseListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseListItem.swift; sourceTree = "<group>"; };
 		9A1AD1C09DC0F0A2592B00ED /* ObservedFacultyGroupsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservedFacultyGroupsView.swift; sourceTree = "<group>"; };
 		9D95AE47FF48D30DFD2C8668 /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
-		9DEDCDFE0CEFA1858064F0D0 /* SchoolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolView.swift; sourceTree = "<group>"; };
+		9DEDCDFE0CEFA1858064F0D0 /* FacultiesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacultiesListView.swift; sourceTree = "<group>"; };
 		A3FBFB144DFBCCFE8BAD4A10 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		A745DC4B06BB6D1619EC985F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		A9101C1DBC17EF683E5176C0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -205,8 +205,8 @@
 				B704F3D0DF48285E97EEF443 /* EventCardView.swift */,
 				895AEF4068F026BCF7CE484C /* FacultyGroupsList.swift */,
 				07F572635ADBAD931CB8591D /* FacultyGroupView.swift */,
+				9DEDCDFE0CEFA1858064F0D0 /* FacultiesListView.swift */,
 				9A1AD1C09DC0F0A2592B00ED /* ObservedFacultyGroupsView.swift */,
-				9DEDCDFE0CEFA1858064F0D0 /* SchoolView.swift */,
 				E77A93C3C90B3CCA65FAB751 /* Dashboard */,
 			);
 			path = Scenes;
@@ -352,7 +352,7 @@
 				E030DEFC1310E7B1135AADE2 /* RootView.swift in Sources */,
 				B7296EE12D31A063148CCA79 /* SampleData.swift in Sources */,
 				7A90DA499302800CAF69DD45 /* SchedulexApp.swift in Sources */,
-				71CEA06BF938CDF515B1D2EA /* SchoolView.swift in Sources */,
+				71CEA06BF938CDF515B1D2EA /* FacultiesListView.swift in Sources */,
 				68EC373A16D0ACEC3544F49D /* String+Ext.swift in Sources */,
 				1A22709BCA54BE9991E547D9 /* SwiftUIViewController.swift in Sources */,
 				A7F43C9B928E639CDAFC2B62 /* ViewModel.swift in Sources */,
@@ -521,6 +521,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = 7TDCFNV5T6;
 				INFOPLIST_FILE = Schedulex/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -555,6 +556,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = 7TDCFNV5T6;
 				INFOPLIST_FILE = Schedulex/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -51,8 +51,10 @@ struct FacultyGroupView: View {
         .toolbar {
             ToolbarItem(placement: .bottomBar) {
                 if isGroupSubscribed {
-                    Text("Obserwowane")
-                        .foregroundStyle(.accentPrimary)
+                    UnfollowGroupButton {
+                        subscribedGroups.removeAll { $0.name == facultyGroup.name }
+                    }
+                    .labelStyle(.titleOnly)
                 } else {
                     Button("Dodaj do obserwowanych") {
                         guard !isGroupSubscribed else { return }
