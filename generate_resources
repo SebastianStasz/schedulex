@@ -1,0 +1,4 @@
+cd Schedulex_L10n
+python3 generate_text_resources.py
+cd ..
+swiftgen

@@ -1,0 +1,14 @@
+## https://github.com/SwiftGen/SwiftGen/tree/6.6.1/Documentation/
+
+input_dir: ./Packages/Resources/Sources/Resources/
+output_dir: ./Packages/Resources/Sources/Resources/Generated/
+
+## Generate constants for localized strings.
+strings:
+  inputs:
+    - Localizable/en.lproj
+  outputs:
+    - templateName: structured-swift5
+      output: Strings+Generated.swift
+      params:
+        publicAccess: true

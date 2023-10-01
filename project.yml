@@ -23,6 +23,7 @@ targets:
     dependencies:
       - package: Domain
       - package: Widgets
+      - package: Resources
       - package: SchedulexFirebase
       - package: UEKScraper
       - package: SwiftSoup
@@ -64,6 +65,7 @@ targetTemplates:
 localPackages:
   - ./Packages/Domain
   - ./Packages/Widgets
+  - ./Packages/Resources
   - ./Packages/SchedulexFirebase
   - ./Packages/UEKScraper
 
