@@ -7,6 +7,7 @@
 
 public enum Icon: String, Identifiable, CaseIterable {
     case closeButton
+    case delete
 
     public var id: String {
         rawValue
@@ -16,6 +17,8 @@ public enum Icon: String, Identifiable, CaseIterable {
         switch self {
         case .closeButton:
             return "xmark.circle.fill"
+        case .delete:
+            return "trash.fill"
         }
     }
 }

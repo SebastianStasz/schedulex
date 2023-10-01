@@ -25,15 +25,10 @@ struct ObservedFacultyGroupsView: View {
             List(subscribedGroups) { facultyGroup in
                 BaseListItem(title: facultyGroup.name, caption: "\(facultyGroup.numberOfEvents) " + L10n.xEvents)
                     .contextMenu {
-                        Button(role: .destructive, action: { groupToDelete = facultyGroup }) {
-                            Label("Unfollow", systemImage: "trash.fill")
-                        }
+                        UnfollowGroupButton { groupToDelete = facultyGroup }
                     }
                     .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                        Button(action: { groupToDelete = facultyGroup }) {
-                            Label("Unfollow", systemImage: "trash.fill")
-                        }
-                        .tint(.red)
+                        UnfollowGroupButton(destructive: false) { groupToDelete = facultyGroup }
                     }
             }
             .navigationDestination(for: Faculty.self) {
