@@ -1,5 +1,5 @@
 //
-//  FacultyGroupsList.swift
+//  FacultyGroupListView.swift
 //  Schedulex
 //
 //  Created by Sebastian Staszczyk on 31/07/2023.
@@ -9,19 +9,15 @@ import Domain
 import Resources
 import SwiftUI
 
-struct FacultyGroupsList: View {
-    @State private var facultyGroup: FacultyGroup?
+struct FacultyGroupListView: View {
     @State private var searchText = ""
     let faculty: Faculty
 
     var body: some View {
-        List(filteredGroups) { group in
-            let caption = "\(group.numberOfEvents) " + L10n.xEvents
-            BaseListItem(title: group.name, caption: caption)
-                .trailingIcon(.info) { facultyGroup = group }
+        List(filteredGroups) {
+            FacultyGroupListItem(facultyGroup: $0)
         }
-        .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "Grupa")
-        .sheet(item: $facultyGroup) { FacultyGroupDetailsView(facultyGroup: $0) }
+        .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: L10n.group)
         .baseListStyle(isEmpty: faculty.groups.isEmpty)
         .navigationTitle(faculty.name)
         .overlay { emptyState }
@@ -41,6 +37,6 @@ struct FacultyGroupsList: View {
 
 struct FacultyGroupsList_Previews: PreviewProvider {
     static var previews: some View {
-        FacultyGroupsList(faculty: .sample)
+        FacultyGroupListView(faculty: .sample)
     }
 }

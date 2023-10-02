@@ -32,28 +32,24 @@ struct FacultiesListView: View {
                         }
                     } else {
                         ForEach(faculties, content: facultyListRow)
-                        ForEach(facultyGroups, content: facultyGroupListRow)
+                        ForEach(facultyGroups) {
+                            FacultyGroupListItem(facultyGroup: $0)
+                        }
                     }
                 }
             }
             .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: L10n.facultyOrGroupPrompt)
-            .navigationDestination(for: Faculty.self) { FacultyGroupsList(faculty: $0) }
             .overlay { loadingIndicatorOrEmptyState }
             .baseListStyle(isLoading: school == nil)
-            .navigationTitle("Dodaj grupę")
+            .navigationTitle(L10n.addGroup)
+            .closeButton()
         }
         .task { school = try? await service.getCracowUniversityOfEconomics() }
     }
 
     private func facultyListRow(faculty: Faculty) -> some View {
-        NavigationLink(value: faculty) {
+        NavigationLink(destination: { FacultyGroupListView(faculty: faculty) }) {
             BaseListItem(title: faculty.name, caption: "\(faculty.numberOfGroups) " + L10n.xGroups)
-        }
-    }
-
-    private func facultyGroupListRow(group: FacultyGroup) -> some View {
-        NavigationLink(value: group) {
-            BaseListItem(title: group.name, caption: "\(group.numberOfEvents) " + L10n.xEvents)
         }
     }
 

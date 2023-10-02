@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Resources
 
 private struct CloseButtonViewModifier: ViewModifier {
     @Environment(\.dismiss) private var dismiss
@@ -14,9 +15,9 @@ private struct CloseButtonViewModifier: ViewModifier {
         content
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button("Close", systemImage: Icon.closeButton.name, action: dismiss.callAsFunction)
-                        .tint(.grayShade1)
-                        .labelStyle(.iconOnly)
+                    Button(L10n.doneButton) { dismiss.callAsFunction() }
+                        .tint(.accentPrimary)
+                        .fontWeight(.medium)
                 }
             }
     }

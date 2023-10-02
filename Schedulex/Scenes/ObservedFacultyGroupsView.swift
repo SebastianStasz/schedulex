@@ -13,6 +13,7 @@ import Widgets
 
 struct ObservedFacultyGroupsView: View {
     @AppStorage("subscribedFacultyGroups") private var subscribedGroups: [FacultyGroup] = []
+    @State private var isFacultiesListPresented = false
     @State private var groupToDelete: FacultyGroup?
     let service: FirestoreService
 
@@ -23,7 +24,7 @@ struct ObservedFacultyGroupsView: View {
     var body: some View {
         NavigationStack {
             List(subscribedGroups) { facultyGroup in
-                BaseListItem(title: facultyGroup.name, caption: "\(facultyGroup.numberOfEvents) " + L10n.xEvents)
+                FacultyGroupListItem(facultyGroup: facultyGroup)
                     .contextMenu {
                         UnfollowGroupButton { groupToDelete = facultyGroup }
                     }
@@ -31,21 +32,14 @@ struct ObservedFacultyGroupsView: View {
                         UnfollowGroupButton(destructive: false) { groupToDelete = facultyGroup }
                     }
             }
-            .navigationDestination(for: Faculty.self) {
-                FacultyGroupsList(faculty: $0)
-            }
-            .navigationDestination(for: FacultyGroup.self) {
-                FacultyGroupView(facultyGroup: $0)
-            }
-            .navigationDestination(for: String.self) { _ in
-                FacultiesListView(service: service)
-            }
             .confirmationDialog(unfollowGroupQuestion, isPresented: isGroupDeleteConfirmationPresented, titleVisibility: .visible) {
                 Button(L10n.unfollow, role: .destructive, action: deleteGroup)
             }
+            .sheet(isPresented: $isFacultiesListPresented) { FacultiesListView(service: service) }
             .baseListStyle(isEmpty: subscribedGroups.isEmpty)
             .navigationTitle(L10n.observedTitle)
             .toolbar { toolbarContent }
+            .closeButton()
         }
     }
 
@@ -54,11 +48,9 @@ struct ObservedFacultyGroupsView: View {
     }
 
     private var toolbarContent: some ToolbarContent {
-        ToolbarItem(placement: .primaryAction) {
-            NavigationLink(value: "FacultiesListView") {
-                Label("Add", systemImage: "plus")
-                    .font(.title2)
-            }
+        ToolbarItem(placement: .bottomBar) {
+            Button(L10n.addGroup) { isFacultiesListPresented = true }
+                .foregroundStyle(.accentPrimary)
         }
     }
 
