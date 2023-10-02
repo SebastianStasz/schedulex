@@ -17,29 +17,32 @@ struct FacultiesListView: View {
     @State private var searchText = ""
 
     var body: some View {
-        List {
-            if school != nil {
-                if searchText.isEmpty {
-                    Section(L10n.forEveryoneHeader) {
-                        ForEach(globalSectionFaculties, content: facultyListRow)
-                    }
-                    Section(L10n.faculties) {
+        NavigationStack {
+            List {
+                if school != nil {
+                    if searchText.isEmpty {
+                        Section(L10n.forEveryoneHeader) {
+                            ForEach(globalSectionFaculties, content: facultyListRow)
+                        }
+                        Section(L10n.faculties) {
+                            ForEach(faculties, content: facultyListRow)
+                        }
+                        Section(L10n.otherHeader) {
+                            ForEach(otherSectionFaculties, content: facultyListRow)
+                        }
+                    } else {
                         ForEach(faculties, content: facultyListRow)
+                        ForEach(facultyGroups, content: facultyGroupListRow)
                     }
-                    Section(L10n.otherHeader) {
-                        ForEach(otherSectionFaculties, content: facultyListRow)
-                    }
-                } else {
-                    ForEach(faculties, content: facultyListRow)
-                    ForEach(facultyGroups, content: facultyGroupListRow)
                 }
             }
+            .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: L10n.facultyOrGroupPrompt)
+            .navigationDestination(for: Faculty.self) { FacultyGroupsList(faculty: $0) }
+            .overlay { loadingIndicatorOrEmptyState }
+            .baseListStyle(isLoading: school == nil)
+            .navigationTitle("Dodaj grupę")
         }
         .task { school = try? await service.getCracowUniversityOfEconomics() }
-        .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: L10n.facultyOrGroupPrompt)
-        .overlay { loadingIndicatorOrEmptyState }
-        .baseListStyle(isLoading: school == nil)
-        .navigationTitle("UEK")
     }
 
     private func facultyListRow(faculty: Faculty) -> some View {
