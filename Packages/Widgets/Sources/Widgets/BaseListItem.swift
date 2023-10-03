@@ -6,23 +6,24 @@
 //
 
 import SwiftUI
-import Widgets
 
-struct BaseListItem: View {
+public struct BaseListItem: View {
     let title: String
     let caption: String?
     var trailingIcon: Icon?
     var trailingIconAction: () -> Void = {}
 
-    init(title: String, caption: String? = nil) {
+    public init(title: String, caption: String? = nil) {
         self.title = title
         self.caption = caption
     }
 
-    var body: some View {
+    public var body: some View {
         HStack {
             VStack(alignment: .leading, spacing: .micro) {
-                Text(title)
+                Text(title, style: .body)
+                    .foregroundStyle(.textPrimary)
+                    .multilineTextAlignment(.leading)
 
                 if let caption {
                     Text(caption, style: .note)
@@ -40,11 +41,12 @@ struct BaseListItem: View {
                     .onTapGesture { trailingIconAction() }
             }
         }
-        .padding(.vertical, .micro)
+        .card()
+        .buttonStyle(.plain)
     }
 }
 
-extension BaseListItem {
+public extension BaseListItem {
     func trailingIcon(_ icon: Icon, onTap: @escaping () -> Void) -> some View {
         var view = self
         view.trailingIcon = icon

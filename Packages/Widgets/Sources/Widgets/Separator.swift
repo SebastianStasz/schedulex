@@ -8,12 +8,16 @@
 import SwiftUI
 
 public struct Separator: View {
-    public init() {}
+    private let height: CGFloat
+
+    public init(height: CGFloat = 1) {
+        self.height = height
+    }
 
     public var body: some View {
         Rectangle()
             .fill(.backgroundPrimary)
-            .frame(height: 1)
+            .frame(height: height)
     }
 }
 

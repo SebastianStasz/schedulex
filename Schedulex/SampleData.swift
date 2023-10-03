@@ -22,6 +22,10 @@ extension FacultyGroup {
     }
 }
 
+extension FacultyGroupClass {
+    static let sample = FacultyGroupClass(name: "Organizacja i zarządzanie", type: "wykład", teacher: "Janusz Morajda")
+}
+
 extension Event {
     static let sample = Event(startDate: .now, endDate: .now, name: "Probability and Statistics", place: "Place", teacher: "dr Some Name", type: "Lecture")
 }

@@ -39,12 +39,19 @@ final class DashboardViewModel: ObservableObject {
         allEvents.isEmpty
     }
 
-    func fetchEvents(for facultyGroups: [FacultyGroup]) async throws {
+    func fetchEvents(for facultyGroups: [FacultyGroup], hiddenClasses: [EditableFacultyGroupClass]) async throws {
         isLoading = true
         var events: [Event] = []
         for facultyGroup in facultyGroups {
-            let facultyGroupEvents = try await service.getFacultyGroupEvents(for: facultyGroup)
-            events.append(contentsOf: facultyGroupEvents.events)
+            let facultyGroupDetails = try await service.getFacultyGroupDetails(for: facultyGroup)
+            let hiddenClasses = hiddenClasses
+                .filter { $0.facultyGroupName == facultyGroup.name }
+                .map { $0.toFacultyGroupClass() }
+            
+            let newEvents = facultyGroupDetails.events
+                .filter { !hiddenClasses.contains($0.class) }
+
+            events.append(contentsOf: newEvents)
         }
         allEvents = events
         isLoading = false

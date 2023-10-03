@@ -8,16 +8,18 @@
 import Domain
 import Resources
 import SwiftUI
+import Widgets
 
 struct FacultyGroupListItem: View {
     @State private var isDetailsViewPresented = false
     let facultyGroup: FacultyGroup
+    let type: FacultyGroupDetailsView.ViewType
 
     var body: some View {
         BaseListItem(title: facultyGroup.name, caption: caption)
             .trailingIcon(.info) { isDetailsViewPresented = true }
             .sheet(isPresented: $isDetailsViewPresented) {
-                FacultyGroupDetailsView(facultyGroup: facultyGroup)
+                FacultyGroupDetailsView(facultyGroup: facultyGroup, type: type)
             }
     }
 
@@ -27,5 +29,5 @@ struct FacultyGroupListItem: View {
 }
 
 #Preview {
-    FacultyGroupListItem(facultyGroup: .sample)
+    FacultyGroupListItem(facultyGroup: .sample, type: .preview)
 }

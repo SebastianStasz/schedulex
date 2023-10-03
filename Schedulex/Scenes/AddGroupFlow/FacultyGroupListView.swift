@@ -8,14 +8,15 @@
 import Domain
 import Resources
 import SwiftUI
+import Widgets
 
 struct FacultyGroupListView: View {
     @State private var searchText = ""
     let faculty: Faculty
 
     var body: some View {
-        List(filteredGroups) {
-            FacultyGroupListItem(facultyGroup: $0)
+        BaseList(filteredGroups) {
+            FacultyGroupListItem(facultyGroup: $0, type: .preview)
         }
         .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: L10n.group)
         .baseListStyle(isEmpty: faculty.groups.isEmpty)

@@ -13,6 +13,7 @@ import Widgets
 
 struct DashboardView: View {
     @AppStorage("subscribedFacultyGroups") private var subscribedGroups: [FacultyGroup] = []
+    @AppStorage("hiddenFacultyGroupsClasses") private var allHiddenClasses: [EditableFacultyGroupClass] = []
     @StateObject private var viewModel = DashboardViewModel()
     @State private var service = FirestoreService()
     @State private var isDatePickerPresented = false
@@ -57,6 +58,7 @@ struct DashboardView: View {
         .sheet(isPresented: $isSchedulesSheetPresented) { ObservedFacultyGroupsView(service: service) }
         .sheet(isPresented: $isDatePickerPresented) { datePicker }
         .onChange(of: subscribedGroups) { _ in fetchEvents() }
+        .onChange(of: allHiddenClasses) { _ in fetchEvents() }
         .task { fetchEvents() }
     }
 
@@ -109,7 +111,7 @@ struct DashboardView: View {
     }
 
     private func fetchEvents() {
-        Task { try await viewModel.fetchEvents(for: subscribedGroups) }
+        Task { try await viewModel.fetchEvents(for: subscribedGroups, hiddenClasses: allHiddenClasses) }
     }
 }
 

@@ -10,18 +10,17 @@ import Foundation
 
 public struct UekScheduleService {
     private let apiService = APIService()
-    private let eventsDecoder = EventsDecoder()
+    private let detailsDecoder = DetailsDecoder()
 
     public init () {}
 
-    public func getFacultyGroupEvents(for facultyGroup: FacultyGroup) async throws -> FacultyGroupEvents {
-        let events = try await getEvents(from: facultyGroup.facultyUrl)
-        return FacultyGroupEvents(events: events)
+    public func getFacultyGroupDetails(for facultyGroup: FacultyGroup) async throws -> FacultyGroupDetails {
+         try await getDetails(from: facultyGroup.facultyUrl)
     }
 
-    private func getEvents(from urlString: String) async throws -> [Event] {
+    private func getDetails(from urlString: String) async throws -> FacultyGroupDetails {
         let webContent = try await apiService.getWebContent(from: urlString)
-        let events = try eventsDecoder.decodeEvents(from: webContent)
-        return events
+        let details = try detailsDecoder.decodeDetails(from: webContent)
+        return details
     }
 }

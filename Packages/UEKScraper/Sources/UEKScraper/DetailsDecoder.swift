@@ -1,5 +1,5 @@
 //
-//  EventsDecoder.swift
+//  DetailsDecoder.swift
 //  UEKScraper
 //
 //  Created by Sebastian Staszczyk on 23/09/2023.
@@ -9,17 +9,34 @@ import Domain
 import Foundation
 import SwiftSoup
 
-struct EventsDecoder {
+struct DetailsDecoder {
     private let datesDecoder = DatesDecoder()
 
-    func decodeEvents(from content: String) throws -> [Event] {
+    func decodeDetails(from content: String) throws -> FacultyGroupDetails {
         let document = try SwiftSoup.parse(content)
         let table = try document.select("table")
         let rows = try table.select("tr").array()
-        return rows.compactMap { getEvent(from: $0) }
+        let events = rows.compactMap { getEvent(from: $0) }
+        let classes = getClasses(from: events)
+        return FacultyGroupDetails(events: events, classes: classes)
     }
 
-    func getEvent(from row: Element) -> Event? {
+    private func getClasses(from events: [Event]) -> [FacultyGroupClass] {
+        let allClasses: [FacultyGroupClass] = events
+            .compactMap {
+                guard let name = $0.name, let type = $0.type, let teacher = $0.teacher, teacher != "Studencki Uek Parlament", type != "rezerwacja", !name.isEmpty else { return nil }
+                return FacultyGroupClass(name: name, type: type, teacher: teacher)
+            }
+        return Array(Set(allClasses))
+            .sorted {
+                guard $0.name != $1.name else {
+                    return $0.type > $1.type
+                }
+                return $0.name < $1.name
+            }
+    }
+
+    private func getEvent(from row: Element) -> Event? {
         do {
             let columns = try row.select("td").array()
             guard columns.count == 6 else { return nil }

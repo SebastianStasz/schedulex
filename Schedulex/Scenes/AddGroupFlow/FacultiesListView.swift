@@ -15,25 +15,25 @@ struct FacultiesListView: View {
     let service: FirestoreService
     @State private var school: School?
     @State private var searchText = ""
-
+    
     var body: some View {
         NavigationStack {
-            List {
-                if school != nil {
-                    if searchText.isEmpty {
-                        Section(L10n.forEveryoneHeader) {
-                            ForEach(globalSectionFaculties, content: facultyListRow)
+            Group {
+                if searchText.isEmpty {
+                    SectionedList(sections, rowContent: facultyListRow)
+                } else {
+                    BaseList {
+                        ForEach(faculties) {
+                            facultyListRow(faculty: $0)
+
+                            Separator()
+                                .displayIf(faculties.last != $0 || (faculties.last == $0 && !facultyGroups.isEmpty))
                         }
-                        Section(L10n.faculties) {
-                            ForEach(faculties, content: facultyListRow)
-                        }
-                        Section(L10n.otherHeader) {
-                            ForEach(otherSectionFaculties, content: facultyListRow)
-                        }
-                    } else {
-                        ForEach(faculties, content: facultyListRow)
                         ForEach(facultyGroups) {
-                            FacultyGroupListItem(facultyGroup: $0)
+                            FacultyGroupListItem(facultyGroup: $0, type: .preview)
+
+                            Separator()
+                                .displayIf(facultyGroups.last != $0)
                         }
                     }
                 }
@@ -55,7 +55,7 @@ struct FacultiesListView: View {
 
     @ViewBuilder
     private var loadingIndicatorOrEmptyState: some View {
-         if isSearchEmpty {
+        if isSearchEmpty {
             EmptyStateView()
         }
     }
@@ -64,12 +64,14 @@ struct FacultiesListView: View {
         !searchText.isEmpty && faculties.isEmpty && facultyGroups.isEmpty
     }
 
-    private var globalSectionFaculties: [Faculty] {
-        school?.faculties.filter { $0.type == .global }.sorted(by: { $0.name < $1.name }) ?? []
+    private var sections: [ListSection<Faculty>] {
+        [ListSection(title: L10n.forEveryoneHeader, items: getFaculties(ofType: .global)),
+         ListSection(title: L10n.faculties, items: getFaculties(ofType: .faculty)),
+         ListSection(title: L10n.otherHeader, items: getFaculties(ofType: .other))]
     }
 
-    private var otherSectionFaculties: [Faculty] {
-        school?.faculties.filter { $0.type == .other }.sorted(by: { $0.name < $1.name }) ?? []
+    private func getFaculties(ofType type: FacultyType) -> [Faculty] {
+        school?.faculties.filter { $0.type == type }.sorted(by: { $0.name < $1.name }) ?? []
     }
 
     private var faculties: [Faculty] {
