@@ -36,7 +36,7 @@ private struct BaseListStyleViewModifier: ViewModifier {
     }
 
     private var backgroundColor: Color {
-        Color(uiColor: .systemGroupedBackground)
+        Color.backgroundPrimary
     }
 }
 

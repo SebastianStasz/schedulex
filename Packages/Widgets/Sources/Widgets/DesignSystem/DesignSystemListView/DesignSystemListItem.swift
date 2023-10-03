@@ -11,6 +11,7 @@ enum DesignSystemListItem: String, CaseIterable {
     case typography
     case color
     case spacing
+    case cornerRadius
     case icon
 
     var name: String {
@@ -26,6 +27,8 @@ enum DesignSystemListItem: String, CaseIterable {
             ColorDesignSystemView()
         case .spacing:
             SpacingDesignSystemView()
+        case .cornerRadius:
+            CornerRadiusDesignSystemView()
         case .icon:
             Text("Icons", style: .body)
         }
