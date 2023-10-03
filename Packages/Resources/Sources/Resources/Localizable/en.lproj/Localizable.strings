@@ -1,6 +1,10 @@
 // main
+"done_button" = "Done";
+"add_group" = "Add group";
 "today" = "Today";
 "calendar" = "Calendar";
+"classes" = "Classes";
+"events" = "Events";
 "my_groups" = "My groups";
 "group" = "Group";
 "faculties" = "Faculties";

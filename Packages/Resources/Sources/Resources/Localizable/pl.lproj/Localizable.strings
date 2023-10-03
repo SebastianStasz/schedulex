@@ -1,6 +1,10 @@
 // main
+"done_button" = "OK";
+"add_group" = "Dodaj grupę";
 "today" = "Dzisiaj";
 "calendar" = "Kalendarz";
+"classes" = "Przedmioty";
+"events" = "Zajęcia";
 "my_groups" = "Moje grupy";
 "group" = "Grupa";
 "faculties" = "Kierunki";

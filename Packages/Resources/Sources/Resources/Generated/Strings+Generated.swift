@@ -10,8 +10,16 @@ import Foundation
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 public enum L10n {
+  /// Add group
+  public static let addGroup = L10n.tr("Localizable", "add_group", fallback: "Add group")
   /// Calendar
   public static let calendar = L10n.tr("Localizable", "calendar", fallback: "Calendar")
+  /// Classes
+  public static let classes = L10n.tr("Localizable", "classes", fallback: "Classes")
+  /// Done
+  public static let doneButton = L10n.tr("Localizable", "done_button", fallback: "Done")
+  /// Events
+  public static let events = L10n.tr("Localizable", "events", fallback: "Events")
   /// Faculties
   public static let faculties = L10n.tr("Localizable", "faculties", fallback: "Faculties")
   /// Faculty or group
