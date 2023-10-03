@@ -13,8 +13,8 @@ private struct CardViewModifier: ViewModifier {
 
     func body(content: Content) -> some View {
         content
-            .padding(.vertical, verticalPadding)
             .padding(.horizontal, horizontalPadding)
+            .padding(.vertical, verticalPadding)
             .background(.backgroundTertiary)
             .cornerRadius(.medium)
     }

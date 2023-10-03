@@ -16,6 +16,10 @@ public extension View {
         background(colorStyle.color)
     }
 
+    func cornerRadius(_ radius: CornerRadius) -> some View {
+        cornerRadius(radius.value)
+    }
+
     /// Displays the view if the condition is true.
     /// - Parameter condition: The condition that must be met in order to display the view.
     /// - Returns: A view if the condition is true.
