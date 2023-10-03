@@ -15,6 +15,14 @@ public extension View {
     func background(_ colorStyle: ColorStyle) -> some View {
         background(colorStyle.color)
     }
+
+    /// Displays the view if the condition is true.
+    /// - Parameter condition: The condition that must be met in order to display the view.
+    /// - Returns: A view if the condition is true.
+    @ViewBuilder
+    func displayIf(_ condition: Bool) -> some View {
+        if condition { self }
+    }
 }
 
 public extension Shape {

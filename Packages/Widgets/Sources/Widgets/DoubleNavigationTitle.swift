@@ -17,12 +17,17 @@ private struct DoubleNavigationTitle: ViewModifier {
                 .fill(.backgroundSecondary)
                 .frame(height: 72)
 
-            VStack(alignment: .leading, spacing: .micro) {
-                Text(subtitle, style: .body)
-                    .foregroundStyle(.grayShade1)
+            HStack(spacing: .xlarge) {
+                VStack(alignment: .leading, spacing: .micro) {
+                    Text(subtitle, style: .body)
+                        .foregroundStyle(.grayShade1)
 
-                Text(title, style: .titleSmall)
-                    .foregroundStyle(.textPrimary)
+                    Text(title, style: .titleSmall)
+                        .foregroundStyle(.textPrimary)
+                }
+                
+                SwiftUI.Text("🐥")
+                    .font(.largeTitle)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.horizontal, .medium)

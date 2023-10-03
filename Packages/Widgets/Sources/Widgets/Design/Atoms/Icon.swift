@@ -9,6 +9,8 @@ public enum Icon: String, Identifiable, CaseIterable {
     case closeButton
     case delete
     case info
+    case circle
+    case checkmark
 
     public var id: String {
         rawValue
@@ -22,6 +24,10 @@ public enum Icon: String, Identifiable, CaseIterable {
             return "trash.fill"
         case .info:
             return "info.circle"
+        case .circle:
+            return "circle"
+        case .checkmark:
+            return "checkmark.circle"
         }
     }
 }

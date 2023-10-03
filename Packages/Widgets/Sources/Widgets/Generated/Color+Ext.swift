@@ -10,6 +10,7 @@ import SwiftUI
 public extension UIColor {
     static let backgroundPrimary = ColorStyle.backgroundPrimary.uiColor
     static let backgroundSecondary = ColorStyle.backgroundSecondary.uiColor
+    static let backgroundTertiary = ColorStyle.backgroundTertiary.uiColor
     static let grayShade1 = ColorStyle.grayShade1.uiColor
     static let accentPrimary = ColorStyle.accentPrimary.uiColor
     static let textPrimary = ColorStyle.textPrimary.uiColor
@@ -22,6 +23,7 @@ public extension UIColor {
 public extension Color {
     static let backgroundPrimary = ColorStyle.backgroundPrimary.color
     static let backgroundSecondary = ColorStyle.backgroundSecondary.color
+    static let backgroundTertiary = ColorStyle.backgroundTertiary.color
     static let grayShade1 = ColorStyle.grayShade1.color
     static let accentPrimary = ColorStyle.accentPrimary.color
     static let textPrimary = ColorStyle.textPrimary.color

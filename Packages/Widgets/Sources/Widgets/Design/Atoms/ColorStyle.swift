@@ -10,6 +10,7 @@ import SwiftUI
 public enum ColorStyle: CaseIterable {
     case backgroundPrimary
     case backgroundSecondary
+    case backgroundTertiary
     case grayShade1
     case accentPrimary
     case textPrimary
@@ -24,6 +25,8 @@ public enum ColorStyle: CaseIterable {
             return "background_primary"
         case .backgroundSecondary:
             return "background_secondary"
+        case .backgroundTertiary:
+            return "background_tertiary"
         case .grayShade1:
             return "gray_shade_1"
         case .accentPrimary:
