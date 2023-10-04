@@ -7,14 +7,25 @@
 
 import Domain
 import SwiftUI
+import SchedulexFirebase
 
 @main
 struct SchedulexApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) private var delegate
+    @AppStorage("subscribedFacultyGroups") private var subscribedGroups: [FacultyGroup] = []
+    @State private var service = FirestoreService()
+    @State private var isFacultiesListPresented = false
 
     var body: some Scene {
         WindowGroup {
-            DashboardView()
+            VStack {
+                if subscribedGroups.isEmpty {
+                    IntroductionView(isFacultiesListPresented: $isFacultiesListPresented)
+                } else {
+                    DashboardView(service: service, isFacultiesListPresented: $isFacultiesListPresented)
+                }
+            }
+            .sheet(isPresented: $isFacultiesListPresented) { FacultiesListView(service: service) }
         }
     }
 }

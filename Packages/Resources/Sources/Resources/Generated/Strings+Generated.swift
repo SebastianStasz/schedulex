@@ -12,6 +12,8 @@ import Foundation
 public enum L10n {
   /// Add group
   public static let addGroup = L10n.tr("Localizable", "add_group", fallback: "Add group")
+  /// Add to observed
+  public static let addToObserved = L10n.tr("Localizable", "add_to_observed", fallback: "Add to observed")
   /// Calendar
   public static let calendar = L10n.tr("Localizable", "calendar", fallback: "Calendar")
   /// Classes

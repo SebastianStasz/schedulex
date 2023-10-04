@@ -41,13 +41,13 @@ struct FacultyGroupDetailsView: View {
     }
 
     enum Destination: Hashable, View {
-        case classesList(String, [FacultyGroupClass])
+        case classesList(String, [FacultyGroupClass], ViewType)
         case eventsList(String, [Event])
 
         var body: some View {
             switch self {
-            case let .classesList(facultyGroupName, classes):
-                FacultyGroupClassListView(facultyGroupName: facultyGroupName, classes: classes)
+            case let .classesList(facultyGroupName, classes, type):
+                FacultyGroupClassListView(facultyGroupName: facultyGroupName, classes: classes, viewType: type)
             case let .eventsList(facultyGroupName, events):
                 FacultyGroupEventListView(facultyGroupName: facultyGroupName, events: events)
             }
@@ -58,7 +58,7 @@ struct FacultyGroupDetailsView: View {
         NavigationStack {
             BaseList {
                 BaseListItem(title: L10n.classes, caption: classesDescription)
-                    .navigationLink(value: Destination.classesList(facultyGroup.name, facultyGroupDetails?.classes ?? []))
+                    .navigationLink(value: Destination.classesList(facultyGroup.name, facultyGroupDetails?.classes ?? [], type))
 
                 Separator()
 
@@ -72,13 +72,12 @@ struct FacultyGroupDetailsView: View {
             .toolbar {
                 ToolbarItem(placement: .bottomBar) {
                     if isGroupSubscribed {
-                        UnfollowGroupButton {
+                        TextButton(L10n.unfollow) {
                             subscribedGroups.removeAll { $0.name == facultyGroup.name }
                             allHiddenClasses.removeAll { $0.facultyGroupName == facultyGroup.name }
                         }
-                        .labelStyle(.titleOnly)
                     } else {
-                        Button("Dodaj do obserwowanych") {
+                        TextButton(L10n.addToObserved) {
                             guard !isGroupSubscribed else { return }
                             subscribedGroups.append(facultyGroup)
                         }

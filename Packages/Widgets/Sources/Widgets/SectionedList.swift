@@ -19,10 +19,10 @@ public struct ListSection<Item: Hashable>: Hashable {
 
 public struct SectionedList<Item: Hashable, RowContent: View>: View {
     private let sections: [ListSection<Item>]
-    private let rowContent: (Item) -> RowContent
+    private let rowContent: (Int, Item) -> RowContent
     private let separatorHeight: CGFloat
 
-    public init(_ sections: [ListSection<Item>], separatorHeight: CGFloat = 1, @ViewBuilder rowContent: @escaping (Item) -> RowContent) {
+    public init(_ sections: [ListSection<Item>], separatorHeight: CGFloat = 1, @ViewBuilder rowContent: @escaping (Int, Item) -> RowContent) {
         self.sections = sections
         self.rowContent = rowContent
         self.separatorHeight = separatorHeight
@@ -30,15 +30,14 @@ public struct SectionedList<Item: Hashable, RowContent: View>: View {
 
     public var body: some View {
         ScrollView {
-            VStack(spacing: 0) {
-                ForEach(sections, id: \.self) { section in
-                    Section(content: { rowsView(for: section.items) },
+            LazyVStack(spacing: 0, pinnedViews: [.sectionHeaders]) {
+                ForEach(Array(zip(sections.indices, sections)), id: \.0) { sectionIndex, section in
+                    Section(content: { rowsView(for: section.items, sectionIndex: sectionIndex) },
                             header: { headerView(title: section.title) })
                 }
             }
             .padding(.bottom, .xlarge)
             .padding(.horizontal, .large)
-            .padding(.top, -.xlarge)
         }
     }
 
@@ -48,12 +47,13 @@ public struct SectionedList<Item: Hashable, RowContent: View>: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.bottom, .medium)
             .padding(.top, 40)
+            .background(.backgroundPrimary)
     }
 
-    private func rowsView(for items: [Item]) -> some View {
+    private func rowsView(for items: [Item], sectionIndex: Int) -> some View {
         LazyVStack(spacing: 0) {
             ForEach(items, id: \.self) {
-                rowContent($0)
+                rowContent(sectionIndex, $0)
                 Separator(height: separatorHeight)
                     .displayIf(items.last != $0)
             }

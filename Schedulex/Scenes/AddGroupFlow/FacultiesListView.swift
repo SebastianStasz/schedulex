@@ -20,7 +20,9 @@ struct FacultiesListView: View {
         NavigationStack {
             Group {
                 if searchText.isEmpty {
-                    SectionedList(sections, rowContent: facultyListRow)
+                    SectionedList(sections) { _, faculty in
+                        facultyListRow(faculty: faculty)
+                    }
                 } else {
                     BaseList {
                         ForEach(faculties) {

@@ -6,6 +6,7 @@
 "classes" = "Przedmioty";
 "events" = "Zajęcia";
 "my_groups" = "Moje grupy";
+"add_to_observed" = "Dodaj do obserwowanych";
 "group" = "Grupa";
 "faculties" = "Kierunki";
 "unfollow" = "Usuń z obserwowanych";

@@ -25,9 +25,6 @@ private struct DoubleNavigationTitle: ViewModifier {
                     Text(title, style: .titleSmall)
                         .foregroundStyle(.textPrimary)
                 }
-                
-                SwiftUI.Text("🐥")
-                    .font(.largeTitle)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.horizontal, .medium)

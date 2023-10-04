@@ -15,45 +15,44 @@ struct DashboardView: View {
     @AppStorage("subscribedFacultyGroups") private var subscribedGroups: [FacultyGroup] = []
     @AppStorage("hiddenFacultyGroupsClasses") private var allHiddenClasses: [EditableFacultyGroupClass] = []
     @StateObject private var viewModel = DashboardViewModel()
-    @State private var service = FirestoreService()
+
+    let service: FirestoreService
+    @Binding var isFacultiesListPresented: Bool
     @State private var isDatePickerPresented = false
     @State private var isSchedulesSheetPresented = false
 
     var body: some View {
-        NavigationStack {
-            VStack(spacing: 0) {
-                if let startDate = viewModel.startDate, let endDate = viewModel.endDate {
-                    LazyVStack {
-                        DayPickerView(startDate: startDate, endDate: endDate, shouldScrollToDay: isDatePickerPresented, selection: $viewModel.selectedDate)
-                    }
-                    .padding(.top, .xlarge)
-                    .padding(.bottom, .medium)
-                    .background(.backgroundSecondary)
-
-                    separator()
-
-                    ScrollView {
-                        LazyVStack(spacing: .medium) {
-                            ForEach(viewModel.selectedDateEvents, id: \.self) {
-                                EventCardView(event: $0)
-                            }
-                        }
-                        .padding(.vertical, .large)
-                        .padding(.horizontal, .medium)
-                        .background(.backgroundPrimary)
-                    }
-                } else {
-                    Rectangle()
-                        .fill(Color.backgroundSecondary)
-                        .frame(height: .medium)
-                    separator()
-                    Spacer()
+        VStack(spacing: 0) {
+            if let startDate = viewModel.startDate, let endDate = viewModel.endDate {
+                LazyVStack {
+                    DayPickerView(startDate: startDate, endDate: endDate, shouldScrollToDay: isDatePickerPresented, selection: $viewModel.selectedDate)
                 }
+                .padding(.top, .xlarge)
+                .padding(.bottom, .medium)
+                .background(.backgroundSecondary)
+
+                separator()
+
+                ScrollView {
+                    LazyVStack(spacing: .medium) {
+                        ForEach(viewModel.selectedDateEvents, id: \.self) {
+                            EventCardView(event: $0)
+                        }
+                    }
+                    .padding(.vertical, .large)
+                    .padding(.horizontal, .medium)
+                    .background(.backgroundPrimary)
+                }
+            } else {
+                Rectangle()
+                    .fill(Color.backgroundSecondary)
+                    .frame(height: .medium)
+                separator()
+                Spacer()
             }
-            .overlay { loadingIndicatorOrEmptyState }
-            .toolbar { toolbarContent }
         }
-        .toolbar(.hidden)
+        .overlay { loadingIndicatorOrEmptyState }
+        .toolbar { toolbarContent }
         .doubleNavigationTitle(title: viewModel.title, subtitle: viewModel.subtitle)
         .sheet(isPresented: $isSchedulesSheetPresented) { ObservedFacultyGroupsView(service: service) }
         .sheet(isPresented: $isDatePickerPresented) { datePicker }
@@ -117,6 +116,6 @@ struct DashboardView: View {
 
 struct DashboardView_Previews: PreviewProvider {
     static var previews: some View {
-        DashboardView()
+        DashboardView(service: FirestoreService(), isFacultiesListPresented: .constant(false))
     }
 }

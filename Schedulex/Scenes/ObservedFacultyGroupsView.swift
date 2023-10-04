@@ -13,6 +13,7 @@ import Widgets
 
 struct ObservedFacultyGroupsView: View {
     @AppStorage("subscribedFacultyGroups") private var subscribedGroups: [FacultyGroup] = []
+    @AppStorage("hiddenFacultyGroupsClasses") private var allHiddenClasses: [EditableFacultyGroupClass] = []
     @State private var isFacultiesListPresented = false
     @State private var groupToDelete: FacultyGroup?
     let service: FirestoreService
@@ -23,14 +24,9 @@ struct ObservedFacultyGroupsView: View {
 
     var body: some View {
         NavigationStack {
-            List(subscribedGroups) { facultyGroup in
-                FacultyGroupListItem(facultyGroup: facultyGroup)
-                    .contextMenu {
-                        UnfollowGroupButton { groupToDelete = facultyGroup }
-                    }
-                    .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                        UnfollowGroupButton(destructive: false) { groupToDelete = facultyGroup }
-                    }
+            BaseList(subscribedGroups) { facultyGroup in
+                FacultyGroupListItem(facultyGroup: facultyGroup, type: .editable)
+                    .contextMenu { UnfollowGroupButton { groupToDelete = facultyGroup } }
             }
             .confirmationDialog(unfollowGroupQuestion, isPresented: isGroupDeleteConfirmationPresented, titleVisibility: .visible) {
                 Button(L10n.unfollow, role: .destructive, action: deleteGroup)
@@ -49,14 +45,14 @@ struct ObservedFacultyGroupsView: View {
 
     private var toolbarContent: some ToolbarContent {
         ToolbarItem(placement: .bottomBar) {
-            Button(L10n.addGroup) { isFacultiesListPresented = true }
-                .foregroundStyle(.accentPrimary)
+            TextButton(L10n.addGroup) { isFacultiesListPresented = true }
         }
     }
 
     private func deleteGroup() {
         guard let groupToDelete else { return }
         subscribedGroups.removeAll { $0.name == groupToDelete.name }
+        allHiddenClasses.removeAll { $0.facultyGroupName == groupToDelete.name }
         self.groupToDelete = nil
     }
 }

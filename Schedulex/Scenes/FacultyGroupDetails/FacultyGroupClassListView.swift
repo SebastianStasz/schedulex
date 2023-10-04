@@ -29,27 +29,32 @@ struct FacultyGroupClassListView: View {
     @AppStorage("hiddenFacultyGroupsClasses") private var allHiddenClasses: [EditableFacultyGroupClass] = []
     let facultyGroupName: String
     let classes: [FacultyGroupClass]
-    
-    var body: some View {
-        List {
-            Section("Widoczne") {
-                ForEach(visibleClasses, id: \.self) { groupClass in
-                    FacultyGroupClassListItem(facultyGroupClass: groupClass, isSelected: true) {
-                        hideClass(groupClass)
-                    }
-                }
-            }
+    let viewType: FacultyGroupDetailsView.ViewType
 
-            Section("Ukryte") {
-                ForEach(hiddenClasses, id: \.self) { groupClass in
-                    FacultyGroupClassListItem(facultyGroupClass: groupClass, isSelected: false) {
-                        unhideClass(groupClass)
+    var body: some View {
+        Group {
+            if viewType == .preview {
+                BaseList(classes, id: \.self) { FacultyGroupClassListItem(facultyGroupClass: $0, isSelected: true, action: nil) }
+            } else {
+                SectionedList(sections) { sectionIndex, groupClass in
+                    FacultyGroupClassListItem(facultyGroupClass: groupClass, isSelected: sectionIndex == 0) {
+                        if sectionIndex == 0 {
+                            hideClass(groupClass)
+                        } else {
+                            unhideClass(groupClass)
+                        }
                     }
                 }
+                .animation(.easeInOut, value: allHiddenClasses)
             }
         }
         .navigationTitle(L10n.classes)
         .baseListStyle()
+    }
+
+    private var sections: [ListSection<FacultyGroupClass>] {
+        [ListSection(title: "Widoczne", items: visibleClasses),
+         ListSection(title: "Ukryte", items: hiddenClasses)]
     }
 
     private var visibleClasses: [FacultyGroupClass] {
@@ -74,5 +79,5 @@ struct FacultyGroupClassListView: View {
 }
 
 #Preview {
-    FacultyGroupClassListView(facultyGroupName: "ZZ", classes: [])
+    FacultyGroupClassListView(facultyGroupName: "ZZ", classes: [], viewType: .preview)
 }

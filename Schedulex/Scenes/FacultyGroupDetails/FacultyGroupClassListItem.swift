@@ -12,7 +12,7 @@ import Widgets
 struct FacultyGroupClassListItem: View {
     let facultyGroupClass: FacultyGroupClass
     let isSelected: Bool
-    let action: () -> Void
+    let action: (() -> Void)?
 
     var body: some View {
         HStack(spacing: .medium) {
@@ -28,12 +28,17 @@ struct FacultyGroupClassListItem: View {
             .padding(.vertical, .micro)
             .frame(maxWidth: .infinity, alignment: .leading)
 
-            Image.icon(isSelected ? .checkmark : .circle)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 20)
-                .onTapGesture { action() }
+            if let action {
+                Image.icon(isSelected ? .checkmark : .circle)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 20)
+                    .foregroundStyle(.accentPrimary)
+                    .onTapGesture { action() }
+            }
         }
+        .card(vertical: .medium)
+        .buttonStyle(.plain)
     }
 }
 

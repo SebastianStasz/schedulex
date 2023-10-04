@@ -14,8 +14,8 @@ struct FacultyGroupEventListView: View {
     let events: [Event]
 
     var body: some View {
-        SectionedList(listSections ?? [], separatorHeight: .medium) {
-            EventCardView(event: $0)
+        SectionedList(listSections ?? [], separatorHeight: .medium) { _, event in
+            EventCardView(event: event)
         }
         .navigationTitle(facultyGroupName)
         .baseListStyle()

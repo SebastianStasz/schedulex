@@ -13,6 +13,11 @@ options:
 
 targets:
   Schedulex:
+    info:
+      path: Schedulex/Info.plist
+      properties:
+        UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
+        UILaunchStoryboardName: LaunchScreen
     scheme:
       testTargets:
         - name: SchedulexTests

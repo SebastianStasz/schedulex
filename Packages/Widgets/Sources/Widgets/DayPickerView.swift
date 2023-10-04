@@ -32,6 +32,7 @@ public struct DayPickerView: View {
                     ForEach(dates, id: \.self) { date in
                         DayPickerItemView(date: date, isSelected: date.isSameDay(as: selectedDate))
                             .frame(width: dayPickerItemWidth)
+                            .contentShape(Rectangle())
                             .onTapGesture { selectedDate = date }
                             .id(date.formatted(style: .dateLong))
                             .onChange(of: selectedDate) { date in
