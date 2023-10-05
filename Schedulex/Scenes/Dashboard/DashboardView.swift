@@ -15,6 +15,7 @@ struct DashboardView: View {
     @AppStorage("subscribedFacultyGroups") private var subscribedGroups: [FacultyGroup] = []
     @AppStorage("hiddenFacultyGroupsClasses") private var allHiddenClasses: [EditableFacultyGroupClass] = []
     @StateObject private var viewModel = DashboardViewModel()
+    @Environment(\.scenePhase) private var scenePhase
 
     let service: FirestoreService
     @Binding var isFacultiesListPresented: Bool
@@ -58,6 +59,7 @@ struct DashboardView: View {
         .sheet(isPresented: $isDatePickerPresented) { datePicker }
         .onChange(of: subscribedGroups) { _ in fetchEvents() }
         .onChange(of: allHiddenClasses) { _ in fetchEvents() }
+        .onChange(of: scenePhase) { onSceneChange($0) }
         .task { fetchEvents() }
     }
 
@@ -107,6 +109,11 @@ struct DashboardView: View {
     private func showDatePicker() {
         guard !viewModel.isLoading && !viewModel.selectedDateEvents.isEmpty else { return }
         isDatePickerPresented = true
+    }
+
+    private func onSceneChange(_ scene: ScenePhase) {
+        guard scene == .active, !viewModel.shouldUseCachedData else { return }
+        fetchEvents()
     }
 
     private func fetchEvents() {

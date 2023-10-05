@@ -19,6 +19,7 @@ final class DashboardViewModel: ObservableObject {
     @Published private(set) var endDate: Date?
     @Published private(set) var isLoading = true
 
+    @Published private var nextUpdateDate: Date?
     @Published private var allEvents: [Event] = []
     @Published var selectedDate: Date = .now
 
@@ -39,6 +40,13 @@ final class DashboardViewModel: ObservableObject {
         allEvents.isEmpty
     }
 
+    var shouldUseCachedData: Bool {
+        guard let nextUpdateDate, nextUpdateDate >= Date.now else {
+            return false
+        }
+        return true
+    }
+
     func fetchEvents(for facultyGroups: [FacultyGroup], hiddenClasses: [EditableFacultyGroupClass]) async throws {
         isLoading = true
         var events: [Event] = []
@@ -54,6 +62,7 @@ final class DashboardViewModel: ObservableObject {
             events.append(contentsOf: newEvents)
         }
         allEvents = events
+        nextUpdateDate = Calendar.current.date(byAdding: .minute, value: 5, to: .now)
         isLoading = false
     }
 
