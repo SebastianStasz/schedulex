@@ -19,7 +19,9 @@ struct FacultyGroupListView: View {
         BaseList(filteredGroups) { facultyGroup in
             let caption = "\(facultyGroup.numberOfEvents) " + L10n.xEvents
             BaseListItem(title: facultyGroup.name, caption: caption)
-                .trailingIcon(.info) { self.facultyGroup = facultyGroup }
+                .trailingIcon(.info)
+                .contentShape(Rectangle())
+                .onTapGesture { self.facultyGroup = facultyGroup }
         }
         .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: L10n.group)
         .sheet(item: $facultyGroup) { FacultyGroupDetailsView(facultyGroup: $0, type: .preview) }

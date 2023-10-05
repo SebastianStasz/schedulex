@@ -11,7 +11,7 @@ public struct BaseListItem: View {
     let title: String
     let caption: String?
     var trailingIcon: Icon?
-    var trailingIconAction: () -> Void = {}
+    var iconSize: CGFloat = 20
 
     public init(title: String, caption: String? = nil) {
         self.title = title
@@ -33,14 +33,11 @@ public struct BaseListItem: View {
             .frame(maxWidth: .infinity, alignment: .leading)
 
             if let trailingIcon {
-                Button(action: trailingIconAction) {
-                    Image.icon(trailingIcon)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 20)
-                        .foregroundStyle(.accentPrimary)
-                }
-                .buttonStyle(.plain)
+                Image.icon(trailingIcon)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(height: iconSize)
+                    .foregroundStyle(.accentPrimary)
             }
         }
         .card()
@@ -49,10 +46,10 @@ public struct BaseListItem: View {
 }
 
 public extension BaseListItem {
-    func trailingIcon(_ icon: Icon, onTap: @escaping () -> Void) -> some View {
+    func trailingIcon(_ icon: Icon, iconSize: CGFloat = 20) -> some View {
         var view = self
         view.trailingIcon = icon
-        view.trailingIconAction = onTap
+        view.iconSize = iconSize
         return view
     }
 }

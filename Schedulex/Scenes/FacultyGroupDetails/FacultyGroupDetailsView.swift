@@ -58,31 +58,32 @@ struct FacultyGroupDetailsView: View {
         NavigationStack {
             BaseList { 
                 BaseListItem(title: L10n.classes, caption: classesDescription)
+                    .trailingIcon(.chevronRight, iconSize: 15)
                     .navigationLink(value: Destination.classesList(facultyGroup.name, facultyGroupDetails?.classes ?? [], type))
+                    .buttonStyle(.plain)
 
                 Separator()
 
                 BaseListItem(title: L10n.events, caption: eventsDescription)
+                    .trailingIcon(.chevronRight, iconSize: 15)
                     .navigationLink(value: Destination.eventsList(facultyGroup.name, facultyGroupDetails?.events ?? []))
+                    .buttonStyle(.plain)
             }
             .navigationDestination(for: Destination.self) { $0 }
             .baseListStyle(isLoading: facultyGroupDetails == nil)
             .navigationTitle(facultyGroup.name)
             .closeButton()
-            .toolbar {
-                ToolbarItem(placement: .bottomBar) {
+            .safeAreaInset(edge: .bottom) {
+                TextButton(isGroupSubscribed ? L10n.unfollow : L10n.addToObserved) {
                     if isGroupSubscribed {
-                        TextButton(L10n.unfollow) {
-                            subscribedGroups.removeAll { $0.name == facultyGroup.name }
-                            allHiddenClasses.removeAll { $0.facultyGroupName == facultyGroup.name }
-                        }
+                        subscribedGroups.removeAll { $0.name == facultyGroup.name }
+                        allHiddenClasses.removeAll { $0.facultyGroupName == facultyGroup.name }
                     } else {
-                        TextButton(L10n.addToObserved) {
-                            guard !isGroupSubscribed else { return }
-                            subscribedGroups.append(facultyGroup)
-                        }
+                        guard !isGroupSubscribed else { return }
+                        subscribedGroups.append(facultyGroup)
                     }
                 }
+                .padding(.bottom, .large)
             }
         }
         .task { facultyGroupDetails = try? await UekScheduleService().getFacultyGroupDetails(for: facultyGroup) }

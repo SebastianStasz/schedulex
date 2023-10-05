@@ -35,7 +35,9 @@ struct FacultiesListView: View {
                         ForEach(facultyGroups) { facultyGroup in
                             let caption = "\(facultyGroup.numberOfEvents) " + L10n.xEvents
                             BaseListItem(title: facultyGroup.name, caption: caption)
-                                .trailingIcon(.info) { self.facultyGroup = facultyGroup }
+                                .trailingIcon(.info)
+                                .contentShape(Rectangle())
+                                .onTapGesture { self.facultyGroup = facultyGroup }
 
                             Separator()
                                 .displayIf(facultyGroups.last != facultyGroup)
@@ -57,6 +59,7 @@ struct FacultiesListView: View {
     private func facultyListRow(faculty: Faculty) -> some View {
         NavigationLink(destination: { FacultyGroupListView(faculty: faculty) }) {
             BaseListItem(title: faculty.name, caption: "\(faculty.numberOfGroups) " + L10n.xGroups)
+                .trailingIcon(.chevronRight, iconSize: 15)
         }
     }
 

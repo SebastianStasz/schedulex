@@ -11,6 +11,7 @@ public enum Icon: String, Identifiable, CaseIterable {
     case info
     case circle
     case checkmark
+    case chevronRight
 
     public var id: String {
         rawValue
@@ -28,6 +29,8 @@ public enum Icon: String, Identifiable, CaseIterable {
             return "circle"
         case .checkmark:
             return "checkmark.circle"
+        case .chevronRight:
+            return "chevron.right"
         }
     }
 }

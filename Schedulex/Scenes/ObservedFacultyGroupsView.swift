@@ -28,7 +28,9 @@ struct ObservedFacultyGroupsView: View {
             BaseList(subscribedGroups.sorted(by: { $0.name < $1.name })) { facultyGroup in
                 let caption = "\(facultyGroup.numberOfEvents) " + L10n.xEvents
                 BaseListItem(title: facultyGroup.name, caption: caption)
-                    .trailingIcon(.info) { self.facultyGroup = facultyGroup }
+                    .trailingIcon(.info)
+                    .contentShape(Rectangle())
+                    .onTapGesture { self.facultyGroup = facultyGroup }
                     .contextMenu { UnfollowGroupButton { groupToDelete = facultyGroup } }
             }
             .confirmationDialog(unfollowGroupQuestion, isPresented: isGroupDeleteConfirmationPresented, titleVisibility: .visible) {
