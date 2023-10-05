@@ -31,13 +31,13 @@ struct FacultyGroupDetailsView: View {
 
     private var classesDescription: String {
         if case type = .preview {
-            return "Number of classes: \(facultyGroupDetails?.classes.count ?? 0)"
+            return L10n.numberOfClasses + " \(facultyGroupDetails?.classes.count ?? 0)"
         }
-        return "Ustaw widoczność zajęć"
+        return L10n.setClassesVisibility
     }
 
     private var eventsDescription: String {
-        "Number of events: \(facultyGroupDetails?.events.count ?? 0)"
+        L10n.numberOfEvents + " \(facultyGroupDetails?.events.count ?? 0)"
     }
 
     enum Destination: Hashable, View {

@@ -5,6 +5,7 @@
 //  Created by Sebastian Staszczyk on 22/09/2023.
 //
 
+import Resources
 import SwiftUI
 import Widgets
 
@@ -16,7 +17,7 @@ struct EmptyStateView: View {
                 .aspectRatio(contentMode: .fit)
                 .frame(height: 26)
 
-            Text("No results found", style: .body)
+            Text(L10n.noResultMessage, style: .body)
         }
         .foregroundStyle(.grayShade1)
     }

@@ -19,4 +19,12 @@
 "faculty_or_group_prompt" = "Faculty or group";
 "x_groups" = "groups";
 "x_events" = "events";
+"number_of_classes" = "Number of classes:";
+"number_of_events" = "Number of events:";
+"set_classes_visibility" = "Set visibility of classes";
+"hidden" = "Hidden";
+"visible" = "Visible";
+"lets_start" = "Let's start";
+"lets_start_message" = "To get started, select the groups you want to follow and see on the home page";
+"no_result_message" = "No results found";
 

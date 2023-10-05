@@ -5,6 +5,7 @@
 //  Created by Sebastian Staszczyk on 03/10/2023.
 //
 
+import Resources
 import SwiftUI
 import Widgets
 
@@ -25,13 +26,13 @@ struct IntroductionView: View {
                     .foregroundStyle(.textPrimary)
                     .opacity(0.8)
 
-                Text("Aby zacząć wybierz grupy, które chcesz obserwować i widzieć na stronie głównej")
+                Text(L10n.letsStartMessage)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, .xlarge)
                     .foregroundStyle(.grayShade1)
 
                 Button(action: presentFacultiesList) {
-                    Text("Zaczynajmy")
+                    Text(L10n.letsStart)
                         .font(.title)
                         .fontWeight(.bold)
                         .padding(.horizontal, .large)

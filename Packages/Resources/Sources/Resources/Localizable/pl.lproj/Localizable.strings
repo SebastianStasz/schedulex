@@ -19,4 +19,12 @@
 "faculty_or_group_prompt" = "Kierunek lub grupa";
 "x_groups" = "grup";
 "x_events" = "zajęć";
+"number_of_classes" = "Liczba typów zajęć";
+"number_of_events" = "Liczba zajęć";
+"set_classes_visibility" = "Ustaw widoczność typów zajęć";
+"hidden" = "Ukryte";
+"visible" = "Widoczne";
+"lets_start" = "Zaczynajmy";
+"lets_start_message" = "Aby zacząć wybierz grupy, które chcesz obserwować i widzieć na stronie głównej";
+"no_result_message" = "Brak wyników wyszukiwania";
 

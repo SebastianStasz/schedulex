@@ -30,22 +30,38 @@ public enum L10n {
   public static let forEveryoneHeader = L10n.tr("Localizable", "for_everyone_header", fallback: "For everyone")
   /// Group
   public static let group = L10n.tr("Localizable", "group", fallback: "Group")
+  /// Hidden
+  public static let hidden = L10n.tr("Localizable", "hidden", fallback: "Hidden")
+  /// Let's start
+  public static let letsStart = L10n.tr("Localizable", "lets_start", fallback: "Let's start")
+  /// To get started, select the groups you want to follow and see on the home page
+  public static let letsStartMessage = L10n.tr("Localizable", "lets_start_message", fallback: "To get started, select the groups you want to follow and see on the home page")
   /// My groups
   public static let myGroups = L10n.tr("Localizable", "my_groups", fallback: "My groups")
   /// No events here
   public static let noEventsMessage = L10n.tr("Localizable", "no_events_message", fallback: "No events here")
+  /// No results found
+  public static let noResultMessage = L10n.tr("Localizable", "no_result_message", fallback: "No results found")
+  /// Number of classes:
+  public static let numberOfClasses = L10n.tr("Localizable", "number_of_classes", fallback: "Number of classes:")
+  /// Number of events:
+  public static let numberOfEvents = L10n.tr("Localizable", "number_of_events", fallback: "Number of events:")
   /// Observed
   public static let observedTitle = L10n.tr("Localizable", "observed_title", fallback: "Observed")
   /// Other
   public static let otherHeader = L10n.tr("Localizable", "other_header", fallback: "Other")
   /// Selected date
   public static let selectedDate = L10n.tr("Localizable", "selected_date", fallback: "Selected date")
+  /// Set visibility of classes
+  public static let setClassesVisibility = L10n.tr("Localizable", "set_classes_visibility", fallback: "Set visibility of classes")
   /// Today
   public static let today = L10n.tr("Localizable", "today", fallback: "Today")
   /// Unfollow
   public static let unfollow = L10n.tr("Localizable", "unfollow", fallback: "Unfollow")
   /// Do you want to unfollow group
   public static let unfollowGroupQuestion = L10n.tr("Localizable", "unfollow_group_question", fallback: "Do you want to unfollow group")
+  /// Visible
+  public static let visible = L10n.tr("Localizable", "visible", fallback: "Visible")
   /// events
   public static let xEvents = L10n.tr("Localizable", "x_events", fallback: "events")
   /// groups
