@@ -24,7 +24,7 @@ struct ObservedFacultyGroupsView: View {
 
     var body: some View {
         NavigationStack {
-            BaseList(subscribedGroups) { facultyGroup in
+            BaseList(subscribedGroups.sorted(by: { $0.name < $1.name })) { facultyGroup in
                 FacultyGroupListItem(facultyGroup: facultyGroup, type: .editable)
                     .contextMenu { UnfollowGroupButton { groupToDelete = facultyGroup } }
             }

@@ -56,7 +56,7 @@ struct FacultyGroupDetailsView: View {
 
     var body: some View {
         NavigationStack {
-            BaseList {
+            BaseList { 
                 BaseListItem(title: L10n.classes, caption: classesDescription)
                     .navigationLink(value: Destination.classesList(facultyGroup.name, facultyGroupDetails?.classes ?? [], type))
 
