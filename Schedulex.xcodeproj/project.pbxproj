@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,11 +13,11 @@
 		165648C635B0FC5FD0D1391B /* FacultyGroupClassListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 313488391FF0ACC31474C16C /* FacultyGroupClassListView.swift */; };
 		1A574750EDCA6AD3EE2D7E02 /* SchedulexTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571F6680D8FFCDC5260429D3 /* SchedulexTests.swift */; };
 		250AFB8DE4862E0E6D00D571 /* SchedulexFirebase in Frameworks */ = {isa = PBXBuildFile; productRef = BE71EE201F5BABF18DDB83B3 /* SchedulexFirebase */; };
-		273FC8EE2F7A053FACFB985B /* Publisher+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F68FCF21387A4DF54A564B7 /* Publisher+Ext.swift */; };
 		2F218CA65CB0E61841BE5301 /* DashboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AB9AA75F96F5082299294E /* DashboardViewModel.swift */; };
 		32C27A6EA34AF992DD43B95C /* Domain in Frameworks */ = {isa = PBXBuildFile; productRef = F40945E597BC452247607BA0 /* Domain */; };
 		3F39BC2A1261BD64B48F5AC7 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 95C4D48AF943D2F2F6589B96 /* Localizable.xcstrings */; };
 		415E87E937F47B1943F7FCF3 /* CombineUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225011E902E1215CC95EAE8D /* CombineUtils.swift */; };
+		448271A6432CC2C7D8E0CCEC /* IntroductionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBA0CCCAA9E37E1B2A5AA71 /* IntroductionView.swift */; };
 		5BD86ABD5730B0C68D57B22C /* UEKScraper in Frameworks */ = {isa = PBXBuildFile; productRef = 5098976EC6B597F4B3E1119E /* UEKScraper */; };
 		673157DE0A238909BF2A6058 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 71AA9B1DB06E568EEC9075D9 /* FirebaseAuth */; };
 		68C0C5B81237BC630E4F06BF /* FacultiesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB996C32BDB3F1CABCD1165 /* FacultiesListView.swift */; };
@@ -25,7 +25,7 @@
 		7A90DA499302800CAF69DD45 /* SchedulexApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9650DFCA36730CAE6E4E59 /* SchedulexApp.swift */; };
 		7BA77A62B3FBCFBE10124F1A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CE4B46A74281E5B7F81A43 /* AppDelegate.swift */; };
 		8FD5913E8FDA52F6C0A6242C /* Array+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24B9C450635173CAE31AC09 /* Array+Ext.swift */; };
-		9220CDC72ACCAB8E0034B67C /* IntroductionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9220CDC62ACCAB8E0034B67C /* IntroductionView.swift */; };
+		92F207972ACF1F79000AE3AA /* Resources in Frameworks */ = {isa = PBXBuildFile; productRef = 92F207962ACF1F79000AE3AA /* Resources */; };
 		9C1D37AB3A56C8157CF307F0 /* FacultyGroupListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA778A53833DA3123F5E1B2F /* FacultyGroupListView.swift */; };
 		9CE313102E1A27E1C252DB01 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A9101C1DBC17EF683E5176C0 /* GoogleService-Info.plist */; };
 		9D23F10F052FAA686511E8DA /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 81FC03B7E42F1333ABEBCB65 /* FirebaseFirestore */; };
@@ -38,7 +38,6 @@
 		C80A118ECE5DC7412EF2AF64 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FBFB144DFBCCFE8BAD4A10 /* DashboardView.swift */; };
 		CD88E2B3AE4753DF56D91232 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C36B3A9B60E45F5A2D83FF /* EmptyStateView.swift */; };
 		CF0BD295F0B3877E501E0283 /* FacultyGroupEventListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AE8EA3268BCC0FB9F726A2 /* FacultyGroupEventListView.swift */; };
-		DD4E8B562B86E3DE79167C2F /* Resources in Frameworks */ = {isa = PBXBuildFile; productRef = 6D6B4CEDF5A27D4153723543 /* Resources */; };
 		E327EA6C0A3A7B97914D8B80 /* EventCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B704F3D0DF48285E97EEF443 /* EventCardView.swift */; };
 		E54DF1222722BF845F02E406 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 036020D225C9DC400B70FB92 /* FirebaseAuth */; };
 		E7AE8CCB086D491DCEA9B87C /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 34EB969AC40FA15803A99087 /* FirebaseFirestoreSwift */; };
@@ -62,7 +61,6 @@
 		225011E902E1215CC95EAE8D /* CombineUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineUtils.swift; sourceTree = "<group>"; };
 		22AAD69A8FFE3230927F22EB /* UEKScraper */ = {isa = PBXFileReference; lastKnownFileType = folder; name = UEKScraper; path = Packages/UEKScraper; sourceTree = SOURCE_ROOT; };
 		2B91428411FC15C487DD95A9 /* SchedulexFirebase */ = {isa = PBXFileReference; lastKnownFileType = folder; name = SchedulexFirebase; path = Packages/SchedulexFirebase; sourceTree = SOURCE_ROOT; };
-		2F68FCF21387A4DF54A564B7 /* Publisher+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publisher+Ext.swift"; sourceTree = "<group>"; };
 		313488391FF0ACC31474C16C /* FacultyGroupClassListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacultyGroupClassListView.swift; sourceTree = "<group>"; };
 		4E3A4FD5CD76DD94586055F7 /* Schedulex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Schedulex.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5668E8C3229634C554B44E48 /* FacultyGroupListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacultyGroupListItem.swift; sourceTree = "<group>"; };
@@ -73,7 +71,6 @@
 		73CE4B46A74281E5B7F81A43 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		76CABAB85E8A4A297F9440EF /* SchedulexTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = SchedulexTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B20CE660498C2B962B7B22F /* FacultyGroupDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacultyGroupDetailsView.swift; sourceTree = "<group>"; };
-		9220CDC62ACCAB8E0034B67C /* IntroductionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroductionView.swift; sourceTree = "<group>"; };
 		95C4D48AF943D2F2F6589B96 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		9A1AD1C09DC0F0A2592B00ED /* ObservedFacultyGroupsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservedFacultyGroupsView.swift; sourceTree = "<group>"; };
 		9D95AE47FF48D30DFD2C8668 /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
@@ -82,6 +79,7 @@
 		A745DC4B06BB6D1619EC985F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		A9101C1DBC17EF683E5176C0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AC5471515EECC0C48AB1EA71 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		AFBA0CCCAA9E37E1B2A5AA71 /* IntroductionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroductionView.swift; sourceTree = "<group>"; };
 		B704F3D0DF48285E97EEF443 /* EventCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCardView.swift; sourceTree = "<group>"; };
 		BC9650DFCA36730CAE6E4E59 /* SchedulexApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulexApp.swift; sourceTree = "<group>"; };
 		C23B82A9C07AE4CFE9BEF43D /* Widgets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Widgets; path = Packages/Widgets; sourceTree = SOURCE_ROOT; };
@@ -99,13 +97,13 @@
 			files = (
 				32C27A6EA34AF992DD43B95C /* Domain in Frameworks */,
 				A67C235C541DDF9B01057A16 /* Widgets in Frameworks */,
-				DD4E8B562B86E3DE79167C2F /* Resources in Frameworks */,
 				250AFB8DE4862E0E6D00D571 /* SchedulexFirebase in Frameworks */,
 				5BD86ABD5730B0C68D57B22C /* UEKScraper in Frameworks */,
 				0112FD584507FA69E719D918 /* SwiftSoup in Frameworks */,
 				673157DE0A238909BF2A6058 /* FirebaseAuth in Frameworks */,
 				9D23F10F052FAA686511E8DA /* FirebaseFirestore in Frameworks */,
 				E7AE8CCB086D491DCEA9B87C /* FirebaseFirestoreSwift in Frameworks */,
+				92F207972ACF1F79000AE3AA /* Resources in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -177,7 +175,6 @@
 			children = (
 				E24B9C450635173CAE31AC09 /* Array+Ext.swift */,
 				225011E902E1215CC95EAE8D /* CombineUtils.swift */,
-				2F68FCF21387A4DF54A564B7 /* Publisher+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -215,8 +212,8 @@
 			children = (
 				D8C36B3A9B60E45F5A2D83FF /* EmptyStateView.swift */,
 				B704F3D0DF48285E97EEF443 /* EventCardView.swift */,
+				AFBA0CCCAA9E37E1B2A5AA71 /* IntroductionView.swift */,
 				9A1AD1C09DC0F0A2592B00ED /* ObservedFacultyGroupsView.swift */,
-				9220CDC62ACCAB8E0034B67C /* IntroductionView.swift */,
 				3E4F730492ABA94BB77ACB98 /* AddGroupFlow */,
 				E77A93C3C90B3CCA65FAB751 /* Dashboard */,
 				B63EFFB477B031ABC715C34B /* FacultyGroupDetails */,
@@ -274,13 +271,13 @@
 			packageProductDependencies = (
 				F40945E597BC452247607BA0 /* Domain */,
 				797986CEBD5E71DC9F526EB5 /* Widgets */,
-				6D6B4CEDF5A27D4153723543 /* Resources */,
 				BE71EE201F5BABF18DDB83B3 /* SchedulexFirebase */,
 				5098976EC6B597F4B3E1119E /* UEKScraper */,
 				978DD0F4308A3B8643D97EDD /* SwiftSoup */,
 				71AA9B1DB06E568EEC9075D9 /* FirebaseAuth */,
 				81FC03B7E42F1333ABEBCB65 /* FirebaseFirestore */,
 				34EB969AC40FA15803A99087 /* FirebaseFirestoreSwift */,
+				92F207962ACF1F79000AE3AA /* Resources */,
 			);
 			productName = Schedulex;
 			productReference = 4E3A4FD5CD76DD94586055F7 /* Schedulex.app */;
@@ -307,6 +304,7 @@
 			packageReferences = (
 				3B025413F1A6A857E5330E4B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				B84AC3C71E34738BC7631797 /* XCRemoteSwiftPackageReference "SwiftSoup" */,
+				92F207932ACF1F4D000AE3AA /* XCLocalSwiftPackageReference "Packages/Resources" */,
 			);
 			projectDirPath = "";
 			projectRoot = "";
@@ -346,13 +344,12 @@
 				68C0C5B81237BC630E4F06BF /* FacultiesListView.swift in Sources */,
 				BA5EFC06E25A9007EA4C402D /* FacultyGroupClassListItem.swift in Sources */,
 				165648C635B0FC5FD0D1391B /* FacultyGroupClassListView.swift in Sources */,
-				9220CDC72ACCAB8E0034B67C /* IntroductionView.swift in Sources */,
 				1094F8456CCDD5F71BC13649 /* FacultyGroupDetailsView.swift in Sources */,
 				CF0BD295F0B3877E501E0283 /* FacultyGroupEventListView.swift in Sources */,
 				EFBC80BF92D624DD1523EF4F /* FacultyGroupListItem.swift in Sources */,
 				9C1D37AB3A56C8157CF307F0 /* FacultyGroupListView.swift in Sources */,
+				448271A6432CC2C7D8E0CCEC /* IntroductionView.swift in Sources */,
 				07F1563821644B0868493207 /* ObservedFacultyGroupsView.swift in Sources */,
-				273FC8EE2F7A053FACFB985B /* Publisher+Ext.swift in Sources */,
 				B7296EE12D31A063148CCA79 /* SampleData.swift in Sources */,
 				7A90DA499302800CAF69DD45 /* SchedulexApp.swift in Sources */,
 				68EC373A16D0ACEC3544F49D /* String+Ext.swift in Sources */,
@@ -519,15 +516,22 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7TDCFNV5T6;
 				INFOPLIST_FILE = Schedulex/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "UEK Schedule";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "sebastian-staszczyk.Schedulex";
 				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -553,15 +557,22 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7TDCFNV5T6;
 				INFOPLIST_FILE = Schedulex/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "UEK Schedule";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "sebastian-staszczyk.Schedulex";
 				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -596,6 +607,13 @@
 			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		92F207932ACF1F4D000AE3AA /* XCLocalSwiftPackageReference "Packages/Resources" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/Resources;
+		};
+/* End XCLocalSwiftPackageReference section */
 
 /* Begin XCRemoteSwiftPackageReference section */
 		3B025413F1A6A857E5330E4B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
@@ -636,10 +654,6 @@
 			package = 3B025413F1A6A857E5330E4B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestoreSwift;
 		};
-		6D6B4CEDF5A27D4153723543 /* Resources */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = Resources;
-		};
 		71AA9B1DB06E568EEC9075D9 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 3B025413F1A6A857E5330E4B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
@@ -658,6 +672,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3B025413F1A6A857E5330E4B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;
+		};
+		92F207962ACF1F79000AE3AA /* Resources */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Resources;
 		};
 		978DD0F4308A3B8643D97EDD /* SwiftSoup */ = {
 			isa = XCSwiftPackageProductDependency;
