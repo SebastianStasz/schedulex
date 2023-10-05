@@ -42,7 +42,6 @@
 		E54DF1222722BF845F02E406 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 036020D225C9DC400B70FB92 /* FirebaseAuth */; };
 		E7AE8CCB086D491DCEA9B87C /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 34EB969AC40FA15803A99087 /* FirebaseFirestoreSwift */; };
 		E9B80710E72F33E008D53BF0 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 8517B9D52BC760EF2871FE88 /* FirebaseFirestore */; };
-		EFBC80BF92D624DD1523EF4F /* FacultyGroupListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5668E8C3229634C554B44E48 /* FacultyGroupListItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,7 +62,6 @@
 		2B91428411FC15C487DD95A9 /* SchedulexFirebase */ = {isa = PBXFileReference; lastKnownFileType = folder; name = SchedulexFirebase; path = Packages/SchedulexFirebase; sourceTree = SOURCE_ROOT; };
 		313488391FF0ACC31474C16C /* FacultyGroupClassListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacultyGroupClassListView.swift; sourceTree = "<group>"; };
 		4E3A4FD5CD76DD94586055F7 /* Schedulex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Schedulex.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		5668E8C3229634C554B44E48 /* FacultyGroupListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacultyGroupListItem.swift; sourceTree = "<group>"; };
 		571F6680D8FFCDC5260429D3 /* SchedulexTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulexTests.swift; sourceTree = "<group>"; };
 		5DAEAC1E84631A5400860A62 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		66AE8EA3268BCC0FB9F726A2 /* FacultyGroupEventListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacultyGroupEventListView.swift; sourceTree = "<group>"; };
@@ -142,7 +140,6 @@
 			isa = PBXGroup;
 			children = (
 				CFB996C32BDB3F1CABCD1165 /* FacultiesListView.swift */,
-				5668E8C3229634C554B44E48 /* FacultyGroupListItem.swift */,
 				EA778A53833DA3123F5E1B2F /* FacultyGroupListView.swift */,
 			);
 			path = AddGroupFlow;
@@ -346,7 +343,6 @@
 				165648C635B0FC5FD0D1391B /* FacultyGroupClassListView.swift in Sources */,
 				1094F8456CCDD5F71BC13649 /* FacultyGroupDetailsView.swift in Sources */,
 				CF0BD295F0B3877E501E0283 /* FacultyGroupEventListView.swift in Sources */,
-				EFBC80BF92D624DD1523EF4F /* FacultyGroupListItem.swift in Sources */,
 				9C1D37AB3A56C8157CF307F0 /* FacultyGroupListView.swift in Sources */,
 				448271A6432CC2C7D8E0CCEC /* IntroductionView.swift in Sources */,
 				07F1563821644B0868493207 /* ObservedFacultyGroupsView.swift in Sources */,
@@ -515,12 +511,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7TDCFNV5T6;
 				INFOPLIST_FILE = Schedulex/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "UEK Schedule";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -556,12 +554,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7TDCFNV5T6;
 				INFOPLIST_FILE = Schedulex/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "UEK Schedule";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

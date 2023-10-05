@@ -16,6 +16,7 @@ struct ObservedFacultyGroupsView: View {
     @AppStorage("hiddenFacultyGroupsClasses") private var allHiddenClasses: [EditableFacultyGroupClass] = []
     @State private var isFacultiesListPresented = false
     @State private var groupToDelete: FacultyGroup?
+    @State private var facultyGroup: FacultyGroup?
     let service: FirestoreService
 
     private var isGroupDeleteConfirmationPresented: Binding<Bool> {
@@ -25,12 +26,15 @@ struct ObservedFacultyGroupsView: View {
     var body: some View {
         NavigationStack {
             BaseList(subscribedGroups.sorted(by: { $0.name < $1.name })) { facultyGroup in
-                FacultyGroupListItem(facultyGroup: facultyGroup, type: .editable)
+                let caption = "\(facultyGroup.numberOfEvents) " + L10n.xEvents
+                BaseListItem(title: facultyGroup.name, caption: caption)
+                    .trailingIcon(.info) { self.facultyGroup = facultyGroup }
                     .contextMenu { UnfollowGroupButton { groupToDelete = facultyGroup } }
             }
             .confirmationDialog(unfollowGroupQuestion, isPresented: isGroupDeleteConfirmationPresented, titleVisibility: .visible) {
                 Button(L10n.unfollow, role: .destructive, action: deleteGroup)
             }
+            .sheet(item: $facultyGroup) { FacultyGroupDetailsView(facultyGroup: $0, type: .editable) }
             .sheet(isPresented: $isFacultiesListPresented) { FacultiesListView(service: service) }
             .baseListStyle(isEmpty: subscribedGroups.isEmpty)
             .navigationTitle(L10n.observedTitle)

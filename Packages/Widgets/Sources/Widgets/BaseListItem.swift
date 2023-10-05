@@ -33,12 +33,14 @@ public struct BaseListItem: View {
             .frame(maxWidth: .infinity, alignment: .leading)
 
             if let trailingIcon {
-                Image.icon(trailingIcon)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 20)
-                    .foregroundStyle(.accentPrimary)
-                    .onTapGesture { trailingIconAction() }
+                Button(action: trailingIconAction) {
+                    Image.icon(trailingIcon)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 20)
+                        .foregroundStyle(.accentPrimary)
+                }
+                .buttonStyle(.plain)
             }
         }
         .card()

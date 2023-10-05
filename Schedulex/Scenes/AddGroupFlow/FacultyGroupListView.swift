@@ -12,15 +12,20 @@ import Widgets
 
 struct FacultyGroupListView: View {
     @State private var searchText = ""
+    @State private var facultyGroup: FacultyGroup?
     let faculty: Faculty
 
     var body: some View {
-        BaseList(filteredGroups) {
-            FacultyGroupListItem(facultyGroup: $0, type: .preview)
+        BaseList(filteredGroups) { facultyGroup in
+            let caption = "\(facultyGroup.numberOfEvents) " + L10n.xEvents
+            BaseListItem(title: facultyGroup.name, caption: caption)
+                .trailingIcon(.info) { self.facultyGroup = facultyGroup }
         }
         .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: L10n.group)
+        .sheet(item: $facultyGroup) { FacultyGroupDetailsView(facultyGroup: $0, type: .preview) }
         .baseListStyle(isEmpty: faculty.groups.isEmpty)
         .navigationTitle(faculty.name)
+        .disableAutocorrection(true)
         .overlay { emptyState }
     }
 

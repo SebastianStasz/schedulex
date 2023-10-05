@@ -15,7 +15,8 @@ struct FacultiesListView: View {
     let service: FirestoreService
     @State private var school: School?
     @State private var searchText = ""
-    
+    @State private var facultyGroup: FacultyGroup?
+
     var body: some View {
         NavigationStack {
             Group {
@@ -31,19 +32,23 @@ struct FacultiesListView: View {
                             Separator()
                                 .displayIf(faculties.last != $0 || (faculties.last == $0 && !facultyGroups.isEmpty))
                         }
-                        ForEach(facultyGroups) {
-                            FacultyGroupListItem(facultyGroup: $0, type: .preview)
+                        ForEach(facultyGroups) { facultyGroup in
+                            let caption = "\(facultyGroup.numberOfEvents) " + L10n.xEvents
+                            BaseListItem(title: facultyGroup.name, caption: caption)
+                                .trailingIcon(.info) { self.facultyGroup = facultyGroup }
 
                             Separator()
-                                .displayIf(facultyGroups.last != $0)
+                                .displayIf(facultyGroups.last != facultyGroup)
                         }
                     }
                 }
             }
             .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: L10n.facultyOrGroupPrompt)
+            .sheet(item: $facultyGroup) { FacultyGroupDetailsView(facultyGroup: $0, type: .preview) }
             .overlay { loadingIndicatorOrEmptyState }
             .baseListStyle(isLoading: school == nil)
             .navigationTitle(L10n.addGroup)
+            .disableAutocorrection(true)
             .closeButton()
         }
         .task { school = try? await service.getCracowUniversityOfEconomics() }
