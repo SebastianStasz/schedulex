@@ -23,40 +23,42 @@ struct DashboardView: View {
     @State private var isSchedulesSheetPresented = false
 
     var body: some View {
-        VStack(spacing: 0) {
-            if let startDate = viewModel.startDate, let endDate = viewModel.endDate {
-                LazyVStack {
-                    DayPickerView(startDate: startDate, endDate: endDate, shouldScrollToDay: isDatePickerPresented, selection: $viewModel.selectedDate)
-                }
-                .padding(.top, .xlarge)
-                .padding(.bottom, .medium)
-                .background(.backgroundSecondary)
-
-                separator()
-
-                ScrollView {
-                    LazyVStack(spacing: .medium) {
-                        ForEach(viewModel.selectedDateEvents, id: \.self) {
-                            EventCardView(event: $0)
-                        }
+        NavigationStack {
+            VStack(spacing: 0) {
+                if let startDate = viewModel.startDate, let endDate = viewModel.endDate {
+                    LazyVStack {
+                        DayPickerView(startDate: startDate, endDate: endDate, shouldScrollToDay: isDatePickerPresented, selection: $viewModel.selectedDate)
                     }
-                    .padding(.vertical, .large)
-                    .padding(.horizontal, .medium)
-                    .background(.backgroundPrimary)
+                    .padding(.top, .xlarge)
+                    .padding(.bottom, .medium)
+                    .background(.backgroundSecondary)
+
+                    separator()
+
+                    ScrollView {
+                        VStack(spacing: .medium) {
+                            ForEach(viewModel.selectedDateEvents, id: \.self) {
+                                EventCardView(event: $0)
+                            }
+                        }
+                        .padding(.vertical, .large)
+                        .padding(.horizontal, .medium)
+                        .background(.backgroundPrimary)
+                    }
+                } else {
+                    Rectangle()
+                        .fill(Color.backgroundSecondary)
+                        .frame(height: .medium)
+                    separator()
+                    Spacer()
                 }
-            } else {
-                Rectangle()
-                    .fill(Color.backgroundSecondary)
-                    .frame(height: .medium)
-                separator()
-                Spacer()
             }
+            .overlay { loadingIndicatorOrEmptyState }
+            .toolbar { toolbarContent }
+            .doubleNavigationTitle(title: viewModel.title, subtitle: viewModel.subtitle)
+            .sheet(isPresented: $isSchedulesSheetPresented) { ObservedFacultyGroupsView(service: service) }
+            .sheet(isPresented: $isDatePickerPresented) { datePicker }
         }
-        .overlay { loadingIndicatorOrEmptyState }
-        .toolbar { toolbarContent }
-        .doubleNavigationTitle(title: viewModel.title, subtitle: viewModel.subtitle)
-        .sheet(isPresented: $isSchedulesSheetPresented) { ObservedFacultyGroupsView(service: service) }
-        .sheet(isPresented: $isDatePickerPresented) { datePicker }
         .onChange(of: subscribedGroups) { _ in fetchEvents() }
         .onChange(of: allHiddenClasses) { _ in fetchEvents() }
         .onChange(of: scenePhase) { onSceneChange($0) }

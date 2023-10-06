@@ -8,6 +8,9 @@
 import SwiftUI
 
 public struct DayPickerView: View {
+    @State private var listId = 0
+    private let dayPickerItemWidth = (UIScreen.main.bounds.size.width - (2 * .medium) - (4 * .large)) / 5
+
     let dates: [Date]
     let shouldScrollToDay: Bool
     @Binding var selectedDate: Date
@@ -26,8 +29,8 @@ public struct DayPickerView: View {
     }
 
     public var body: some View {
-        ScrollView(.horizontal) {
-            ScrollViewReader { proxy in
+        ScrollViewReader { proxy in
+            ScrollView(.horizontal) {
                 LazyHStack(spacing: .large) {
                     ForEach(dates, id: \.self) { date in
                         DayPickerItemView(date: date, isSelected: date.isSameDay(as: selectedDate))
@@ -45,16 +48,14 @@ public struct DayPickerView: View {
                     }
                 }
                 .padding(.horizontal, .medium)
-                .onAppear {
-                    proxy.scrollTo(selectedDate.formatted(style: .dateLong), anchor: .center)
-                }
+            }
+            .id(listId)
+            .onAppear {
+                proxy.scrollTo(selectedDate.formatted(style: .dateLong), anchor: .center)
             }
         }
         .scrollIndicators(.hidden)
-    }
-
-    private var dayPickerItemWidth: CGFloat {
-        (UIScreen.main.bounds.size.width - (2 * .medium) - (4 * .large)) / 5
+        .onChange(of: dates) { _ in listId += 1 }
     }
 }
 
