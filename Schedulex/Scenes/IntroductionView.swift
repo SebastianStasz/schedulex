@@ -46,6 +46,9 @@ struct IntroductionView: View {
             .frame(maxHeight: .infinity, alignment: .top)
         }
         .padding(.top, 60)
+        .fullScreenCover(isPresented: $isIntroductionFlowSheetPresented) {
+            StartFirstStepView()
+        }
     }
 
     private func presentIntroductionFlowSheet() {

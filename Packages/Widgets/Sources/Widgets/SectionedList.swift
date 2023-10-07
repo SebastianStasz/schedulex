@@ -10,10 +10,14 @@ import SwiftUI
 public struct ListSection<Item: Hashable>: Hashable {
     public let title: String
     public let items: [Item]
+    public let emptyLabel: String
+    public let isLazy: Bool
 
-    public init(title: String, items: [Item]) {
+    public init(title: String, items: [Item], emptyLabel: String = "No items", isLazy: Bool = true) {
         self.title = title
         self.items = items
+        self.emptyLabel = emptyLabel
+        self.isLazy = isLazy
     }
 }
 
@@ -32,11 +36,11 @@ public struct SectionedList<Item: Hashable, RowContent: View>: View {
         ScrollView {
             LazyVStack(spacing: 0, pinnedViews: [.sectionHeaders]) {
                 ForEach(Array(zip(sections.indices, sections)), id: \.0) { sectionIndex, section in
-                    Section(content: { rowsView(for: section.items, sectionIndex: sectionIndex) },
+                    Section(content: { rowsView(for: section, sectionIndex: sectionIndex) },
                             header: { headerView(title: section.title) })
                 }
             }
-            .padding(.bottom, .xlarge)
+            .padding(.top, .medium)
             .padding(.horizontal, .large)
         }
     }
@@ -45,20 +49,39 @@ public struct SectionedList<Item: Hashable, RowContent: View>: View {
         Text(title, style: .body)
             .foregroundStyle(.grayShade1)
             .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.bottom, .medium)
-            .padding(.top, 40)
+            .padding(.vertical, .medium)
             .background(.backgroundPrimary)
     }
 
-    private func rowsView(for items: [Item], sectionIndex: Int) -> some View {
-        LazyVStack(spacing: 0) {
-            ForEach(items, id: \.self) {
-                rowContent(sectionIndex, $0)
-                Separator(height: separatorHeight)
-                    .displayIf(items.last != $0)
+    @ViewBuilder
+    private func rowsView(for section: ListSection<Item>, sectionIndex: Int) -> some View {
+        if section.items.isEmpty {
+            Text(section.emptyLabel, style: .footnote)
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, .large)
+        } else {
+            Group {
+                if section.isLazy {
+                    LazyVStack(spacing: 0) {
+                        rowsContent(for: section, sectionIndex: sectionIndex)
+                    }
+                } else {
+                    VStack(spacing: 0) {
+                        rowsContent(for: section, sectionIndex: sectionIndex)
+                    }
+                }
             }
+            .background(.backgroundTertiary)
+            .cornerRadius(.medium)
+            .padding(.bottom, .xlarge)
         }
-        .background(.backgroundTertiary)
-        .cornerRadius(.medium)
+    }
+
+    private func rowsContent(for section: ListSection<Item>, sectionIndex: Int) -> some View {
+        ForEach(section.items, id: \.self) {
+            rowContent(sectionIndex, $0)
+            Separator(height: separatorHeight)
+                .displayIf(section.items.last != $0)
+        }
     }
 }
