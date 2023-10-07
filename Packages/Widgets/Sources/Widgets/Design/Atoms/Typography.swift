@@ -6,13 +6,14 @@
 //
 
 import SwiftUI
+import Resources
 
 public enum Typography: CaseIterable {
     case titleSmall
     case bodyMedium
     case body
-    case callout
-    case note
+    case footnote
+    case time
 
     var name: String {
         switch self {
@@ -22,25 +23,25 @@ public enum Typography: CaseIterable {
             return "Body medium"
         case .body:
             return "Body"
-        case .callout:
-            return "Callout"
-        case .note:
-            return "Note"
+        case .footnote:
+            return "Footnote"
+        case .time:
+            return "Time"
         }
     }
 
-    var font: Font {
+    var font: SwiftUI.Font {
         switch self {
         case .titleSmall:
             return .system(size: 22, weight: .semibold)
         case .bodyMedium:
-            return .system(size: 17, weight: .semibold)
+            return .system(size: 16, weight: .medium)
         case .body:
             return .system(size: 17)
-        case .callout:
-            return .system(size: 16, weight: .medium)
-        case .note:
+        case .footnote:
             return .system(size: 13)
+        case .time:
+            return FontFamily.RobotoMono.regular.swiftUIFont(size: 14, relativeTo: .footnote)
         }
     }
 }

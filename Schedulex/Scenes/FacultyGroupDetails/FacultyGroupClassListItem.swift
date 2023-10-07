@@ -20,8 +20,8 @@ struct FacultyGroupClassListItem: View {
                 Text(facultyGroupClass.name, style: .body)
 
                 VStack(alignment: .leading, spacing: .micro) {
-                    Text(facultyGroupClass.teacher, style: .note)
-                    Text(facultyGroupClass.type, style: .note)
+                    Text(facultyGroupClass.teacher, style: .footnote)
+                    Text(facultyGroupClass.type, style: .footnote)
                 }
                 .foregroundColor(.gray)
             }

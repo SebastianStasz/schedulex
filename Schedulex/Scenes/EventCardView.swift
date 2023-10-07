@@ -13,24 +13,24 @@ struct EventCardView: View {
     let event: Event
     
     var body: some View {
-        HStack(spacing: 0) {
+        HStack(alignment: .top, spacing: 0) {
             HStack(alignment: .top, spacing: .medium) {
                 VStack(alignment: .leading, spacing: .micro) {
-                    Text(event.startDate?.formatted(style: .timeOnly) ?? "")
-                    Text(event.endDate?.formatted(style: .timeOnly) ?? "")
+                    Text(event.startDate?.formatted(style: .timeOnly) ?? "", style: .time)
+                    Text(event.endDate?.formatted(style: .timeOnly) ?? "", style: .time)
                 }
                 .foregroundStyle(.blueShade1)
                 .font(.note)
 
                 VStack(alignment: .leading, spacing: .small) {
-                    Text(event.name ?? "", style: .callout)
+                    Text(event.name ?? "", style: .bodyMedium)
                         .lineLimit(2)
                         .foregroundStyle(.blueShade1)
 
                     VStack(alignment: .leading, spacing: .micro) {
-                        Text(event.teacher ?? "", style: .note)
-                        Text(event.place ?? "", style: .note)
-                        Text(event.type ?? "", style: .note)
+                        Text(event.teacher ?? "", style: .footnote)
+                        Text(event.place ?? "", style: .footnote)
+                        Text(event.type ?? "", style: .footnote)
                     }
                     .foregroundStyle(.blueShade2)
                 }

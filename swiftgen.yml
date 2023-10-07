@@ -12,3 +12,13 @@ strings:
       output: Strings+Generated.swift
       params:
         publicAccess: true
+
+## Generate constants for Fonts.
+fonts:
+  inputs:
+    - Fonts/RobotoMono
+  outputs:
+    - templateName: swift5
+      output: Fonts+Generated.swift
+      params:
+        publicAccess: true

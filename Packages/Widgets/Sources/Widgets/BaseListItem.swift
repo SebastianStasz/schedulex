@@ -26,7 +26,7 @@ public struct BaseListItem: View {
                     .multilineTextAlignment(.leading)
 
                 if let caption {
-                    Text(caption, style: .note)
+                    Text(caption, style: .footnote)
                         .foregroundColor(.gray)
                 }
             }
