@@ -13,8 +13,8 @@ struct IntroductionView: View {
     @Binding var isFacultiesListPresented: Bool
 
     var body: some View {
-        VStack(spacing: 50) {
-            Image("logo_uek")
+        VStack(spacing: 40) {
+            Image(.logoUek)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 200)
@@ -24,7 +24,6 @@ struct IntroductionView: View {
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .foregroundStyle(.textPrimary)
-                    .opacity(0.8)
 
                 Text(L10n.letsStartMessage)
                     .multilineTextAlignment(.center)
@@ -35,12 +34,14 @@ struct IntroductionView: View {
                     Text(L10n.letsStart)
                         .font(.title)
                         .fontWeight(.bold)
-                        .padding(.horizontal, .large)
-                        .padding(.vertical, .small)
+                        .foregroundStyle(.white)
+                        .padding(.vertical, .large)
+                        .padding(.horizontal, 2 * .xlarge)
+                        .background(.accentPrimary)
+                        .cornerRadius(.large)
                 }
-                .buttonStyle(.borderedProminent)
-                .tint(.accentPrimary)
-                .padding(.top, 30)
+                .buttonStyle(.plain)
+                .padding(.top, 80)
             }
             .frame(maxHeight: .infinity, alignment: .top)
         }
