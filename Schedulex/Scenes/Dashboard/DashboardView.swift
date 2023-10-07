@@ -19,6 +19,7 @@ struct DashboardView: View {
 
     let service: FirestoreService
     @Binding var isFacultiesListPresented: Bool
+    @State private var shouldScrollToDay = false
     @State private var isDatePickerPresented = false
     @State private var isSchedulesSheetPresented = false
 
@@ -27,7 +28,7 @@ struct DashboardView: View {
             VStack(spacing: 0) {
                 if let startDate = viewModel.startDate, let endDate = viewModel.endDate {
                     LazyVStack {
-                        DayPickerView(startDate: startDate, endDate: endDate, shouldScrollToDay: isDatePickerPresented, selection: $viewModel.selectedDate)
+                        DayPickerView(startDate: startDate, endDate: endDate, isDatePickerPresented: isDatePickerPresented, shouldScrollToDay: $shouldScrollToDay, selection: $viewModel.selectedDate)
                     }
                     .padding(.top, .xlarge)
                     .padding(.bottom, .medium)
@@ -99,7 +100,7 @@ struct DashboardView: View {
             HStack(spacing: 0) {
                 TextButton(L10n.myGroups) { isSchedulesSheetPresented = true }
                     .frame(maxWidth: .infinity, alignment: .leading)
-                TextButton(L10n.today) { viewModel.selectedDate = .now }
+                TextButton(L10n.today, action: selectTodaysDate)
                     .frame(maxWidth: .infinity)
                 TextButton(L10n.calendar, action: showDatePicker)
                     .frame(maxWidth: .infinity, alignment: .trailing)
@@ -108,8 +109,13 @@ struct DashboardView: View {
         }
     }
 
+    private func selectTodaysDate() {
+        shouldScrollToDay = true
+        viewModel.selectedDate = .now
+    }
+
     private func showDatePicker() {
-        guard !viewModel.isLoading && !viewModel.selectedDateEvents.isEmpty else { return }
+        guard !viewModel.isLoading && !viewModel.isEmpty else { return }
         isDatePickerPresented = true
     }
 

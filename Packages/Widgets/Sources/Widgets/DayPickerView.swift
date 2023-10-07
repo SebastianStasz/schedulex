@@ -12,10 +12,11 @@ public struct DayPickerView: View {
     private let dayPickerItemWidth = (UIScreen.main.bounds.size.width - (2 * .medium) - (4 * .large)) / 5
 
     let dates: [Date]
-    let shouldScrollToDay: Bool
+    let isDatePickerPresented: Bool
     @Binding var selectedDate: Date
+    @Binding var shouldScrollToDay: Bool
 
-    public init(startDate: Date, endDate: Date, shouldScrollToDay: Bool = false, selection: Binding<Date>) {
+    public init(startDate: Date, endDate: Date, isDatePickerPresented: Bool = false, shouldScrollToDay: Binding<Bool>, selection: Binding<Date>) {
         let endDate = Calendar.current.date(byAdding: .day, value: 1, to: endDate)!
         var dates: [Date] = []
         var date = startDate
@@ -24,7 +25,8 @@ public struct DayPickerView: View {
             date = Calendar.current.date(byAdding: .day, value: 1, to: date)!
         }
         self.dates = dates
-        self.shouldScrollToDay = shouldScrollToDay
+        self.isDatePickerPresented = isDatePickerPresented
+        _shouldScrollToDay = shouldScrollToDay
         _selectedDate = selection
     }
 
@@ -39,9 +41,10 @@ public struct DayPickerView: View {
                             .onTapGesture { selectedDate = date }
                             .id(date.formatted(style: .dateLong))
                             .onChange(of: selectedDate) { date in
-                                if shouldScrollToDay {
+                                if shouldScrollToDay || isDatePickerPresented {
                                     withAnimation(.easeInOut) {
                                         proxy.scrollTo(date.formatted(style: .dateLong), anchor: .center)
+                                        shouldScrollToDay = false
                                     }
                                 }
                             }
@@ -62,5 +65,5 @@ public struct DayPickerView: View {
 #Preview {
     let endDate = Calendar.current.date(byAdding: .day, value: 10, to: .now)!
     let selectedDate = Calendar.current.date(byAdding: .day, value: 2, to: .now)!
-    return DayPickerView(startDate: .now, endDate: endDate, selection: .constant(selectedDate))
+    return DayPickerView(startDate: .now, endDate: endDate, shouldScrollToDay: .constant(false), selection: .constant(selectedDate))
 }
