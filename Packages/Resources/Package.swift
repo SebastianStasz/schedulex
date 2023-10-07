@@ -5,7 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "Resources",
-    defaultLocalization: "pl", 
+    defaultLocalization: "en", 
     platforms: [.iOS(.v16)],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
