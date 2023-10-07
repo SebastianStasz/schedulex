@@ -33,10 +33,7 @@ struct FacultiesListView: View {
                                 .displayIf(faculties.last != $0 || (faculties.last == $0 && !facultyGroups.isEmpty))
                         }
                         ForEach(facultyGroups) { facultyGroup in
-                            let caption = "\(facultyGroup.numberOfEvents) " + L10n.xEvents
-                            BaseListItem(title: facultyGroup.name, caption: caption)
-                                .trailingIcon(.info)
-                                .contentShape(Rectangle())
+                            FacultyGroupListRow(facultyGroup: facultyGroup, trailingIcon: .info, iconColor: .accentPrimary)
                                 .onTapGesture { self.facultyGroup = facultyGroup }
 
                             Separator()
