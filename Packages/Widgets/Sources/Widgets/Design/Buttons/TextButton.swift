@@ -10,8 +10,10 @@ import SwiftUI
 private struct TextButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
+            .padding(.vertical, .small)
             .foregroundStyle(.accentPrimary)
             .opacity(configuration.isPressed ? 0.6 : 1)
+            .animation(.easeInOut, value: configuration.isPressed)
     }
 }
 
