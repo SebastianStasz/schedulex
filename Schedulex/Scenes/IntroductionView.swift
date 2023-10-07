@@ -10,7 +10,7 @@ import SwiftUI
 import Widgets
 
 struct IntroductionView: View {
-    @Binding var isFacultiesListPresented: Bool
+    @State private var isIntroductionFlowSheetPresented = false
 
     var body: some View {
         VStack(spacing: 40) {
@@ -30,7 +30,7 @@ struct IntroductionView: View {
                     .padding(.horizontal, .xlarge)
                     .foregroundStyle(.grayShade1)
 
-                Button(action: presentFacultiesList) {
+                Button(action: presentIntroductionFlowSheet) {
                     Text(L10n.letsStart)
                         .font(.title)
                         .fontWeight(.bold)
@@ -48,11 +48,11 @@ struct IntroductionView: View {
         .padding(.top, 60)
     }
 
-    private func presentFacultiesList() {
-        isFacultiesListPresented = true
+    private func presentIntroductionFlowSheet() {
+        isIntroductionFlowSheetPresented = true
     }
 }
 
 #Preview {
-    IntroductionView(isFacultiesListPresented: .constant(false))
+    IntroductionView()
 }

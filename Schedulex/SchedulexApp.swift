@@ -13,14 +13,14 @@ import SchedulexFirebase
 struct SchedulexApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) private var delegate
     @AppStorage("subscribedFacultyGroups") private var subscribedGroups: [FacultyGroup] = []
-    @State private var service = FirestoreService()
+    @StateObject private var service = FirestoreService()
     @State private var isFacultiesListPresented = false
 
     var body: some Scene {
         WindowGroup {
             VStack {
                 if subscribedGroups.isEmpty {
-                    IntroductionView(isFacultiesListPresented: $isFacultiesListPresented)
+                    IntroductionView().environmentObject(service)
                 } else {
                     DashboardView(service: service, isFacultiesListPresented: $isFacultiesListPresented)
                 }
