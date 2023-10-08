@@ -1,5 +1,9 @@
 // main
 "done_button" = "OK";
+"cancel_button" = "Anuluj";
+"next_button" = "Dalej";
+"confirm_button" = "Zatwierdź";
+"continue_button" = "Kontynuuj";
 "add_group" = "Dodaj grupę";
 "today" = "Dzisiaj";
 "calendar" = "Kalendarz";
@@ -25,6 +29,17 @@
 "hidden" = "Ukryte";
 "visible" = "Widoczne";
 "lets_start" = "Zaczynajmy";
-"lets_start_message" = "Aby zacząć wybierz grupy, które chcesz obserwować i widzieć na stronie głównej";
+"lets_start_message" = "Aby rozpocząć wybierz grupy, które chcesz obserwować i widzieć na stronie głównej";
 "no_result_message" = "Brak wyników wyszukiwania";
+
+// start_flow
+"start_first_step_title" = "Wybierz grupy";
+"start_first_step_prompt" = "Wyszukaj grupę";
+"start_first_step_selected" = "Wybrane";
+"start_first_step_no_groups" = "Brak wybranych grup";
+"start_first_step_all_groups" = "Dostępne grupy";
+"start_first_step_alert_title" = "Brak wybranej grupy";
+"start_first_step_alert_message" = "Nie wybrano żadnej grupy. Czy kontynuować mimo to?";
+"start_second_step_title" = "Wybierz języki";
+"start_second_step_no_languages" = "Brak wybranych języków";
 

@@ -9,7 +9,7 @@ import Domain
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
-final public class FirestoreService {
+final public class FirestoreService: ObservableObject {
     private lazy var db = Firestore.firestore()
     private var nextUpdateDate: Date?
     private var school: School?

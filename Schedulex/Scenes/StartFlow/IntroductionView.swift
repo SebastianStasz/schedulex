@@ -6,11 +6,13 @@
 //
 
 import Resources
+import SchedulexFirebase
 import SwiftUI
 import Widgets
 
 struct IntroductionView: View {
-    @Binding var isFacultiesListPresented: Bool
+    @EnvironmentObject private var service: FirestoreService
+    @State private var isIntroductionFlowSheetPresented = false
 
     var body: some View {
         VStack(spacing: 40) {
@@ -30,7 +32,7 @@ struct IntroductionView: View {
                     .padding(.horizontal, .xlarge)
                     .foregroundStyle(.grayShade1)
 
-                Button(action: presentFacultiesList) {
+                Button(action: presentIntroductionFlowSheet) {
                     Text(L10n.letsStart)
                         .font(.title)
                         .fontWeight(.bold)
@@ -46,13 +48,17 @@ struct IntroductionView: View {
             .frame(maxHeight: .infinity, alignment: .top)
         }
         .padding(.top, 60)
+        .fullScreenCover(isPresented: $isIntroductionFlowSheetPresented) {
+            let viewModel = StartFlowViewModel(service: service)
+            StartFirstStepView(viewModel: viewModel)
+        }
     }
 
-    private func presentFacultiesList() {
-        isFacultiesListPresented = true
+    private func presentIntroductionFlowSheet() {
+        isIntroductionFlowSheetPresented = true
     }
 }
 
 #Preview {
-    IntroductionView(isFacultiesListPresented: .constant(false))
+    IntroductionView()
 }
