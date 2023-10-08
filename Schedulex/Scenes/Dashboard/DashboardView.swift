@@ -42,10 +42,12 @@ struct DashboardView: View {
                                 EventCardView(event: $0)
                             }
                         }
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .padding(.vertical, .large)
                         .padding(.horizontal, .medium)
                         .background(.backgroundPrimary)
                     }
+                    .gesture(dragGesture)
                 } else {
                     Rectangle()
                         .fill(Color.backgroundSecondary)
@@ -64,6 +66,23 @@ struct DashboardView: View {
         .onChange(of: allHiddenClasses) { _ in fetchEvents() }
         .onChange(of: scenePhase) { onSceneChange($0) }
         .task { fetchEvents() }
+    }
+
+    private var dragGesture: _EndedGesture<DragGesture> {
+        DragGesture()
+            .onEnded { gesture in
+                if gesture.translation.width >= 30 {
+                    if let date = viewModel.startDate, viewModel.selectedDate > date {
+                        shouldScrollToDay = true
+                        viewModel.selectedDate = Calendar.current.date(byAdding: .day, value: -1, to: viewModel.selectedDate)!
+                    }
+                } else if gesture.translation.width <= -30 {
+                    if let date = viewModel.endDate, viewModel.selectedDate < date {
+                        shouldScrollToDay = true
+                        viewModel.selectedDate = Calendar.current.date(byAdding: .day, value: 1, to: viewModel.selectedDate)!
+                    }
+                }
+            }
     }
 
     private func separator() -> some View {
