@@ -11,6 +11,7 @@ import Resources
 import Widgets
 
 struct GroupsSelectionListView: View {
+    @State private var isSearchFocused = false
     @State private var searchText = ""
 
     let groups: [FacultyGroup]
@@ -19,8 +20,8 @@ struct GroupsSelectionListView: View {
 
     var body: some View {
         VStack(spacing: .medium) {
-            SearchField(prompt: L10n.startFirstStepPrompt, searchText: $searchText)
-            
+            SearchField(prompt: L10n.startFirstStepPrompt, searchText: $searchText, isFocused: $isSearchFocused)
+
             ScrollViewReader { proxy in
                 SectionedList(sections) { sectionIndex, facultyGroup in
                     let isSelected = selectedGroups.contains(facultyGroup)
@@ -32,11 +33,17 @@ struct GroupsSelectionListView: View {
                     FacultyGroupListRow(facultyGroup: facultyGroup, trailingIcon: icon, iconColor: color)
                         .onTapGesture { isSelected ? deselect() : select() }
                 }
+                .baseListStyle(isLoading: groups.isEmpty)
                 .animation(.easeInOut(duration: 0.15), value: selectedGroups)
-                .onAppear { proxy.scrollTo(0, anchor: .top) }
+                .onAppear {
+                    proxy.scrollTo(0, anchor: .top)
+                    isSearchFocused = !groups.isEmpty
+                }
             }
         }
         .padding(.top, .small)
+        .onDisappear { isSearchFocused = false }
+        .onChange(of: groups) { isSearchFocused = !$0.isEmpty }
     }
 
     private var sections: [ListSection<FacultyGroup>] {

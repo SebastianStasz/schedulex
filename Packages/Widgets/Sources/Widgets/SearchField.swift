@@ -8,13 +8,15 @@
 import SwiftUI
 
 public struct SearchField: View {
-    @FocusState private var isFocused: Bool
+    @FocusState private var focusState: Bool
+    @Binding private var isFocused: Bool
     @Binding private var searchText: String
     private let prompt: String
 
-    public init(prompt: String, searchText: Binding<String>) {
+    public init(prompt: String, searchText: Binding<String>, isFocused: Binding<Bool>) {
         self.prompt = prompt
         self._searchText = searchText
+        self._isFocused = isFocused
     }
 
     public var body: some View {
@@ -24,11 +26,11 @@ public struct SearchField: View {
                     .foregroundColor(.secondary)
 
                 TextField(prompt, text: $searchText, prompt: promptText)
-                    .focused($isFocused)
+                    .focused($focusState)
                     .submitLabel(.next)
                     .keyboardType(.alphabet)
                     .autocorrectionDisabled()
-                    .onSubmit { isFocused = true }
+                    .onSubmit { focusState = true }
                     .textInputAutocapitalization(.characters)
 
                 if !searchText.isEmpty {
@@ -42,8 +44,8 @@ public struct SearchField: View {
             .cornerRadius(.medium)
         }
         .padding(.horizontal, .large)
-        .onTapGesture { isFocused = true }
-        .onAppear { isFocused = true }
+        .onTapGesture { focusState = true }
+        .onChange(of: isFocused) { focusState = $0 }
     }
 
     private var promptText: SwiftUI.Text {
@@ -57,5 +59,5 @@ public struct SearchField: View {
 }
 
 #Preview {
-    SearchField(prompt: "Prompt", searchText: .constant(""))
+    SearchField(prompt: "Prompt", searchText: .constant(""), isFocused: .constant(false))
 }

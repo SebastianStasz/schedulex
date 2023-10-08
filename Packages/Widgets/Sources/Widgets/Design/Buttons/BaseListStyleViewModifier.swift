@@ -20,7 +20,7 @@ private struct BaseListStyleViewModifier: ViewModifier {
                     loadingIndicator
                 }
             }
-            .scrollContentBackground(.hidden)
+            .allowsHitTesting(!isLoading)
     }
 
     @ViewBuilder

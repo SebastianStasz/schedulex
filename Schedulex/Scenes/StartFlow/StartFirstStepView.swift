@@ -17,7 +17,6 @@ struct StartFirstStepView: View {
     var body: some View {
         NavigationStack {
             GroupsSelectionListView(groups: viewModel.facultyGroups, emptyMessage: L10n.startFirstStepNoGroups, selectedGroups: $viewModel.selectedGroups)
-                .baseListStyle(isLoading: viewModel.isLoading)
                 .navigationTitle(L10n.startFirstStepTitle)
                 .navigationBarTitleDisplayMode(.inline)
                 .keyboardButton(L10n.nextButton, disabled: viewModel.isLoading, action: proceedToSecondStep)
