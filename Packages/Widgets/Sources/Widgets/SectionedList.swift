@@ -25,19 +25,22 @@ public struct SectionedList<Item: Hashable, RowContent: View>: View {
     private let sections: [ListSection<Item>]
     private let rowContent: (Int, Item) -> RowContent
     private let separatorHeight: CGFloat
+    private let pinnedHeaders: Bool
 
-    public init(_ sections: [ListSection<Item>], separatorHeight: CGFloat = 1, @ViewBuilder rowContent: @escaping (Int, Item) -> RowContent) {
+    public init(_ sections: [ListSection<Item>], pinnedHeaders: Bool = true, separatorHeight: CGFloat = 1, @ViewBuilder rowContent: @escaping (Int, Item) -> RowContent) {
         self.sections = sections
         self.rowContent = rowContent
+        self.pinnedHeaders = pinnedHeaders
         self.separatorHeight = separatorHeight
     }
 
     public var body: some View {
         ScrollView {
-            LazyVStack(spacing: 0, pinnedViews: [.sectionHeaders]) {
+            LazyVStack(spacing: 0, pinnedViews: pinnedHeaders ? [.sectionHeaders] : []) {
                 ForEach(Array(zip(sections.indices, sections)), id: \.0) { sectionIndex, section in
                     Section(content: { rowsView(for: section, sectionIndex: sectionIndex) },
                             header: { headerView(title: section.title) })
+                    .id(sectionIndex)
                 }
             }
             .padding(.top, .medium)

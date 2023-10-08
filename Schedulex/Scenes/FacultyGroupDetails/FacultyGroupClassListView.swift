@@ -53,8 +53,8 @@ struct FacultyGroupClassListView: View {
     }
 
     private var sections: [ListSection<FacultyGroupClass>] {
-        [ListSection(title: L10n.visible, items: visibleClasses),
-         ListSection(title: L10n.hidden, items: hiddenClasses)]
+        [ListSection(title: L10n.visible, items: visibleClasses, isLazy: false),
+         ListSection(title: L10n.hidden, items: hiddenClasses, isLazy: false)]
     }
 
     private var visibleClasses: [FacultyGroupClass] {
