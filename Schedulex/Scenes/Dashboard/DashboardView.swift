@@ -15,9 +15,9 @@ struct DashboardView: View {
     @AppStorage("subscribedFacultyGroups") private var subscribedGroups: [FacultyGroup] = []
     @AppStorage("hiddenFacultyGroupsClasses") private var allHiddenClasses: [EditableFacultyGroupClass] = []
     @StateObject private var viewModel = DashboardViewModel()
+    @EnvironmentObject private var service: FirestoreService
     @Environment(\.scenePhase) private var scenePhase
 
-    let service: FirestoreService
     @Binding var isFacultiesListPresented: Bool
     @State private var shouldScrollToDay = false
     @State private var isDatePickerPresented = false
@@ -131,6 +131,6 @@ struct DashboardView: View {
 
 struct DashboardView_Previews: PreviewProvider {
     static var previews: some View {
-        DashboardView(service: FirestoreService(), isFacultiesListPresented: .constant(false))
+        DashboardView(isFacultiesListPresented: .constant(false))
     }
 }

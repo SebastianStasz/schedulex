@@ -6,10 +6,12 @@
 //
 
 import Resources
+import SchedulexFirebase
 import SwiftUI
 import Widgets
 
 struct IntroductionView: View {
+    @EnvironmentObject private var service: FirestoreService
     @State private var isIntroductionFlowSheetPresented = false
 
     var body: some View {
@@ -47,7 +49,8 @@ struct IntroductionView: View {
         }
         .padding(.top, 60)
         .fullScreenCover(isPresented: $isIntroductionFlowSheetPresented) {
-            StartFirstStepView()
+            let viewModel = StartFlowViewModel(service: service)
+            StartFirstStepView(viewModel: viewModel)
         }
     }
 

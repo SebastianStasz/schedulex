@@ -18,6 +18,8 @@ public enum L10n {
   public static let calendar = L10n.tr("Localizable", "calendar", fallback: "Calendar")
   /// Classes
   public static let classes = L10n.tr("Localizable", "classes", fallback: "Classes")
+  /// Confirm
+  public static let confirmButton = L10n.tr("Localizable", "confirm_button", fallback: "Confirm")
   /// Done
   public static let doneButton = L10n.tr("Localizable", "done_button", fallback: "Done")
   /// Events
@@ -66,6 +68,8 @@ public enum L10n {
   public static let startFirstStepSelected = L10n.tr("Localizable", "start_first_step_selected", fallback: "Selected")
   /// Select groups
   public static let startFirstStepTitle = L10n.tr("Localizable", "start_first_step_title", fallback: "Select groups")
+  /// Select languages
+  public static let startSecondStepTitle = L10n.tr("Localizable", "start_second_step_title", fallback: "Select languages")
   /// Today
   public static let today = L10n.tr("Localizable", "today", fallback: "Today")
   /// Unfollow

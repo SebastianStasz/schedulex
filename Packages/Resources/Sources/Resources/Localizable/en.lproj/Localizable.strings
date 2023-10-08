@@ -1,6 +1,7 @@
 // main
 "done_button" = "Done";
 "next_button" = "Next";
+"confirm_button" = "Confirm";
 "add_group" = "Add group";
 "today" = "Today";
 "calendar" = "Calendar";
@@ -29,10 +30,11 @@
 "lets_start_message" = "To get started, select the groups you want to follow and see on the home page";
 "no_result_message" = "No results found";
 
-// start_first_step
+// start_flow
 "start_first_step_title" = "Select groups";
 "start_first_step_prompt" = "Group name";
 "start_first_step_selected" = "Selected";
 "start_first_step_no_groups" = "No groups selected";
 "start_first_step_all_groups" = "Available groups";
+"start_second_step_title" = "Select languages";
 

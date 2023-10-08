@@ -13,4 +13,16 @@ public struct School: Decodable {
     public let faculties: [Faculty]
     public let pavilions: [Pavilion]
     public let teacherGroups: [TeacherGroup]
+
+    public var allGroupsWithoutLanguages: [FacultyGroup] {
+        faculties
+            .filter { !$0.name.hasPrefix("Centrum") }
+            .flatMap { $0.groups }
+    }
+
+    public var languageGroups: [FacultyGroup] {
+        faculties
+            .filter { $0.name.hasPrefix("Centrum") }
+            .flatMap { $0.groups }
+    }
 }

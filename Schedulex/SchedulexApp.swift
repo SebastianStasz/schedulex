@@ -20,12 +20,13 @@ struct SchedulexApp: App {
         WindowGroup {
             VStack {
                 if subscribedGroups.isEmpty {
-                    IntroductionView().environmentObject(service)
+                    IntroductionView()
                 } else {
-                    DashboardView(service: service, isFacultiesListPresented: $isFacultiesListPresented)
+                    DashboardView(isFacultiesListPresented: $isFacultiesListPresented)
                 }
             }
             .sheet(isPresented: $isFacultiesListPresented) { FacultiesListView(service: service) }
+            .environmentObject(service)
         }
     }
 }

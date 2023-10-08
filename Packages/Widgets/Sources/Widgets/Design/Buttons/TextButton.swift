@@ -19,16 +19,20 @@ private struct TextButtonStyle: ButtonStyle {
 
 public struct TextButton: View {
     private let title: String
+    private let disabled: Bool
     private let action: () -> Void
 
-    public init(_ title: String, action: @escaping () -> Void) {
+    public init(_ title: String, disabled: Bool = false, action: @escaping () -> Void) {
         self.title = title
+        self.disabled = disabled
         self.action = action
     }
 
     public var body: some View {
         Button(title, action: action)
             .buttonStyle(TextButtonStyle())
+            .disabled(disabled)
+            .opacity(disabled ? 0.6 : 1)
     }
 }
 
