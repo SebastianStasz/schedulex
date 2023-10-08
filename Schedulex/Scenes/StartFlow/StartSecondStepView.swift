@@ -16,15 +16,10 @@ struct StartSecondStepView: View {
 
     var body: some View {
         GroupsSelectionListView(groups: viewModel.languageGroups, selectedGroups: $viewModel.selectedLanguages)
+            .keyboardButton(L10n.confirmButton, disabled: !viewModel.canConfirmSelection, action: confirmGroupsSelection)
             .navigationTitle(L10n.startSecondStepTitle)
-            .toolbar { toolbarContent }
+            .navigationBarTitleDisplayMode(.inline)
             .baseListStyle()
-    }
-
-    private var toolbarContent: some ToolbarContent {
-        ToolbarItem(placement: .confirmationAction) {
-            TextButton(L10n.confirmButton, disabled: !viewModel.canConfirmSelection, action: confirmGroupsSelection)
-        }
     }
 
     private func confirmGroupsSelection() {

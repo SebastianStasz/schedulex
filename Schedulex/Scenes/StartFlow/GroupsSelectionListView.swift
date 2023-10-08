@@ -17,21 +17,27 @@ struct GroupsSelectionListView: View {
     @Binding var selectedGroups: [FacultyGroup]
 
     var body: some View {
-        SectionedList(sections) { sectionIndex, facultyGroup in
-            let isSelected = selectedGroups.contains(facultyGroup)
-            let icon: Icon = isSelected ? .checkmark : .circle
-            let color: Color = isSelected ? .greenPrimary : .accentPrimary
-            let select = { selectedGroups.append(facultyGroup) }
-            let deselect = { selectedGroups.removeAll(where: { $0 == facultyGroup }) }
+        VStack(spacing: .medium) {
+            SearchField(prompt: L10n.startFirstStepPrompt, searchText: $searchText)
+            
+            ScrollViewReader { proxy in
+                SectionedList(sections, pinnedHeaders: false) { sectionIndex, facultyGroup in
+                    let isSelected = selectedGroups.contains(facultyGroup)
+                    let icon: Icon = isSelected ? .checkmark : .circle
+                    let color: Color = isSelected ? .greenPrimary : .accentPrimary
+                    let select = { selectedGroups.append(facultyGroup) }
+                    let deselect = { selectedGroups.removeAll(where: { $0 == facultyGroup }) }
 
-            FacultyGroupListRow(facultyGroup: facultyGroup, trailingIcon: icon, iconColor: color)
-                .onTapGesture { isSelected ? deselect() : select() }
+                    FacultyGroupListRow(facultyGroup: facultyGroup, trailingIcon: icon, iconColor: color)
+                        .onTapGesture { isSelected ? deselect() : select() }
+                }
+                .keyboardType(.alphabet)
+                .autocorrectionDisabled()
+                .textInputAutocapitalization(.characters)
+                .animation(.easeInOut(duration: 0.15), value: selectedGroups)
+                .onAppear { proxy.scrollTo(0, anchor: .top) }
+            }
         }
-        .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: L10n.startFirstStepPrompt)
-        .textInputAutocapitalization(.characters)
-        .autocorrectionDisabled()
-        .keyboardType(.alphabet)
-        .animation(.easeInOut(duration: 0.15), value: selectedGroups)
     }
 
     private var sections: [ListSection<FacultyGroup>] {
@@ -47,5 +53,5 @@ struct GroupsSelectionListView: View {
 }
 
 #Preview {
-    GroupsSelectionListView(groups: [], selectedGroups: .constant([]))
-}
+        GroupsSelectionListView(groups: [], selectedGroups: .constant([]))
+    }

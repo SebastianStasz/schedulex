@@ -19,7 +19,8 @@ struct StartFirstStepView: View {
             GroupsSelectionListView(groups: viewModel.facultyGroups, selectedGroups: $viewModel.selectedGroups)
                 .baseListStyle(isLoading: viewModel.isLoading)
                 .navigationTitle(L10n.startFirstStepTitle)
-                .toolbar { toolbarContent }
+                .navigationBarTitleDisplayMode(.inline)
+                .keyboardButton(L10n.nextButton, disabled: viewModel.isLoading, action: proceedToSecondStep)
                 .navigationDestination(isPresented: $isSecondStepPresented) {
                     StartSecondStepView(viewModel: viewModel)
                 }
@@ -31,12 +32,6 @@ struct StartFirstStepView: View {
                 }
         }
         .task { try? await viewModel.fetchData() }
-    }
-
-    private var toolbarContent: some ToolbarContent {
-        ToolbarItem(placement: .confirmationAction) {
-            TextButton(L10n.nextButton, disabled: viewModel.isLoading, action: proceedToSecondStep)
-        }
     }
 
     private func proceedToSecondStep() {
