@@ -15,7 +15,7 @@ struct StartSecondStepView: View {
     @ObservedObject var viewModel: StartFlowViewModel
 
     var body: some View {
-        GroupsSelectionListView(groups: viewModel.languageGroups, selectedGroups: $viewModel.selectedLanguages)
+        GroupsSelectionListView(groups: viewModel.languageGroups, emptyMessage: L10n.startSecondStepNoLanguages, selectedGroups: $viewModel.selectedLanguages)
             .keyboardButton(L10n.confirmButton, disabled: !viewModel.canConfirmSelection, action: confirmGroupsSelection)
             .navigationTitle(L10n.startSecondStepTitle)
             .navigationBarTitleDisplayMode(.inline)

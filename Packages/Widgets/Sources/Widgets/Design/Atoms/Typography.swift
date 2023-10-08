@@ -14,6 +14,7 @@ public enum Typography: CaseIterable {
     case body
     case footnote
     case time
+    case keyboardButton
 
     var name: String {
         switch self {
@@ -27,6 +28,8 @@ public enum Typography: CaseIterable {
             return "Footnote"
         case .time:
             return "Time"
+        case .keyboardButton:
+            return "Keyboard button"
         }
     }
 
@@ -42,6 +45,8 @@ public enum Typography: CaseIterable {
             return .system(size: 13)
         case .time:
             return FontFamily.RobotoMono.regular.swiftUIFont(size: 14, relativeTo: .footnote)
+        case .keyboardButton:
+            return .system(size: 18, weight: .semibold)
         }
     }
 }

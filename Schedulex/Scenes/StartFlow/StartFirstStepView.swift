@@ -16,7 +16,7 @@ struct StartFirstStepView: View {
 
     var body: some View {
         NavigationStack {
-            GroupsSelectionListView(groups: viewModel.facultyGroups, selectedGroups: $viewModel.selectedGroups)
+            GroupsSelectionListView(groups: viewModel.facultyGroups, emptyMessage: L10n.startFirstStepNoGroups, selectedGroups: $viewModel.selectedGroups)
                 .baseListStyle(isLoading: viewModel.isLoading)
                 .navigationTitle(L10n.startFirstStepTitle)
                 .navigationBarTitleDisplayMode(.inline)

@@ -14,6 +14,7 @@ struct GroupsSelectionListView: View {
     @State private var searchText = ""
 
     let groups: [FacultyGroup]
+    let emptyMessage: String
     @Binding var selectedGroups: [FacultyGroup]
 
     var body: some View {
@@ -21,7 +22,7 @@ struct GroupsSelectionListView: View {
             SearchField(prompt: L10n.startFirstStepPrompt, searchText: $searchText)
             
             ScrollViewReader { proxy in
-                SectionedList(sections, pinnedHeaders: false) { sectionIndex, facultyGroup in
+                SectionedList(sections) { sectionIndex, facultyGroup in
                     let isSelected = selectedGroups.contains(facultyGroup)
                     let icon: Icon = isSelected ? .checkmark : .circle
                     let color: Color = isSelected ? .greenPrimary : .accentPrimary
@@ -31,18 +32,16 @@ struct GroupsSelectionListView: View {
                     FacultyGroupListRow(facultyGroup: facultyGroup, trailingIcon: icon, iconColor: color)
                         .onTapGesture { isSelected ? deselect() : select() }
                 }
-                .keyboardType(.alphabet)
-                .autocorrectionDisabled()
-                .textInputAutocapitalization(.characters)
                 .animation(.easeInOut(duration: 0.15), value: selectedGroups)
                 .onAppear { proxy.scrollTo(0, anchor: .top) }
             }
         }
+        .padding(.top, .small)
     }
 
     private var sections: [ListSection<FacultyGroup>] {
-        [ListSection(title: L10n.startFirstStepSelected, items: selectedGroups, emptyLabel: L10n.startFirstStepNoGroups, isLazy: false),
-         ListSection(title: L10n.startFirstStepAllGroups, items: availableGroups)]
+        [ListSection(title: L10n.startFirstStepSelected, items: selectedGroups, emptyLabel: emptyMessage),
+         ListSection(title: L10n.startFirstStepAllGroups, items: availableGroups, emptyLabel: L10n.noResultMessage, isLazy: true)]
     }
 
     private var availableGroups: [FacultyGroup] {
@@ -53,5 +52,5 @@ struct GroupsSelectionListView: View {
 }
 
 #Preview {
-        GroupsSelectionListView(groups: [], selectedGroups: .constant([]))
+        GroupsSelectionListView(groups: [], emptyMessage: "Empty message", selectedGroups: .constant([]))
     }

@@ -70,12 +70,14 @@ public enum L10n {
   public static let startFirstStepAllGroups = L10n.tr("Localizable", "start_first_step_all_groups", fallback: "Available groups")
   /// No groups selected
   public static let startFirstStepNoGroups = L10n.tr("Localizable", "start_first_step_no_groups", fallback: "No groups selected")
-  /// Group name
-  public static let startFirstStepPrompt = L10n.tr("Localizable", "start_first_step_prompt", fallback: "Group name")
+  /// Search group
+  public static let startFirstStepPrompt = L10n.tr("Localizable", "start_first_step_prompt", fallback: "Search group")
   /// Selected
   public static let startFirstStepSelected = L10n.tr("Localizable", "start_first_step_selected", fallback: "Selected")
   /// Select groups
   public static let startFirstStepTitle = L10n.tr("Localizable", "start_first_step_title", fallback: "Select groups")
+  /// No languages selected
+  public static let startSecondStepNoLanguages = L10n.tr("Localizable", "start_second_step_no_languages", fallback: "No languages selected")
   /// Select languages
   public static let startSecondStepTitle = L10n.tr("Localizable", "start_second_step_title", fallback: "Select languages")
   /// Today

@@ -13,7 +13,7 @@ public struct ListSection<Item: Hashable>: Hashable {
     public let emptyLabel: String
     public let isLazy: Bool
 
-    public init(title: String, items: [Item], emptyLabel: String = "No items", isLazy: Bool = true) {
+    public init(title: String, items: [Item], emptyLabel: String = "", isLazy: Bool = false) {
         self.title = title
         self.items = items
         self.emptyLabel = emptyLabel
@@ -27,7 +27,7 @@ public struct SectionedList<Item: Hashable, RowContent: View>: View {
     private let separatorHeight: CGFloat
     private let pinnedHeaders: Bool
 
-    public init(_ sections: [ListSection<Item>], pinnedHeaders: Bool = true, separatorHeight: CGFloat = 1, @ViewBuilder rowContent: @escaping (Int, Item) -> RowContent) {
+    public init(_ sections: [ListSection<Item>], pinnedHeaders: Bool = false, separatorHeight: CGFloat = 1, @ViewBuilder rowContent: @escaping (Int, Item) -> RowContent) {
         self.sections = sections
         self.rowContent = rowContent
         self.pinnedHeaders = pinnedHeaders

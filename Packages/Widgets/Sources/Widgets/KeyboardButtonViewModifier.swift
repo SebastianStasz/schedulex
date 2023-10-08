@@ -16,7 +16,8 @@ private struct KeyboardButtonViewModifier: ViewModifier {
         content
             .toolbar {
                 ToolbarItem(placement: .keyboard) {
-                    TextButton(title, style: .bodyMedium, color: .blue, disabled: disabled, action: action)
+                    TextButton(title, style: .keyboardButton, color: .blue, disabled: disabled, action: action)
+                        .tracking(0.5)
                 }
             }
     }

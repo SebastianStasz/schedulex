@@ -34,11 +34,12 @@
 
 // start_flow
 "start_first_step_title" = "Wybierz grupy";
-"start_first_step_prompt" = "Nazwa grupy";
+"start_first_step_prompt" = "Wyszukaj grupę";
 "start_first_step_selected" = "Wybrane";
 "start_first_step_no_groups" = "Brak wybranych grup";
 "start_first_step_all_groups" = "Dostępne grupy";
 "start_first_step_alert_title" = "Brak wybranej grupy";
 "start_first_step_alert_message" = "Nie wybrano żadnej grupy. Czy kontynuować mimo to?";
 "start_second_step_title" = "Wybierz języki";
+"start_second_step_no_languages" = "Brak wybranych języków";
 

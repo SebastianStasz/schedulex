@@ -36,7 +36,7 @@ struct FacultyGroupClassListView: View {
             if viewType == .preview {
                 BaseList(classes, id: \.self) { FacultyGroupClassListItem(facultyGroupClass: $0, isSelected: true, action: nil) }
             } else {
-                SectionedList(sections) { sectionIndex, groupClass in
+                SectionedList(sections, pinnedHeaders: true) { sectionIndex, groupClass in
                     FacultyGroupClassListItem(facultyGroupClass: groupClass, isSelected: sectionIndex == 0) {
                         if sectionIndex == 0 {
                             hideClass(groupClass)
@@ -53,8 +53,8 @@ struct FacultyGroupClassListView: View {
     }
 
     private var sections: [ListSection<FacultyGroupClass>] {
-        [ListSection(title: L10n.visible, items: visibleClasses, isLazy: false),
-         ListSection(title: L10n.hidden, items: hiddenClasses, isLazy: false)]
+        [ListSection(title: L10n.visible, items: visibleClasses),
+         ListSection(title: L10n.hidden, items: hiddenClasses)]
     }
 
     private var visibleClasses: [FacultyGroupClass] {

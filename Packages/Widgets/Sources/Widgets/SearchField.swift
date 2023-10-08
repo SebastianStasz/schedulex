@@ -26,7 +26,10 @@ public struct SearchField: View {
                 TextField(prompt, text: $searchText, prompt: promptText)
                     .focused($isFocused)
                     .submitLabel(.next)
+                    .keyboardType(.alphabet)
+                    .autocorrectionDisabled()
                     .onSubmit { isFocused = true }
+                    .textInputAutocapitalization(.characters)
 
                 if !searchText.isEmpty {
                     Image(systemName: "xmark.circle.fill")
