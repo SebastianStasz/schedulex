@@ -25,6 +25,14 @@ final class StartFlowViewModel: ObservableObject {
         school == nil
     }
 
+    var canConfirmSelection: Bool {
+        !allSelectedGroups.isEmpty
+    }
+
+    var allSelectedGroups: [FacultyGroup] {
+        selectedGroups + selectedLanguages
+    }
+
     var facultyGroups: [FacultyGroup] {
         school?.allGroupsWithoutLanguages ?? []
     }

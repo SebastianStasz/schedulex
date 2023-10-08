@@ -16,10 +16,14 @@ public enum L10n {
   public static let addToObserved = L10n.tr("Localizable", "add_to_observed", fallback: "Add to observed")
   /// Calendar
   public static let calendar = L10n.tr("Localizable", "calendar", fallback: "Calendar")
+  /// Cancel
+  public static let cancelButton = L10n.tr("Localizable", "cancel_button", fallback: "Cancel")
   /// Classes
   public static let classes = L10n.tr("Localizable", "classes", fallback: "Classes")
   /// Confirm
   public static let confirmButton = L10n.tr("Localizable", "confirm_button", fallback: "Confirm")
+  /// Continue
+  public static let continueButton = L10n.tr("Localizable", "continue_button", fallback: "Continue")
   /// Done
   public static let doneButton = L10n.tr("Localizable", "done_button", fallback: "Done")
   /// Events
@@ -58,6 +62,10 @@ public enum L10n {
   public static let selectedDate = L10n.tr("Localizable", "selected_date", fallback: "Selected date")
   /// Set visibility of classes
   public static let setClassesVisibility = L10n.tr("Localizable", "set_classes_visibility", fallback: "Set visibility of classes")
+  /// No group selected. Do you want to continue anyway?
+  public static let startFirstStepAlertMessage = L10n.tr("Localizable", "start_first_step_alert_message", fallback: "No group selected. Do you want to continue anyway?")
+  /// No group selected
+  public static let startFirstStepAlertTitle = L10n.tr("Localizable", "start_first_step_alert_title", fallback: "No group selected")
   /// Available groups
   public static let startFirstStepAllGroups = L10n.tr("Localizable", "start_first_step_all_groups", fallback: "Available groups")
   /// No groups selected

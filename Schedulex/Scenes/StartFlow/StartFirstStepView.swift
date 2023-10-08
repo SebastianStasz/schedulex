@@ -12,6 +12,7 @@ import Widgets
 struct StartFirstStepView: View {
     @StateObject var viewModel: StartFlowViewModel
     @State private var isSecondStepPresented = false
+    @State private var isConfirmationAlertPresented = false
 
     var body: some View {
         NavigationStack {
@@ -22,15 +23,27 @@ struct StartFirstStepView: View {
                 .navigationDestination(isPresented: $isSecondStepPresented) {
                     StartSecondStepView(viewModel: viewModel)
                 }
+                .alert(L10n.startFirstStepAlertTitle, isPresented: $isConfirmationAlertPresented) {
+                    Button(L10n.continueButton) { isSecondStepPresented = true }
+                    Button(L10n.cancelButton, role: .cancel) {}
+                } message: {
+                    Text(L10n.startFirstStepAlertMessage)
+                }
         }
         .task { try? await viewModel.fetchData() }
     }
 
     private var toolbarContent: some ToolbarContent {
         ToolbarItem(placement: .confirmationAction) {
-            TextButton(L10n.nextButton, disabled: viewModel.isLoading) {
-                isSecondStepPresented = true
-            }
+            TextButton(L10n.nextButton, disabled: viewModel.isLoading, action: proceedToSecondStep)
+        }
+    }
+
+    private func proceedToSecondStep() {
+        if viewModel.selectedGroups.isEmpty {
+            isConfirmationAlertPresented = true
+        } else {
+            isSecondStepPresented = true
         }
     }
 }

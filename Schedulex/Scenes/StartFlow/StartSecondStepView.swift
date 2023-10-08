@@ -23,13 +23,12 @@ struct StartSecondStepView: View {
 
     private var toolbarContent: some ToolbarContent {
         ToolbarItem(placement: .confirmationAction) {
-            TextButton(L10n.confirmButton, action: confirmGroupsSelection)
+            TextButton(L10n.confirmButton, disabled: !viewModel.canConfirmSelection, action: confirmGroupsSelection)
         }
     }
 
     private func confirmGroupsSelection() {
-        let groups = viewModel.selectedGroups + viewModel.selectedLanguages
-        subscribedGroups = groups
+        subscribedGroups = viewModel.allSelectedGroups
     }
 }
 

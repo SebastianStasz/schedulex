@@ -34,7 +34,6 @@ struct GroupsSelectionListView: View {
         .animation(.easeInOut(duration: 0.15), value: selectedGroups)
     }
 
-
     private var sections: [ListSection<FacultyGroup>] {
         [ListSection(title: L10n.startFirstStepSelected, items: selectedGroups, emptyLabel: L10n.startFirstStepNoGroups, isLazy: false),
          ListSection(title: L10n.startFirstStepAllGroups, items: availableGroups)]

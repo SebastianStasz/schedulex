@@ -1,7 +1,9 @@
 // main
 "done_button" = "OK";
+"cancel_button" = "Anuluj";
 "next_button" = "Dalej";
 "confirm_button" = "Zatwierdź";
+"continue_button" = "Kontynuuj";
 "add_group" = "Dodaj grupę";
 "today" = "Dzisiaj";
 "calendar" = "Kalendarz";
@@ -36,5 +38,7 @@
 "start_first_step_selected" = "Wybrane";
 "start_first_step_no_groups" = "Brak wybranych grup";
 "start_first_step_all_groups" = "Dostępne grupy";
+"start_first_step_alert_title" = "Brak wybranej grupy";
+"start_first_step_alert_message" = "Nie wybrano żadnej grupy. Czy kontynuować mimo to?";
 "start_second_step_title" = "Wybierz języki";
 

@@ -32,7 +32,7 @@ public struct TextButton: View {
         Button(title, action: action)
             .buttonStyle(TextButtonStyle())
             .disabled(disabled)
-            .opacity(disabled ? 0.6 : 1)
+            .opacity(disabled ? 0.5 : 1)
     }
 }
 

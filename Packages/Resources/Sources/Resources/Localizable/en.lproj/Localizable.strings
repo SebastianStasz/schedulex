@@ -1,7 +1,9 @@
 // main
 "done_button" = "Done";
+"cancel_button" = "Cancel";
 "next_button" = "Next";
 "confirm_button" = "Confirm";
+"continue_button" = "Continue";
 "add_group" = "Add group";
 "today" = "Today";
 "calendar" = "Calendar";
@@ -36,5 +38,7 @@
 "start_first_step_selected" = "Selected";
 "start_first_step_no_groups" = "No groups selected";
 "start_first_step_all_groups" = "Available groups";
+"start_first_step_alert_title" = "No group selected";
+"start_first_step_alert_message" = "No group selected. Do you want to continue anyway?";
 "start_second_step_title" = "Select languages";
 
