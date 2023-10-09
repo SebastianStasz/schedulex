@@ -90,7 +90,7 @@ struct FacultyGroupDetailsView: View {
     }
 
     private var isGroupSubscribed: Bool {
-        subscribedGroups.contains(facultyGroup)
+        subscribedGroups.contains(where: { $0.name == facultyGroup.name })
     }
 }
 
