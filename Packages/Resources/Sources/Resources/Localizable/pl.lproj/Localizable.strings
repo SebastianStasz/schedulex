@@ -1,9 +1,15 @@
-// main
-"done_button" = "OK";
+// button
 "cancel_button" = "Anuluj";
 "next_button" = "Dalej";
 "confirm_button" = "Zatwierdź";
 "continue_button" = "Kontynuuj";
+"done_button" = "OK";
+
+// dashboard
+"event_finished" = "Zakończone";
+"event_finishing_in" = "Koniec";
+
+// main
 "add_group" = "Dodaj grupę";
 "today" = "Dzisiaj";
 "calendar" = "Kalendarz";
@@ -29,7 +35,7 @@
 "hidden" = "Ukryte";
 "visible" = "Widoczne";
 "lets_start" = "Zaczynajmy";
-"lets_start_message" = "Aby rozpocząć wybierz grupy, które chcesz obserwować i widzieć na stronie głównej";
+"lets_start_message" = "Aby zacząć wybierz grupy, które chcesz obserwować i widzieć na stronie głównej";
 "no_result_message" = "Brak wyników wyszukiwania";
 
 // start_flow

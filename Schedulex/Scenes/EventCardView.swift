@@ -6,6 +6,7 @@
 //
 
 import Domain
+import Resources
 import SwiftUI
 import Widgets
 
@@ -30,7 +31,13 @@ struct EventCardView: View {
                     VStack(alignment: .leading, spacing: .micro) {
                         Text(event.teacher ?? "", style: .footnote)
                         Text(event.place ?? "", style: .footnote)
-                        Text(event.type ?? "", style: .footnote)
+                        HStack(spacing: 0) {
+                            Text(event.type ?? "", style: .footnote)
+                            Spacer()
+                            TimelineView(.periodic(from: .now, by: 1)) { _ in
+                                Text(status, style: .time)
+                            }
+                        }
                     }
                     .foregroundStyle(.blueShade2)
                 }
@@ -42,6 +49,21 @@ struct EventCardView: View {
         .padding(.leading, .medium)
         .background(.blueShade3)
         .clipShape(RoundedRectangle(cornerRadius: 12))
+    }
+
+    private var status: String {
+        guard let startDate = event.startDate, let endDate = event.endDate else { return "" }
+        if endDate <= .now {
+            return L10n.eventFinished
+        } else {
+            let formatter = RelativeDateTimeFormatter()
+            formatter.unitsStyle = .short
+            let isBeforeEvent = startDate > .now
+            let date = isBeforeEvent ? startDate : endDate
+            let prefix = isBeforeEvent ? "" : "\(L10n.eventFinishingIn) "
+            let description = formatter.localizedString(for: date, relativeTo: .now)
+            return prefix + description
+        }
     }
 }
 

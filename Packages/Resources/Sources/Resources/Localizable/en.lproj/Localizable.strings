@@ -1,9 +1,15 @@
-// main
-"done_button" = "Done";
+// button
 "cancel_button" = "Cancel";
 "next_button" = "Next";
 "confirm_button" = "Confirm";
 "continue_button" = "Continue";
+"done_button" = "Done";
+
+// dashboard
+"event_finished" = "Ended";
+"event_finishing_in" = "End";
+
+// main
 "add_group" = "Add group";
 "today" = "Today";
 "calendar" = "Calendar";
