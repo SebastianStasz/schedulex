@@ -24,6 +24,7 @@
 "selected_date" = "Selected date";
 "observed_title" = "Observed";
 "no_events_message" = "No events here";
+"no_events_weekend_message" = "It's weekend!";
 "other_header" = "Other";
 "for_everyone_header" = "For everyone";
 "faculty_or_group_prompt" = "Faculty or group";

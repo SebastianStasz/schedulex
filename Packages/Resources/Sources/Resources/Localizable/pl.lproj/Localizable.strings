@@ -24,6 +24,7 @@
 "selected_date" = "Wybrana data";
 "observed_title" = "Obserwowane";
 "no_events_message" = "Brak zajęć";
+"no_events_weekend_message" = "Weekend!";
 "other_header" = "Inne";
 "for_everyone_header" = "Dla wszystkich";
 "faculty_or_group_prompt" = "Kierunek lub grupa";

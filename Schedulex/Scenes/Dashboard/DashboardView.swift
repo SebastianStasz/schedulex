@@ -24,44 +24,42 @@ struct DashboardView: View {
     @State private var isSchedulesSheetPresented = false
 
     var body: some View {
-        NavigationStack {
-            VStack(spacing: 0) {
-                if let startDate = viewModel.startDate, let endDate = viewModel.endDate {
-                    LazyVStack {
-                        DayPickerView(startDate: startDate, endDate: endDate, isDatePickerPresented: isDatePickerPresented, shouldScrollToDay: $shouldScrollToDay, selection: $viewModel.selectedDate)
-                    }
-                    .padding(.top, .xlarge)
-                    .padding(.bottom, .medium)
-                    .background(.backgroundSecondary)
-
-                    separator()
-
-                    ScrollView {
-                        VStack(spacing: .medium) {
-                            ForEach(viewModel.selectedDateEvents, id: \.self) {
-                                EventCardView(event: $0)
-                            }
-                        }
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .padding(.vertical, .large)
-                        .padding(.horizontal, .medium)
-                        .background(.backgroundPrimary)
-                    }
-                    .gesture(dragGesture)
-                } else {
-                    Rectangle()
-                        .fill(Color.backgroundSecondary)
-                        .frame(height: .medium)
-                    separator()
-                    Spacer()
+        VStack(spacing: 0) {
+            if let startDate = viewModel.startDate, let endDate = viewModel.endDate {
+                LazyVStack {
+                    DayPickerView(startDate: startDate, endDate: endDate, isDatePickerPresented: isDatePickerPresented, shouldScrollToDay: $shouldScrollToDay, selection: $viewModel.selectedDate)
                 }
+                .padding(.top, .xlarge)
+                .padding(.bottom, .medium)
+                .background(.backgroundSecondary)
+
+                separator()
+
+                ScrollView {
+                    VStack(spacing: .medium) {
+                        ForEach(viewModel.selectedDateEvents, id: \.self) {
+                            EventCardView(event: $0)
+                        }
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .padding(.vertical, .large)
+                    .padding(.horizontal, .medium)
+                    .background(.backgroundPrimary)
+                }
+                .gesture(dragGesture)
+            } else {
+                Rectangle()
+                    .fill(Color.backgroundSecondary)
+                    .frame(height: .medium)
+                separator()
+                Spacer()
             }
-            .overlay { loadingIndicatorOrEmptyState }
-            .toolbar { toolbarContent }
-            .doubleNavigationTitle(title: viewModel.title, subtitle: viewModel.subtitle)
-            .sheet(isPresented: $isSchedulesSheetPresented) { ObservedFacultyGroupsView(service: service) }
-            .sheet(isPresented: $isDatePickerPresented) { datePicker }
         }
+        .overlay { loadingIndicatorOrEmptyState }
+        .toolbar { toolbarContent }
+        .doubleNavigationTitle(title: viewModel.title, subtitle: viewModel.subtitle)
+        .sheet(isPresented: $isSchedulesSheetPresented) { ObservedFacultyGroupsView(service: service) }
+        .sheet(isPresented: $isDatePickerPresented) { datePicker }
         .onChange(of: subscribedGroups) { _ in fetchEvents() }
         .onChange(of: allHiddenClasses) { _ in fetchEvents() }
         .onChange(of: scenePhase) { onSceneChange($0) }
@@ -109,7 +107,8 @@ struct DashboardView: View {
         if viewModel.isLoading {
             ProgressView()
         } else if !viewModel.isEmpty && viewModel.selectedDateEvents.isEmpty {
-            Text(L10n.noEventsMessage, style: .body)
+            let isWeekend = NSCalendar.current.isDateInWeekend(viewModel.selectedDate)
+            Text(isWeekend ? L10n.noEventsWeekendMessage : L10n.noEventsMessage, style: .body)
                 .foregroundStyle(.grayShade1)
         }
     }

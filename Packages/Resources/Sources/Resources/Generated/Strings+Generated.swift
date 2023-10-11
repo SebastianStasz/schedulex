@@ -52,6 +52,8 @@ public enum L10n {
   public static let nextButton = L10n.tr("Localizable", "next_button", fallback: "Next")
   /// No events here
   public static let noEventsMessage = L10n.tr("Localizable", "no_events_message", fallback: "No events here")
+  /// It's weekend!
+  public static let noEventsWeekendMessage = L10n.tr("Localizable", "no_events_weekend_message", fallback: "It's weekend!")
   /// No results found
   public static let noResultMessage = L10n.tr("Localizable", "no_result_message", fallback: "No results found")
   /// Number of classes:
