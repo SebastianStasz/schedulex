@@ -28,7 +28,7 @@ struct DayPickerItemView: View {
 
     private var border: some View {
         RoundedRectangle(cornerRadius: 12)
-            .stroke(Color.grayShade1.opacity(0.4), lineWidth: 1)
+            .stroke(borderColor, lineWidth: isToday ? 2 : 1)
             .opacity(isSelected ? 0 : 1)
     }
 
@@ -44,12 +44,21 @@ struct DayPickerItemView: View {
         isSelected ? .accentPrimary : .clear
     }
 
+    private var borderColor: Color {
+        let color: Color = isToday ? .accentPrimary : .grayShade1
+        return color.opacity(isToday ? 1 : 0.4)
+    }
+
     private var dayTitleColor: Color {
         isSelected ? .white : .grayShade1
     }
 
     private var dayNumberColor: Color {
         isSelected ? .white : .textPrimary
+    }
+
+    private var isToday: Bool {
+        Date.now.isSameDay(as: date)
     }
 }
 
