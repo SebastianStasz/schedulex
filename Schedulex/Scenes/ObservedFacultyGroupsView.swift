@@ -27,11 +27,12 @@ struct ObservedFacultyGroupsView: View {
         NavigationStack {
             BaseList(subscribedGroups.sorted(by: { $0.name < $1.name })) { facultyGroup in
                 let caption = "\(facultyGroup.numberOfEvents) " + L10n.xEvents
-                BaseListItem(title: facultyGroup.name, caption: caption)
-                    .trailingIcon(.info)
-                    .contentShape(Rectangle())
-                    .onTapGesture { self.facultyGroup = facultyGroup }
-                    .contextMenu { UnfollowGroupButton { groupToDelete = facultyGroup } }
+                let isSelected = !facultyGroup.isHidden
+                let action = { self.facultyGroup = facultyGroup }
+
+                ObservedFacultyGroupItem(title: facultyGroup.name, caption: caption, isSelected: isSelected, trailingIconAction: action)
+                .onTapGesture { hideOrShowGroup(facultyGroup) }
+                .contextMenu { UnfollowGroupButton { groupToDelete = facultyGroup } }
             }
             .confirmationDialog(unfollowGroupQuestion, isPresented: isGroupDeleteConfirmationPresented, titleVisibility: .visible) {
                 Button(L10n.unfollow, role: .destructive, action: deleteGroup)
@@ -53,6 +54,13 @@ struct ObservedFacultyGroupsView: View {
         ToolbarItem(placement: .bottomBar) {
             TextButton(L10n.addGroup) { isFacultiesListPresented = true }
         }
+    }
+
+    private func hideOrShowGroup(_ group: FacultyGroup) {
+        guard let index = subscribedGroups.firstIndex(where: { $0.name == group.name }) else {
+            return
+        }
+        subscribedGroups[index].isHidden.toggle()
     }
 
     private func deleteGroup() {
