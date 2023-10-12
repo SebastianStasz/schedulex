@@ -21,6 +21,7 @@ final class DashboardViewModel: ObservableObject {
 
     @Published private var nextUpdateDate: Date?
     @Published private var allEvents: [Event] = []
+    @Published var shouldScrollToDay = false
     @Published var selectedDate: Date = .now
 
     private let service = UekScheduleService()
@@ -76,7 +77,9 @@ final class DashboardViewModel: ObservableObject {
             .store(in: &cancellables)
 
         CombineLatest($startDate.compactMap { $0 }, $endDate.compactMap { $0 })
-            .map { startDate, endDate in
+            .delay(for: .milliseconds(50), scheduler: DispatchQueue.main)
+            .map { [weak self] startDate, endDate in
+                self?.shouldScrollToDay = true
                 let todayDate = Date.now
                 if todayDate < startDate {
                     return startDate
