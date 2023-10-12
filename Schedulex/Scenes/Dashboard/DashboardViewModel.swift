@@ -81,6 +81,12 @@ final class DashboardViewModel: ObservableObject {
 
         CombineLatest($startDate.compactMap { $0 }, $endDate.compactMap { $0 })
             .delay(for: .milliseconds(50), scheduler: DispatchQueue.main)
+            .filter { [weak self] startDate, endDate in
+                guard let selectedDate = self?.selectedDate else {
+                    return true
+                }
+                return startDate > selectedDate || endDate < selectedDate
+            }
             .map { [weak self] startDate, endDate in
                 self?.shouldScrollToDay = true
                 let todayDate = Date.now
