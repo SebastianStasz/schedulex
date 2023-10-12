@@ -13,6 +13,13 @@ public struct FacultyGroup: Identifiable, Hashable, Codable {
     public let facultyDocument: String
     public let facultyUrl: String
 
+    private var _isHidden: Bool?
+
+    public var isHidden: Bool {
+        get { _isHidden ?? false }
+        set { _isHidden = newValue }
+    }
+
     public var id: String { name }
 
     public init(name: String, numberOfEvents: Int, facultyDocument: String, facultyUrl: String) {
@@ -20,15 +27,5 @@ public struct FacultyGroup: Identifiable, Hashable, Codable {
         self.numberOfEvents = numberOfEvents
         self.facultyDocument = facultyDocument
         self.facultyUrl = facultyUrl
-    }
-}
-
-public struct FacultyGroupDetails: Decodable {
-    public let events: [Event]
-    public let classes: [FacultyGroupClass]
-
-    public init(events: [Event], classes: [FacultyGroupClass]) {
-        self.events = events
-        self.classes = classes
     }
 }
