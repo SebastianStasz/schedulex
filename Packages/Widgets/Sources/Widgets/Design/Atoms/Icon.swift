@@ -28,7 +28,7 @@ public enum Icon: String, Identifiable, CaseIterable {
         case .circle:
             return "circle"
         case .checkmark:
-            return "checkmark.circle"
+            return "checkmark.circle.fill"
         case .chevronRight:
             return "chevron.right"
         }
