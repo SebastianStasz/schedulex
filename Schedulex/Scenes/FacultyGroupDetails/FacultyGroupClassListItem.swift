@@ -33,7 +33,7 @@ struct FacultyGroupClassListItem: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 20)
-                    .foregroundStyle(.accentPrimary)
+                    .foregroundStyle(isSelected ? .greenPrimary : .accentPrimary)
                     .onTapGesture { action() }
             }
         }
