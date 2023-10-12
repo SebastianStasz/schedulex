@@ -27,5 +27,5 @@ extension FacultyGroupClass {
 }
 
 extension Event {
-    static let sample = Event(startDate: .now, endDate: .now, name: "Probability and Statistics", place: "Place", teacher: "dr Some Name", type: "Lecture")
+    static let sample = Event(facultyGroupName: "ZIIAS1-1113", startDate: .now, endDate: .now, name: "Probability and Statistics", place: "Place", teacher: "dr Some Name", type: "Lecture")
 }

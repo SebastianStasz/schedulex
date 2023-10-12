@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct FacultyGroupDetails: Decodable {
+public struct FacultyGroupDetails {
     public let events: [Event]
     public let classes: [FacultyGroupClass]
 

@@ -52,6 +52,9 @@ final class DashboardViewModel: ObservableObject {
         isLoading = true
         var events: [Event] = []
         for facultyGroup in facultyGroups {
+            guard !facultyGroup.isHidden else {
+                continue
+            }
             let facultyGroupDetails = try await service.getFacultyGroupDetails(for: facultyGroup)
             let hiddenClasses = hiddenClasses
                 .filter { $0.facultyGroupName == facultyGroup.name }
@@ -94,7 +97,7 @@ final class DashboardViewModel: ObservableObject {
         CombineLatest($allEvents, $selectedDate)
             .map { allEvents, selectedDate in
                 allEvents
-                    .filter { $0.startDate?.formatted(date: .numeric, time: .omitted) == selectedDate.formatted(date: .numeric, time: .omitted) }
+                    .filter { $0.startDate?.isSameDay(as: selectedDate) ?? false }
                     .sorted(by: { $0.startDate! < $1.startDate! })
             }
             .assign(to: &$selectedDateEvents)
