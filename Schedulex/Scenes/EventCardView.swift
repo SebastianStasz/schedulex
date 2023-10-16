@@ -20,13 +20,13 @@ struct EventCardView: View {
                     Text(event.startDate?.formatted(style: .timeOnly) ?? "", style: .time)
                     Text(event.endDate?.formatted(style: .timeOnly) ?? "", style: .time)
                 }
-                .foregroundStyle(.blueShade1)
+                .foregroundStyle(event.facultyGroupColor.shade1)
                 .font(.note)
 
                 VStack(alignment: .leading, spacing: .small) {
                     Text(event.name ?? "", style: .bodyMedium)
                         .lineLimit(2)
-                        .foregroundStyle(.blueShade1)
+                        .foregroundStyle(event.facultyGroupColor.shade1)
 
                     VStack(alignment: .leading, spacing: .micro) {
                         Text(event.teacher ?? "", style: .footnote)
@@ -39,15 +39,15 @@ struct EventCardView: View {
                             }
                         }
                     }
-                    .foregroundStyle(.blueShade2)
+                    .foregroundStyle(event.facultyGroupColor.shade2)
                 }
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.medium)
-            .background(.blueShade4)
+            .background(event.facultyGroupColor.shade4)
         }
         .padding(.leading, .medium)
-        .background(.blueShade3)
+        .background(event.facultyGroupColor.shade3)
         .clipShape(RoundedRectangle(cornerRadius: 12))
     }
 
