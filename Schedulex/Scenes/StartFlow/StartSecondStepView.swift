@@ -23,7 +23,17 @@ struct StartSecondStepView: View {
     }
 
     private func confirmGroupsSelection() {
-        subscribedGroups = viewModel.allSelectedGroups
+        var newGroups: [FacultyGroup] = []
+        var availableColors = FacultyGroupColor.allCases
+
+        for group in viewModel.allSelectedGroups {
+            var group = group
+            let color = availableColors.first
+            group.color = color ?? .default
+            availableColors.removeAll(where: { $0 == color })
+            newGroups.append(group)
+        }
+        subscribedGroups = newGroups
     }
 }
 

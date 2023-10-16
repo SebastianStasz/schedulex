@@ -60,12 +60,14 @@ struct FacultyGroupDetailsView: View {
     var body: some View {
         NavigationStack {
             BaseList {
-                BaseListItem(title: "Color", caption: "Change color for events", color: (subscribedGroups.first(where: { $0.name == facultyGroup.name })?.color ?? .default).representative)
-                    .trailingIcon(.chevronRight, iconSize: 15)
-                    .navigationLink(value: Destination.colorPicker(facultyGroup))
-                    .buttonStyle(.plain)
+                if type == .editable {
+                    BaseListItem(title: "Color", caption: "Change color for events", color: (subscribedGroups.first(where: { $0.name == facultyGroup.name })?.color ?? .default).representative)
+                        .trailingIcon(.chevronRight, iconSize: 15)
+                        .navigationLink(value: Destination.colorPicker(facultyGroup))
+                        .buttonStyle(.plain)
 
-                Separator()
+                    Separator()
+                }
 
                 BaseListItem(title: L10n.classes, caption: classesDescription)
                     .trailingIcon(.chevronRight, iconSize: 15)
@@ -90,6 +92,11 @@ struct FacultyGroupDetailsView: View {
                         allHiddenClasses.removeAll { $0.facultyGroupName == facultyGroup.name }
                     } else {
                         guard !isGroupSubscribed else { return }
+                        let availableColors = FacultyGroupColor.allCases.filter { color in
+                            !subscribedGroups.contains(where: { $0.color == color })
+                        }
+                        var facultyGroup = facultyGroup
+                        facultyGroup.color = availableColors.first ?? .default
                         subscribedGroups.append(facultyGroup)
                     }
                 }
