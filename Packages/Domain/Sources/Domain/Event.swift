@@ -7,7 +7,8 @@
 
 import Foundation
 
-public struct Event: Hashable, Decodable {
+public struct Event: Hashable {
+    public let facultyGroupName: String
     public let startDate: Date?
     public let endDate: Date?
     public let name: String?
@@ -19,7 +20,8 @@ public struct Event: Hashable, Decodable {
         FacultyGroupClass(name: name ?? "", type: type ?? "", teacher: teacher ?? "")
     }
 
-    public init(startDate: Date?, endDate: Date?, name: String?, place: String?, teacher: String?, type: String?) {
+    public init(facultyGroupName: String, startDate: Date?, endDate: Date?, name: String?, place: String?, teacher: String?, type: String?) {
+        self.facultyGroupName = facultyGroupName
         self.startDate = startDate
         self.endDate = endDate
         self.name = name

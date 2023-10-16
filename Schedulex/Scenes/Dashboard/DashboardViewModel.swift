@@ -21,6 +21,7 @@ final class DashboardViewModel: ObservableObject {
 
     @Published private var nextUpdateDate: Date?
     @Published private var allEvents: [Event] = []
+    @Published var shouldScrollToDay = false
     @Published var selectedDate: Date = .now
 
     private let service = UekScheduleService()
@@ -51,6 +52,9 @@ final class DashboardViewModel: ObservableObject {
         isLoading = true
         var events: [Event] = []
         for facultyGroup in facultyGroups {
+            guard !facultyGroup.isHidden else {
+                continue
+            }
             let facultyGroupDetails = try await service.getFacultyGroupDetails(for: facultyGroup)
             let hiddenClasses = hiddenClasses
                 .filter { $0.facultyGroupName == facultyGroup.name }
@@ -76,7 +80,15 @@ final class DashboardViewModel: ObservableObject {
             .store(in: &cancellables)
 
         CombineLatest($startDate.compactMap { $0 }, $endDate.compactMap { $0 })
-            .map { startDate, endDate in
+            .delay(for: .milliseconds(50), scheduler: DispatchQueue.main)
+            .filter { [weak self] startDate, endDate in
+                guard let selectedDate = self?.selectedDate else {
+                    return true
+                }
+                return startDate > selectedDate || endDate < selectedDate
+            }
+            .map { [weak self] startDate, endDate in
+                self?.shouldScrollToDay = true
                 let todayDate = Date.now
                 if todayDate < startDate {
                     return startDate
@@ -91,7 +103,7 @@ final class DashboardViewModel: ObservableObject {
         CombineLatest($allEvents, $selectedDate)
             .map { allEvents, selectedDate in
                 allEvents
-                    .filter { $0.startDate?.formatted(date: .numeric, time: .omitted) == selectedDate.formatted(date: .numeric, time: .omitted) }
+                    .filter { $0.startDate?.isSameDay(as: selectedDate) ?? false }
                     .sorted(by: { $0.startDate! < $1.startDate! })
             }
             .assign(to: &$selectedDateEvents)

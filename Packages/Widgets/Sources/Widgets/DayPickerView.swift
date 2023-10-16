@@ -56,9 +56,14 @@ public struct DayPickerView: View {
             .onAppear {
                 proxy.scrollTo(selectedDate.formatted(style: .dateLong), anchor: .center)
             }
+            .onChange(of: dates) { _ in
+                listId += 1
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+                    proxy.scrollTo(selectedDate.formatted(style: .dateLong), anchor: .center)
+                }
+            }
         }
         .scrollIndicators(.hidden)
-        .onChange(of: dates) { _ in listId += 1 }
     }
 }
 

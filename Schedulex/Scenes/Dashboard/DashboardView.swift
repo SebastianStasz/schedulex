@@ -19,7 +19,6 @@ struct DashboardView: View {
     @Environment(\.scenePhase) private var scenePhase
 
     @Binding var isFacultiesListPresented: Bool
-    @State private var shouldScrollToDay = false
     @State private var isDatePickerPresented = false
     @State private var isSchedulesSheetPresented = false
 
@@ -27,7 +26,7 @@ struct DashboardView: View {
         VStack(spacing: 0) {
             if let startDate = viewModel.startDate, let endDate = viewModel.endDate {
                 LazyVStack {
-                    DayPickerView(startDate: startDate, endDate: endDate, isDatePickerPresented: isDatePickerPresented, shouldScrollToDay: $shouldScrollToDay, selection: $viewModel.selectedDate)
+                    DayPickerView(startDate: startDate, endDate: endDate, isDatePickerPresented: isDatePickerPresented, shouldScrollToDay: $viewModel.shouldScrollToDay, selection: $viewModel.selectedDate)
                 }
                 .padding(.top, .xlarge)
                 .padding(.bottom, .medium)
@@ -71,12 +70,12 @@ struct DashboardView: View {
             .onEnded { gesture in
                 if gesture.translation.width >= 30 {
                     if let date = viewModel.startDate, viewModel.selectedDate > date {
-                        shouldScrollToDay = true
+                        viewModel.shouldScrollToDay = true
                         viewModel.selectedDate = Calendar.current.date(byAdding: .day, value: -1, to: viewModel.selectedDate)!
                     }
                 } else if gesture.translation.width <= -30 {
                     if let date = viewModel.endDate, viewModel.selectedDate < date {
-                        shouldScrollToDay = true
+                        viewModel.shouldScrollToDay = true
                         viewModel.selectedDate = Calendar.current.date(byAdding: .day, value: 1, to: viewModel.selectedDate)!
                     }
                 }
@@ -128,7 +127,7 @@ struct DashboardView: View {
     }
 
     private func selectTodaysDate() {
-        shouldScrollToDay = true
+        viewModel.shouldScrollToDay = true
         viewModel.selectedDate = .now
     }
 
