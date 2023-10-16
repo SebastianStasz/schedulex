@@ -14,4 +14,8 @@ public enum FacultyGroupColor: String, CaseIterable, Codable {
     case green
     case red
     case yellow
+
+    public static var `default`: FacultyGroupColor {
+        .blue
+    }
 }

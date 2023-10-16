@@ -22,7 +22,7 @@ public struct FacultyGroup: Identifiable, Hashable, Codable {
     }
 
     public var color: FacultyGroupColor {
-        get { _color ?? .blue }
+        get { _color ?? .default }
         set { _color = newValue }
     }
 
