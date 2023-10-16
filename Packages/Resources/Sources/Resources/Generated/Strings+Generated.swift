@@ -18,8 +18,12 @@ public enum L10n {
   public static let calendar = L10n.tr("Localizable", "calendar", fallback: "Calendar")
   /// Cancel
   public static let cancelButton = L10n.tr("Localizable", "cancel_button", fallback: "Cancel")
+  /// Change color of events
+  public static let changeColorOfEvents = L10n.tr("Localizable", "change_color_of_events", fallback: "Change color of events")
   /// Classes
   public static let classes = L10n.tr("Localizable", "classes", fallback: "Classes")
+  /// Color
+  public static let color = L10n.tr("Localizable", "color", fallback: "Color")
   /// Confirm
   public static let confirmButton = L10n.tr("Localizable", "confirm_button", fallback: "Confirm")
   /// Continue
@@ -64,6 +68,8 @@ public enum L10n {
   public static let observedTitle = L10n.tr("Localizable", "observed_title", fallback: "Observed")
   /// Other
   public static let otherHeader = L10n.tr("Localizable", "other_header", fallback: "Other")
+  /// Select color
+  public static let selectColor = L10n.tr("Localizable", "select_color", fallback: "Select color")
   /// Selected date
   public static let selectedDate = L10n.tr("Localizable", "selected_date", fallback: "Selected date")
   /// Set visibility of classes

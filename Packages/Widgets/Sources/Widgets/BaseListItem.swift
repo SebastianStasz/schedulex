@@ -6,21 +6,29 @@
 //
 
 import SwiftUI
+import Resources
 
 public struct BaseListItem: View {
     let title: String
     let caption: String?
+    let color: Color?
     var trailingIcon: Icon?
     var iconColor: Color = .accentPrimary
     var iconSize: CGFloat = 20
 
-    public init(title: String, caption: String? = nil) {
+    public init(title: String, caption: String? = nil, color: Color? = nil) {
         self.title = title
         self.caption = caption
+        self.color = color
     }
 
     public var body: some View {
-        HStack {
+        HStack(spacing: .large) {
+            if let color {
+                ColorPickerSquare(color: color, cornerRadius: .mini)
+                    .fixedSize(horizontal: true, vertical: false)
+            }
+
             VStack(alignment: .leading, spacing: .micro) {
                 Text(title, style: .body)
                     .foregroundStyle(.textPrimary)

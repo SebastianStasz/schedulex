@@ -14,10 +14,16 @@ public struct FacultyGroup: Identifiable, Hashable, Codable {
     public let facultyUrl: String
 
     private var _isHidden: Bool?
+    private var _color: FacultyGroupColor?
 
     public var isHidden: Bool {
         get { _isHidden ?? false }
         set { _isHidden = newValue }
+    }
+
+    public var color: FacultyGroupColor {
+        get { _color ?? .default }
+        set { _color = newValue }
     }
 
     public var id: String { name }

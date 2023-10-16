@@ -11,12 +11,13 @@ import Widgets
 struct ObservedFacultyGroupItem: View {
     let title: String
     let caption: String
+    let color: Color
     let isSelected: Bool
     let trailingIconAction: () -> Void
 
     var body: some View {
         HStack(spacing: .large) {
-            SelectionIcon(isSelected: isSelected)
+            SelectionIcon(isSelected: isSelected, color: color)
                 .frame(height: .xlarge)
 
             VStack(alignment: .leading, spacing: .micro) {
@@ -46,8 +47,8 @@ struct ObservedFacultyGroupItem: View {
 
 #Preview {
     VStack(spacing: .large) {
-        ObservedFacultyGroupItem(title: "ZIISS2-2311IS", caption: "76 events", isSelected: true, trailingIconAction: {})
-        ObservedFacultyGroupItem(title: "ZIISS2-2311IS", caption: "76 events", isSelected: false, trailingIconAction: {})
+        ObservedFacultyGroupItem(title: "ZIISS2-2311IS", caption: "76 events", color: .greenPrimary, isSelected: true, trailingIconAction: {})
+        ObservedFacultyGroupItem(title: "ZIISS2-2311IS", caption: "76 events", color: .accentPrimary, isSelected: false, trailingIconAction: {})
     }
     .padding(.large)
 }

@@ -9,6 +9,7 @@ import Foundation
 
 public struct Event: Hashable {
     public let facultyGroupName: String
+    public let facultyGroupColor: FacultyGroupColor
     public let startDate: Date?
     public let endDate: Date?
     public let name: String?
@@ -20,8 +21,9 @@ public struct Event: Hashable {
         FacultyGroupClass(name: name ?? "", type: type ?? "", teacher: teacher ?? "")
     }
 
-    public init(facultyGroupName: String, startDate: Date?, endDate: Date?, name: String?, place: String?, teacher: String?, type: String?) {
+    public init(facultyGroupName: String, facultyGroupColor: FacultyGroupColor, startDate: Date?, endDate: Date?, name: String?, place: String?, teacher: String?, type: String?) {
         self.facultyGroupName = facultyGroupName
+        self.facultyGroupColor = facultyGroupColor
         self.startDate = startDate
         self.endDate = endDate
         self.name = name

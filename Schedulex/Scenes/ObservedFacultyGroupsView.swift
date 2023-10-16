@@ -30,7 +30,7 @@ struct ObservedFacultyGroupsView: View {
                 let isSelected = !facultyGroup.isHidden
                 let action = { self.facultyGroup = facultyGroup }
 
-                ObservedFacultyGroupItem(title: facultyGroup.name, caption: caption, isSelected: isSelected, trailingIconAction: action)
+                ObservedFacultyGroupItem(title: facultyGroup.name, caption: caption, color: facultyGroup.color.representative, isSelected: isSelected, trailingIconAction: action)
                 .onTapGesture { hideOrShowGroup(facultyGroup) }
                 .contextMenu { UnfollowGroupButton { groupToDelete = facultyGroup } }
             }

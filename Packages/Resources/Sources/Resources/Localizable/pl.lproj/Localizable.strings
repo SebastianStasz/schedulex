@@ -21,6 +21,9 @@
 "faculties" = "Kierunki";
 "unfollow" = "Usuń z obserwowanych";
 "unfollow_group_question" = "Czy chcesz usunąć z obserwowanych grupę";
+"color" = "Kolor";
+"select_color" = "Wybierz kolor";
+"change_color_of_events" = "Zmień kolor zajęć";
 "selected_date" = "Wybrana data";
 "observed_title" = "Obserwowane";
 "no_events_message" = "Brak zajęć";

@@ -41,11 +41,14 @@ struct FacultyGroupDetailsView: View {
     }
 
     enum Destination: Hashable, View {
+        case colorPicker(FacultyGroup)
         case classesList(String, [FacultyGroupClass], ViewType)
         case eventsList(String, [Event])
 
         var body: some View {
             switch self {
+            case let .colorPicker(facultyGroup):
+                FacultyGroupColorPickerListView(facultyGroup: facultyGroup)
             case let .classesList(facultyGroupName, classes, type):
                 FacultyGroupClassListView(facultyGroupName: facultyGroupName, classes: classes, viewType: type)
             case let .eventsList(facultyGroupName, events):
@@ -56,7 +59,16 @@ struct FacultyGroupDetailsView: View {
 
     var body: some View {
         NavigationStack {
-            BaseList { 
+            BaseList {
+                if type == .editable {
+                    BaseListItem(title: L10n.color, caption: L10n.changeColorOfEvents, color: (subscribedGroups.first(where: { $0.name == facultyGroup.name })?.color ?? .default).representative)
+                        .trailingIcon(.chevronRight, iconSize: 15)
+                        .navigationLink(value: Destination.colorPicker(facultyGroup))
+                        .buttonStyle(.plain)
+
+                    Separator()
+                }
+
                 BaseListItem(title: L10n.classes, caption: classesDescription)
                     .trailingIcon(.chevronRight, iconSize: 15)
                     .navigationLink(value: Destination.classesList(facultyGroup.name, facultyGroupDetails?.classes ?? [], type))
@@ -80,6 +92,11 @@ struct FacultyGroupDetailsView: View {
                         allHiddenClasses.removeAll { $0.facultyGroupName == facultyGroup.name }
                     } else {
                         guard !isGroupSubscribed else { return }
+                        let availableColors = FacultyGroupColor.allCases.filter { color in
+                            !subscribedGroups.contains(where: { $0.color == color })
+                        }
+                        var facultyGroup = facultyGroup
+                        facultyGroup.color = availableColors.first ?? .default
                         subscribedGroups.append(facultyGroup)
                     }
                 }

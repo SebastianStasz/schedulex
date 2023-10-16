@@ -21,6 +21,9 @@
 "faculties" = "Faculties";
 "unfollow" = "Unfollow";
 "unfollow_group_question" = "Do you want to unfollow group";
+"color" = "Color";
+"select_color" = "Select color";
+"change_color_of_events" = "Change color of events";
 "selected_date" = "Selected date";
 "observed_title" = "Observed";
 "no_events_message" = "No events here";
