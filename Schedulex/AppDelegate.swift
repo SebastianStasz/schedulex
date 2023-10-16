@@ -6,6 +6,7 @@
 //
 
 import FirebaseCore
+import Resources
 import UIKit
 import Widgets
 

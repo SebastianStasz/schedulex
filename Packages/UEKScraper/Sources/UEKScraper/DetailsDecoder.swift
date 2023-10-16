@@ -51,7 +51,7 @@ struct DetailsDecoder {
                 return nil
             }
             let dates = datesDecoder.getDates(date: date, time: time)
-            return Event(facultyGroupName: facultyGroup.name, startDate: dates.0, endDate: dates.1, name: name, place: place, teacher: teacher, type: type)
+            return Event(facultyGroupName: facultyGroup.name, facultyGroupColor: facultyGroup.color, startDate: dates.0, endDate: dates.1, name: name, place: place, teacher: teacher, type: type)
         } catch {
             return nil
         }

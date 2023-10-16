@@ -63,6 +63,7 @@ public extension UIColor {
     static let yellowShade2 = UIColor(named: "yellow_shade_2", in: .module, compatibleWith: .current)!
     static let yellowShade3 = UIColor(named: "yellow_shade_3", in: .module, compatibleWith: .current)!
     static let yellowShade4 = UIColor(named: "yellow_shade_4", in: .module, compatibleWith: .current)!
+    static let textPrimary = UIColor(named: "text_primary", in: .module, compatibleWith: .current)!
 }
 
 public extension Image {
