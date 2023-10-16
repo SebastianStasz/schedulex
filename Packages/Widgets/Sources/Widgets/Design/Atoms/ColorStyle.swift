@@ -5,6 +5,7 @@
 //  Created by Sebastian Staszczyk on 19/09/2023.
 //
 
+import Resources
 import SwiftUI
 
 public enum ColorStyle: CaseIterable {
@@ -47,11 +48,30 @@ public enum ColorStyle: CaseIterable {
         }
     }
 
-    var uiColor: UIColor {
-        UIColor(named: name, in: .module, compatibleWith: .current)!
-    }
-
     var color: Color {
-        Color(name, bundle: .module)
+        switch self {
+        case .backgroundPrimary:
+            return .backgroundPrimary
+        case .backgroundSecondary:
+            return .backgroundSecondary
+        case .backgroundTertiary:
+            return .backgroundTertiary
+        case .grayShade1:
+            return .grayShade1
+        case .accentPrimary:
+            return .accentPrimary
+        case .greenPrimary:
+            return .greenPrimary
+        case .textPrimary:
+            return .textPrimary
+        case .blueShade1:
+            return .blueShade1
+        case .blueShade2:
+            return .blueShade2
+        case .blueShade3:
+            return .blueShade3
+        case .blueShade4:
+            return .blueShade4
+        }
     }
 }

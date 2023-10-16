@@ -22,3 +22,13 @@ fonts:
       output: Fonts+Generated.swift
       params:
         publicAccess: true
+
+## Generate constants for Assets Catalogs.
+xcassets:
+  inputs:
+    - Colors.xcassets
+  outputs:
+    - templatePath: swiftgenTemplate.stencil
+      output: Assets+Generated.swift
+      params:
+        publicAccess: true
