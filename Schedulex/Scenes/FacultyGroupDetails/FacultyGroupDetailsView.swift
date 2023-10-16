@@ -61,7 +61,7 @@ struct FacultyGroupDetailsView: View {
         NavigationStack {
             BaseList {
                 if type == .editable {
-                    BaseListItem(title: "Color", caption: "Change color for events", color: (subscribedGroups.first(where: { $0.name == facultyGroup.name })?.color ?? .default).representative)
+                    BaseListItem(title: L10n.color, caption: L10n.changeColorOfEvents, color: (subscribedGroups.first(where: { $0.name == facultyGroup.name })?.color ?? .default).representative)
                         .trailingIcon(.chevronRight, iconSize: 15)
                         .navigationLink(value: Destination.colorPicker(facultyGroup))
                         .buttonStyle(.plain)

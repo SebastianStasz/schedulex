@@ -8,6 +8,7 @@
 import Domain
 import SwiftUI
 import Widgets
+import Resources
 
 struct FacultyGroupColorPickerListView: View {
     @AppStorage("subscribedFacultyGroups") private var subscribedGroups: [FacultyGroup] = []
@@ -24,7 +25,7 @@ struct FacultyGroupColorPickerListView: View {
             .padding(.horizontal, .large)
         }
         .background(.backgroundPrimary)
-        .navigationTitle("Select color")
+        .navigationTitle(L10n.selectColor)
     }
 
     private func iconsRow(for colors: ArraySlice<FacultyGroupColor>) -> some View {
