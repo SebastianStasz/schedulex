@@ -7,13 +7,15 @@
 
 import SwiftUI
 
-public enum FacultyGroupColor: String, CaseIterable, Codable {
+public enum FacultyGroupColor: String, Identifiable, CaseIterable, Codable {
     case blue
     case orange
     case purple
     case green
     case red
     case yellow
+
+    public var id: String { rawValue }
 
     public static var `default`: FacultyGroupColor {
         .blue

@@ -8,11 +8,14 @@
 import SwiftUI
 
 public enum CornerRadius: String, CaseIterable {
+    case mini
     case medium
     case large
 
     var value: CGFloat {
         switch self {
+        case .mini:
+            return 4
         case .medium:
             return 10
         case .large:

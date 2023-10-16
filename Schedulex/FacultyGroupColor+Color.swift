@@ -10,6 +10,10 @@ import SwiftUI
 import Widgets
 
 extension FacultyGroupColor {
+    var representative: Color {
+        shade3
+    }
+    
     var shade1: Color {
         switch self {
         case .blue:
