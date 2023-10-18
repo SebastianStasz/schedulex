@@ -11,6 +11,12 @@ options:
   deploymentTarget:
     iOS: 16.0
 
+settingGroups:
+  common:
+    PRODUCT_NAME: UEK Schedule
+    MARKETING_VERSION: 1.0.6
+    TARGETED_DEVICE_FAMILY: 1
+
 targets:
   Schedulex:
     info:
@@ -65,7 +71,8 @@ targetTemplates:
     type: application
     sources: [Schedulex]
     settings:
-      INFOPLIST_FILE: Schedulex/Info.plist
+      groups:
+        - common
 
 localPackages:
   - ./Packages/Domain
