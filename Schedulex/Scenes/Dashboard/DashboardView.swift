@@ -24,9 +24,9 @@ struct DashboardView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            if let startDate = viewModel.startDate, let endDate = viewModel.endDate {
+            if let items = viewModel.dayPickerItems {
                 LazyVStack {
-                    DayPickerView(startDate: startDate, endDate: endDate, isDatePickerPresented: isDatePickerPresented, shouldScrollToDay: $viewModel.shouldScrollToDay, selection: $viewModel.selectedDate)
+                    DayPickerView(items: items, isDatePickerPresented: isDatePickerPresented, shouldScrollToDay: $viewModel.shouldScrollToDay, selection: $viewModel.selectedDate)
                 }
                 .padding(.top, .xlarge)
                 .padding(.bottom, .medium)

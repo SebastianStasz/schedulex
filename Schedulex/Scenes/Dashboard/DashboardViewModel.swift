@@ -14,6 +14,7 @@ import Widgets
 
 @MainActor
 final class DashboardViewModel: ObservableObject {
+    @Published private(set) var dayPickerItems: [DayPickerItem]? = nil
     @Published private(set) var selectedDateEvents: [Event] = []
     @Published private(set) var startDate: Date?
     @Published private(set) var endDate: Date?
@@ -59,7 +60,7 @@ final class DashboardViewModel: ObservableObject {
             let hiddenClasses = hiddenClasses
                 .filter { $0.facultyGroupName == facultyGroup.name }
                 .map { $0.toFacultyGroupClass() }
-            
+
             let newEvents = facultyGroupDetails.events
                 .filter { !hiddenClasses.contains($0.class) }
 
@@ -67,10 +68,45 @@ final class DashboardViewModel: ObservableObject {
         }
         allEvents = events
         nextUpdateDate = Calendar.current.date(byAdding: .minute, value: 5, to: .now)
-        isLoading = false
     }
 
     func bind() {
+        $allEvents
+            .map { $0.sorted(by: { $0.startDate! < $1.startDate! }) }
+            .compactMap { [weak self] in
+                let startDate = $0.first?.startDate
+                let endDate = $0.last?.startDate
+                self?.startDate = startDate
+                self?.endDate = endDate
+                guard let startDate, let endDate else { return nil }
+                return (startDate, endDate, $0)
+            }
+            .receive(on: DispatchQueue.global(qos: .background))
+            .map { (startDate: Date, endDate: Date, events: [Event]) in
+                let endDate = Calendar.current.date(byAdding: .day, value: 1, to: endDate)!
+                var dates: [Date] = []
+                var date = startDate
+                while date < endDate {
+                    dates.append(date)
+                    date = Calendar.current.date(byAdding: .day, value: 1, to: date)!
+                }
+
+                let eventsByDay = Dictionary(grouping: events, by: { $0.startDate?.formatted(date: .numeric, time: .omitted) })
+
+                return dates.map { date in
+                    if let events = eventsByDay[date.formatted(date: .numeric, time: .omitted)] {
+                        let colors = Array(Set(events.map { $0.facultyGroupColor })).sorted { $0.id < $1.id }.map { $0.representative }
+                        return DayPickerItem(date: date, circleColors: colors)
+                    }
+                    return DayPickerItem(date: date, circleColors: [])
+                }
+            }
+            .receive(on: DispatchQueue.main)
+            .handleEvents(receiveOutput: { [weak self] _ in
+                self?.isLoading = false
+            })
+            .assign(to: &$dayPickerItems)
+
         $allEvents
             .map { $0.sorted(by: { $0.startDate! < $1.startDate! }) }
             .sink { [weak self] in

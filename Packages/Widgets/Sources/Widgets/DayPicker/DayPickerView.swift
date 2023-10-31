@@ -11,20 +11,13 @@ public struct DayPickerView: View {
     @State private var listId = 0
     private let dayPickerItemWidth = (UIScreen.main.bounds.size.width - (2 * .medium) - (4 * .large)) / 5
 
-    let dates: [Date]
-    let isDatePickerPresented: Bool
-    @Binding var selectedDate: Date
-    @Binding var shouldScrollToDay: Bool
+    private let items: [DayPickerItem]
+    private let isDatePickerPresented: Bool
+    @Binding private var selectedDate: Date
+    @Binding private var shouldScrollToDay: Bool
 
-    public init(startDate: Date, endDate: Date, isDatePickerPresented: Bool = false, shouldScrollToDay: Binding<Bool>, selection: Binding<Date>) {
-        let endDate = Calendar.current.date(byAdding: .day, value: 1, to: endDate)!
-        var dates: [Date] = []
-        var date = startDate
-        while date < endDate {
-            dates.append(date)
-            date = Calendar.current.date(byAdding: .day, value: 1, to: date)!
-        }
-        self.dates = dates
+    public init(items: [DayPickerItem], isDatePickerPresented: Bool = false, shouldScrollToDay: Binding<Bool>, selection: Binding<Date>) {
+        self.items = items
         self.isDatePickerPresented = isDatePickerPresented
         _shouldScrollToDay = shouldScrollToDay
         _selectedDate = selection
@@ -34,12 +27,12 @@ public struct DayPickerView: View {
         ScrollViewReader { proxy in
             ScrollView(.horizontal) {
                 LazyHStack(spacing: .large) {
-                    ForEach(dates, id: \.self) { date in
-                        DayPickerItemView(date: date, isSelected: date.isSameDay(as: selectedDate))
+                    ForEach(items, id: \.self) { item in
+                        DayPickerItemView(item: item, isSelected: item.date.isSameDay(as: selectedDate))
                             .frame(width: dayPickerItemWidth)
                             .contentShape(Rectangle())
-                            .onTapGesture { selectedDate = date }
-                            .id(date.formatted(style: .dateLong))
+                            .onTapGesture { selectedDate = item.date }
+                            .id(item.date.formatted(style: .dateLong))
                             .onChange(of: selectedDate) { date in
                                 if shouldScrollToDay || isDatePickerPresented {
                                     withAnimation(.easeInOut) {
@@ -56,7 +49,7 @@ public struct DayPickerView: View {
             .onAppear {
                 proxy.scrollTo(selectedDate.formatted(style: .dateLong), anchor: .center)
             }
-            .onChange(of: dates) { _ in
+            .onChange(of: items) { _ in
                 listId += 1
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
                     proxy.scrollTo(selectedDate.formatted(style: .dateLong), anchor: .center)
@@ -67,8 +60,8 @@ public struct DayPickerView: View {
     }
 }
 
-#Preview {
-    let endDate = Calendar.current.date(byAdding: .day, value: 10, to: .now)!
-    let selectedDate = Calendar.current.date(byAdding: .day, value: 2, to: .now)!
-    return DayPickerView(startDate: .now, endDate: endDate, shouldScrollToDay: .constant(false), selection: .constant(selectedDate))
-}
+//#Preview {
+//    let endDate = Calendar.current.date(byAdding: .day, value: 10, to: .now)!
+//    let selectedDate = Calendar.current.date(byAdding: .day, value: 2, to: .now)!
+//    return DayPickerView(startDate: .now, endDate: endDate, shouldScrollToDay: .constant(false), selection: .constant(selectedDate))
+//}
