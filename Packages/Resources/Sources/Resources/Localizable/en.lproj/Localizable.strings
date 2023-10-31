@@ -7,7 +7,7 @@
 
 // dashboard
 "event_finished" = "Ended";
-"event_finishing_in" = "End";
+"event_finishing_in" = "Ends";
 
 // main
 "add_group" = "Add group";
@@ -21,9 +21,6 @@
 "faculties" = "Faculties";
 "unfollow" = "Unfollow";
 "unfollow_group_question" = "Do you want to unfollow group";
-"color" = "Color";
-"select_color" = "Select color";
-"change_color_of_events" = "Change color of events";
 "selected_date" = "Selected date";
 "observed_title" = "Observed";
 "no_events_message" = "No events here";
@@ -41,6 +38,9 @@
 "lets_start" = "Let's start";
 "lets_start_message" = "To get started, select the groups you want to follow and see on the home page";
 "no_result_message" = "No results found";
+"color" = "Color";
+"select_color" = "Select color";
+"change_color_of_events" = "change_color_of_events";
 
 // start_flow
 "start_first_step_title" = "Select groups";
