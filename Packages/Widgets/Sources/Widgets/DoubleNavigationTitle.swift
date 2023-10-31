@@ -15,7 +15,7 @@ private struct DoubleNavigationTitle: ViewModifier {
         VStack(spacing: 0) {
             Rectangle()
                 .fill(.backgroundSecondary)
-                .frame(height: 72)
+                .frame(height: topSpacing)
 
             HStack(spacing: .xlarge) {
                 VStack(alignment: .leading, spacing: .micro) {
@@ -34,6 +34,10 @@ private struct DoubleNavigationTitle: ViewModifier {
         }
         .ignoresSafeArea(edges: .top)
     }
+
+    private var topSpacing: CGFloat {
+        UIDevice.current.hasNotch ? 72 : 40
+    }
 }
 
 public extension View {
@@ -45,4 +49,11 @@ public extension View {
 #Preview {
     Text("Content", style: .body)
         .doubleNavigationTitle(title: "Title", subtitle: "Note")
+}
+
+private extension UIDevice {
+    var hasNotch: Bool {
+        let bottom = UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0
+        return bottom > 0
+    }
 }
