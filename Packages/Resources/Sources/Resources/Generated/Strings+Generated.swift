@@ -18,8 +18,8 @@ public enum L10n {
   public static let calendar = L10n.tr("Localizable", "calendar", fallback: "Calendar")
   /// Cancel
   public static let cancelButton = L10n.tr("Localizable", "cancel_button", fallback: "Cancel")
-  /// change_color_of_events
-  public static let changeColorOfEvents = L10n.tr("Localizable", "change_color_of_events", fallback: "change_color_of_events")
+  /// Change color of events
+  public static let changeColorOfEvents = L10n.tr("Localizable", "change_color_of_events", fallback: "Change color of events")
   /// Classes
   public static let classes = L10n.tr("Localizable", "classes", fallback: "Classes")
   /// Color

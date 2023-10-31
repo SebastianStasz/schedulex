@@ -40,7 +40,7 @@
 "no_result_message" = "No results found";
 "color" = "Color";
 "select_color" = "Select color";
-"change_color_of_events" = "change_color_of_events";
+"change_color_of_events" = "Change color of events";
 
 // start_flow
 "start_first_step_title" = "Select groups";
