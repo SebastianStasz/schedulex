@@ -18,7 +18,7 @@ struct FacultiesListView: View {
     @State private var facultyGroup: FacultyGroup?
 
     var body: some View {
-        NavigationStack {
+        NavigationSplitView {
             Group {
                 if searchText.isEmpty {
                     SectionedList(sections) { _, faculty in
@@ -49,7 +49,7 @@ struct FacultiesListView: View {
             .navigationTitle(L10n.addGroup)
             .disableAutocorrection(true)
             .closeButton()
-        }
+        } detail: {}
         .task { school = try? await service.getCracowUniversityOfEconomics() }
     }
 

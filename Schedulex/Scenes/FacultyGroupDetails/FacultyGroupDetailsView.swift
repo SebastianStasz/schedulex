@@ -58,7 +58,7 @@ struct FacultyGroupDetailsView: View {
     }
 
     var body: some View {
-        NavigationStack {
+        NavigationSplitView {
             BaseList {
                 if type == .editable {
                     BaseListItem(title: L10n.color, caption: L10n.changeColorOfEvents, color: (subscribedGroups.first(where: { $0.name == facultyGroup.name })?.color ?? .default).representative)
@@ -81,7 +81,7 @@ struct FacultyGroupDetailsView: View {
                     .navigationLink(value: Destination.eventsList(facultyGroup.name, facultyGroupDetails?.events ?? []))
                     .buttonStyle(.plain)
             }
-            .navigationDestination(for: Destination.self) { $0 }
+            .navigationDestination(for: Destination.self) { $0.interactiveDismissDisabled(true) }
             .baseListStyle(isLoading: facultyGroupDetails == nil)
             .navigationTitle(facultyGroup.name)
             .closeButton()
@@ -102,7 +102,7 @@ struct FacultyGroupDetailsView: View {
                 }
                 .padding(.bottom, .large)
             }
-        }
+        } detail: {}
         .task { facultyGroupDetails = try? await UekScheduleService().getFacultyGroupDetails(for: facultyGroup) }
     }
 

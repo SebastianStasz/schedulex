@@ -24,7 +24,7 @@ struct ObservedFacultyGroupsView: View {
     }
 
     var body: some View {
-        NavigationStack {
+        NavigationSplitView {
             BaseList(subscribedGroups.sorted(by: { $0.name < $1.name })) { facultyGroup in
                 let caption = "\(facultyGroup.numberOfEvents) " + L10n.xEvents
                 let isSelected = !facultyGroup.isHidden
@@ -43,7 +43,7 @@ struct ObservedFacultyGroupsView: View {
             .navigationTitle(L10n.observedTitle)
             .toolbar { toolbarContent }
             .closeButton()
-        }
+        } detail: {}
     }
 
     private var unfollowGroupQuestion: String {
