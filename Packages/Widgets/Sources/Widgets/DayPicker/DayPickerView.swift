@@ -8,8 +8,10 @@
 import SwiftUI
 
 public struct DayPickerView: View {
+    private static let dayPickerItemWidth = (UIScreen.main.bounds.size.width - (2 * .medium) - (4 * .large)) / 5
+    @Environment(\.scenePhase) private var scenePhase
+    @State private var todayDate: Date = .now
     @State private var listId = 0
-    private let dayPickerItemWidth = (UIScreen.main.bounds.size.width - (2 * .medium) - (4 * .large)) / 5
 
     private let items: [DayPickerItem]
     private let isDatePickerPresented: Bool
@@ -28,8 +30,11 @@ public struct DayPickerView: View {
             ScrollView(.horizontal) {
                 LazyHStack(spacing: .large) {
                     ForEach(items, id: \.self) { item in
-                        DayPickerItemView(item: item, isSelected: item.date.isSameDay(as: selectedDate))
-                            .frame(width: dayPickerItemWidth)
+                        let isSelected = item.date.isSameDay(as: selectedDate)
+                        let isToday = todayDate.isSameDay(as: item.date)
+                        
+                        DayPickerItemView(item: item, isSelected: isSelected, isToday: isToday)
+                            .frame(width: Self.dayPickerItemWidth)
                             .contentShape(Rectangle())
                             .onTapGesture { selectedDate = item.date }
                             .id(item.date.formatted(style: .dateLong))
@@ -57,6 +62,12 @@ public struct DayPickerView: View {
             }
         }
         .scrollIndicators(.hidden)
+        .onChange(of: scenePhase) { onSceneChange($0) }
+    }
+
+    private func onSceneChange(_ scene: ScenePhase) {
+        guard scene == .active else { return }
+        todayDate = .now
     }
 }
 

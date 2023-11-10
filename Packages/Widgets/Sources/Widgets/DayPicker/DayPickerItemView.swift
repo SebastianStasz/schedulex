@@ -10,6 +10,7 @@ import SwiftUI
 struct DayPickerItemView: View {
     let item: DayPickerItem
     let isSelected: Bool
+    let isToday: Bool
 
     var body: some View {
         VStack(spacing: .medium) {
@@ -67,16 +68,14 @@ struct DayPickerItemView: View {
     private var dayNumberColor: Color {
         isSelected ? .white : .textPrimary
     }
-
-    private var isToday: Bool {
-        Date.now.isSameDay(as: item.date)
-    }
 }
 
 #Preview {
     VStack(spacing: .large) {
-        DayPickerItemView(item: DayPickerItem(date: .now), isSelected: false)
-        DayPickerItemView(item: DayPickerItem(date: .now), isSelected: true)
+        DayPickerItemView(item: DayPickerItem(date: .now), isSelected: false, isToday: false)
+        DayPickerItemView(item: DayPickerItem(date: .now), isSelected: false, isToday: true)
+        DayPickerItemView(item: DayPickerItem(date: .now), isSelected: true, isToday: false)
+        DayPickerItemView(item: DayPickerItem(date: .now), isSelected: true, isToday: true)
     }
     .frame(width: 65)
 }
