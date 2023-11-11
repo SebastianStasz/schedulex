@@ -7,12 +7,17 @@
 
 import SwiftUI
 
-public struct DayPickerItem: Hashable {
+public struct DayPickerItem: Hashable, Identifiable {
+    public let id = UUID()
     let date: Date
     let circleColors: [Color]
+    let isSelectable: Bool
+    let isVisible: Bool
 
-    public init(date: Date, circleColors: [Color] = []) {
+    public init(date: Date, circleColors: [Color] = [], isSelectable: Bool = true, isVisible: Bool = true) {
         self.date = date
         self.circleColors = circleColors
+        self.isSelectable = isSelectable
+        self.isVisible = isVisible
     }
 }
