@@ -15,6 +15,10 @@ struct YearAndMonth: Hashable {
         let components = DateComponents(year: year, month: month)
         return Calendar.current.date(from: components)!
     }
+
+    var numberOfDaysInMonth: Int {
+        Calendar.current.range(of: .day, in: .month, for: date)!.count
+    }
 }
 
 extension Date {
@@ -30,12 +34,36 @@ struct CalendarPickerMonth: Identifiable {
     var id: Date {
         yearAndMonth.date
     }
-}
 
+    var daysOffset: Int {
+        let weekdayShift = yearAndMonth.date.weekday - 2
+        return weekdayShift < 0 ? weekdayShift + 7 : weekdayShift
+    }
 
-struct CalendarPickerItem {
-    let days: [DayPickerItem]
-    let yearAndMonth: YearAndMonth
+    func getDays() -> [DayPickerItem] {
+        var days: [DayPickerItem] = dayPickerItems
+
+        if let firstDay = days.first?.date.day, firstDay > 1 {
+            let nonSelectableDays: [DayPickerItem] = (1..<firstDay).compactMap {
+                makeDayPickerItem(for: $0)
+            }
+            days.insert(contentsOf: nonSelectableDays, at: 0)
+        }
+        if let lastDay = days.last, lastDay.date.day < yearAndMonth.numberOfDaysInMonth {
+            let firstMissingDay = lastDay.date.day + 1
+            let nonSelectableDays: [DayPickerItem] = (firstMissingDay..<yearAndMonth.numberOfDaysInMonth).compactMap {
+                makeDayPickerItem(for: $0)
+            }
+            days.append(contentsOf: nonSelectableDays)
+        }
+        return days
+    }
+
+    private func makeDayPickerItem(for day: Int) -> DayPickerItem? {
+        let components = DateComponents(year: yearAndMonth.year, month: yearAndMonth.month, day: day)
+        guard let date = Calendar.current.date(from: components) else { return nil }
+        return DayPickerItem(date: date, isSelectable: false)
+    }
 }
 
 public struct CalendarPicker: View {
@@ -56,89 +84,73 @@ public struct CalendarPicker: View {
 
     private let months: [CalendarPickerMonth]
 
+    private var rows: [GridItem] {
+        Array(repeating: GridItem(spacing: .small), count: 7)
+    }
+
     public var body: some View {
-        VStack(spacing: .medium) {
-            HStack(spacing: 0) {
-                if let selectedMonth {
-                    Text(selectedMonth.date.formatted(.dateTime.month(.wide).year()), style: .titleSmall)
-                }
+        VStack(spacing: .small) {
+            //            HStack(spacing: 0) {
+            //                if let selectedMonth {
+            //                    Text(selectedMonth.date.formatted(.dateTime.month(.wide).year()), style: .titleSmall)
+            //                }
+            //
+            //                Spacer()
+            //            }
+            //            GeometryReader { proxy in
+            //            LazyVGrid(columns: rows, spacing: 0) {
 
-                Spacer()
+
+            LazyVGrid(columns: rows) {
+                ForEach(Locale.Weekday.allCases) {
+                    Text($0.rawValue, style: .footnote)
+                        .textCase(.uppercase)
+                        .fontWeight(.semibold)
+                        .foregroundStyle(.grayShade1)
+                        .frame(maxWidth: .infinity)
+                }
             }
 
-            GeometryReader { proxy in
-                Grid(horizontalSpacing: 0, verticalSpacing: 0) {
-                    headerGridRow()
-                    
-                    TabView(selection: $selectedMonth) {
-                        ForEach(months) { month in
-                            Grid(horizontalSpacing: .small, verticalSpacing: .small) {
-                                ForEach(getDays(for: month), id: \.self) { dayPickerItems in
-                                    GridRow {
-                                        ForEach(dayPickerItems) { item in
-                                            let day = item.date.formatted(.dateTime.day())
-                                            let isToday = item.date.isSameDay(as: selectedDate)
-                                            
-                                            CalendarPickerItemView(day: day, isSelectable: item.isSelectable, isToday: isToday)
-                                                .onTapGesture { selectedDate = item.date }
-                                                .opacity(item.isVisible ? 1 : 0)
-                                        }
-                                    }
-                                }
-                            }
-                            .tag(Optional(month.yearAndMonth))
+            TabView(selection: $selectedMonth) {
+                ForEach(months) { month in
+                    LazyVGrid(columns: rows, spacing: .small) {
+                        ForEach(0..<month.daysOffset, id: \.self) { _ in
+                            Color.clear
                         }
-                        .frame(height: (proxy.size.width / 7) * 5 + .small * 2)
+
+                        ForEach(month.getDays(), id: \.self) { item in
+                            let day = item.date.formatted(.dateTime.day())
+                            let isSelected = item.date.isSameDay(as: selectedDate)
+                            let isToday = item.date.isSameDay(as: .now)
+
+                            CalendarPickerItemView(day: day, isToday: isToday, isSelected: isSelected)
+                                .onTapGesture { selectedDate = item.date }
+                                .disabled(!item.isSelectable)
+                        }
                     }
+                    .tag(Optional(month.yearAndMonth))
+                    .frame(maxHeight: .infinity, alignment: .top)
                 }
-                .tabViewStyle(.page(indexDisplayMode: .never))
             }
+            .tabViewStyle(.page(indexDisplayMode: .never))
+            .animation(nil)
         }
         .onChange(of: selectedDate) { selectedMonth = $0.toYearAndMonth() }
         .onAppear { selectedMonth = selectedDate.toYearAndMonth() }
     }
-
-    private func headerGridRow() -> some View {
-        GridRow {
-            ForEach(Locale.Weekday.allCases) {
-                Text($0.rawValue, style: .footnote)
-                    .textCase(.uppercase)
-                    .fontWeight(.semibold)
-                    .foregroundStyle(.grayShade1)
-                    .frame(maxWidth: .infinity)
-            }
-        }
-    }
-
-    private func getDays(for month: CalendarPickerMonth) -> [[DayPickerItem]] {
-        var days: [DayPickerItem] = month.dayPickerItems
-        let yearAndMonth = month.yearAndMonth
-        let firstDayWeekday = days.first!.date.startOfMonth.weekday
-        let weekdayShift = firstDayWeekday - 2
-        let emptyDaysCount = weekdayShift < 0 ? weekdayShift + 7 : weekdayShift
-
-        if let firstDay = days.first?.date.day, firstDay > 1 {
-            let nonSelectableDays: [DayPickerItem] = (1..<firstDay).compactMap {
-                let components = DateComponents(year: yearAndMonth.year, month: yearAndMonth.month, day: $0)
-                guard let date = Calendar.current.date(from: components) else { return nil }
-                return DayPickerItem(date: date, isSelectable: false)
-            }
-            days.insert(contentsOf: nonSelectableDays, at: 0)
-        }
-
-        let emptyDays = (0..<emptyDaysCount).map { _ in DayPickerItem(date: .now, isVisible: false) }
-
-        days.insert(contentsOf: emptyDays, at: 0)
-        return days.chunked(into: 7)
-    }
-
-    private var numberOfDaysInCurrentMonth: Int {
-        Calendar.current.range(of: .day, in: .month, for: selectedDate)!.count
-    }
 }
 
 #Preview {
-    CalendarPicker(items: [], selectedDate: .constant(.now))
+    let startDate: Date = .now
+    let endDate = Calendar.current.date(byAdding: .month, value: 1, to: startDate)!
+    var dates: [Date] = []
+    var date = startDate
+    while date < endDate {
+        dates.append(date)
+        date = Calendar.current.date(byAdding: .day, value: 1, to: date)!
+    }
+    let items = dates.map { DayPickerItem(date: $0, isSelectable: true) }
+    return CalendarPicker(items: items, selectedDate: .constant(.now))
 }
 
 extension Locale.Weekday: Identifiable, CaseIterable {
@@ -148,20 +160,5 @@ extension Locale.Weekday: Identifiable, CaseIterable {
 
     public static var allCases: [Locale.Weekday] {
         [.monday, .tuesday, .wednesday, .thursday, .friday, .saturday, .sunday]
-    }
-}
-
-extension Date {
-    var startOfMonth: Date {
-        let components = Calendar.current.dateComponents([.year, .month], from: self)
-        return Calendar.current.date(from: components)!
-    }
-}
-
-extension Array {
-    func chunked(into size: Int) -> [[Element]] {
-        return stride(from: 0, to: count, by: size).map {
-            Array(self[$0..<Swift.min($0 + size, count)])
-        }
     }
 }
