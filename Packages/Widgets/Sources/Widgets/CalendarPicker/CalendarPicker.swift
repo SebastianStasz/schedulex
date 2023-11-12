@@ -7,65 +7,6 @@
 
 import SwiftUI
 
-struct YearAndMonth: Hashable {
-    let year: Int
-    let month: Int
-
-    var date: Date {
-        let components = DateComponents(year: year, month: month)
-        return Calendar.current.date(from: components)!
-    }
-
-    var numberOfDaysInMonth: Int {
-        Calendar.current.range(of: .day, in: .month, for: date)!.count
-    }
-}
-
-extension Date {
-    func toYearAndMonth() -> YearAndMonth {
-        YearAndMonth(year: year, month: month)
-    }
-}
-
-struct CalendarPickerMonth: Identifiable {
-    let yearAndMonth: YearAndMonth
-    let dayPickerItems: [DayPickerItem]
-
-    var id: Date {
-        yearAndMonth.date
-    }
-
-    var daysOffset: Int {
-        let weekdayShift = yearAndMonth.date.weekday - 2
-        return weekdayShift < 0 ? weekdayShift + 7 : weekdayShift
-    }
-
-    func getDays() -> [DayPickerItem] {
-        var days: [DayPickerItem] = dayPickerItems
-
-        if let firstDay = days.first?.date.day, firstDay > 1 {
-            let nonSelectableDays: [DayPickerItem] = (1..<firstDay).compactMap {
-                makeDayPickerItem(for: $0)
-            }
-            days.insert(contentsOf: nonSelectableDays, at: 0)
-        }
-        if let lastDay = days.last, lastDay.date.day < yearAndMonth.numberOfDaysInMonth {
-            let firstMissingDay = lastDay.date.day + 1
-            let nonSelectableDays: [DayPickerItem] = (firstMissingDay..<yearAndMonth.numberOfDaysInMonth).compactMap {
-                makeDayPickerItem(for: $0)
-            }
-            days.append(contentsOf: nonSelectableDays)
-        }
-        return days
-    }
-
-    private func makeDayPickerItem(for day: Int) -> DayPickerItem? {
-        let components = DateComponents(year: yearAndMonth.year, month: yearAndMonth.month, day: day)
-        guard let date = Calendar.current.date(from: components) else { return nil }
-        return DayPickerItem(date: date, isSelectable: false)
-    }
-}
-
 public struct CalendarPicker: View {
     private let items: [DayPickerItem]
     @State private var selectedMonth: YearAndMonth?
@@ -151,14 +92,4 @@ public struct CalendarPicker: View {
     }
     let items = dates.map { DayPickerItem(date: $0, isSelectable: true) }
     return CalendarPicker(items: items, selectedDate: .constant(.now))
-}
-
-extension Locale.Weekday: Identifiable, CaseIterable {
-    public var id: String {
-        rawValue
-    }
-
-    public static var allCases: [Locale.Weekday] {
-        [.monday, .tuesday, .wednesday, .thursday, .friday, .saturday, .sunday]
-    }
 }
