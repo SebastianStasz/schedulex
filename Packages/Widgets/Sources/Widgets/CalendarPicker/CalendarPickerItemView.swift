@@ -13,16 +13,35 @@ struct CalendarPickerItemView: View {
     let day: String
     let isToday: Bool
     let isSelected: Bool
+    let circleColors: [Color]
 
     var body: some View {
-        Text(day, style: .bodyMedium)
-            .foregroundStyle(dayNumberColor)
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(backgroundColor)
-            .overlay(border)
-            .clipShape(RoundedRectangle(cornerRadius: 12))
-            .aspectRatio(1, contentMode: .fit)
-            .contentShape(Rectangle())
+        VStack(spacing: .micro) {
+            SwiftUI.Text(day)
+                .font(.system(size: 18, weight: .medium))
+                .foregroundStyle(dayNumberColor)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(backgroundColor)
+                .overlay(border)
+                .clipShape(RoundedRectangle(cornerRadius: 12))
+                .aspectRatio(1, contentMode: .fit)
+                .contentShape(Rectangle())
+
+            HStack(spacing: 5) {
+                if circleColors.isEmpty {
+                    Circle()
+                        .frame(width: 5, height: 5)
+                        .opacity(0)
+                } else {
+                    ForEach(circleColors.prefix(4), id: \.self) { color in
+                        Circle()
+                            .fill(color)
+                            .frame(width: 5, height: 5)
+                    }
+                }
+            }
+        }
+        .frame(maxHeight: .infinity ,alignment: .top)
     }
 
     private var border: some View {
@@ -44,12 +63,12 @@ struct CalendarPickerItemView: View {
 }
 
 #Preview {
-    VStack(spacing: .large) {
-        CalendarPickerItemView(day: "1", isToday: true, isSelected: true)
-        CalendarPickerItemView(day: "1", isToday: false, isSelected: true)
-        CalendarPickerItemView(day: "1", isToday: true, isSelected: false)
-        CalendarPickerItemView(day: "1", isToday: false, isSelected: false)
-        CalendarPickerItemView(day: "1", isToday: false, isSelected: false)
+    VStack(spacing: 0) {
+        CalendarPickerItemView(day: "12", isToday: true, isSelected: true, circleColors: [.blue])
+        CalendarPickerItemView(day: "12", isToday: false, isSelected: true, circleColors: [])
+        CalendarPickerItemView(day: "12", isToday: true, isSelected: false, circleColors: [])
+        CalendarPickerItemView(day: "12", isToday: false, isSelected: false, circleColors: [.blue])
+        CalendarPickerItemView(day: "12", isToday: false, isSelected: false, circleColors: [])
             .disabled(true)
     }
     .frame(width: 40)

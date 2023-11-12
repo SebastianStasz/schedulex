@@ -91,13 +91,20 @@ struct DashboardView: View {
 
     @ViewBuilder
     private var datePicker: some View {
-        if let startDate = viewModel.startDate, let endDate = viewModel.endDate {
-            DatePicker(L10n.selectedDate, selection: $viewModel.selectedDate, in: startDate...endDate, displayedComponents: .date)
-                .datePickerStyle(.graphical)
-                .padding(.horizontal, .medium)
-                .presentationDetents([.height(380)])
+        if let items = viewModel.dayPickerItems {
+            CalendarPicker(items: items, selectedDate: $viewModel.selectedDate)
+                .padding(.top, .large)
+                .presentationDetents([.height(480)])
                 .presentationDragIndicator(.visible)
-                .tint(Color.accentPrimary)
+                .ignoresSafeArea(edges: .bottom)
+
+//        if let startDate = viewModel.startDate, let endDate = viewModel.endDate {
+//            DatePicker(L10n.selectedDate, selection: $viewModel.selectedDate, in: startDate...endDate, displayedComponents: .date)
+//                .datePickerStyle(.graphical)
+//                .padding(.horizontal, .medium)
+//                .presentationDetents([.height(380)])
+//                .presentationDragIndicator(.visible)
+//                .tint(Color.accentPrimary)
         }
     }
 
