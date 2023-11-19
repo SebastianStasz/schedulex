@@ -5,6 +5,7 @@
 //  Created by Sebastian Staszczyk on 21/09/2023.
 //
 
+import Resources
 import SwiftUI
 
 private struct TextButtonStyle: ButtonStyle {

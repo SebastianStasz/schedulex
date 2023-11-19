@@ -94,7 +94,7 @@ struct DashboardView: View {
         if let items = viewModel.dayPickerItems {
             CalendarPicker(items: items, selectedDate: $viewModel.selectedDate)
                 .padding(.top, .large)
-                .presentationDetents([.height(480)])
+                .presentationDetents([.height(380)])
                 .presentationDragIndicator(.visible)
                 .ignoresSafeArea(edges: .bottom)
 

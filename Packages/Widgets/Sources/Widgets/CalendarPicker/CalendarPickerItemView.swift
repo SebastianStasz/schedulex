@@ -16,32 +16,26 @@ struct CalendarPickerItemView: View {
     let circleColors: [Color]
 
     var body: some View {
-        VStack(spacing: .micro) {
+        VStack(spacing: 1) {
             SwiftUI.Text(day)
-                .font(.system(size: 18, weight: .medium))
+                .font(.system(size: 18, weight: .regular))
                 .foregroundStyle(dayNumberColor)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(backgroundColor)
-                .overlay(border)
-                .clipShape(RoundedRectangle(cornerRadius: 12))
-                .aspectRatio(1, contentMode: .fit)
-                .contentShape(Rectangle())
+                .padding(.top, circleColors.isEmpty ? 0 : .micro)
 
             HStack(spacing: 5) {
-                if circleColors.isEmpty {
+                ForEach(circleColors.prefix(4), id: \.self) { color in
                     Circle()
-                        .frame(width: 5, height: 5)
-                        .opacity(0)
-                } else {
-                    ForEach(circleColors.prefix(4), id: \.self) { color in
-                        Circle()
-                            .fill(color)
-                            .frame(width: 5, height: 5)
-                    }
+                        .fill(color)
+                        .frame(width: .micro, height: .micro)
                 }
             }
         }
-        .frame(maxHeight: .infinity ,alignment: .top)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(backgroundColor)
+        .overlay(border)
+        .clipShape(RoundedRectangle(cornerRadius: 12))
+        .aspectRatio(1, contentMode: .fit)
+        .contentShape(Rectangle())
     }
 
     private var border: some View {
@@ -52,7 +46,7 @@ struct CalendarPickerItemView: View {
 
     private var dayNumberColor: Color {
         guard isEnabled else {
-            return .grayShade1
+            return .grayShade1.opacity(0.5)
         }
         return isSelected ? .white : .textPrimary
     }
@@ -63,11 +57,12 @@ struct CalendarPickerItemView: View {
 }
 
 #Preview {
-    VStack(spacing: 0) {
+    VStack(spacing: .large) {
         CalendarPickerItemView(day: "12", isToday: true, isSelected: true, circleColors: [.blue])
-        CalendarPickerItemView(day: "12", isToday: false, isSelected: true, circleColors: [])
+        CalendarPickerItemView(day: "12", isToday: false, isSelected: true, circleColors: [.blue])
+        CalendarPickerItemView(day: "12", isToday: true, isSelected: false, circleColors: [.blue])
         CalendarPickerItemView(day: "12", isToday: true, isSelected: false, circleColors: [])
-        CalendarPickerItemView(day: "12", isToday: false, isSelected: false, circleColors: [.blue])
+        CalendarPickerItemView(day: "12", isToday: false, isSelected: false, circleColors: [])
         CalendarPickerItemView(day: "12", isToday: false, isSelected: false, circleColors: [])
             .disabled(true)
     }

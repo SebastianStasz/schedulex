@@ -28,7 +28,7 @@ public struct CalendarPicker: View {
     private let months: [CalendarPickerMonth]
 
     private var rows: [GridItem] {
-        Array(repeating: GridItem(spacing: .micro), count: 7)
+        Array(repeating: GridItem(spacing: 6), count: 7)
     }
 
     public var body: some View {
@@ -43,7 +43,7 @@ public struct CalendarPicker: View {
             }
             .padding(.horizontal, .large)
 
-            VStack(spacing: .medium) {
+            VStack(spacing: .small) {
                 LazyVGrid(columns: rows) {
                     ForEach(Locale.Weekday.allCases) {
                         Text($0.rawValue, style: .footnote)
@@ -57,7 +57,7 @@ public struct CalendarPicker: View {
 
                 TabView(selection: $selectedMonth) {
                     ForEach(months) { month in
-                        LazyVGrid(columns: rows, spacing: .medium) {
+                        LazyVGrid(columns: rows, spacing: .micro) {
                             ForEach(0..<month.daysOffset, id: \.self) { _ in
                                 Color.clear
                             }
