@@ -14,13 +14,13 @@ public struct DayPickerView: View {
     @State private var listId = 0
 
     private let items: [DayPickerItem]
-    private let isDatePickerPresented: Bool
+    @Binding private var isDatePickerPresented: Bool
     @Binding private var selectedDate: Date
     @Binding private var shouldScrollToDay: Bool
 
-    public init(items: [DayPickerItem], isDatePickerPresented: Bool = false, shouldScrollToDay: Binding<Bool>, selection: Binding<Date>) {
+    public init(items: [DayPickerItem], isDatePickerPresented: Binding<Bool>, shouldScrollToDay: Binding<Bool>, selection: Binding<Date>) {
         self.items = items
-        self.isDatePickerPresented = isDatePickerPresented
+        _isDatePickerPresented = isDatePickerPresented
         _shouldScrollToDay = shouldScrollToDay
         _selectedDate = selection
     }

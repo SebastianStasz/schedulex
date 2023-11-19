@@ -26,7 +26,7 @@ struct DashboardView: View {
         VStack(spacing: 0) {
             if let items = viewModel.dayPickerItems {
                 LazyVStack {
-                    DayPickerView(items: items, isDatePickerPresented: isDatePickerPresented, shouldScrollToDay: $viewModel.shouldScrollToDay, selection: $viewModel.selectedDate)
+                    DayPickerView(items: items, isDatePickerPresented: $isDatePickerPresented, shouldScrollToDay: $viewModel.shouldScrollToDay, selection: $viewModel.selectedDate)
                 }
                 .padding(.top, .xlarge)
                 .padding(.bottom, .medium)
@@ -91,13 +91,20 @@ struct DashboardView: View {
 
     @ViewBuilder
     private var datePicker: some View {
-        if let startDate = viewModel.startDate, let endDate = viewModel.endDate {
-            DatePicker(L10n.selectedDate, selection: $viewModel.selectedDate, in: startDate...endDate, displayedComponents: .date)
-                .datePickerStyle(.graphical)
-                .padding(.horizontal, .medium)
+        if let items = viewModel.dayPickerItems {
+            CalendarPicker(items: items, selectedDate: $viewModel.selectedDate)
+                .padding(.top, .large)
                 .presentationDetents([.height(380)])
                 .presentationDragIndicator(.visible)
-                .tint(Color.accentPrimary)
+                .ignoresSafeArea(edges: .bottom)
+
+//        if let startDate = viewModel.startDate, let endDate = viewModel.endDate {
+//            DatePicker(L10n.selectedDate, selection: $viewModel.selectedDate, in: startDate...endDate, displayedComponents: .date)
+//                .datePickerStyle(.graphical)
+//                .padding(.horizontal, .medium)
+//                .presentationDetents([.height(380)])
+//                .presentationDragIndicator(.visible)
+//                .tint(Color.accentPrimary)
         }
     }
 
