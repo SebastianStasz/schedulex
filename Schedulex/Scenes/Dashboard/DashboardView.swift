@@ -14,6 +14,7 @@ import Widgets
 struct DashboardView: View {
     @AppStorage("subscribedFacultyGroups") private var subscribedGroups: [FacultyGroup] = []
     @AppStorage("hiddenFacultyGroupsClasses") private var allHiddenClasses: [EditableFacultyGroupClass] = []
+    @AppStorage("showDashboardSwipeTip") private var showDashboardSwipeTip = true
     @StateObject private var viewModel = DashboardViewModel()
     @EnvironmentObject private var service: FirestoreService
     @Environment(\.scenePhase) private var scenePhase
@@ -21,6 +22,7 @@ struct DashboardView: View {
     @Binding var isFacultiesListPresented: Bool
     @State private var isDatePickerPresented = false
     @State private var isSchedulesSheetPresented = false
+    @State private var swipeCount = 0
 
     var body: some View {
         VStack(spacing: 0) {
@@ -36,6 +38,11 @@ struct DashboardView: View {
 
                 ScrollView {
                     VStack(spacing: .medium) {
+                        if showDashboardSwipeTip {
+                            swipeTip
+                                .transition(.scale)
+                        }
+
                         ForEach(viewModel.selectedDateEvents, id: \.self) {
                             EventCardView(event: $0)
                         }
@@ -70,11 +77,13 @@ struct DashboardView: View {
             .onEnded { gesture in
                 if gesture.translation.width >= 30 {
                     if let date = viewModel.startDate, viewModel.selectedDate > date {
+                        onSwipe()
                         viewModel.shouldScrollToDay = true
                         viewModel.selectedDate = Calendar.current.date(byAdding: .day, value: -1, to: viewModel.selectedDate)!
                     }
                 } else if gesture.translation.width <= -30 {
                     if let date = viewModel.endDate, viewModel.selectedDate < date {
+                        onSwipe()
                         viewModel.shouldScrollToDay = true
                         viewModel.selectedDate = Calendar.current.date(byAdding: .day, value: 1, to: viewModel.selectedDate)!
                     }
@@ -106,6 +115,16 @@ struct DashboardView: View {
 //                .presentationDragIndicator(.visible)
 //                .tint(Color.accentPrimary)
         }
+    }
+
+    private var swipeTip: some View {
+        VStack(spacing: .small) {
+            Text(L10n.swipeTipTitle, style: .bodyMedium)
+            Text(L10n.swipeTipDescription, style: .footnote)
+                .foregroundStyle(.grayShade1)
+        }
+        .padding(.vertical, .xlarge)
+        .padding(.bottom, .small)
     }
 
     @ViewBuilder
@@ -148,6 +167,16 @@ struct DashboardView: View {
     private func showDatePicker() {
         guard !viewModel.isLoading && !viewModel.isEmpty else { return }
         isDatePickerPresented = true
+    }
+
+    private func onSwipe() {
+        swipeCount += 1
+        guard showDashboardSwipeTip, swipeCount > 3 else { return }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            withAnimation {
+                showDashboardSwipeTip = false
+            }
+        }
     }
 
     private func onSceneChange(_ scene: ScenePhase) {
