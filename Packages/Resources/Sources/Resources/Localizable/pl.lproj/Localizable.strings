@@ -8,6 +8,8 @@
 // dashboard
 "event_finished" = "Zakończone";
 "event_finishing_in" = "Koniec";
+"swipe_tip_title" = "⬅️  Swipe w lewo lub w prawo  ➡️";
+"swipe_tip_description" = "Zmieniaj dni w kalendarzu przesunięciem palca!";
 
 // main
 "add_group" = "Dodaj grupę";

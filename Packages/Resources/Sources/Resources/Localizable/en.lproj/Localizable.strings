@@ -8,6 +8,8 @@
 // dashboard
 "event_finished" = "Ended";
 "event_finishing_in" = "Ends";
+"swipe_tip_title" = "⬅️  Swipe right or left  ➡️";
+"swipe_tip_description" = "Change days with a swipe of your finger!";
 
 // main
 "add_group" = "Add group";

@@ -92,6 +92,10 @@ public enum L10n {
   public static let startSecondStepNoLanguages = L10n.tr("Localizable", "start_second_step_no_languages", fallback: "No languages selected")
   /// Select languages
   public static let startSecondStepTitle = L10n.tr("Localizable", "start_second_step_title", fallback: "Select languages")
+  /// Change days with a swipe of your finger!
+  public static let swipeTipDescription = L10n.tr("Localizable", "swipe_tip_description", fallback: "Change days with a swipe of your finger!")
+  /// ⬅️  Swipe right or left  ➡️
+  public static let swipeTipTitle = L10n.tr("Localizable", "swipe_tip_title", fallback: "⬅️  Swipe right or left  ➡️")
   /// Today
   public static let today = L10n.tr("Localizable", "today", fallback: "Today")
   /// Unfollow
