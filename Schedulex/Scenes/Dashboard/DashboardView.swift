@@ -114,8 +114,15 @@ struct DashboardView: View {
             ProgressView()
         } else if !viewModel.isEmpty && viewModel.selectedDateEvents.isEmpty {
             let isWeekend = NSCalendar.current.isDateInWeekend(viewModel.selectedDate)
+            HStack(spacing: .micro) {
             Text(isWeekend ? L10n.noEventsWeekendMessage : L10n.noEventsMessage, style: .body)
                 .foregroundStyle(.grayShade1)
+
+                if isWeekend {
+                    SwiftUI.Text("🍻")
+                        .font(.title)
+                }
+            }
         }
     }
 
