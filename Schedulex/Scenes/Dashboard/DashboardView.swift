@@ -15,6 +15,7 @@ struct DashboardView: View {
     @AppStorage("subscribedFacultyGroups") private var subscribedGroups: [FacultyGroup] = []
     @AppStorage("hiddenFacultyGroupsClasses") private var allHiddenClasses: [EditableFacultyGroupClass] = []
     @AppStorage("showDashboardSwipeTip") private var showDashboardSwipeTip = true
+    @AppStorage("hiddenInfoCards") private var hiddenInfoCards: [InfoCard] = []
     @StateObject private var viewModel = DashboardViewModel()
     @EnvironmentObject private var service: FirestoreService
     @Environment(\.scenePhase) private var scenePhase
@@ -26,42 +27,30 @@ struct DashboardView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            if let items = viewModel.dayPickerItems {
-                LazyVStack {
-                    DayPickerView(items: items, isDatePickerPresented: $isDatePickerPresented, shouldScrollToDay: $viewModel.shouldScrollToDay, selection: $viewModel.selectedDate)
-                }
-                .padding(.top, .xlarge)
-                .padding(.bottom, .medium)
-                .background(.backgroundSecondary)
-
-                separator()
-
-                ScrollView {
-                    VStack(spacing: .medium) {
-                        if showDashboardSwipeTip {
-                            swipeTip
-                                .transition(.scale)
-                        }
-
-                        ForEach(viewModel.selectedDateEvents, id: \.self) {
-                            EventCardView(event: $0)
-                        }
-                    }
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .padding(.vertical, .large)
-                    .padding(.horizontal, .medium)
-                    .background(.backgroundPrimary)
-                }
-                .gesture(dragGesture)
-            } else {
-                Rectangle()
-                    .fill(Color.backgroundSecondary)
-                    .frame(height: .medium)
-                separator()
-                Spacer()
+            LazyVStack {
+                DayPickerView(items: viewModel.dayPickerItems ?? [], isDatePickerPresented: $isDatePickerPresented, shouldScrollToDay: $viewModel.shouldScrollToDay, selection: $viewModel.selectedDate)
             }
+            .padding(.top, .xlarge)
+            .padding(.bottom, .medium)
+            .background(.backgroundSecondary)
+
+            separator()
+
+            ScrollView {
+                VStack(spacing: .medium) {
+                    InfoCardsSection()
+
+                    ForEach(viewModel.isLoading ? [] : viewModel.selectedDateEvents, id: \.self) {
+                        EventCardView(event: $0)
+                    }
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .padding(.medium)
+                .background(.backgroundPrimary)
+            }
+            .gesture(dragGesture)
+            .overlay { loadingIndicatorOrEmptyState }
         }
-        .overlay { loadingIndicatorOrEmptyState }
         .toolbar { toolbarContent }
         .doubleNavigationTitle(title: viewModel.title, subtitle: viewModel.subtitle)
         .sheet(isPresented: $isSchedulesSheetPresented) { ObservedFacultyGroupsView(service: service) }
@@ -70,6 +59,7 @@ struct DashboardView: View {
         .onChange(of: allHiddenClasses) { _ in fetchEvents() }
         .onChange(of: scenePhase) { onSceneChange($0) }
         .task { fetchEvents() }
+        .onAppear { hiddenInfoCards = [] ; showDashboardSwipeTip = true }
     }
 
     private var dragGesture: _EndedGesture<DragGesture> {
@@ -106,25 +96,7 @@ struct DashboardView: View {
                 .presentationDetents([.height(380)])
                 .presentationDragIndicator(.visible)
                 .ignoresSafeArea(edges: .bottom)
-
-//        if let startDate = viewModel.startDate, let endDate = viewModel.endDate {
-//            DatePicker(L10n.selectedDate, selection: $viewModel.selectedDate, in: startDate...endDate, displayedComponents: .date)
-//                .datePickerStyle(.graphical)
-//                .padding(.horizontal, .medium)
-//                .presentationDetents([.height(380)])
-//                .presentationDragIndicator(.visible)
-//                .tint(Color.accentPrimary)
         }
-    }
-
-    private var swipeTip: some View {
-        VStack(spacing: .small) {
-            Text(L10n.swipeTipTitle, style: .bodyMedium)
-            Text(L10n.swipeTipDescription, style: .footnote)
-                .foregroundStyle(.grayShade1)
-        }
-        .padding(.vertical, .xlarge)
-        .padding(.bottom, .small)
     }
 
     @ViewBuilder
@@ -134,8 +106,8 @@ struct DashboardView: View {
         } else if !viewModel.isEmpty && viewModel.selectedDateEvents.isEmpty {
             let isWeekend = NSCalendar.current.isDateInWeekend(viewModel.selectedDate)
             HStack(spacing: .micro) {
-            Text(isWeekend ? L10n.noEventsWeekendMessage : L10n.noEventsMessage, style: .body)
-                .foregroundStyle(.grayShade1)
+                Text(isWeekend ? L10n.noEventsWeekendMessage : L10n.noEventsMessage, style: .body)
+                    .foregroundStyle(.grayShade1)
 
                 if isWeekend {
                     SwiftUI.Text("🍻")

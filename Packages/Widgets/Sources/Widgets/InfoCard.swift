@@ -7,8 +7,12 @@
 
 import Foundation
 
-public enum InfoCard {
+public enum InfoCard: String, Identifiable, Codable, CaseIterable {
     case enableNotifications
+
+    public var id: String {
+        rawValue
+    }
 
     var title: String {
         switch self {

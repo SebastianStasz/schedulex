@@ -9,9 +9,11 @@ import SwiftUI
 
 public struct InfoCardView: View {
     private let card: InfoCard
+    private let onClose: () -> Void
 
-    public init(card: InfoCard) {
+    public init(card: InfoCard, onClose: @escaping () -> Void) {
         self.card = card
+        self.onClose = onClose
     }
 
     public var body: some View {
@@ -30,12 +32,15 @@ public struct InfoCardView: View {
                             .foregroundColor(.textDark)
                             .frame(maxWidth: .infinity, alignment: .leading)
 
-                        Image.icon(.closeButton)
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 17, height: 17, alignment: .top)
-                            .fontWeight(.light)
-                            .foregroundColor(.textSecondary)
+                        Button(action: onClose) {
+                            Image.icon(.closeButton)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 14, height: 14, alignment: .top)
+                                .fontWeight(.light)
+                                .foregroundColor(.textSecondary)
+                        }
+                        .buttonStyle(.plain)
                     }
 
                     Text(card.message, style: .footnote)
@@ -60,5 +65,5 @@ public struct InfoCardView: View {
 }
 
 #Preview {
-    InfoCardView(card: .enableNotifications)
+    InfoCardView(card: .enableNotifications, onClose: {})
 }
