@@ -10,6 +10,7 @@ import SwiftUI
 private struct DoubleNavigationTitle: ViewModifier {
     let title: String
     let subtitle: String
+    let showSettings: () -> Void
 
     func body(content: Content) -> some View {
         VStack(spacing: 0) {
@@ -25,6 +26,12 @@ private struct DoubleNavigationTitle: ViewModifier {
                     Text(title, style: .titleSmall)
                         .foregroundStyle(.textPrimary)
                 }
+                .frame(maxWidth: .infinity, alignment: .leading)
+
+                Button("Settings", systemImage: "gearshape", action: showSettings)
+                    .labelStyle(.iconOnly)
+                    .font(.title2)
+                    .foregroundStyle(.textPrimary)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.horizontal, .medium)
@@ -41,14 +48,15 @@ private struct DoubleNavigationTitle: ViewModifier {
 }
 
 public extension View {
-    func doubleNavigationTitle(title: String, subtitle: String) -> some View {
-        modifier(DoubleNavigationTitle(title: title, subtitle: subtitle))
+    func doubleNavigationTitle(title: String, subtitle: String, showSettings: @escaping () -> Void) -> some View {
+        modifier(DoubleNavigationTitle(title: title, subtitle: subtitle, showSettings: showSettings))
     }
 }
 
 #Preview {
     Text("Content", style: .body)
-        .doubleNavigationTitle(title: "Title", subtitle: "Note")
+        .frame(maxHeight: .infinity)
+        .doubleNavigationTitle(title: "30 listopada 2023", subtitle: "Dzisiaj", showSettings: {})
 }
 
 private extension UIDevice {

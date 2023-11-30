@@ -22,7 +22,7 @@ struct SchedulexApp: App {
                 if subscribedGroups.isEmpty {
                     IntroductionView()
                 } else {
-                    DashboardView(isFacultiesListPresented: $isFacultiesListPresented)
+                    DashboardView()
                 }
             }
             .sheet(isPresented: $isFacultiesListPresented) { FacultiesListView(service: service) }

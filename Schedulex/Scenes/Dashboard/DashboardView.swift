@@ -21,46 +21,53 @@ struct DashboardView: View {
     @EnvironmentObject private var service: FirestoreService
     @Environment(\.scenePhase) private var scenePhase
 
-    @Binding var isFacultiesListPresented: Bool
+    @State private var areSettingsPresented = false
+    @State private var areMyGroupsPresented = false
     @State private var isDatePickerPresented = false
-    @State private var isSchedulesSheetPresented = false
     @State private var swipeCount = 0
 
     var body: some View {
-        VStack(spacing: 0) {
-            LazyVStack {
-                DayPickerView(items: viewModel.dayPickerItems ?? [], isDatePickerPresented: $isDatePickerPresented, shouldScrollToDay: $viewModel.shouldScrollToDay, selection: $viewModel.selectedDate)
-            }
-            .padding(.top, .xlarge)
-            .padding(.bottom, .medium)
-            .background(.backgroundSecondary)
-
-            separator()
-
-            ScrollView {
-                VStack(spacing: .medium) {
-                    InfoCardsSection()
-                        .environmentObject(notificationsManager)
-
-                    ForEach(viewModel.isLoading ? [] : viewModel.selectedDateEvents, id: \.self) {
-                        EventCardView(event: $0)
-                    }
+        NavigationStack {
+            VStack(spacing: 0) {
+                LazyVStack {
+                    DayPickerView(items: viewModel.dayPickerItems ?? [], isDatePickerPresented: $isDatePickerPresented, shouldScrollToDay: $viewModel.shouldScrollToDay, selection: $viewModel.selectedDate)
                 }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .padding(.medium)
-                .background(.backgroundPrimary)
+                .padding(.top, .xlarge)
+                .padding(.bottom, .medium)
+                .background(.backgroundSecondary)
+
+                separator()
+
+                ScrollView {
+                    VStack(spacing: .medium) {
+                        InfoCardsSection()
+                            .environmentObject(notificationsManager)
+
+                        ForEach(viewModel.isLoading ? [] : viewModel.selectedDateEvents, id: \.self) {
+                            EventCardView(event: $0)
+                        }
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .padding(.medium)
+                    .background(.backgroundPrimary)
+                }
+                .gesture(dragGesture)
+                .overlay { loadingIndicatorOrEmptyState }
             }
-            .gesture(dragGesture)
-            .overlay { loadingIndicatorOrEmptyState }
+            .toolbar { toolbarContent }
+            .doubleNavigationTitle(title: viewModel.title, subtitle: viewModel.subtitle, showSettings: {
+                areSettingsPresented = true
+            })
+            .navigationTitle("‎‎‎‏‏‎")
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationDestination(isPresented: $areSettingsPresented) { SettingsView() }
+            .navigationDestination(isPresented: $areMyGroupsPresented) { ObservedFacultyGroupsView(service: service) }
         }
-        .toolbar { toolbarContent }
-        .doubleNavigationTitle(title: viewModel.title, subtitle: viewModel.subtitle)
-        .sheet(isPresented: $isSchedulesSheetPresented) { ObservedFacultyGroupsView(service: service) }
         .sheet(isPresented: $isDatePickerPresented) { datePicker }
         .onChange(of: subscribedGroups) { _ in fetchEvents() }
         .onChange(of: allHiddenClasses) { _ in fetchEvents() }
         .onChange(of: scenePhase) { onSceneChange($0) }
-        .task { 
+        .task {
             fetchEvents()
             await notificationsManager.updateNotificationsPermission()
         }
@@ -124,7 +131,7 @@ struct DashboardView: View {
     private var toolbarContent: some ToolbarContent {
         ToolbarItem(placement: .bottomBar) {
             HStack(spacing: 0) {
-                TextButton(L10n.myGroups) { isSchedulesSheetPresented = true }
+                TextButton(L10n.myGroups) { areMyGroupsPresented = true }
                     .frame(maxWidth: .infinity, alignment: .leading)
                 TextButton(L10n.today, action: selectTodaysDate)
                     .frame(maxWidth: .infinity)
@@ -165,8 +172,6 @@ struct DashboardView: View {
     }
 }
 
-struct DashboardView_Previews: PreviewProvider {
-    static var previews: some View {
-        DashboardView(isFacultiesListPresented: .constant(false))
-    }
+#Preview {
+    DashboardView()
 }
