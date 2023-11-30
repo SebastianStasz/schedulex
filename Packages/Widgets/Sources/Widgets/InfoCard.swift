@@ -27,4 +27,11 @@ public enum InfoCard: String, Identifiable, Codable, CaseIterable {
             return "Otrzymuj powiadomienia 5 minut przed rozpoczęciem zajęć."
         }
     }
+
+    var buttonTitle: String {
+        switch self {
+        case .enableNotifications:
+            return "Włącz powiadomienia"
+        }
+    }
 }

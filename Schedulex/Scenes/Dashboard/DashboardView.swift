@@ -17,6 +17,7 @@ struct DashboardView: View {
     @AppStorage("showDashboardSwipeTip") private var showDashboardSwipeTip = true
     @AppStorage("hiddenInfoCards") private var hiddenInfoCards: [InfoCard] = []
     @StateObject private var viewModel = DashboardViewModel()
+    @StateObject private var notificationsManager = NotificationsManager()
     @EnvironmentObject private var service: FirestoreService
     @Environment(\.scenePhase) private var scenePhase
 
@@ -39,6 +40,7 @@ struct DashboardView: View {
             ScrollView {
                 VStack(spacing: .medium) {
                     InfoCardsSection()
+                        .environmentObject(notificationsManager)
 
                     ForEach(viewModel.isLoading ? [] : viewModel.selectedDateEvents, id: \.self) {
                         EventCardView(event: $0)
@@ -58,8 +60,10 @@ struct DashboardView: View {
         .onChange(of: subscribedGroups) { _ in fetchEvents() }
         .onChange(of: allHiddenClasses) { _ in fetchEvents() }
         .onChange(of: scenePhase) { onSceneChange($0) }
-        .task { fetchEvents() }
-        .onAppear { hiddenInfoCards = [] ; showDashboardSwipeTip = true }
+        .task { 
+            fetchEvents()
+            await notificationsManager.updateNotificationsPermission()
+        }
     }
 
     private var dragGesture: _EndedGesture<DragGesture> {

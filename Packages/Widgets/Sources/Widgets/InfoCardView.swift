@@ -9,10 +9,12 @@ import SwiftUI
 
 public struct InfoCardView: View {
     private let card: InfoCard
+    private let onConfirm: () -> Void
     private let onClose: () -> Void
 
-    public init(card: InfoCard, onClose: @escaping () -> Void) {
+    public init(card: InfoCard, onConfirm: @escaping () -> Void, onClose: @escaping () -> Void) {
         self.card = card
+        self.onConfirm = onConfirm
         self.onClose = onClose
     }
 
@@ -54,9 +56,12 @@ public struct InfoCardView: View {
                 .opacity(0.1)
                 .padding(.vertical, .large)
 
-            Text("Włącz powiadomienia", style: .body)
-                .foregroundColor(.textDark)
-                .frame(maxWidth: .infinity)
+            Button(action: onConfirm) {
+                Text(card.buttonTitle, style: .body)
+                    .foregroundColor(.textDark)
+                    .frame(maxWidth: .infinity)
+            }
+            .buttonStyle(.plain)
         }
         .padding(.large)
         .background(Color.yellowPrimary)
@@ -65,5 +70,5 @@ public struct InfoCardView: View {
 }
 
 #Preview {
-    InfoCardView(card: .enableNotifications, onClose: {})
+    InfoCardView(card: .enableNotifications, onConfirm: {}, onClose: {})
 }
