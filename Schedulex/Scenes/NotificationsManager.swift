@@ -26,4 +26,15 @@ final class NotificationsManager: ObservableObject {
         try await notificationCenter.requestAuthorization(options: [.sound, .alert])
         await updateNotificationsPermission()
     }
+
+    func setNotifications(_ notifications: [LocalNotification]) async {
+        notificationCenter.removeAllPendingNotificationRequests()
+        for notification in notifications {
+            let notificationRequest = notification.toUNNotificationRequest()
+            try? await notificationCenter.add(notificationRequest)
+        }
+        // DEBUG
+        let noti = await notificationCenter.pendingNotificationRequests()
+        print(noti)
+    }
 }

@@ -68,7 +68,6 @@ struct DashboardView: View {
         .onChange(of: allHiddenClasses) { _ in fetchEvents() }
         .onChange(of: scenePhase) { onSceneChange($0) }
         .task {
-            fetchEvents()
             await notificationsManager.updateNotificationsPermission()
         }
     }
@@ -168,7 +167,11 @@ struct DashboardView: View {
     }
 
     private func fetchEvents() {
-        Task { try await viewModel.fetchEvents(for: subscribedGroups, hiddenClasses: allHiddenClasses) }
+        Task {
+            try await viewModel.fetchEvents(for: subscribedGroups, hiddenClasses: allHiddenClasses)
+            let notifications = viewModel.allEvents.compactMap { $0.toLocalNotification() }
+            await notificationsManager.setNotifications(notifications)
+        }
     }
 }
 

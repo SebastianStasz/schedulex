@@ -21,7 +21,7 @@ final class DashboardViewModel: ObservableObject {
     @Published private(set) var isLoading = true
 
     @Published private var nextUpdateDate: Date?
-    @Published private var allEvents: [Event] = []
+    @Published private(set) var allEvents: [Event] = []
     @Published var shouldScrollToDay = false
     @Published var selectedDate: Date = .now
 
