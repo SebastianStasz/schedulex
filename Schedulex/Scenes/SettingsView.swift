@@ -11,21 +11,26 @@ import Resources
 
 struct SettingsView: View {
     var body: some View {
-        VStack {
-            Text("Content")
+        VStack(spacing: .large) {
+            SettingsAppInformationsSection()
+            Spacer()
         }
-        .navigationTitle("Settings")
+        .padding(.large)
+        .navigationTitle(L10n.settingsTitle)
         .navigationBarTitleDisplayMode(.large)
         .toolbar { toolbarContent }
     }
-    
+
     private var toolbarContent: some ToolbarContent {
         ToolbarItem(placement: .bottomBar) {
-            TextButton("") {  }
+            TextButton("") { }
         }
     }
 }
 
+
 #Preview {
-    SettingsView()
+    NavigationStack {
+        SettingsView()
+    }
 }
