@@ -13,6 +13,7 @@ struct SettingsView: View {
     var body: some View {
         VStack(spacing: .large) {
             SettingsAppInformationsSection()
+            ClassNotificationsToggle()
             Spacer()
         }
         .padding(.large)

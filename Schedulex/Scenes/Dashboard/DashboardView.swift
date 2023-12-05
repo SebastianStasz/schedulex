@@ -14,6 +14,7 @@ import Widgets
 struct DashboardView: View {
     @AppStorage("subscribedFacultyGroups") private var subscribedGroups: [FacultyGroup] = []
     @AppStorage("hiddenFacultyGroupsClasses") private var allHiddenClasses: [EditableFacultyGroupClass] = []
+    @AppStorage("classNotificationsEnabled") private var classNotificationsEnabled = false
     @AppStorage("showDashboardSwipeTip") private var showDashboardSwipeTip = true
     @AppStorage("hiddenInfoCards") private var hiddenInfoCards: [InfoCard] = []
     @StateObject private var viewModel = DashboardViewModel()
@@ -60,7 +61,7 @@ struct DashboardView: View {
             })
             .navigationTitle("‎‎‎‏‏‎")
             .navigationBarTitleDisplayMode(.inline)
-            .navigationDestination(isPresented: $areSettingsPresented) { SettingsView() }
+            .navigationDestination(isPresented: $areSettingsPresented) { SettingsView().environmentObject(notificationsManager) }
             .navigationDestination(isPresented: $areMyGroupsPresented) { ObservedFacultyGroupsView(service: service) }
         }
         .sheet(isPresented: $isDatePickerPresented) { datePicker }
@@ -169,6 +170,7 @@ struct DashboardView: View {
     private func fetchEvents() {
         Task {
             try await viewModel.fetchEvents(for: subscribedGroups, hiddenClasses: allHiddenClasses)
+            guard classNotificationsEnabled else { return }
             let notifications = viewModel.allEvents.compactMap { $0.toLocalNotification() }
             await notificationsManager.setNotifications(notifications)
         }

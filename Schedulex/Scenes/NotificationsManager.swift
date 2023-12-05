@@ -27,8 +27,12 @@ final class NotificationsManager: ObservableObject {
         await updateNotificationsPermission()
     }
 
-    func setNotifications(_ notifications: [LocalNotification]) async {
+    func removeAllPendingNotifications() {
         notificationCenter.removeAllPendingNotificationRequests()
+    }
+
+    func setNotifications(_ notifications: [LocalNotification]) async {
+        removeAllPendingNotifications()
         for notification in notifications {
             let notificationRequest = notification.toUNNotificationRequest()
             try? await notificationCenter.add(notificationRequest)

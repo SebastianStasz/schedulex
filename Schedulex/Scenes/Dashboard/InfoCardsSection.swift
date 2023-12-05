@@ -11,6 +11,7 @@ import Widgets
 
 struct InfoCardsSection: View {
     @EnvironmentObject private var notificationsManager: NotificationsManager
+    @AppStorage("classNotificationsEnabled") private var classNotificationsEnabled = false
     @AppStorage("showDashboardSwipeTip") private var showDashboardSwipeTip = true
     @AppStorage("hiddenInfoCards") private var hiddenInfoCards: [InfoCard] = []
 
@@ -72,6 +73,7 @@ struct InfoCardsSection: View {
     private func performInfoCardAction(for infoCard: InfoCard) {
         switch infoCard {
         case .enableNotifications:
+            classNotificationsEnabled = true
             Task { try? await notificationsManager.requestNotificationsPermission() }
         }
     }
