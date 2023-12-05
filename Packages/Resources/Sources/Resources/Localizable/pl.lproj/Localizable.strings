@@ -11,6 +11,11 @@
 "swipe_tip_title" = "⬅️  Swipe w lewo lub w prawo  ➡️";
 "swipe_tip_description" = "Zmieniaj dni w kalendarzu przesunięciem palca!";
 
+// info_cards
+"info_card_enable_notifications_title" = "Nie przegap zajęć!";
+"info_card_enable_notifications_description" = "Otrzymuj powiadomienia 5 minut przed rozpoczęciem zajęć.";
+"info_card_enable_notifications_button" = "Włącz powiadomienia";
+
 // main
 "add_group" = "Dodaj grupę";
 "today" = "Dzisiaj";
@@ -43,6 +48,19 @@
 "color" = "Kolor";
 "select_color" = "Wybierz kolor";
 "change_color_of_events" = "Zmień kolor zajęć";
+"event_notification_title" = "Wydarzenie UEK Schedule";
+"event_notification_subtitle" = "Za 5 minut.";
+
+// settings
+"settings_title" = "Ustawienia";
+"settings_version" = "Wersja:";
+"settings_contact" = "Kontakt:";
+"settings_events_notifications_title" = "Powiadomienia o zajęciach";
+"settings_notifications_alert_title" = "Włącz powiadomienia";
+"settings_notifications_alert_description" = "Włącz powiadomienia w ustawieniach na swoim urządzeniu";
+"settings_notifications_alert_go_to_settings" = "Idź do ustawień";
+"settings_notifications_alert_cancel" = "Nie teraz";
+"rate_the_app" = "Oceń aplikację";
 
 // start_flow
 "start_first_step_title" = "Wybierz grupy";

@@ -21,7 +21,7 @@ final class DashboardViewModel: ObservableObject {
     @Published private(set) var isLoading = true
 
     @Published private var nextUpdateDate: Date?
-    @Published private var allEvents: [Event] = []
+    @Published private(set) var allEvents: [Event] = []
     @Published var shouldScrollToDay = false
     @Published var selectedDate: Date = .now
 
@@ -70,7 +70,7 @@ final class DashboardViewModel: ObservableObject {
         nextUpdateDate = Calendar.current.date(byAdding: .minute, value: 5, to: .now)
     }
 
-    func bind() {
+    private func bind() {
         $allEvents
             .map { $0.sorted(by: { $0.startDate! < $1.startDate! }) }
             .compactMap { [weak self] in

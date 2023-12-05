@@ -20,7 +20,7 @@ public enum Icon: String, Identifiable, CaseIterable {
     var name: String {
         switch self {
         case .closeButton:
-            return "xmark.circle.fill"
+            return "xmark"
         case .delete:
             return "trash.fill"
         case .info:

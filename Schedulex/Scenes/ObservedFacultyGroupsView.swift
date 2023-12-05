@@ -24,26 +24,24 @@ struct ObservedFacultyGroupsView: View {
     }
 
     var body: some View {
-        NavigationSplitView {
-            BaseList(subscribedGroups.sorted(by: { $0.name < $1.name })) { facultyGroup in
-                let caption = "\(facultyGroup.numberOfEvents) " + L10n.xEvents
-                let isSelected = !facultyGroup.isHidden
-                let action = { self.facultyGroup = facultyGroup }
+        BaseList(subscribedGroups.sorted(by: { $0.name < $1.name })) { facultyGroup in
+            let caption = "\(facultyGroup.numberOfEvents) " + L10n.xEvents
+            let isSelected = !facultyGroup.isHidden
+            let action = { self.facultyGroup = facultyGroup }
 
-                ObservedFacultyGroupItem(title: facultyGroup.name, caption: caption, color: facultyGroup.color.representative, isSelected: isSelected, trailingIconAction: action)
-                .onTapGesture { hideOrShowGroup(facultyGroup) }
-                .contextMenu { UnfollowGroupButton { groupToDelete = facultyGroup } }
-            }
-            .confirmationDialog(unfollowGroupQuestion, isPresented: isGroupDeleteConfirmationPresented, titleVisibility: .visible) {
-                Button(L10n.unfollow, role: .destructive, action: deleteGroup)
-            }
-            .sheet(item: $facultyGroup) { FacultyGroupDetailsView(facultyGroup: $0, type: .editable) }
-            .sheet(isPresented: $isFacultiesListPresented) { FacultiesListView(service: service) }
-            .baseListStyle(isEmpty: subscribedGroups.isEmpty)
-            .navigationTitle(L10n.observedTitle)
-            .toolbar { toolbarContent }
-            .closeButton()
-        } detail: {}
+            ObservedFacultyGroupItem(title: facultyGroup.name, caption: caption, color: facultyGroup.color.representative, isSelected: isSelected, trailingIconAction: action)
+            .onTapGesture { hideOrShowGroup(facultyGroup) }
+            .contextMenu { UnfollowGroupButton { groupToDelete = facultyGroup } }
+        }
+        .confirmationDialog(unfollowGroupQuestion, isPresented: isGroupDeleteConfirmationPresented, titleVisibility: .visible) {
+            Button(L10n.unfollow, role: .destructive, action: deleteGroup)
+        }
+        .sheet(item: $facultyGroup) { FacultyGroupDetailsView(facultyGroup: $0, type: .editable) }
+        .sheet(isPresented: $isFacultiesListPresented) { FacultiesListView(service: service) }
+        .baseListStyle(isEmpty: subscribedGroups.isEmpty)
+        .navigationTitle(L10n.observedTitle)
+        .navigationBarTitleDisplayMode(.large)
+        .toolbar { toolbarContent }
     }
 
     private var unfollowGroupQuestion: String {

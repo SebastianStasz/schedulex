@@ -14,21 +14,22 @@ import Widgets
 struct DashboardView: View {
     @AppStorage("subscribedFacultyGroups") private var subscribedGroups: [FacultyGroup] = []
     @AppStorage("hiddenFacultyGroupsClasses") private var allHiddenClasses: [EditableFacultyGroupClass] = []
+    @AppStorage("classNotificationsEnabled") private var classNotificationsEnabled = false
     @AppStorage("showDashboardSwipeTip") private var showDashboardSwipeTip = true
     @StateObject private var viewModel = DashboardViewModel()
+    @StateObject private var notificationsManager = NotificationsManager()
     @EnvironmentObject private var service: FirestoreService
-    @Environment(\.scenePhase) private var scenePhase
 
-    @Binding var isFacultiesListPresented: Bool
+    @State private var areSettingsPresented = false
+    @State private var areMyGroupsPresented = false
     @State private var isDatePickerPresented = false
-    @State private var isSchedulesSheetPresented = false
     @State private var swipeCount = 0
 
     var body: some View {
-        VStack(spacing: 0) {
-            if let items = viewModel.dayPickerItems {
+        NavigationStack {
+            VStack(spacing: 0) {
                 LazyVStack {
-                    DayPickerView(items: items, isDatePickerPresented: $isDatePickerPresented, shouldScrollToDay: $viewModel.shouldScrollToDay, selection: $viewModel.selectedDate)
+                    DayPickerView(items: viewModel.dayPickerItems ?? [], isDatePickerPresented: $isDatePickerPresented, shouldScrollToDay: $viewModel.shouldScrollToDay, selection: $viewModel.selectedDate)
                 }
                 .padding(.top, .xlarge)
                 .padding(.bottom, .medium)
@@ -38,38 +39,41 @@ struct DashboardView: View {
 
                 ScrollView {
                     VStack(spacing: .medium) {
-                        if showDashboardSwipeTip {
-                            swipeTip
-                                .transition(.scale)
+                        if !(viewModel.dayPickerItems?.isEmpty ?? true) {
+                            InfoCardsSection()
+                                .environmentObject(notificationsManager)
                         }
 
-                        ForEach(viewModel.selectedDateEvents, id: \.self) {
+                        ForEach((viewModel.dayPickerItems?.isEmpty ?? true) ? [] : viewModel.selectedDateEvents, id: \.self) {
                             EventCardView(event: $0)
                         }
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .padding(.vertical, .large)
-                    .padding(.horizontal, .medium)
+                    .padding(.medium)
                     .background(.backgroundPrimary)
                 }
                 .gesture(dragGesture)
-            } else {
-                Rectangle()
-                    .fill(Color.backgroundSecondary)
-                    .frame(height: .medium)
-                separator()
-                Spacer()
+                .overlay { loadingIndicatorOrEmptyState }
             }
+            .toolbar { toolbarContent }
+            .doubleNavigationTitle(title: viewModel.title, subtitle: viewModel.subtitle, showSettings: {
+                areSettingsPresented = true
+            })
+            .navigationTitle("‎‎‎‏‏‎")
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationDestination(isPresented: $areSettingsPresented) { SettingsView().environmentObject(notificationsManager) }
+            .navigationDestination(isPresented: $areMyGroupsPresented) { ObservedFacultyGroupsView(service: service) }
         }
-        .overlay { loadingIndicatorOrEmptyState }
-        .toolbar { toolbarContent }
-        .doubleNavigationTitle(title: viewModel.title, subtitle: viewModel.subtitle)
-        .sheet(isPresented: $isSchedulesSheetPresented) { ObservedFacultyGroupsView(service: service) }
         .sheet(isPresented: $isDatePickerPresented) { datePicker }
         .onChange(of: subscribedGroups) { _ in fetchEvents() }
         .onChange(of: allHiddenClasses) { _ in fetchEvents() }
-        .onChange(of: scenePhase) { onSceneChange($0) }
-        .task { fetchEvents() }
+        .onChange(of: classNotificationsEnabled) { _ in setClassesNotifications() }
+        .onChange(of: notificationsManager.isNotificationsAccessGranted) { _ in setClassesNotifications() }
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification).dropFirst()) { _ in onSceneChange(.active)}
+        .task {
+            fetchEvents()
+            await notificationsManager.updateNotificationsPermission()
+        }
     }
 
     private var dragGesture: _EndedGesture<DragGesture> {
@@ -106,25 +110,7 @@ struct DashboardView: View {
                 .presentationDetents([.height(380)])
                 .presentationDragIndicator(.visible)
                 .ignoresSafeArea(edges: .bottom)
-
-//        if let startDate = viewModel.startDate, let endDate = viewModel.endDate {
-//            DatePicker(L10n.selectedDate, selection: $viewModel.selectedDate, in: startDate...endDate, displayedComponents: .date)
-//                .datePickerStyle(.graphical)
-//                .padding(.horizontal, .medium)
-//                .presentationDetents([.height(380)])
-//                .presentationDragIndicator(.visible)
-//                .tint(Color.accentPrimary)
         }
-    }
-
-    private var swipeTip: some View {
-        VStack(spacing: .small) {
-            Text(L10n.swipeTipTitle, style: .bodyMedium)
-            Text(L10n.swipeTipDescription, style: .footnote)
-                .foregroundStyle(.grayShade1)
-        }
-        .padding(.vertical, .xlarge)
-        .padding(.bottom, .small)
     }
 
     @ViewBuilder
@@ -134,8 +120,8 @@ struct DashboardView: View {
         } else if !viewModel.isEmpty && viewModel.selectedDateEvents.isEmpty {
             let isWeekend = NSCalendar.current.isDateInWeekend(viewModel.selectedDate)
             HStack(spacing: .micro) {
-            Text(isWeekend ? L10n.noEventsWeekendMessage : L10n.noEventsMessage, style: .body)
-                .foregroundStyle(.grayShade1)
+                Text(isWeekend ? L10n.noEventsWeekendMessage : L10n.noEventsMessage, style: .body)
+                    .foregroundStyle(.grayShade1)
 
                 if isWeekend {
                     SwiftUI.Text("🍻")
@@ -148,7 +134,7 @@ struct DashboardView: View {
     private var toolbarContent: some ToolbarContent {
         ToolbarItem(placement: .bottomBar) {
             HStack(spacing: 0) {
-                TextButton(L10n.myGroups) { isSchedulesSheetPresented = true }
+                TextButton(L10n.myGroups) { areMyGroupsPresented = true }
                     .frame(maxWidth: .infinity, alignment: .leading)
                 TextButton(L10n.today, action: selectTodaysDate)
                     .frame(maxWidth: .infinity)
@@ -184,13 +170,20 @@ struct DashboardView: View {
         fetchEvents()
     }
 
+    private func setClassesNotifications() {
+        guard classNotificationsEnabled else { return }
+        let notifications = viewModel.allEvents.compactMap { $0.toLocalNotification() }
+        Task { await notificationsManager.setNotifications(notifications) }
+    }
+
     private func fetchEvents() {
-        Task { try await viewModel.fetchEvents(for: subscribedGroups, hiddenClasses: allHiddenClasses) }
+        Task {
+            try await viewModel.fetchEvents(for: subscribedGroups, hiddenClasses: allHiddenClasses)
+            setClassesNotifications()
+        }
     }
 }
 
-struct DashboardView_Previews: PreviewProvider {
-    static var previews: some View {
-        DashboardView(isFacultiesListPresented: .constant(false))
-    }
+#Preview {
+    DashboardView()
 }

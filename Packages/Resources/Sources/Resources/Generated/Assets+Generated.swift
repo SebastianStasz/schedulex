@@ -25,6 +25,9 @@ public extension Color {
   static var redShade2 : Color { Color("red_shade_2", bundle: .module) }
   static var redShade3 : Color { Color("red_shade_3", bundle: .module) }
   static var redShade4 : Color { Color("red_shade_4", bundle: .module) }
+  static var textDark : Color { Color("text_dark", bundle: .module) }
+  static var textPrimary : Color { Color("text_primary", bundle: .module) }
+  static var textSecondary : Color { Color("text_secondary", bundle: .module) }
   static var yellowShade1 : Color { Color("yellow_shade_1", bundle: .module) }
   static var yellowShade2 : Color { Color("yellow_shade_2", bundle: .module) }
   static var yellowShade3 : Color { Color("yellow_shade_3", bundle: .module) }
@@ -35,7 +38,7 @@ public extension Color {
   static var backgroundTertiary : Color { Color("background_tertiary", bundle: .module) }
   static var grayShade1 : Color { Color("gray_shade_1", bundle: .module) }
   static var greenPrimary : Color { Color("green_primary", bundle: .module) }
-  static var textPrimary : Color { Color("text_primary", bundle: .module) }
+  static var yellowPrimary : Color { Color("yellow_primary", bundle: .module) }
 }
 
 public extension UIColor {
@@ -59,11 +62,13 @@ public extension UIColor {
     static let redShade2 = UIColor(named: "red_shade_2", in: .module, compatibleWith: .current)!
     static let redShade3 = UIColor(named: "red_shade_3", in: .module, compatibleWith: .current)!
     static let redShade4 = UIColor(named: "red_shade_4", in: .module, compatibleWith: .current)!
+    static let textDark = UIColor(named: "text_dark", in: .module, compatibleWith: .current)!
+    static let textPrimary = UIColor(named: "text_primary", in: .module, compatibleWith: .current)!
+    static let textSecondary = UIColor(named: "text_secondary", in: .module, compatibleWith: .current)!
     static let yellowShade1 = UIColor(named: "yellow_shade_1", in: .module, compatibleWith: .current)!
     static let yellowShade2 = UIColor(named: "yellow_shade_2", in: .module, compatibleWith: .current)!
     static let yellowShade3 = UIColor(named: "yellow_shade_3", in: .module, compatibleWith: .current)!
     static let yellowShade4 = UIColor(named: "yellow_shade_4", in: .module, compatibleWith: .current)!
-    static let textPrimary = UIColor(named: "text_primary", in: .module, compatibleWith: .current)!
 }
 
 public extension Image {
