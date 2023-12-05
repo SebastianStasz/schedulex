@@ -29,25 +29,24 @@ public struct InfoCardView: View {
                     .foregroundColor(.textDark)
 
                 VStack(alignment: .leading, spacing: .small) {
-                    HStack(spacing: 0) {
-                        Text(card.title, style: .body)
-                            .foregroundColor(.textDark)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-
-                        Button(action: onClose) {
-                            Image.icon(.closeButton)
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 14, height: 14, alignment: .top)
-                                .fontWeight(.light)
-                                .foregroundColor(.textSecondary)
-                        }
-                        .buttonStyle(.plain)
-                    }
+                    Text(card.title, style: .body)
+                        .foregroundColor(.textDark)
+                        .frame(maxWidth: .infinity, alignment: .leading)
 
                     Text(card.message, style: .footnote)
+                        .fixedSize(horizontal: false, vertical: true)
                         .foregroundColor(.textSecondary)
                 }
+
+                Button(action: onClose) {
+                    Image.icon(.closeButton)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 14, height: 14, alignment: .top)
+                        .fontWeight(.light)
+                        .foregroundColor(.textSecondary)
+                }
+                .buttonStyle(.plain)
             }
 
             Rectangle()
@@ -71,4 +70,5 @@ public struct InfoCardView: View {
 
 #Preview {
     InfoCardView(card: .enableNotifications, onConfirm: {}, onClose: {})
+        .padding(.large)
 }
