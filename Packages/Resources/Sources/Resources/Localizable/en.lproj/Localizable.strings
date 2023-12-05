@@ -11,6 +11,11 @@
 "swipe_tip_title" = "⬅️  Swipe right or left  ➡️";
 "swipe_tip_description" = "Change days with a swipe of your finger!";
 
+// info_cards
+"info_card_enable_notifications_title" = "Don't miss the classes!";
+"info_card_enable_notifications_description" = "Receive notifications 5 minutes before class starts.";
+"info_card_enable_notifications_button" = "Enable notifications";
+
 // main
 "add_group" = "Add group";
 "today" = "Today";
@@ -43,6 +48,19 @@
 "color" = "Color";
 "select_color" = "Select color";
 "change_color_of_events" = "Change color of events";
+"event_notification_title" = "UEK Schedule event";
+"event_notification_subtitle" = "In 5 minutes.";
+
+// settings
+"settings_title" = "Settings";
+"settings_version" = "Version:";
+"settings_contact" = "Contact:";
+"settings_events_notifications_title" = "Class notifications";
+"settings_notifications_alert_title" = "Enable notifications";
+"settings_notifications_alert_description" = "Notifications can be enabled from settings on your device.";
+"settings_notifications_alert_go_to_settings" = "Go to settings";
+"settings_notifications_alert_cancel" = "Not now";
+"rate_the_app" = "Rate the app";
 
 // start_flow
 "start_first_step_title" = "Select groups";

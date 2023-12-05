@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Resources
 
 public enum InfoCard: String, Identifiable, Codable, CaseIterable {
     case enableNotifications
@@ -17,21 +18,21 @@ public enum InfoCard: String, Identifiable, Codable, CaseIterable {
     var title: String {
         switch self {
         case .enableNotifications:
-            return "Nie przegap zajęć!"
+            return L10n.infoCardEnableNotificationsTitle
         }
     }
 
     var message: String {
         switch self {
         case .enableNotifications:
-            return "Otrzymuj powiadomienia 5 minut przed rozpoczęciem zajęć."
+            return L10n.infoCardEnableNotificationsDescription
         }
     }
 
     var buttonTitle: String {
         switch self {
         case .enableNotifications:
-            return "Włącz powiadomienia"
+            return L10n.infoCardEnableNotificationsButton
         }
     }
 }

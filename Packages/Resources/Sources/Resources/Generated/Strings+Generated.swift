@@ -34,6 +34,10 @@ public enum L10n {
   public static let eventFinished = L10n.tr("Localizable", "event_finished", fallback: "Ended")
   /// Ends
   public static let eventFinishingIn = L10n.tr("Localizable", "event_finishing_in", fallback: "Ends")
+  /// In 5 minutes.
+  public static let eventNotificationSubtitle = L10n.tr("Localizable", "event_notification_subtitle", fallback: "In 5 minutes.")
+  /// UEK Schedule event
+  public static let eventNotificationTitle = L10n.tr("Localizable", "event_notification_title", fallback: "UEK Schedule event")
   /// Events
   public static let events = L10n.tr("Localizable", "events", fallback: "Events")
   /// Faculties
@@ -46,6 +50,12 @@ public enum L10n {
   public static let group = L10n.tr("Localizable", "group", fallback: "Group")
   /// Hidden
   public static let hidden = L10n.tr("Localizable", "hidden", fallback: "Hidden")
+  /// Enable notifications
+  public static let infoCardEnableNotificationsButton = L10n.tr("Localizable", "info_card_enable_notifications_button", fallback: "Enable notifications")
+  /// Receive notifications 5 minutes before class starts.
+  public static let infoCardEnableNotificationsDescription = L10n.tr("Localizable", "info_card_enable_notifications_description", fallback: "Receive notifications 5 minutes before class starts.")
+  /// Don't miss the classes!
+  public static let infoCardEnableNotificationsTitle = L10n.tr("Localizable", "info_card_enable_notifications_title", fallback: "Don't miss the classes!")
   /// Let's start
   public static let letsStart = L10n.tr("Localizable", "lets_start", fallback: "Let's start")
   /// To get started, select the groups you want to follow and see on the home page
@@ -68,12 +78,30 @@ public enum L10n {
   public static let observedTitle = L10n.tr("Localizable", "observed_title", fallback: "Observed")
   /// Other
   public static let otherHeader = L10n.tr("Localizable", "other_header", fallback: "Other")
+  /// Rate the app
+  public static let rateTheApp = L10n.tr("Localizable", "rate_the_app", fallback: "Rate the app")
   /// Select color
   public static let selectColor = L10n.tr("Localizable", "select_color", fallback: "Select color")
   /// Selected date
   public static let selectedDate = L10n.tr("Localizable", "selected_date", fallback: "Selected date")
   /// Set visibility of classes
   public static let setClassesVisibility = L10n.tr("Localizable", "set_classes_visibility", fallback: "Set visibility of classes")
+  /// Contact:
+  public static let settingsContact = L10n.tr("Localizable", "settings_contact", fallback: "Contact:")
+  /// Class notifications
+  public static let settingsEventsNotificationsTitle = L10n.tr("Localizable", "settings_events_notifications_title", fallback: "Class notifications")
+  /// Not now
+  public static let settingsNotificationsAlertCancel = L10n.tr("Localizable", "settings_notifications_alert_cancel", fallback: "Not now")
+  /// Notifications can be enabled from settings on your device.
+  public static let settingsNotificationsAlertDescription = L10n.tr("Localizable", "settings_notifications_alert_description", fallback: "Notifications can be enabled from settings on your device.")
+  /// Go to settings
+  public static let settingsNotificationsAlertGoToSettings = L10n.tr("Localizable", "settings_notifications_alert_go_to_settings", fallback: "Go to settings")
+  /// Enable notifications
+  public static let settingsNotificationsAlertTitle = L10n.tr("Localizable", "settings_notifications_alert_title", fallback: "Enable notifications")
+  /// Settings
+  public static let settingsTitle = L10n.tr("Localizable", "settings_title", fallback: "Settings")
+  /// Version:
+  public static let settingsVersion = L10n.tr("Localizable", "settings_version", fallback: "Version:")
   /// No group selected. Do you want to continue anyway?
   public static let startFirstStepAlertMessage = L10n.tr("Localizable", "start_first_step_alert_message", fallback: "No group selected. Do you want to continue anyway?")
   /// No group selected
