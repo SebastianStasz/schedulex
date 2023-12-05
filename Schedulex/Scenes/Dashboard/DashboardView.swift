@@ -16,11 +16,9 @@ struct DashboardView: View {
     @AppStorage("hiddenFacultyGroupsClasses") private var allHiddenClasses: [EditableFacultyGroupClass] = []
     @AppStorage("classNotificationsEnabled") private var classNotificationsEnabled = false
     @AppStorage("showDashboardSwipeTip") private var showDashboardSwipeTip = true
-    @AppStorage("hiddenInfoCards") private var hiddenInfoCards: [InfoCard] = []
     @StateObject private var viewModel = DashboardViewModel()
     @StateObject private var notificationsManager = NotificationsManager()
     @EnvironmentObject private var service: FirestoreService
-    @Environment(\.scenePhase) private var scenePhase
 
     @State private var areSettingsPresented = false
     @State private var areMyGroupsPresented = false
@@ -42,8 +40,8 @@ struct DashboardView: View {
                 ScrollView {
                     VStack(spacing: .medium) {
                         if !(viewModel.dayPickerItems?.isEmpty ?? true) {
-                        InfoCardsSection()
-                            .environmentObject(notificationsManager)
+                            InfoCardsSection()
+                                .environmentObject(notificationsManager)
                         }
 
                         ForEach((viewModel.dayPickerItems?.isEmpty ?? true) ? [] : viewModel.selectedDateEvents, id: \.self) {
@@ -69,8 +67,11 @@ struct DashboardView: View {
         .sheet(isPresented: $isDatePickerPresented) { datePicker }
         .onChange(of: subscribedGroups) { _ in fetchEvents() }
         .onChange(of: allHiddenClasses) { _ in fetchEvents() }
-        .onChange(of: scenePhase) { onSceneChange($0) }
+        .onChange(of: classNotificationsEnabled) { _ in setClassesNotifications() }
+        .onChange(of: notificationsManager.isNotificationsAccessGranted) { _ in setClassesNotifications() }
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification).dropFirst()) { _ in onSceneChange(.active)}
         .task {
+            fetchEvents()
             await notificationsManager.updateNotificationsPermission()
         }
     }
@@ -169,12 +170,16 @@ struct DashboardView: View {
         fetchEvents()
     }
 
+    private func setClassesNotifications() {
+        guard classNotificationsEnabled else { return }
+        let notifications = viewModel.allEvents.compactMap { $0.toLocalNotification() }
+        Task { await notificationsManager.setNotifications(notifications) }
+    }
+
     private func fetchEvents() {
         Task {
             try await viewModel.fetchEvents(for: subscribedGroups, hiddenClasses: allHiddenClasses)
-            guard classNotificationsEnabled else { return }
-            let notifications = viewModel.allEvents.compactMap { $0.toLocalNotification() }
-            await notificationsManager.setNotifications(notifications)
+            setClassesNotifications()
         }
     }
 }

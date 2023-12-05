@@ -70,7 +70,7 @@ final class DashboardViewModel: ObservableObject {
         nextUpdateDate = Calendar.current.date(byAdding: .minute, value: 5, to: .now)
     }
 
-    func bind() {
+    private func bind() {
         $allEvents
             .map { $0.sorted(by: { $0.startDate! < $1.startDate! }) }
             .compactMap { [weak self] in
