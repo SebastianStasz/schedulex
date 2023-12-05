@@ -41,10 +41,12 @@ struct DashboardView: View {
 
                 ScrollView {
                     VStack(spacing: .medium) {
+                        if !(viewModel.dayPickerItems?.isEmpty ?? true) {
                         InfoCardsSection()
                             .environmentObject(notificationsManager)
+                        }
 
-                        ForEach(viewModel.isLoading ? [] : viewModel.selectedDateEvents, id: \.self) {
+                        ForEach((viewModel.dayPickerItems?.isEmpty ?? true) ? [] : viewModel.selectedDateEvents, id: \.self) {
                             EventCardView(event: $0)
                         }
                     }
