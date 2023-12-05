@@ -6,13 +6,13 @@
 //
 
 import Domain
-import Foundation
 import NotificationCenter
 
 struct LocalNotification {
     let id: String
     let title: String
-    let description: String
+    let subtitle: String?
+    let description: String?
     let dateComponents: DateComponents
 
     func toUNNotificationRequest() -> UNNotificationRequest {
@@ -23,17 +23,9 @@ struct LocalNotification {
     private var notificationContent: UNNotificationContent {
         var content = UNMutableNotificationContent()
         content.title = title
-        content.body = description
+        content.sound = .default
+        content.subtitle = subtitle ?? ""
+        content.body = description ?? ""
         return content
-    }
-}
-
-extension Event {
-    func toLocalNotification() -> LocalNotification? {
-        let name = name ?? "UEK Schedule event"
-        let description = "Event by \(teacher ?? "")"
-        guard let startDate else { return nil }
-        let dateComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: startDate)
-        return LocalNotification(id: UUID().uuidString, title: name, description: description, dateComponents: dateComponents)
     }
 }
