@@ -79,6 +79,7 @@ struct InfoCardsSection: View {
             Task { try? await notificationsManager.requestNotificationsPermission() }
         case .rateTheApplication:
             openAppInAppStore()
+            hiddenInfoCards.append(.rateTheApplication)
         }
     }
 
