@@ -46,4 +46,5 @@ struct SettingsAppInformationsSection: View {
 
 #Preview {
     SettingsAppInformationsSection()
+        .padding(.large)
 }

@@ -14,6 +14,7 @@ struct ClassNotificationsToggle: View {
     @EnvironmentObject private var notificationsManager: NotificationsManager
     @State private var isEnableNotificationsAlertPresented = false
     @AppStorage("classNotificationsEnabled") private var classNotificationsEnabled = false
+    @AppStorage("classNotificationsTime") private var classNotificationsTime = ClassNotificationTime.oneHourBefore
 
     private var areNotificationsEnabled: Binding<Bool> {
         Binding(get: { classNotificationsEnabled && (notificationsManager.isNotificationsAccessGranted ?? false) },
@@ -21,11 +22,32 @@ struct ClassNotificationsToggle: View {
     }
 
     var body: some View {
-        HStack(spacing: .large) {
-            SettingsLabel(title: L10n.settingsEventsNotificationsTitle, description: L10n.infoCardEnableNotificationsDescription)
+        VStack(spacing: .large) {
+            HStack(spacing: .large) {
+                SettingsLabel(title: L10n.settingsClassNotificationsTitle, description: L10n.settingsClassNotificationsTimeDescription)
 
-            Toggle(L10n.settingsEventsNotificationsTitle, isOn: areNotificationsEnabled)
-                .labelsHidden()
+                Toggle(L10n.settingsClassNotificationsTitle, isOn: areNotificationsEnabled)
+                    .labelsHidden()
+            }
+
+            if classNotificationsEnabled {
+                Separator()
+
+                HStack(spacing: .micro) {
+                    Text(L10n.settingsClassNotificationsTimeTitle, style: .body)
+                        .foregroundStyle(.textPrimary)
+
+                    Picker(L10n.settingsClassNotificationsTimeTitle, selection: $classNotificationsTime) {
+                        ForEach(ClassNotificationTime.allCases) {
+                            Text($0.title).tag($0)
+                        }
+                    }
+                    .tint(.accentPrimary)
+                    .pickerStyle(.menu)
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+                    .padding(.trailing, -.medium)
+                }
+            }
         }
         .card()
         .alert(L10n.settingsNotificationsAlertTitle, isPresented: $isEnableNotificationsAlertPresented) {
@@ -79,5 +101,6 @@ struct ClassNotificationsToggle: View {
 
 #Preview {
     ClassNotificationsToggle()
+        .padding(.large)
         .environmentObject(NotificationsManager())
 }
