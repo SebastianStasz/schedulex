@@ -52,8 +52,8 @@ public enum L10n {
   public static let hidden = L10n.tr("Localizable", "hidden", fallback: "Hidden")
   /// Enable notifications
   public static let infoCardEnableNotificationsButton = L10n.tr("Localizable", "info_card_enable_notifications_button", fallback: "Enable notifications")
-  /// Receive notifications 1 hour before class starts. Time of notifications can be changed in settings.
-  public static let infoCardEnableNotificationsDescription = L10n.tr("Localizable", "info_card_enable_notifications_description", fallback: "Receive notifications 1 hour before class starts. Time of notifications can be changed in settings.")
+  /// Receive notifications 1 hour before class starts. You can change the notification time in the settings.
+  public static let infoCardEnableNotificationsDescription = L10n.tr("Localizable", "info_card_enable_notifications_description", fallback: "Receive notifications 1 hour before class starts. You can change the notification time in the settings.")
   /// Don't miss the classes!
   public static let infoCardEnableNotificationsTitle = L10n.tr("Localizable", "info_card_enable_notifications_title", fallback: "Don't miss the classes!")
   /// Let's start

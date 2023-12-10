@@ -13,7 +13,7 @@
 
 // info_cards
 "info_card_enable_notifications_title" = "Don't miss the classes!";
-"info_card_enable_notifications_description" = "Receive notifications 1 hour before class starts. Time of notifications can be changed in settings.";
+"info_card_enable_notifications_description" = "Receive notifications 1 hour before class starts. You can change the notification time in the settings.";
 "info_card_enable_notifications_button" = "Enable notifications";
 
 // main
