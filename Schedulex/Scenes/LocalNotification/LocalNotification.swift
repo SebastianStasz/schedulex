@@ -21,7 +21,7 @@ struct LocalNotification {
     }
 
     private var notificationContent: UNNotificationContent {
-        var content = UNMutableNotificationContent()
+        let content = UNMutableNotificationContent()
         content.title = title
         content.sound = .default
         content.subtitle = subtitle ?? ""
