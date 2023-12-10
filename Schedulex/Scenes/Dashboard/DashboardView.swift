@@ -14,6 +14,7 @@ import Widgets
 struct DashboardView: View {
     @AppStorage("subscribedFacultyGroups") private var subscribedGroups: [FacultyGroup] = []
     @AppStorage("hiddenFacultyGroupsClasses") private var allHiddenClasses: [EditableFacultyGroupClass] = []
+    @AppStorage("classNotificationsTime") private var classNotificationsTime = ClassNotificationTime.oneHourBefore
     @AppStorage("classNotificationsEnabled") private var classNotificationsEnabled = false
     @AppStorage("showDashboardSwipeTip") private var showDashboardSwipeTip = true
     @StateObject private var viewModel = DashboardViewModel()
@@ -68,6 +69,7 @@ struct DashboardView: View {
         .onChange(of: subscribedGroups) { _ in fetchEvents() }
         .onChange(of: allHiddenClasses) { _ in fetchEvents() }
         .onChange(of: classNotificationsEnabled) { _ in setClassesNotifications() }
+        .onChange(of: classNotificationsTime) { _ in setClassesNotifications() }
         .onChange(of: notificationsManager.isNotificationsAccessGranted) { _ in setClassesNotifications() }
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification).dropFirst()) { _ in onSceneChange(.active)}
         .task {
@@ -172,7 +174,7 @@ struct DashboardView: View {
 
     private func setClassesNotifications() {
         guard classNotificationsEnabled else { return }
-        let notifications = viewModel.allEvents.compactMap { $0.toLocalNotification() }
+        let notifications = viewModel.allEvents.compactMap { $0.toLocalNotification(time: classNotificationsTime) }
         Task { await notificationsManager.setNotifications(notifications) }
     }
 
