@@ -37,8 +37,5 @@ final class NotificationsManager: ObservableObject {
             let notificationRequest = notification.toUNNotificationRequest()
             try? await notificationCenter.add(notificationRequest)
         }
-        // DEBUG
-        let noti = await notificationCenter.pendingNotificationRequests()
-        print(noti)
     }
 }

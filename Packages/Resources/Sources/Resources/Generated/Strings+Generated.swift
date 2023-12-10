@@ -56,6 +56,12 @@ public enum L10n {
   public static let infoCardEnableNotificationsDescription = L10n.tr("Localizable", "info_card_enable_notifications_description", fallback: "Receive notifications 1 hour before class starts. You can change the notification time in the settings.")
   /// Don't miss the classes!
   public static let infoCardEnableNotificationsTitle = L10n.tr("Localizable", "info_card_enable_notifications_title", fallback: "Don't miss the classes!")
+  /// Rate the application
+  public static let infoCardRateTheAppButton = L10n.tr("Localizable", "info_card_rate_the_app_button", fallback: "Rate the application")
+  /// Share your rating. Click the button below to go directly to the application page.
+  public static let infoCardRateTheAppDescription = L10n.tr("Localizable", "info_card_rate_the_app_description", fallback: "Share your rating. Click the button below to go directly to the application page.")
+  /// Rate UEK Schedule
+  public static let infoCardRateTheAppTitle = L10n.tr("Localizable", "info_card_rate_the_app_title", fallback: "Rate UEK Schedule")
   /// Let's start
   public static let letsStart = L10n.tr("Localizable", "lets_start", fallback: "Let's start")
   /// To get started, select the groups you want to follow and see on the home page

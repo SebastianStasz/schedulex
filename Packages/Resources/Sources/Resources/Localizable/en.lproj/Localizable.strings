@@ -15,6 +15,9 @@
 "info_card_enable_notifications_title" = "Don't miss the classes!";
 "info_card_enable_notifications_description" = "Receive notifications 1 hour before class starts. You can change the notification time in the settings.";
 "info_card_enable_notifications_button" = "Enable notifications";
+"info_card_rate_the_app_title" = "Rate UEK Schedule";
+"info_card_rate_the_app_description" = "Share your rating. Click the button below to go directly to the application page.";
+"info_card_rate_the_app_button" = "Rate the application";
 
 // main
 "add_group" = "Add group";
