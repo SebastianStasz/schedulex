@@ -67,6 +67,8 @@ struct InfoCardsSection: View {
         switch infoCard {
         case .enableNotifications:
             return notificationsManager.canRequestNotificationsAccess ?? false
+        default:
+            return shouldRateAppInfoCardBeDisplayed()
         }
     }
 
@@ -75,7 +77,22 @@ struct InfoCardsSection: View {
         case .enableNotifications:
             classNotificationsEnabled = true
             Task { try? await notificationsManager.requestNotificationsPermission() }
+        case .rateTheApplication:
+            openAppInAppStore()
         }
+    }
+
+    private func shouldRateAppInfoCardBeDisplayed() -> Bool {
+        guard let pathToDocumentsFolder = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last?.path(),
+              let installDate = try? FileManager.default.attributesOfItem(atPath: pathToDocumentsFolder)[.creationDate] as? Date,
+              let daysFromInstallation = Calendar.current.dateComponents([.day], from: installDate, to: .now).day
+        else { return false }
+        return daysFromInstallation > 7
+    }
+
+    private func openAppInAppStore() {
+        let url = URL(string: "itms-apps://itunes.apple.com/app/id6468822571")!
+        UIApplication.shared.open(url)
     }
 }
 

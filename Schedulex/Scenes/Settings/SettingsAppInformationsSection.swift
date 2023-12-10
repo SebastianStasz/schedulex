@@ -24,10 +24,10 @@ struct SettingsAppInformationsSection: View {
             Separator()
 
             SettingsLabel(title: L10n.settingsContact, description: "sebastianstaszczyk.1999@gmail.com")
-
-            Separator()
-
-            Button(L10n.rateTheApp, action: openAppInAppStore)
+//
+//            Separator()
+//
+//            Button(L10n.rateTheApp, action: openAppInAppStore)
         }
         .card()
     }

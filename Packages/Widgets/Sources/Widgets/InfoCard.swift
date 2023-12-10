@@ -10,6 +10,7 @@ import Resources
 
 public enum InfoCard: String, Identifiable, Codable, CaseIterable {
     case enableNotifications
+    case rateTheApplication
 
     public var id: String {
         rawValue
@@ -19,6 +20,8 @@ public enum InfoCard: String, Identifiable, Codable, CaseIterable {
         switch self {
         case .enableNotifications:
             return L10n.infoCardEnableNotificationsTitle
+        case .rateTheApplication:
+            return L10n.infoCardRateTheAppTitle
         }
     }
 
@@ -26,6 +29,8 @@ public enum InfoCard: String, Identifiable, Codable, CaseIterable {
         switch self {
         case .enableNotifications:
             return L10n.infoCardEnableNotificationsDescription
+        case .rateTheApplication:
+            return L10n.infoCardRateTheAppDescription
         }
     }
 
@@ -33,6 +38,8 @@ public enum InfoCard: String, Identifiable, Codable, CaseIterable {
         switch self {
         case .enableNotifications:
             return L10n.infoCardEnableNotificationsButton
+        case .rateTheApplication:
+            return L10n.infoCardRateTheAppButton
         }
     }
 }

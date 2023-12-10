@@ -36,6 +36,7 @@ public struct InfoCardView: View {
                     Text(card.message, style: .footnote)
                         .fixedSize(horizontal: false, vertical: true)
                         .foregroundColor(.textSecondary)
+                        .frame(maxHeight: .infinity, alignment: .top)
                 }
 
                 Button(action: onClose) {
