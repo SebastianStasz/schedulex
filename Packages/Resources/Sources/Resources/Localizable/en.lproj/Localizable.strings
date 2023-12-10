@@ -13,7 +13,7 @@
 
 // info_cards
 "info_card_enable_notifications_title" = "Don't miss the classes!";
-"info_card_enable_notifications_description" = "Receive notifications 5 minutes before class starts.";
+"info_card_enable_notifications_description" = "Receive notifications 1 hour before class starts. Time of notifications can be changed in settings.";
 "info_card_enable_notifications_button" = "Enable notifications";
 
 // main
@@ -55,7 +55,11 @@
 "settings_title" = "Settings";
 "settings_version" = "Version:";
 "settings_contact" = "Contact:";
-"settings_events_notifications_title" = "Class notifications";
+"settings_class_notifications_title" = "Class notifications";
+"settings_class_notifications_time_title" = "Notifications time";
+"settings_class_notifications_time_description" = "Receive notifications before class starts.";
+"settings_class_notifications_time_hour_before" = "1 hour before";
+"settings_class_notifications_time_minutes_before" = "minutes before";
 "settings_notifications_alert_title" = "Enable notifications";
 "settings_notifications_alert_description" = "Notifications can be enabled from settings on your device.";
 "settings_notifications_alert_go_to_settings" = "Go to settings";

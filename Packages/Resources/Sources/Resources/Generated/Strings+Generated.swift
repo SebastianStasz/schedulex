@@ -52,8 +52,8 @@ public enum L10n {
   public static let hidden = L10n.tr("Localizable", "hidden", fallback: "Hidden")
   /// Enable notifications
   public static let infoCardEnableNotificationsButton = L10n.tr("Localizable", "info_card_enable_notifications_button", fallback: "Enable notifications")
-  /// Receive notifications 5 minutes before class starts.
-  public static let infoCardEnableNotificationsDescription = L10n.tr("Localizable", "info_card_enable_notifications_description", fallback: "Receive notifications 5 minutes before class starts.")
+  /// Receive notifications 1 hour before class starts. Time of notifications can be changed in settings.
+  public static let infoCardEnableNotificationsDescription = L10n.tr("Localizable", "info_card_enable_notifications_description", fallback: "Receive notifications 1 hour before class starts. Time of notifications can be changed in settings.")
   /// Don't miss the classes!
   public static let infoCardEnableNotificationsTitle = L10n.tr("Localizable", "info_card_enable_notifications_title", fallback: "Don't miss the classes!")
   /// Let's start
@@ -86,10 +86,18 @@ public enum L10n {
   public static let selectedDate = L10n.tr("Localizable", "selected_date", fallback: "Selected date")
   /// Set visibility of classes
   public static let setClassesVisibility = L10n.tr("Localizable", "set_classes_visibility", fallback: "Set visibility of classes")
+  /// Receive notifications before class starts.
+  public static let settingsClassNotificationsTimeDescription = L10n.tr("Localizable", "settings_class_notifications_time_description", fallback: "Receive notifications before class starts.")
+  /// 1 hour before
+  public static let settingsClassNotificationsTimeHourBefore = L10n.tr("Localizable", "settings_class_notifications_time_hour_before", fallback: "1 hour before")
+  /// minutes before
+  public static let settingsClassNotificationsTimeMinutesBefore = L10n.tr("Localizable", "settings_class_notifications_time_minutes_before", fallback: "minutes before")
+  /// Notifications time
+  public static let settingsClassNotificationsTimeTitle = L10n.tr("Localizable", "settings_class_notifications_time_title", fallback: "Notifications time")
+  /// Class notifications
+  public static let settingsClassNotificationsTitle = L10n.tr("Localizable", "settings_class_notifications_title", fallback: "Class notifications")
   /// Contact:
   public static let settingsContact = L10n.tr("Localizable", "settings_contact", fallback: "Contact:")
-  /// Class notifications
-  public static let settingsEventsNotificationsTitle = L10n.tr("Localizable", "settings_events_notifications_title", fallback: "Class notifications")
   /// Not now
   public static let settingsNotificationsAlertCancel = L10n.tr("Localizable", "settings_notifications_alert_cancel", fallback: "Not now")
   /// Notifications can be enabled from settings on your device.

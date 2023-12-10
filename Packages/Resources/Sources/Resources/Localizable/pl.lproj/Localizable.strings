@@ -13,7 +13,7 @@
 
 // info_cards
 "info_card_enable_notifications_title" = "Nie przegap zajęć!";
-"info_card_enable_notifications_description" = "Otrzymuj powiadomienia 5 minut przed rozpoczęciem zajęć.";
+"info_card_enable_notifications_description" = "Otrzymuj powiadomienia 1 godzinę przed rozpoczęciem zajęć. Czas powiadomień możesz zmień w ustawieniach.";
 "info_card_enable_notifications_button" = "Włącz powiadomienia";
 
 // main
@@ -55,7 +55,11 @@
 "settings_title" = "Ustawienia";
 "settings_version" = "Wersja:";
 "settings_contact" = "Kontakt:";
-"settings_events_notifications_title" = "Powiadomienia o zajęciach";
+"settings_class_notifications_title" = "Powiadomienia o zajęciach";
+"settings_class_notifications_time_title" = "Czas powiadomień";
+"settings_class_notifications_time_description" = "Otrzymuj powiadomienia przed rozpoczęciem zajęć.";
+"settings_class_notifications_time_hour_before" = "1 godzina wcześniej";
+"settings_class_notifications_time_minutes_before" = "minut wcześniej";
 "settings_notifications_alert_title" = "Włącz powiadomienia";
 "settings_notifications_alert_description" = "Włącz powiadomienia w ustawieniach na swoim urządzeniu";
 "settings_notifications_alert_go_to_settings" = "Idź do ustawień";
