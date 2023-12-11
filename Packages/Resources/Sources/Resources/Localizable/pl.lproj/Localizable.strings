@@ -52,7 +52,9 @@
 "select_color" = "Wybierz kolor";
 "change_color_of_events" = "Zmień kolor zajęć";
 "event_notification_title" = "Wydarzenie UEK Schedule";
-"event_notification_subtitle" = "Za 5 minut.";
+"event_notification_subtitle_prefix" = "Za";
+"event_notification_subtitle_suffix" = "minut.";
+"event_notification_subtitle_hour" = "Za godzinę.";
 
 // settings
 "settings_title" = "Ustawienia";

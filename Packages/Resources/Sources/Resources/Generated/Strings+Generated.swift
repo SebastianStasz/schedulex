@@ -34,8 +34,12 @@ public enum L10n {
   public static let eventFinished = L10n.tr("Localizable", "event_finished", fallback: "Ended")
   /// Ends
   public static let eventFinishingIn = L10n.tr("Localizable", "event_finishing_in", fallback: "Ends")
-  /// In 5 minutes.
-  public static let eventNotificationSubtitle = L10n.tr("Localizable", "event_notification_subtitle", fallback: "In 5 minutes.")
+  /// In 1 hour.
+  public static let eventNotificationSubtitleHour = L10n.tr("Localizable", "event_notification_subtitle_hour", fallback: "In 1 hour.")
+  /// In
+  public static let eventNotificationSubtitlePrefix = L10n.tr("Localizable", "event_notification_subtitle_prefix", fallback: "In")
+  /// minutes.
+  public static let eventNotificationSubtitleSuffix = L10n.tr("Localizable", "event_notification_subtitle_suffix", fallback: "minutes.")
   /// UEK Schedule event
   public static let eventNotificationTitle = L10n.tr("Localizable", "event_notification_title", fallback: "UEK Schedule event")
   /// Events
