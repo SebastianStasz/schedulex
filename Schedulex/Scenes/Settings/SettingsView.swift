@@ -23,9 +23,7 @@ struct SettingsView: View {
     }
 
     private var toolbarContent: some ToolbarContent {
-        ToolbarItem(placement: .bottomBar) {
-            TextButton("") { }
-        }
+        ToolbarItem(placement: .bottomBar) { TextButton("") { } }
     }
 }
 

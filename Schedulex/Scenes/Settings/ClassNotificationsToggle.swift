@@ -36,16 +36,18 @@ struct ClassNotificationsToggle: View {
                 HStack(spacing: .micro) {
                     Text(L10n.settingsClassNotificationsTimeTitle, style: .body)
                         .foregroundStyle(.textPrimary)
+                        .frame(maxWidth: .infinity, alignment: .leading)
 
-                    Picker(L10n.settingsClassNotificationsTimeTitle, selection: $classNotificationsTime) {
-                        ForEach(ClassNotificationTime.allCases) {
-                            Text($0.title).tag($0)
+                    Menu {
+                        Picker(L10n.settingsClassNotificationsTimeTitle, selection: $classNotificationsTime) {
+                            ForEach(ClassNotificationTime.allCases.reversed()) {
+                                Text($0.title).tag($0)
+                            }
                         }
+                    } label: {
+                        Text(classNotificationsTime.title, style: .body)
+                            .foregroundStyle(.accentPrimary)
                     }
-                    .tint(.accentPrimary)
-                    .pickerStyle(.menu)
-                    .frame(maxWidth: .infinity, alignment: .trailing)
-                    .padding(.trailing, -.medium)
                 }
             }
         }
@@ -76,7 +78,7 @@ struct ClassNotificationsToggle: View {
             isEnableNotificationsAlertPresented = true
         }
     }
-    
+
     private func onSceneChange(_ scene: ScenePhase) {
         guard scene == .active else { return }
         updateNotificationsPermission()
@@ -91,10 +93,10 @@ struct ClassNotificationsToggle: View {
     }
 
     private func openSettings() {
-        if let bundle = Bundle.main.bundleIdentifier, 
-            let settings = URL(string: UIApplication.openSettingsURLString + bundle),
-            UIApplication.shared.canOpenURL(settings) {
-            UIApplication.shared.open(settings)
+        if let bundle = Bundle.main.bundleIdentifier,
+           let settings = URL(string: UIApplication.openSettingsURLString + bundle),
+           UIApplication.shared.canOpenURL(settings) {
+                UIApplication.shared.open(settings)
         }
     }
 }
