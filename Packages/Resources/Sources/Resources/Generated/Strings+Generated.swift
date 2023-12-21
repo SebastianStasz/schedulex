@@ -56,8 +56,8 @@ public enum L10n {
   public static let hidden = L10n.tr("Localizable", "hidden", fallback: "Hidden")
   /// Enable notifications
   public static let infoCardEnableNotificationsButton = L10n.tr("Localizable", "info_card_enable_notifications_button", fallback: "Enable notifications")
-  /// Receive notifications 1 hour before class starts. You can change the notification time in the settings.
-  public static let infoCardEnableNotificationsDescription = L10n.tr("Localizable", "info_card_enable_notifications_description", fallback: "Receive notifications 1 hour before class starts. You can change the notification time in the settings.")
+  /// Receive notifications one hour before class starts. You can change the notification time in the settings.
+  public static let infoCardEnableNotificationsDescription = L10n.tr("Localizable", "info_card_enable_notifications_description", fallback: "Receive notifications one hour before class starts. You can change the notification time in the settings.")
   /// Don't miss the classes!
   public static let infoCardEnableNotificationsTitle = L10n.tr("Localizable", "info_card_enable_notifications_title", fallback: "Don't miss the classes!")
   /// Rate the application
@@ -67,9 +67,13 @@ public enum L10n {
   /// Rate UEK Schedule
   public static let infoCardRateTheAppTitle = L10n.tr("Localizable", "info_card_rate_the_app_title", fallback: "Rate UEK Schedule")
   /// Let's start
-  public static let letsStart = L10n.tr("Localizable", "lets_start", fallback: "Let's start")
-  /// To get started, select the groups you want to follow and see on the home page
-  public static let letsStartMessage = L10n.tr("Localizable", "lets_start_message", fallback: "To get started, select the groups you want to follow and see on the home page")
+  public static let introductionButtonTitle = L10n.tr("Localizable", "introduction_button_title", fallback: "Let's start")
+  /// Select the groups you want to follow and see on the home page.
+  public static let introductionPoint1 = L10n.tr("Localizable", "introduction_point_1", fallback: "Select the groups you want to follow and see on the home page.")
+  /// Receive notifications before classes.
+  public static let introductionPoint2 = L10n.tr("Localizable", "introduction_point_2", fallback: "Receive notifications before classes.")
+  /// Hide classes you don't want to see.
+  public static let introductionPoint3 = L10n.tr("Localizable", "introduction_point_3", fallback: "Hide classes you don't want to see.")
   /// My groups
   public static let myGroups = L10n.tr("Localizable", "my_groups", fallback: "My groups")
   /// Next

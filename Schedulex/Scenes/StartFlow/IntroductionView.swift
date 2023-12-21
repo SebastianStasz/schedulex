@@ -15,43 +15,64 @@ struct IntroductionView: View {
     @State private var isIntroductionFlowSheetPresented = false
 
     var body: some View {
-        VStack(spacing: 40) {
+        VStack(spacing: 0) {
+            Spacer()
+
             Image(.logoUek)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(width: 200)
+                .frame(height: 160)
+                .padding(.bottom, .large)
 
-            VStack(spacing: .small) {
-                Text("UEK Schedule")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                    .foregroundStyle(.textPrimary)
+            Text("UEK Schedule")
+                .font(.title)
+                .fontWeight(.bold)
+                .foregroundStyle(.textPrimary)
 
-                Text(L10n.letsStartMessage)
-                    .multilineTextAlignment(.center)
-                    .padding(.horizontal, .xlarge)
-                    .foregroundStyle(.grayShade1)
+            Spacer()
+            Spacer()
 
-                Button(action: presentIntroductionFlowSheet) {
-                    Text(L10n.letsStart)
-                        .font(.title)
-                        .fontWeight(.bold)
-                        .foregroundStyle(.white)
-                        .padding(.vertical, .large)
-                        .padding(.horizontal, 2 * .xlarge)
-                        .background(.accentPrimary)
-                        .cornerRadius(.large)
-                }
-                .buttonStyle(.plain)
-                .padding(.top, 80)
+            VStack(alignment: .leading, spacing: 32) {
+                introductionPoint(title: L10n.introductionPoint1, icon: "calendar")
+                introductionPoint(title: L10n.introductionPoint2, icon: "bell.fill")
+                introductionPoint(title: L10n.introductionPoint3, icon: "eye.slash.fill")
             }
-            .frame(maxHeight: .infinity, alignment: .top)
+
+            Spacer()
+            Spacer()
+
+            Button(action: presentIntroductionFlowSheet) {
+                Text(L10n.introductionButtonTitle, style: .titleSmall)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, .large)
+                    .foregroundStyle(.white)
+                    .background(.accentPrimary)
+                    .cornerRadius(.large)
+            }
+            .fullScreenCover(isPresented: $isIntroductionFlowSheetPresented) {
+                let viewModel = StartFlowViewModel(service: service)
+                StartFirstStepView(viewModel: viewModel)
+            }
         }
-        .padding(.top, 60)
-        .fullScreenCover(isPresented: $isIntroductionFlowSheetPresented) {
-            let viewModel = StartFlowViewModel(service: service)
-            StartFirstStepView(viewModel: viewModel)
+        .padding(.bottom, bottomSpacing)
+        .padding(.horizontal, .large)
+        .padding(.top, .large)
+    }
+
+    func introductionPoint(title: String, icon: String) -> some View {
+        HStack(spacing: .xlarge) {
+            Image(systemName: icon)
+                .resizable()
+                .scaledToFit()
+                .frame(width: 34, height: 34)
+                .foregroundStyle(.accentPrimary)
+
+            Text(title, style: .bodyMedium)
         }
+    }
+
+    private var bottomSpacing: CGFloat {
+        UIDevice.current.hasNotch ? 40 : .large
     }
 
     private func presentIntroductionFlowSheet() {

@@ -13,11 +13,17 @@
 
 // info_cards
 "info_card_enable_notifications_title" = "Nie przegap zajęć!";
-"info_card_enable_notifications_description" = "Otrzymuj powiadomienia 1 godzinę przed rozpoczęciem zajęć. Czas powiadomień możesz zmień w ustawieniach.";
+"info_card_enable_notifications_description" = "Otrzymuj powiadomienia godzinę przed rozpoczęciem zajęć. Czas powiadomień możesz zmień w ustawieniach.";
 "info_card_enable_notifications_button" = "Włącz powiadomienia";
 "info_card_rate_the_app_title" = "Oceń UEK Schedule";
 "info_card_rate_the_app_description" = "Podziel się swoją oceną. Kliknij poniższy przycisk, aby przejść bezpośrednio do strony aplikacji.";
 "info_card_rate_the_app_button" = "Oceń aplikację";
+
+// introduction_screen
+"introduction_point_1" = "Wybierz grupy, które chcesz obserwować i wyświetlać na stronie głównej.";
+"introduction_point_2" = "Otrzymuj powiadomienia przed zajęciami.";
+"introduction_point_3" = "Ukrywaj przedmioty, których nie chcesz widzieć.";
+"introduction_button_title" = "Zaczynajmy";
 
 // main
 "add_group" = "Dodaj grupę";
@@ -45,8 +51,6 @@
 "set_classes_visibility" = "Ustaw widoczność typów zajęć";
 "hidden" = "Ukryte";
 "visible" = "Widoczne";
-"lets_start" = "Zaczynajmy";
-"lets_start_message" = "Aby zacząć wybierz grupy, które chcesz obserwować i widzieć na stronie głównej";
 "no_result_message" = "Brak wyników wyszukiwania";
 "color" = "Kolor";
 "select_color" = "Wybierz kolor";

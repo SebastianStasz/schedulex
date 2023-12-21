@@ -58,10 +58,3 @@ public extension View {
         .frame(maxHeight: .infinity)
         .doubleNavigationTitle(title: "30 listopada 2023", subtitle: "Dzisiaj", showSettings: {})
 }
-
-private extension UIDevice {
-    var hasNotch: Bool {
-        let bottom = UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0
-        return bottom > 0
-    }
-}
