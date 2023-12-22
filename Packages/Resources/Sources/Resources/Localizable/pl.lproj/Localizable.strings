@@ -13,7 +13,7 @@
 
 // info_cards
 "info_card_enable_notifications_title" = "Nie przegap zajęć!";
-"info_card_enable_notifications_description" = "Otrzymuj powiadomienia godzinę przed rozpoczęciem zajęć. Czas powiadomień możesz zmień w ustawieniach.";
+"info_card_enable_notifications_description" = "Otrzymuj powiadomienia godzinę przed rozpoczęciem zajęć. Czas powiadomień możesz zmienić w ustawieniach.";
 "info_card_enable_notifications_button" = "Włącz powiadomienia";
 "info_card_rate_the_app_title" = "Oceń UEK Schedule";
 "info_card_rate_the_app_description" = "Podziel się swoją oceną. Kliknij poniższy przycisk, aby przejść bezpośrednio do strony aplikacji.";
