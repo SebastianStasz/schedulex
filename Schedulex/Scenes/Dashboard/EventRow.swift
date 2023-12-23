@@ -9,49 +9,99 @@ import Domain
 import SwiftUI
 import Widgets
 
+enum EventsListElement {
+    case event(Event, isFirst: Bool, isLast: Bool)
+    case `break`(DateComponents)
+
+    var isFirst: Bool {
+        guard case let .event(_, isFirst, _) = self else { return false }
+        return isFirst
+    }
+
+    var isLast: Bool {
+        guard case let .event(_, _, isLast) = self else { return false }
+        return isLast
+    }
+
+    var startTime: String? {
+        guard case let .event(event, _, _) = self else { return nil }
+        return event.startDate?.formatted(style: .timeOnly)
+    }
+
+    var endTime: String? {
+        guard case let .event(event, _, _) = self else { return nil }
+        return event.endDate?.formatted(style: .timeOnly)
+    }
+
+    var circleIcon: Icon {
+        guard case let .event(event, _, _) = self else { return .circle }
+        return event.status == nil ? .circleFill : .circle
+    }
+}
+
 struct EventRow: View {
-    let event: Event
-    let isFirst: Bool
-    let isLast: Bool
+    let element: EventsListElement
 
     var body: some View {
         HStack(alignment: .top, spacing: .medium) {
             VStack(alignment: .leading, spacing: .micro) {
-                Text(event.startDate?.formatted(style: .timeOnly) ?? "", style: .timeMedium)
-                    .foregroundStyle(.textPrimary)
+                let startTime = element.startTime ?? Date.now.formatted(style: .timeOnly)
 
-                Text(event.endDate?.formatted(style: .timeOnly) ?? "", style: .time)
+                Text(startTime, style: .timeMedium)
+                    .foregroundStyle(.textPrimary)
+                    .opacity(element.startTime == nil ? 0 : 1)
+
+                Text(element.endTime ?? "", style: .time)
                     .foregroundStyle(.textSecondary)
             }
 
             VStack(spacing: 0) {
-                Image.icon(isEnded ? .circleFill : .circle)
+                Image.icon(element.circleIcon)
                     .resizable()
                     .frame(width: 12, height: 12)
-                    .padding(.top, isFirst ? 0 : 5)
+                    .padding(.top, element.isFirst ? 0 : 5)
                     .padding(.bottom, 5)
 
                 Rectangle()
                     .frame(width: 1)
 
-                if isLast {
+                if element.isLast {
                     Rectangle()
                         .frame(width: 12, height: 1)
                 }
             }
             .foregroundStyle(.accentPrimary)
 
-            EventCardView(event: event)
-                .padding(.bottom, isLast ? 0 : .medium)
+            switch element {
+            case let .event(event, _, isLast):
+                EventCardView(event: event)
+                    .padding(.bottom, isLast ? 0 : .medium)
+            case let .break(breakTimeComponents):
+                Text(breakTimeDescription(from: breakTimeComponents), style: .footnote)
+                    .padding(.large)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .foregroundStyle(.textPrimary)
+                    .background(Color.accentPrimary)
+                    .clipShape(RoundedRectangle(cornerRadius: 12))
+                    .padding(.bottom, .medium)
+            }
         }
         .fixedSize(horizontal: false, vertical: true)
     }
 
-    private var isEnded: Bool {
-        event.status == nil
+    private func breakTimeDescription(from components: DateComponents) -> String {
+        guard let time = Calendar.current.date(from: components),
+              let hour = components.hour
+        else { return "Przerwa" }
+        let suffix = hour == 0 ? "minut" : "g."
+        return "Przerwa \(time.formatted(style: .timeBetween)) \(suffix)"
     }
 }
 
 #Preview {
-    EventRow(event: .sample, isFirst: true, isLast: true)
+    VStack(spacing: .large) {
+        EventRow(element: .event(.sample, isFirst: true, isLast: true))
+        EventRow(element: .break(DateComponents(hour: 1, minute: 45)))
+    }
+    .padding(.medium)
 }
