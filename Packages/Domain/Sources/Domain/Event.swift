@@ -10,6 +10,8 @@ import Foundation
 public struct Event: Hashable {
     public let facultyGroupName: String
     public let facultyGroupColor: FacultyGroupColor
+    public let isEventTransfer: Bool
+    public let eventTransferNote: String?
     public let startDate: Date?
     public let endDate: Date?
     public let name: String?
@@ -17,19 +19,30 @@ public struct Event: Hashable {
     public let teacher: String?
     public let type: String?
 
-    public var `class`: FacultyGroupClass {
-        FacultyGroupClass(name: name ?? "", type: type ?? "", teacher: teacher ?? "")
-    }
-
-    public init(facultyGroupName: String, facultyGroupColor: FacultyGroupColor, startDate: Date?, endDate: Date?, name: String?, place: String?, teacher: String?, type: String?) {
+    public init(facultyGroupName: String, facultyGroupColor: FacultyGroupColor, isEventTransfer: Bool, eventTransferNote: String?, startDate: Date?, endDate: Date?, name: String?, place: String?, teacher: String?, type: String?) {
         self.facultyGroupName = facultyGroupName
         self.facultyGroupColor = facultyGroupColor
+        self.isEventTransfer = isEventTransfer
+        self.eventTransferNote = eventTransferNote
         self.startDate = startDate
         self.endDate = endDate
         self.name = name
         self.place = place
         self.teacher = teacher
         self.type = type
+    }
+
+    public var typeDescription: String {
+        let type = type ?? ""
+        guard isEventTransfer else {
+            return type
+        }
+        let note = eventTransferNote ?? ""
+        return "\(type) \(note)"
+    }
+
+    public var `class`: FacultyGroupClass {
+        FacultyGroupClass(name: name ?? "", type: type ?? "", teacher: teacher ?? "")
     }
 
     public var startDateWithoutTime: Date? {

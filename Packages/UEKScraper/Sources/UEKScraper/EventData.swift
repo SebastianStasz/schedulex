@@ -15,6 +15,7 @@ struct EventData {
     let time: String
     let place: String?
     let teacher: String?
+    var eventTransferNote: String?
 
     private var isLanguageEvent: Bool {
         name?.contains("grupa przedmiotów") ?? false || place == "Wybierz swoją grupę językową" || type == "lektorat"
@@ -24,13 +25,17 @@ struct EventData {
         teacher != "Studencki Uek Parlament" && type != "rezerwacja" && type != "Przeniesienie zajęć"
     }
 
+    var isEventTransfer: Bool {
+        type == "Przeniesienie zajęć"
+    }
+
     func isValidEvent(for facultyGroup: FacultyGroup) -> Bool {
         !(!facultyGroup.isLanguage && isLanguageEvent)
     }
 
     func toEvent(facultyGroup: FacultyGroup, datesDecoder: DatesDecoder) -> Event {
         let dates = datesDecoder.getDates(date: date, time: time)
-        return Event(facultyGroupName: facultyGroup.name, facultyGroupColor: facultyGroup.color, startDate: dates.0, endDate: dates.1, name: name, place: place, teacher: teacher, type: type)
+        return Event(facultyGroupName: facultyGroup.name, facultyGroupColor: facultyGroup.color, isEventTransfer: isEventTransfer, eventTransferNote: eventTransferNote, startDate: dates.0, endDate: dates.1, name: name, place: place, teacher: teacher, type: type)
     }
 
     func toFacultyGroupClass() -> FacultyGroupClass? {

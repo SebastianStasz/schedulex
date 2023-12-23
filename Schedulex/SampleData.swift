@@ -27,5 +27,6 @@ extension FacultyGroupClass {
 }
 
 extension Event {
-    static let sample = Event(facultyGroupName: "ZIIAS1-1113", facultyGroupColor: .blue, startDate: .now, endDate: .now, name: "Probability and Statistics", place: "Place", teacher: "dr Some Name", type: "Lecture")
+    static let sample = Event(facultyGroupName: "ZIIAS1-1113", facultyGroupColor: .blue, isEventTransfer: false, eventTransferNote: nil, startDate: .now, endDate: .now, name: "Probability and Statistics", place: "Place", teacher: "dr Some Name", type: "Lecture")
+    static let eventTransfer = Event(facultyGroupName: "ZIIAS1-1113", facultyGroupColor: .blue, isEventTransfer: true, eventTransferNote: "na 17.01.2024", startDate: .now, endDate: .now, name: "Probability and Statistics", place: "Place", teacher: "dr Some Name", type: "Przeniesienie zajęć")
 }

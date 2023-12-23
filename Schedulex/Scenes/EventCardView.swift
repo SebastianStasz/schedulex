@@ -15,6 +15,10 @@ struct EventCardView: View {
     
     var body: some View {
         HStack(alignment: .top, spacing: 0) {
+            Rectangle()
+                .frame(width: .medium)
+                .foregroundStyle(event.facultyGroupColor.shade3)
+
             HStack(alignment: .top, spacing: .medium) {
                 VStack(alignment: .leading, spacing: .micro) {
                     Text(event.startDate?.formatted(style: .timeOnly) ?? "", style: .time)
@@ -32,10 +36,13 @@ struct EventCardView: View {
                         Text(event.teacher ?? "", style: .footnote)
                         Text(event.place ?? "", style: .footnote)
                         HStack(spacing: 0) {
-                            Text(event.type ?? "", style: .footnote)
+                            Text(event.typeDescription, style: .footnote)
+                                .foregroundStyle(event.isEventTransfer ? .red : event.facultyGroupColor.shade2)
                             Spacer()
-                            TimelineView(.periodic(from: .now, by: 1)) { _ in
-                                Text(status, style: .time)
+                            if !event.isEventTransfer {
+                                TimelineView(.periodic(from: .now, by: 1)) { _ in
+                                    Text(status, style: .time)
+                                }
                             }
                         }
                     }
@@ -46,9 +53,9 @@ struct EventCardView: View {
             .padding(.medium)
             .background(event.facultyGroupColor.shade4)
         }
-        .padding(.leading, .medium)
-        .background(event.facultyGroupColor.shade3)
         .clipShape(RoundedRectangle(cornerRadius: 12))
+        .fixedSize(horizontal: false, vertical: true)
+        .opacity(event.isEventTransfer ? 0.5 : 1)
     }
 
     private var status: String {
@@ -68,6 +75,9 @@ struct EventCardView: View {
 }
 
 #Preview {
-    EventCardView(event: .sample)
-        .padding()
+    VStack(spacing: .large) {
+        EventCardView(event: .sample)
+        EventCardView(event: .eventTransfer)
+    }
+    .padding(.large)
 }
