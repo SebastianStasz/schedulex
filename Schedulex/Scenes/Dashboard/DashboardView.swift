@@ -44,13 +44,11 @@ struct DashboardView: View {
                             InfoCardsSection()
                                 .environmentObject(notificationsManager)
                         }
-
-                        ForEach((viewModel.dayPickerItems?.isEmpty ?? true) ? [] : viewModel.selectedDateEvents, id: \.self) {
-                            EventCardView(event: $0)
-                        }
+                        EventsList(events: (viewModel.dayPickerItems?.isEmpty ?? true) ? [] : viewModel.selectedDateEvents)
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .padding(.medium)
+                    .padding(.horizontal, .medium)
+                    .padding(.vertical, .large)
                     .background(.backgroundPrimary)
                 }
                 .gesture(dragGesture)
