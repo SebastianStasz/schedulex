@@ -21,4 +21,3 @@ struct APIService {
         return url
     }
 }
-
