@@ -10,6 +10,7 @@ public enum Icon: String, Identifiable, CaseIterable {
     case delete
     case info
     case circle
+    case doubleCircle
     case circleFill
     case checkmark
     case chevronRight
@@ -29,6 +30,8 @@ public enum Icon: String, Identifiable, CaseIterable {
             return "info.circle"
         case .circle:
             return "circle"
+        case .doubleCircle:
+            return "circle.circle"
         case .circleFill:
             return "circle.fill"
         case .checkmark:

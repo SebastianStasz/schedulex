@@ -14,6 +14,10 @@ public enum L10n {
   public static let addGroup = L10n.tr("Localizable", "add_group", fallback: "Add group")
   /// Add to observed
   public static let addToObserved = L10n.tr("Localizable", "add_to_observed", fallback: "Add to observed")
+  /// h.
+  public static let breakCardTimeSuffix = L10n.tr("Localizable", "break_card_time_suffix", fallback: "h.")
+  /// Break
+  public static let breakCardTitle = L10n.tr("Localizable", "break_card_title", fallback: "Break")
   /// Calendar
   public static let calendar = L10n.tr("Localizable", "calendar", fallback: "Calendar")
   /// Cancel
@@ -38,8 +42,6 @@ public enum L10n {
   public static let eventNotificationSubtitleHour = L10n.tr("Localizable", "event_notification_subtitle_hour", fallback: "In 1 hour.")
   /// In
   public static let eventNotificationSubtitlePrefix = L10n.tr("Localizable", "event_notification_subtitle_prefix", fallback: "In")
-  /// minutes.
-  public static let eventNotificationSubtitleSuffix = L10n.tr("Localizable", "event_notification_subtitle_suffix", fallback: "minutes.")
   /// UEK Schedule event
   public static let eventNotificationTitle = L10n.tr("Localizable", "event_notification_title", fallback: "UEK Schedule event")
   /// Events
@@ -74,6 +76,8 @@ public enum L10n {
   public static let introductionPoint2 = L10n.tr("Localizable", "introduction_point_2", fallback: "Receive notifications before classes.")
   /// Hide classes you don't want to see.
   public static let introductionPoint3 = L10n.tr("Localizable", "introduction_point_3", fallback: "Hide classes you don't want to see.")
+  /// minutes.
+  public static let minutesSuffix = L10n.tr("Localizable", "minutes_suffix", fallback: "minutes.")
   /// My groups
   public static let myGroups = L10n.tr("Localizable", "my_groups", fallback: "My groups")
   /// Next

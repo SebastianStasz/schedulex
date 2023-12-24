@@ -10,6 +10,8 @@
 "event_finishing_in" = "Ends";
 "swipe_tip_title" = "⬅️  Swipe right or left  ➡️";
 "swipe_tip_description" = "Change days with a swipe of your finger!";
+"break_card_title" = "Break";
+"break_card_time_suffix" = "h.";
 
 // info_cards
 "info_card_enable_notifications_title" = "Don't miss the classes!";
@@ -57,7 +59,7 @@
 "change_color_of_events" = "Change color of events";
 "event_notification_title" = "UEK Schedule event";
 "event_notification_subtitle_prefix" = "In";
-"event_notification_subtitle_suffix" = "minutes.";
+"minutes_suffix" = "minutes.";
 "event_notification_subtitle_hour" = "In 1 hour.";
 
 // settings

@@ -28,7 +28,7 @@ extension Event {
         case .oneHourBefore:
             return L10n.eventNotificationSubtitleHour
         default:
-            return "\(L10n.eventNotificationSubtitlePrefix) \(time.minutes) \(L10n.eventNotificationSubtitleSuffix)"
+            return "\(L10n.eventNotificationSubtitlePrefix) \(time.minutes) \(L10n.minutesSuffix)"
         }
     }
 

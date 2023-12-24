@@ -28,9 +28,7 @@ struct EventCardView: View {
                             .foregroundStyle(event.isEventTransfer ? .red : event.facultyGroupColor.shade2)
                         Spacer()
                         if let status = event.status, !event.isEventTransfer {
-                            TimelineView(.periodic(from: .now, by: 1)) { _ in
-                                Text(status, style: .footnote)
-                            }
+                            Text(status, style: .footnote)
                         }
                     }
                 }

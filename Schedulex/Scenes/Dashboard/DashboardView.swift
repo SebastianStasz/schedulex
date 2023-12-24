@@ -38,7 +38,7 @@ struct DashboardView: View {
 
                 separator()
 
-                ScrollView {
+                ScrollView(showsIndicators: false) {
                     VStack(spacing: .medium) {
                         if !(viewModel.dayPickerItems?.isEmpty ?? true) {
                             InfoCardsSection()
@@ -47,8 +47,7 @@ struct DashboardView: View {
                         EventsList(events: (viewModel.dayPickerItems?.isEmpty ?? true) ? [] : viewModel.selectedDateEvents)
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .padding(.horizontal, .medium)
-                    .padding(.vertical, .large)
+                    .padding(.medium)
                     .background(.backgroundPrimary)
                 }
                 .gesture(dragGesture)
