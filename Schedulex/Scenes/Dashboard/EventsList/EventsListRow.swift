@@ -22,7 +22,7 @@ struct EventsListRow: View {
                     .opacity(element.startTime == nil ? 0 : 1)
 
                 Text(element.endTime ?? "", style: .time)
-                    .foregroundStyle(.textSecondary)
+                    .foregroundStyle(.grayShade1)
             }
 
             VStack(spacing: 0) {

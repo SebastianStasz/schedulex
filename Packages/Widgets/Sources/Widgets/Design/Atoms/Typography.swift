@@ -47,9 +47,9 @@ public enum Typography: CaseIterable {
         case .footnote:
             return .system(size: 13)
         case .timeMedium:
-            return FontFamily.RobotoMono.medium.swiftUIFont(size: 16, relativeTo: .footnote)
+            return FontFamily.Inconsolata.medium.swiftUIFont(size: 18, relativeTo: .footnote)
         case .time:
-            return FontFamily.RobotoMono.regular.swiftUIFont(size: 15, relativeTo: .footnote)
+            return FontFamily.Inconsolata.regular.swiftUIFont(size: 16, relativeTo: .footnote)
         case .keyboardButton:
             return .system(size: 18, weight: .semibold)
         }

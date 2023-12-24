@@ -45,6 +45,7 @@ struct DashboardView: View {
                                 .environmentObject(notificationsManager)
                         }
                         EventsList(events: (viewModel.dayPickerItems?.isEmpty ?? true) ? [] : viewModel.selectedDateEvents)
+                            .padding(.vertical, .medium)
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .padding(.medium)
