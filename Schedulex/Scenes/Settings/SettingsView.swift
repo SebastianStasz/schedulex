@@ -10,9 +10,12 @@ import Widgets
 import Resources
 
 struct SettingsView: View {
+    @AppStorage("appColorScheme") private var appColorScheme: AppColorScheme = .system
+    
     var body: some View {
         VStack(spacing: .large) {
             SettingsAppInformationsSection()
+            MenuPicker(title: L10n.settingsAppThemeTitle, options: AppColorScheme.allCases, selectedOption: $appColorScheme).card()
             ClassNotificationsToggle()
             Spacer()
         }
