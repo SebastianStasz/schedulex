@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Resources
 
 public struct Event: Hashable {
     public let facultyGroupName: String
@@ -33,12 +34,27 @@ public struct Event: Hashable {
     }
 
     public var typeDescription: String {
-        let type = type ?? ""
+        let type = type ?? " "
         guard isEventTransfer else {
             return type
         }
-        let note = eventTransferNote ?? ""
+        let note = eventTransferNote ?? " "
         return "\(type) \(note)"
+    }
+
+    public var status: String? {
+        guard let startDate = startDate, let endDate = endDate else { return nil }
+        if endDate <= .now {
+            return nil
+        } else {
+            let formatter = RelativeDateTimeFormatter()
+            formatter.unitsStyle = .short
+            let isBeforeEvent = startDate > .now
+            let date = isBeforeEvent ? startDate : endDate
+            let prefix = isBeforeEvent ? "" : "\(L10n.eventFinishingIn) "
+            let description = formatter.localizedString(for: date, relativeTo: .now)
+            return prefix + description
+        }
     }
 
     public var `class`: FacultyGroupClass {

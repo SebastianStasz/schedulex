@@ -10,6 +10,7 @@ import Foundation
 public enum DateStyle {
     case dateLong
     case timeOnly
+    case timeBetween
 
     func formatDate(_ date: Date) -> String {
         switch self {
@@ -17,6 +18,8 @@ public enum DateStyle {
             return date.formatted(date: .long, time: .omitted)
         case .timeOnly:
             return date.formatted(.dateTime.hour(.twoDigits(amPM: .abbreviated)).minute(.twoDigits))
+        case .timeBetween:
+            return date.formatted(.dateTime.hour(.defaultDigits(amPM: .omitted)).minute(.twoDigits))
         }
     }
 }

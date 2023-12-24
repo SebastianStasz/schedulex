@@ -20,11 +20,12 @@ public typealias Font = FontConvertible.Font
 
 // swiftlint:disable identifier_name line_length type_body_length
 public enum FontFamily {
-  public enum RobotoMono {
-    public static let regular = FontConvertible(name: "RobotoMono-Regular", family: "Roboto Mono", path: "RobotoMono-Regular.ttf")
-    public static let all: [FontConvertible] = [regular]
+  public enum Inconsolata {
+    public static let medium = FontConvertible(name: "Inconsolata-Medium", family: "Inconsolata", path: "Inconsolata-Medium.ttf")
+    public static let regular = FontConvertible(name: "Inconsolata-Regular", family: "Inconsolata", path: "Inconsolata-Regular.ttf")
+    public static let all: [FontConvertible] = [medium, regular]
   }
-  public static let allCustomFonts: [FontConvertible] = [RobotoMono.all].flatMap { $0 }
+  public static let allCustomFonts: [FontConvertible] = [Inconsolata.all].flatMap { $0 }
   public static func registerAllCustomFonts() {
     allCustomFonts.forEach { $0.register() }
   }
