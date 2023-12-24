@@ -7,8 +7,9 @@
 
 import Foundation
 import Resources
+import Widgets
 
-enum ClassNotificationTime: String, Identifiable, CaseIterable {
+enum ClassNotificationTime: String, Identifiable, CaseIterable, Pickable {
     case fiveMinutesBefore
     case tenMinutesBefore
     case fifteenMinutesBefore

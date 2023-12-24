@@ -32,23 +32,7 @@ struct ClassNotificationsToggle: View {
 
             if classNotificationsEnabled {
                 Separator()
-
-                HStack(spacing: .micro) {
-                    Text(L10n.settingsClassNotificationsTimeTitle, style: .body)
-                        .foregroundStyle(.textPrimary)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-
-                    Menu {
-                        Picker(L10n.settingsClassNotificationsTimeTitle, selection: $classNotificationsTime) {
-                            ForEach(ClassNotificationTime.allCases.reversed()) {
-                                Text($0.title).tag($0)
-                            }
-                        }
-                    } label: {
-                        Text(classNotificationsTime.title, style: .body)
-                            .foregroundStyle(.accentPrimary)
-                    }
-                }
+                MenuPicker(title: L10n.settingsClassNotificationsTimeTitle, options: ClassNotificationTime.allCases, selectedOption: $classNotificationsTime)
             }
         }
         .card()
