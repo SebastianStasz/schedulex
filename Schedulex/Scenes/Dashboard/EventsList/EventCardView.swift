@@ -20,10 +20,10 @@ struct EventCardView: View {
                     .foregroundStyle(event.facultyGroupColor.shade1)
 
                 VStack(alignment: .leading, spacing: .micro) {
-                    Text(event.teacher ?? " ", style: .footnote)
+                    Text(event.teacher ?? "", style: .footnote)
 
                     if !event.isEventTransfer {
-                        Text(event.place ?? " ", style: .footnote)
+                        Text(event.place ?? "", style: .footnote)
                     }
 
                     HStack(spacing: 0) {
