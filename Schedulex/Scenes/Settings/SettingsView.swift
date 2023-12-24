@@ -11,7 +11,7 @@ import Resources
 
 struct SettingsView: View {
     @AppStorage("appColorScheme") private var appColorScheme: AppColorScheme = .system
-    
+
     var body: some View {
         VStack(spacing: .large) {
             SettingsAppInformationsSection()
@@ -29,7 +29,6 @@ struct SettingsView: View {
         ToolbarItem(placement: .bottomBar) { TextButton("") { } }
     }
 }
-
 
 #Preview {
     NavigationStack {

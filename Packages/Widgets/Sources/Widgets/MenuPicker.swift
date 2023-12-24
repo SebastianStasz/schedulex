@@ -41,7 +41,3 @@ public struct MenuPicker<T: Pickable>: View {
         }
     }
 }
-
-//#Preview {
-//    SwiftUIView()
-//}
