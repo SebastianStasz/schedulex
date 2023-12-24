@@ -17,25 +17,27 @@ struct EventCardView: View {
         HStack(spacing: .medium) {
             VStack(alignment: .leading, spacing: .small) {
                 Text(event.name ?? "", style: .bodyMedium)
-                    .lineLimit(2)
                     .foregroundStyle(event.facultyGroupColor.shade1)
 
                 VStack(alignment: .leading, spacing: .micro) {
                     Text(event.teacher ?? " ", style: .footnote)
                     Text(event.place ?? " ", style: .footnote)
+
                     HStack(spacing: 0) {
                         Text(event.typeDescription, style: .footnote)
                             .foregroundStyle(event.isEventTransfer ? .red : event.facultyGroupColor.shade2)
+                        
                         Spacer()
+
                         if let status = event.status, !event.isEventTransfer {
                             Text(status, style: .footnote)
                         }
                     }
                 }
-                .lineLimit(1)
                 .foregroundStyle(event.facultyGroupColor.shade2)
             }
         }
+        .lineLimit(1, reservesSpace: true)
         .padding(.medium)
         .background(event.facultyGroupColor.shade4)
         .clipShape(RoundedRectangle(cornerRadius: 12))
