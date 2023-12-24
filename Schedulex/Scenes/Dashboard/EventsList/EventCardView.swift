@@ -32,7 +32,7 @@ struct EventCardView: View {
 
                         Spacer()
 
-                        if let status = event.status, !event.isEventTransfer {
+                        if let status, !event.isEventTransfer {
                             Text(status, style: .footnote)
                         }
                     }
@@ -44,6 +44,21 @@ struct EventCardView: View {
         .padding(.medium)
         .background(event.facultyGroupColor.shade4)
         .clipShape(RoundedRectangle(cornerRadius: 12))
+    }
+
+    private var status: String? {
+        guard let startDate = event.startDate, let endDate = event.endDate else { return nil }
+        if endDate <= .now {
+            return nil
+        } else {
+            let formatter = RelativeDateTimeFormatter()
+            formatter.unitsStyle = .short
+            let isBeforeEvent = startDate > .now
+            let date = isBeforeEvent ? startDate : endDate
+            let prefix = isBeforeEvent ? "" : "\(L10n.eventFinishingIn) "
+            let description = formatter.localizedString(for: date, relativeTo: .now)
+            return prefix + description
+        }
     }
 }
 

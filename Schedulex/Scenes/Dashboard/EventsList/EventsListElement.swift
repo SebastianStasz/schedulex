@@ -36,7 +36,7 @@ enum EventsListElement {
     var circleIcon: Icon {
         switch self {
         case let .event(event, _, _):
-            guard event.status != nil else { return .circleFill }
+            guard let endDate = event.endDate, endDate > .now else { return .circleFill }
             return event.startDate! > .now ? .circle : .doubleCircle
         case let .break(startDate, endDate, _):
             guard startDate < .now else { return .circle }
