@@ -66,6 +66,10 @@
 "settings_title" = "Ustawienia";
 "settings_version" = "Wersja:";
 "settings_contact" = "Kontakt:";
+"settings_app_theme_title" = "Motyw aplikacji";
+"settings_app_theme_system_title" = "Systemowy";
+"settings_app_theme_light_title" = "Jasny";
+"settings_app_theme_dark_title" = "Ciemny";
 "settings_class_notifications_title" = "Powiadomienia o zajęciach";
 "settings_class_notifications_time_title" = "Czas powiadomień";
 "settings_class_notifications_time_description" = "Otrzymuj powiadomienia przed rozpoczęciem zajęć.";

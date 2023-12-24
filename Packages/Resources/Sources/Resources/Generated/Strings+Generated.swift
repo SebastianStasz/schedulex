@@ -104,6 +104,14 @@ public enum L10n {
   public static let selectedDate = L10n.tr("Localizable", "selected_date", fallback: "Selected date")
   /// Set visibility of classes
   public static let setClassesVisibility = L10n.tr("Localizable", "set_classes_visibility", fallback: "Set visibility of classes")
+  /// Dark
+  public static let settingsAppThemeDarkTitle = L10n.tr("Localizable", "settings_app_theme_dark_title", fallback: "Dark")
+  /// Light
+  public static let settingsAppThemeLightTitle = L10n.tr("Localizable", "settings_app_theme_light_title", fallback: "Light")
+  /// System
+  public static let settingsAppThemeSystemTitle = L10n.tr("Localizable", "settings_app_theme_system_title", fallback: "System")
+  /// App theme
+  public static let settingsAppThemeTitle = L10n.tr("Localizable", "settings_app_theme_title", fallback: "App theme")
   /// Receive notifications before class starts.
   public static let settingsClassNotificationsTimeDescription = L10n.tr("Localizable", "settings_class_notifications_time_description", fallback: "Receive notifications before class starts.")
   /// 1 hour before
