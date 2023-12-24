@@ -16,7 +16,7 @@ strings:
 ## Generate constants for Fonts.
 fonts:
   inputs:
-    - Fonts/RobotoMono
+    - Fonts/Inconsolata
   outputs:
     - templateName: swift5
       output: Fonts+Generated.swift
