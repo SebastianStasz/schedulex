@@ -66,6 +66,10 @@
 "settings_title" = "Settings";
 "settings_version" = "Version:";
 "settings_contact" = "Contact:";
+"settings_app_theme_title" = "App theme";
+"settings_app_theme_system_title" = "System";
+"settings_app_theme_light_title" = "Light";
+"settings_app_theme_dark_title" = "Dark";
 "settings_class_notifications_title" = "Class notifications";
 "settings_class_notifications_time_title" = "Notifications time";
 "settings_class_notifications_time_description" = "Receive notifications before class starts.";
