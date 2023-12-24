@@ -12,7 +12,7 @@ import Widgets
 
 struct EventCardView: View {
     let event: Event
-    
+
     var body: some View {
         HStack(spacing: .medium) {
             VStack(alignment: .leading, spacing: .small) {
@@ -21,12 +21,15 @@ struct EventCardView: View {
 
                 VStack(alignment: .leading, spacing: .micro) {
                     Text(event.teacher ?? " ", style: .footnote)
-                    Text(event.place ?? " ", style: .footnote)
+
+                    if !event.isEventTransfer {
+                        Text(event.place ?? " ", style: .footnote)
+                    }
 
                     HStack(spacing: 0) {
                         Text(event.typeDescription, style: .footnote)
                             .foregroundStyle(event.isEventTransfer ? .red : event.facultyGroupColor.shade2)
-                        
+
                         Spacer()
 
                         if let status = event.status, !event.isEventTransfer {
@@ -41,7 +44,6 @@ struct EventCardView: View {
         .padding(.medium)
         .background(event.facultyGroupColor.shade4)
         .clipShape(RoundedRectangle(cornerRadius: 12))
-        .opacity(event.isEventTransfer ? 0.5 : 1)
     }
 }
 
