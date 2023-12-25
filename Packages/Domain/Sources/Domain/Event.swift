@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Event: Hashable {
+public struct Event: Hashable, Identifiable {
     public let facultyGroupName: String
     public let facultyGroupColor: FacultyGroupColor
     public let isEventTransfer: Bool
@@ -17,9 +17,15 @@ public struct Event: Hashable {
     public let name: String?
     public let place: String?
     public let teacher: String?
+    public let teacherProfileUrl: URL?
+    public let teamsUrl: URL?
     public let type: String?
 
-    public init(facultyGroupName: String, facultyGroupColor: FacultyGroupColor, isEventTransfer: Bool, eventTransferNote: String?, startDate: Date?, endDate: Date?, name: String?, place: String?, teacher: String?, type: String?) {
+    public var id: Int {
+        hashValue
+    }
+
+    public init(facultyGroupName: String, facultyGroupColor: FacultyGroupColor, isEventTransfer: Bool, eventTransferNote: String?, startDate: Date?, endDate: Date?, name: String?, place: String?, teacher: String?, teacherProfileUrl: URL?, teamsUrl: URL?, type: String?) {
         self.facultyGroupName = facultyGroupName
         self.facultyGroupColor = facultyGroupColor
         self.isEventTransfer = isEventTransfer
@@ -29,6 +35,8 @@ public struct Event: Hashable {
         self.name = name
         self.place = place
         self.teacher = teacher
+        self.teacherProfileUrl = teacherProfileUrl
+        self.teamsUrl = teamsUrl
         self.type = type
     }
 
