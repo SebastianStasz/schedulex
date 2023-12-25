@@ -30,7 +30,7 @@ struct ClassNotificationsToggle: View {
                     .labelsHidden()
             }
 
-            if classNotificationsEnabled {
+            if areNotificationsEnabled.wrappedValue {
                 Separator()
                 MenuPicker(title: L10n.settingsClassNotificationsTimeTitle, options: ClassNotificationTime.allCases, selectedOption: $classNotificationsTime)
             }
