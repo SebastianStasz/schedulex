@@ -12,6 +12,8 @@
 "swipe_tip_description" = "Change days with a swipe of your finger!";
 "break_card_title" = "Break";
 "break_card_time_suffix" = "h.";
+"event_details_link_to_class" = "Link to class";
+"event_details_business_card" = "Business card";
 
 // info_cards
 "info_card_enable_notifications_title" = "Don't miss the classes!";

@@ -26,6 +26,7 @@ fonts:
 ## Generate constants for Assets Catalogs.
 xcassets:
   inputs:
+    - Images.xcassets
     - Colors.xcassets
   outputs:
     - templatePath: swiftgenTemplate.stencil

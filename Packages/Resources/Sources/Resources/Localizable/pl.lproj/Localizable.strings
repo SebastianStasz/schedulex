@@ -12,6 +12,8 @@
 "swipe_tip_description" = "Zmieniaj dni w kalendarzu przesunięciem palca!";
 "break_card_title" = "Przerwa";
 "break_card_time_suffix" = "g.";
+"event_details_link_to_class" = "Link do zajęć";
+"event_details_business_card" = "e-wizytówka";
 
 // info_cards
 "info_card_enable_notifications_title" = "Nie przegap zajęć!";
