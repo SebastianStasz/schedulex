@@ -34,6 +34,10 @@ public enum L10n {
   public static let continueButton = L10n.tr("Localizable", "continue_button", fallback: "Continue")
   /// Done
   public static let doneButton = L10n.tr("Localizable", "done_button", fallback: "Done")
+  /// Business card
+  public static let eventDetailsBusinessCard = L10n.tr("Localizable", "event_details_business_card", fallback: "Business card")
+  /// Link to class
+  public static let eventDetailsLinkToClass = L10n.tr("Localizable", "event_details_link_to_class", fallback: "Link to class")
   /// Ended
   public static let eventFinished = L10n.tr("Localizable", "event_finished", fallback: "Ended")
   /// Ends

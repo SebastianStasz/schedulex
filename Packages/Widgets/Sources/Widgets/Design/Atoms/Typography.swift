@@ -13,6 +13,7 @@ public enum Typography: CaseIterable {
     case bodyMedium
     case body
     case footnote
+    case footnoteBig
     case timeMedium
     case time
     case keyboardButton
@@ -27,6 +28,8 @@ public enum Typography: CaseIterable {
             return "Body"
         case .footnote:
             return "Footnote"
+        case .footnoteBig:
+            return "footnoteBig"
         case .timeMedium:
             return "Time medium"
         case .time:
@@ -46,6 +49,8 @@ public enum Typography: CaseIterable {
             return .system(size: 17)
         case .footnote:
             return .system(size: 13)
+        case .footnoteBig:
+            return .system(size: 14)
         case .timeMedium:
             return FontFamily.Inconsolata.medium.swiftUIFont(size: 18, relativeTo: .footnote)
         case .time:

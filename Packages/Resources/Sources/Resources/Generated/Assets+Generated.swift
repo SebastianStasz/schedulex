@@ -39,6 +39,7 @@ public extension Color {
   static var grayShade1 : Color { Color("gray_shade_1", bundle: .module) }
   static var greenPrimary : Color { Color("green_primary", bundle: .module) }
   static var yellowPrimary : Color { Color("yellow_primary", bundle: .module) }
+  // Images.xcassets
 }
 
 public extension UIColor {
@@ -73,9 +74,12 @@ public extension UIColor {
 
 public extension Image {
   // Colors.xcassets
+  // Images.xcassets
+  static var teamsLogo : Image { Image("teams_logo", bundle: .module) }
 }
 
 public extension UIImage {
+    static let teamsLogo = UIImage(named: "teams_logo", in: .module, with: nil)!
 }
 
 private final class BundleToken {

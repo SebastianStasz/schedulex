@@ -15,6 +15,10 @@ public enum Icon: String, Identifiable, CaseIterable {
     case checkmark
     case chevronRight
     case plusCircle
+    case person
+    case building
+    case paperPlane
+    case contactCard
 
     public var id: String {
         rawValue
@@ -40,6 +44,14 @@ public enum Icon: String, Identifiable, CaseIterable {
             return "chevron.right"
         case .plusCircle:
             return "plus.circle"
+        case .person:
+            return "person.fill"
+        case .building:
+            return "building.fill"
+        case .paperPlane:
+            return "paperplane.fill"
+        case .contactCard:
+            return "person.text.rectangle.fill"
         }
     }
 }

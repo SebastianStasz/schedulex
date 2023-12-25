@@ -42,13 +42,22 @@ struct DetailsDecoder {
     }
 
     private func toEventData(from row: Element, for facultyGroup: FacultyGroup) -> EventData? {
-        guard let columns = try? row.select("td").array().compactMap({ try? $0.text() }), columns.count == 6 else { return nil }
-        let eventData = EventData(name: columns[2].nilIfEmpty(),
-                                  type: columns[3].nilIfEmpty(),
-                                  date: columns[0], 
-                                  time: columns[1],
-                                  place: columns[5].nilIfEmpty(), 
-                                  teacher: columns[4].nilIfEmpty(), 
+        guard let columns = try? row.select("td").array() else { return nil }
+
+        let cells = columns.compactMap { try? $0.text() }
+        guard cells.count == 6 else { return nil }
+
+        let teacherProfileLink = try? columns[4].select("a").attr("href")
+        let teamsLink = try? columns[5].select("a").attr("href")
+
+        let eventData = EventData(name: cells[2].nilIfEmpty(),
+                                  type: cells[3].nilIfEmpty(),
+                                  date: cells[0],
+                                  time: cells[1],
+                                  place: cells[5].nilIfEmpty(),
+                                  teacher: cells[4].nilIfEmpty(),
+                                  teacherProfileLink: teacherProfileLink, 
+                                  teamsLink: teamsLink,
                                   eventTransferNote: nil)
         return eventData.isValidEvent(for: facultyGroup) ? eventData : nil
     }

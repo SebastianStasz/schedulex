@@ -10,6 +10,7 @@ import SwiftUI
 import Widgets
 
 struct EventsList: View {
+    @State private var selectedEvent: Event?
     let events: [Event]
 
     var body: some View {
@@ -20,8 +21,9 @@ struct EventsList: View {
                     let nextEvent = events[safe: id + 1]
                     let isFirst = events.first == event
                     let isLast = events.last == event
-                    
+
                     EventsListRow(element: .event(event, isFirst: isFirst, isLast: isLast))
+                        .onTapGesture { selectedEvent = event }
 
                     if let nextEvent,
                        let startDate = event.endDate,
@@ -31,6 +33,7 @@ struct EventsList: View {
                     }
                 }
             }
+            .sheet(item: $selectedEvent) { EventDetailsView(event: $0) }
         }
     }
 

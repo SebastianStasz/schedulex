@@ -15,7 +15,19 @@ struct EventData {
     let time: String
     let place: String?
     let teacher: String?
+    let teacherProfileLink: String?
+    let teamsLink: String?
     var eventTransferNote: String?
+
+    private var teacherProfileUrl: URL? {
+        guard let teacherProfileLink else { return nil }
+        return URL(string: teacherProfileLink)
+    }
+
+    private var teamsUrl: URL? {
+        guard let teamsLink else { return nil }
+        return URL(string: teamsLink)
+    }
 
     private var isLanguageEvent: Bool {
         name?.contains("grupa przedmiotów") ?? false || place == "Wybierz swoją grupę językową" || type == "lektorat"
@@ -35,7 +47,7 @@ struct EventData {
 
     func toEvent(facultyGroup: FacultyGroup, datesDecoder: DatesDecoder) -> Event {
         let dates = datesDecoder.getDates(date: date, time: time)
-        return Event(facultyGroupName: facultyGroup.name, facultyGroupColor: facultyGroup.color, isEventTransfer: isEventTransfer, eventTransferNote: eventTransferNote, startDate: dates.0, endDate: dates.1, name: name, place: place, teacher: teacher, type: type)
+        return Event(facultyGroupName: facultyGroup.name, facultyGroupColor: facultyGroup.color, isEventTransfer: isEventTransfer, eventTransferNote: eventTransferNote, startDate: dates.0, endDate: dates.1, name: name, place: place, teacher: teacher, teacherProfileUrl: teacherProfileUrl, teamsUrl: teamsUrl, type: type)
     }
 
     func toFacultyGroupClass() -> FacultyGroupClass? {
