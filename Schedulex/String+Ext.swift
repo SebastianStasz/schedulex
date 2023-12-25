@@ -13,6 +13,10 @@ extension String {
     func containsCaseInsensitive(_ other: String) -> Bool {
         lowercased().contains(other.lowercased())
     }
+
+    func capitalizingFirstLetter() -> String {
+        return prefix(1).capitalized + dropFirst()
+    }
 }
 
 extension Array {
