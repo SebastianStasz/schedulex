@@ -45,8 +45,8 @@ public struct CalendarPicker: View {
 
             VStack(spacing: .small) {
                 LazyVGrid(columns: rows) {
-                    ForEach(Locale.Weekday.allCases) {
-                        Text($0.rawValue, style: .footnote)
+                    ForEach(Calendar.current.shortWeekdaySymbols, id: \.self) {
+                        Text($0, style: .footnote)
                             .fontWeight(.medium)
                             .textCase(.uppercase)
                             .foregroundStyle(.grayShade1)
