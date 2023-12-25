@@ -46,7 +46,7 @@ struct EventDetailsView: View {
         .padding(.top, 40)
         .background(.backgroundSecondary)
         .presentationDragIndicator(.visible)
-        .presentationDetents([.medium])
+        .presentationDetents([UIDevice.current.hasNotch ? .medium : .height(440)])
     }
 
     private func line(title: String, icon: Icon) -> some View {
