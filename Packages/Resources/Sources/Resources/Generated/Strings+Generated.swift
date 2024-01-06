@@ -116,6 +116,10 @@ public enum L10n {
   public static let settingsAppThemeSystemTitle = L10n.tr("Localizable", "settings_app_theme_system_title", fallback: "System")
   /// App theme
   public static let settingsAppThemeTitle = L10n.tr("Localizable", "settings_app_theme_title", fallback: "App theme")
+  /// Installed
+  public static let settingsAppVersionInstalled = L10n.tr("Localizable", "settings_app_version_installed", fallback: "Installed")
+  /// Update
+  public static let settingsAppVersionUpdate = L10n.tr("Localizable", "settings_app_version_update", fallback: "Update")
   /// Receive notifications before class starts.
   public static let settingsClassNotificationsTimeDescription = L10n.tr("Localizable", "settings_class_notifications_time_description", fallback: "Receive notifications before class starts.")
   /// 1 hour before

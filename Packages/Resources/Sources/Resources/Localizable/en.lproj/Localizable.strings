@@ -82,6 +82,8 @@
 "settings_notifications_alert_go_to_settings" = "Go to settings";
 "settings_notifications_alert_cancel" = "Not now";
 "rate_the_app" = "Rate the app";
+"settings_app_version_installed" = "Installed";
+"settings_app_version_update" = "Update";
 
 // start_flow
 "start_first_step_title" = "Select groups";
