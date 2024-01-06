@@ -10,6 +10,7 @@ import SwiftUI
 import Widgets
 
 struct SettingsAppInformationsSection: View {
+    let appVersion: String
     let isUpdateAvailable: Bool
 
     var body: some View {
@@ -20,7 +21,7 @@ struct SettingsAppInformationsSection: View {
                     .scaledToFit()
                     .frame(width: 60)
 
-                SettingsLabel(title: "UEK Schedule", description: appVersion)
+                SettingsLabel(title: "UEK Schedule", description: appVersionLabel)
 
                 Button(appVersionButtonTitle, action: openAppInAppStore)
                     .buttonStyle(.appVersionButtonStyle)
@@ -38,10 +39,8 @@ struct SettingsAppInformationsSection: View {
         isUpdateAvailable ? L10n.settingsAppVersionUpdate : L10n.settingsAppVersionInstalled
     }
 
-    private var appVersion: String {
-        let dictionary = Bundle.main.infoDictionary!
-        let version = dictionary["CFBundleShortVersionString"] as? String
-        return "\(L10n.settingsVersion) \(version ?? "")"
+    private var appVersionLabel: String {
+        "\(L10n.settingsVersion) \(appVersion)"
     }
 
     private func openAppInAppStore() {
@@ -52,8 +51,8 @@ struct SettingsAppInformationsSection: View {
 
 #Preview {
     VStack(spacing: .large) {
-        SettingsAppInformationsSection(isUpdateAvailable: false)
-        SettingsAppInformationsSection(isUpdateAvailable: true)
+        SettingsAppInformationsSection(appVersion: "1.0.12", isUpdateAvailable: false)
+        SettingsAppInformationsSection(appVersion: "1.0.12", isUpdateAvailable: true)
     }
     .padding(.large)
 }
