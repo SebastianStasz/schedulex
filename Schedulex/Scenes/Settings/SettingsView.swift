@@ -14,7 +14,7 @@ struct SettingsView: View {
 
     var body: some View {
         VStack(spacing: .large) {
-            SettingsAppInformationsSection()
+            SettingsAppInformationsSection(isUpdateAvailable: false)
             MenuPicker(title: L10n.settingsAppThemeTitle, options: AppColorScheme.allCases, selectedOption: $appColorScheme).card()
             ClassNotificationsToggle()
             Spacer()

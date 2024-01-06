@@ -10,6 +10,8 @@ import SwiftUI
 import Widgets
 
 struct SettingsAppInformationsSection: View {
+    let isUpdateAvailable: Bool
+
     var body: some View {
         VStack(spacing: .large) {
             HStack(spacing: .large) {
@@ -19,17 +21,21 @@ struct SettingsAppInformationsSection: View {
                     .frame(width: 60)
 
                 SettingsLabel(title: "UEK Schedule", description: appVersion)
+
+                Button(appVersionButtonTitle, action: openAppInAppStore)
+                    .buttonStyle(.appVersionButtonStyle)
+                    .disabled(!isUpdateAvailable)
             }
 
             Separator()
 
             SettingsLabel(title: L10n.settingsContact, description: "sebastianstaszczyk.1999@gmail.com")
-//
-//            Separator()
-//
-//            Button(L10n.rateTheApp, action: openAppInAppStore)
         }
         .card()
+    }
+
+    private var appVersionButtonTitle: String {
+        isUpdateAvailable ? L10n.settingsAppVersionUpdate : L10n.settingsAppVersionInstalled
     }
 
     private var appVersion: String {
@@ -45,6 +51,9 @@ struct SettingsAppInformationsSection: View {
 }
 
 #Preview {
-    SettingsAppInformationsSection()
-        .padding(.large)
+    VStack(spacing: .large) {
+        SettingsAppInformationsSection(isUpdateAvailable: false)
+        SettingsAppInformationsSection(isUpdateAvailable: true)
+    }
+    .padding(.large)
 }
