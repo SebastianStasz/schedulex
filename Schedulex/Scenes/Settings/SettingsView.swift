@@ -11,10 +11,12 @@ import Resources
 
 struct SettingsView: View {
     @AppStorage("appColorScheme") private var appColorScheme: AppColorScheme = .system
+    let appVersion: String
+    let isUpdateAvailable: Bool
 
     var body: some View {
         VStack(spacing: .large) {
-            SettingsAppInformationsSection()
+            SettingsAppInformationsSection(appVersion: appVersion, isUpdateAvailable: isUpdateAvailable)
             MenuPicker(title: L10n.settingsAppThemeTitle, options: AppColorScheme.allCases, selectedOption: $appColorScheme).card()
             ClassNotificationsToggle()
             Spacer()
@@ -32,6 +34,6 @@ struct SettingsView: View {
 
 #Preview {
     NavigationStack {
-        SettingsView()
+        SettingsView(appVersion: "1.0.12", isUpdateAvailable: false)
     }
 }

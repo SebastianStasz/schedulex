@@ -19,8 +19,10 @@ struct DashboardView: View {
     @AppStorage("showDashboardSwipeTip") private var showDashboardSwipeTip = true
     @StateObject private var viewModel = DashboardViewModel()
     @StateObject private var notificationsManager = NotificationsManager()
+    @StateObject private var appConfigurationService = AppConfigurationService()
     @EnvironmentObject private var service: FirestoreService
 
+    @State private var appVersion: String?
     @State private var areSettingsPresented = false
     @State private var areMyGroupsPresented = false
     @State private var isDatePickerPresented = false
@@ -55,12 +57,16 @@ struct DashboardView: View {
                 .overlay { loadingIndicatorOrEmptyState }
             }
             .toolbar { toolbarContent }
-            .doubleNavigationTitle(title: viewModel.title, subtitle: viewModel.subtitle, showSettings: {
+            .doubleNavigationTitle(title: viewModel.title, subtitle: viewModel.subtitle, showBadge: appConfigurationService.isUpdateAvailable, openSettings: {
                 areSettingsPresented = true
             })
             .navigationTitle("‎‎‎‏‏‎")
             .navigationBarTitleDisplayMode(.inline)
-            .navigationDestination(isPresented: $areSettingsPresented) { SettingsView().environmentObject(notificationsManager) }
+            .navigationDestination(isPresented: $areSettingsPresented) {
+                SettingsView(appVersion: appConfigurationService.appVersion ?? "",
+                             isUpdateAvailable: appConfigurationService.isUpdateAvailable)
+                .environmentObject(notificationsManager)
+            }
             .navigationDestination(isPresented: $areMyGroupsPresented) { ObservedFacultyGroupsView(service: service) }
         }
         .sheet(isPresented: $isDatePickerPresented) { datePicker }
@@ -72,6 +78,7 @@ struct DashboardView: View {
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification).dropFirst()) { _ in onSceneChange(.active)}
         .task {
             fetchEvents()
+            appConfigurationService.subscribe(service: service)
             await notificationsManager.updateNotificationsPermission()
         }
     }

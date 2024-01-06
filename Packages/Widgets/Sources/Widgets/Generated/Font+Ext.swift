@@ -10,6 +10,10 @@ import SwiftUI
 public extension Font {
     static let titleSmall = Typography.titleSmall.font
     static let bodyMedium = Typography.bodyMedium.font
-    static let body = Typography.body.font
-    static var note = Typography.footnote.font
+    static let content = Typography.body.font
+    static let note = Typography.footnote.font
+    static let footnoteBig = Typography.footnoteBig.font
+    static let timeMedium = Typography.timeMedium.font
+    static let time = Typography.time.font
+    static let keyboardButton = Typography.keyboardButton.font
 }

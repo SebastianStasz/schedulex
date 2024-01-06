@@ -82,6 +82,8 @@
 "settings_notifications_alert_go_to_settings" = "Idź do ustawień";
 "settings_notifications_alert_cancel" = "Nie teraz";
 "rate_the_app" = "Oceń aplikację";
+"settings_app_version_installed" = "Zainstalowana";
+"settings_app_version_update" = "Aktualizuj";
 
 // start_flow
 "start_first_step_title" = "Wybierz grupy";

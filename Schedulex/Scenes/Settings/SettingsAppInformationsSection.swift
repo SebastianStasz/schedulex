@@ -10,6 +10,9 @@ import SwiftUI
 import Widgets
 
 struct SettingsAppInformationsSection: View {
+    let appVersion: String
+    let isUpdateAvailable: Bool
+
     var body: some View {
         VStack(spacing: .large) {
             HStack(spacing: .large) {
@@ -18,24 +21,26 @@ struct SettingsAppInformationsSection: View {
                     .scaledToFit()
                     .frame(width: 60)
 
-                SettingsLabel(title: "UEK Schedule", description: appVersion)
+                SettingsLabel(title: "UEK Schedule", description: appVersionLabel)
+
+                Button(appVersionButtonTitle, action: openAppInAppStore)
+                    .buttonStyle(.appVersionButtonStyle)
+                    .disabled(!isUpdateAvailable)
             }
 
             Separator()
 
             SettingsLabel(title: L10n.settingsContact, description: "sebastianstaszczyk.1999@gmail.com")
-//
-//            Separator()
-//
-//            Button(L10n.rateTheApp, action: openAppInAppStore)
         }
         .card()
     }
 
-    private var appVersion: String {
-        let dictionary = Bundle.main.infoDictionary!
-        let version = dictionary["CFBundleShortVersionString"] as? String
-        return "\(L10n.settingsVersion) \(version ?? "")"
+    private var appVersionButtonTitle: String {
+        isUpdateAvailable ? L10n.settingsAppVersionUpdate : L10n.settingsAppVersionInstalled
+    }
+
+    private var appVersionLabel: String {
+        "\(L10n.settingsVersion) \(appVersion)"
     }
 
     private func openAppInAppStore() {
@@ -45,6 +50,9 @@ struct SettingsAppInformationsSection: View {
 }
 
 #Preview {
-    SettingsAppInformationsSection()
-        .padding(.large)
+    VStack(spacing: .large) {
+        SettingsAppInformationsSection(appVersion: "1.0.12", isUpdateAvailable: false)
+        SettingsAppInformationsSection(appVersion: "1.0.12", isUpdateAvailable: true)
+    }
+    .padding(.large)
 }
