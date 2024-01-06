@@ -10,6 +10,7 @@ import SwiftUI
 import Widgets
 
 struct SettingsAppInformationsSection: View {
+    @State private var presentSendEmailView = false
     let appVersion: String
     let isUpdateAvailable: Bool
 
@@ -31,8 +32,10 @@ struct SettingsAppInformationsSection: View {
             Separator()
 
             SettingsLabel(title: L10n.settingsContact, description: "sebastianstaszczyk.1999@gmail.com")
+                .onTapGesture { presentSendEmailView = true }
         }
         .card()
+        .sheet(isPresented: $presentSendEmailView) { SendEmailView() }
     }
 
     private var appVersionButtonTitle: String {
