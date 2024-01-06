@@ -6,6 +6,7 @@
 //
 
 import Domain
+import Combine
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
@@ -15,6 +16,18 @@ final public class FirestoreService: ObservableObject {
     private var school: School?
 
     public init() {}
+
+    public func subscribeToAppSettings() -> PassthroughSubject<AppConfiguration?, Never> {
+        let publisher = PassthroughSubject<AppConfiguration?, Never>()
+        db.collection("app").document("configuration")
+            .addSnapshotListener { document, error in
+                if let document {
+                    let appConfiguration = try? document.data(as: AppConfiguration.self)
+                    publisher.send(appConfiguration)
+                }
+            }
+        return publisher
+    }
 
     public func getCracowUniversityOfEconomics() async throws -> School {
         guard shouldUseCachedData else {
