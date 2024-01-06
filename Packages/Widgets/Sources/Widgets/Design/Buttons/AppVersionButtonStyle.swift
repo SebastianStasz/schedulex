@@ -18,6 +18,7 @@ public struct AppVersionButtonStyle: ButtonStyle {
             .padding(.horizontal, .small)
             .background(backgroundColor)
             .cornerRadius(.mini)
+            .opacity(configuration.isPressed ? 0.6 : 1)
     }
 
     private var textColor: Color {
