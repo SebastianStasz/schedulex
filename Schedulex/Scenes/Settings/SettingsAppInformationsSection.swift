@@ -32,7 +32,7 @@ struct SettingsAppInformationsSection: View {
 
             Separator()
 
-            SettingsLabel(title: L10n.settingsContact, description: contactMail)
+            SettingsLabel(title: L10n.settingsContact, description: contactMail, outstanding: true)
                 .onTapGesture { emailPresenter.sendMail(emailContent: emailContent) }
         }
         .card()
@@ -50,7 +50,7 @@ struct SettingsAppInformationsSection: View {
     }
 
     private var emailContent: EmailContent {
-        .defaultContact(recipient: contactMail)
+        .defaultContact(recipient: contactMail, appVersion: appVersion)
     }
 
     private func openAppInAppStore() {

@@ -11,7 +11,7 @@ struct EmailContent {
     let subject: String
     let recipient: String
 
-    static func defaultContact(recipient: String) -> EmailContent {
-        EmailContent(subject: "UEKSchedule", recipient: recipient)
+    static func defaultContact(recipient: String, appVersion: String) -> EmailContent {
+        EmailContent(subject: "UEKSchedule \(appVersion)", recipient: recipient)
     }
 }
