@@ -17,7 +17,7 @@ final public class FirestoreService: ObservableObject {
 
     public init() {}
 
-    public func subscribeToAppSettings() -> PassthroughSubject<AppConfiguration?, Never> {
+    public func subscribeToAppConfiguration() -> PassthroughSubject<AppConfiguration?, Never> {
         let publisher = PassthroughSubject<AppConfiguration?, Never>()
         db.collection("app").document("configuration")
             .addSnapshotListener { document, error in

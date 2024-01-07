@@ -12,11 +12,12 @@ import Resources
 struct SettingsView: View {
     @AppStorage("appColorScheme") private var appColorScheme: AppColorScheme = .system
     let appVersion: String
+    let contactMail: String
     let isUpdateAvailable: Bool
 
     var body: some View {
         VStack(spacing: .large) {
-            SettingsAppInformationsSection(appVersion: appVersion, isUpdateAvailable: isUpdateAvailable)
+            SettingsAppInformationsSection(appVersion: appVersion, contactMail: contactMail, isUpdateAvailable: isUpdateAvailable)
             MenuPicker(title: L10n.settingsAppThemeTitle, options: AppColorScheme.allCases, selectedOption: $appColorScheme).card()
             ClassNotificationsToggle()
             Spacer()
@@ -34,6 +35,6 @@ struct SettingsView: View {
 
 #Preview {
     NavigationStack {
-        SettingsView(appVersion: "1.0.12", isUpdateAvailable: false)
+        SettingsView(appVersion: "1.0.12", contactMail: "sebastianstaszczyk.1999@gmail.com", isUpdateAvailable: false)
     }
 }

@@ -11,6 +11,7 @@ import Widgets
 struct SettingsLabel: View {
     let title: String
     let description: String
+    var outstanding = false
 
     var body: some View {
         VStack(alignment: .leading, spacing: .micro) {
@@ -18,7 +19,7 @@ struct SettingsLabel: View {
                 .foregroundStyle(.textPrimary)
 
             Text(description, style: .footnote)
-                .foregroundStyle(.grayShade1)
+                .foregroundStyle(outstanding ? .blue : .grayShade1)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
     }
