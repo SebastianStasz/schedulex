@@ -8,13 +8,6 @@
 import MessageUI
 import SwiftUI
 
-struct EmailContent {
-    let subject: String
-    let recipient: String
-
-    static let `default` = EmailContent(subject: "UEKSchedule", recipient: "sebastianstaszczyk.1999@gmail.com")
-}
-
 struct SendEmailView: UIViewControllerRepresentable {
     @Environment(\.dismiss) private var dismiss
     let emailContent: EmailContent
