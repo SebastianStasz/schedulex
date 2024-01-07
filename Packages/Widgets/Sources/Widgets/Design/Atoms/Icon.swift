@@ -6,6 +6,7 @@
 //
 
 public enum Icon: String, Identifiable, CaseIterable {
+    case settings
     case closeButton
     case delete
     case info
@@ -27,6 +28,8 @@ public enum Icon: String, Identifiable, CaseIterable {
 
     var name: String {
         switch self {
+        case .settings:
+            return "gearshape"
         case .closeButton:
             return "xmark"
         case .delete:

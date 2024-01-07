@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Resources
 
 private struct DoubleNavigationTitle: ViewModifier {
     let title: String
@@ -29,7 +30,7 @@ private struct DoubleNavigationTitle: ViewModifier {
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
 
-                Button("Settings", systemImage: "gearshape", action: openSettings)
+                Button(L10n.settingsTitle, icon: .settings, action: openSettings)
                     .labelStyle(.iconOnly)
                     .font(.title2)
                     .foregroundStyle(.textPrimary)
