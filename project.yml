@@ -24,6 +24,11 @@ targets:
       properties:
         UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
         UILaunchStoryboardName: LaunchScreen
+        LSApplicationQueriesSchemes:
+          - googlegmail
+          - ms-outlook
+          - readdle-spark
+          - ymail
     scheme:
       testTargets:
         - name: SchedulexTests
