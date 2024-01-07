@@ -12,6 +12,7 @@ import Widgets
 struct SettingsAppInformationsSection: View {
     @State private var presentSendEmailView = false
     let appVersion: String
+    let contactMail: String
     let isUpdateAvailable: Bool
 
     var body: some View {
@@ -54,8 +55,8 @@ struct SettingsAppInformationsSection: View {
 
 #Preview {
     VStack(spacing: .large) {
-        SettingsAppInformationsSection(appVersion: "1.0.12", isUpdateAvailable: false)
-        SettingsAppInformationsSection(appVersion: "1.0.12", isUpdateAvailable: true)
+        SettingsAppInformationsSection(appVersion: "1.0.12", contactMail: "sebastianstaszczyk.1999@gmail.com", isUpdateAvailable: false)
+        SettingsAppInformationsSection(appVersion: "1.0.12", contactMail: "sebastianstaszczyk.1999@gmail.com", isUpdateAvailable: true)
     }
     .padding(.large)
 }

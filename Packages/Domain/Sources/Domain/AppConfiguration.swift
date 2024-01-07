@@ -9,4 +9,7 @@ import Foundation
 
 public struct AppConfiguration: Codable {
     public let latestAppVersion: String
+    public let contactMail: String
+
+    public static let defaultConfiguration = AppConfiguration(latestAppVersion: "", contactMail: "")
 }

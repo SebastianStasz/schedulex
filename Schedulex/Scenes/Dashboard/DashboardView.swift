@@ -64,6 +64,7 @@ struct DashboardView: View {
             .navigationBarTitleDisplayMode(.inline)
             .navigationDestination(isPresented: $areSettingsPresented) {
                 SettingsView(appVersion: appConfigurationService.appVersion ?? "",
+                             contactMail: appConfigurationService.configuration.contactMail,
                              isUpdateAvailable: appConfigurationService.isUpdateAvailable)
                 .environmentObject(notificationsManager)
             }
