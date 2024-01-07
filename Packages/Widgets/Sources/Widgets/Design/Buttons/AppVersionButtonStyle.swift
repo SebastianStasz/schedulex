@@ -26,6 +26,6 @@ public struct AppVersionButtonStyle: ButtonStyle {
     }
 
     private var backgroundColor: Color {
-        isEnabled ? .greenPrimary : .backgroundSecondary
+        isEnabled ? .blue : .backgroundSecondary
     }
 }
