@@ -16,8 +16,13 @@ struct EventCardView: View {
     var body: some View {
         HStack(spacing: .medium) {
             VStack(alignment: .leading, spacing: .small) {
-                Text(event.name ?? "", style: .bodyMedium)
-                    .foregroundStyle(event.facultyGroupColor.shade1)
+                HStack(spacing: .micro) {
+                    Text(event.name ?? "", style: .bodyMedium)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+
+                    Image(systemName: "info.square")
+                }
+                .foregroundStyle(event.facultyGroupColor.shade1)
 
                 VStack(alignment: .leading, spacing: .micro) {
                     Text(event.teacher ?? "", style: .footnote)

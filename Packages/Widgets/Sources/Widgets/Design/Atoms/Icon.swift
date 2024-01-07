@@ -19,6 +19,7 @@ public enum Icon: String, Identifiable, CaseIterable {
     case building
     case paperPlane
     case contactCard
+    case menu
 
     public var id: String {
         rawValue
@@ -52,6 +53,8 @@ public enum Icon: String, Identifiable, CaseIterable {
             return "paperplane.fill"
         case .contactCard:
             return "person.text.rectangle.fill"
+        case .menu:
+            return "ellipsis"
         }
     }
 }
