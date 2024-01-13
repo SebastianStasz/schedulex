@@ -9,7 +9,6 @@ import Domain
 import SwiftUI
 import SchedulexFirebase
 
-@main
 struct SchedulexApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) private var delegate
     @AppStorage("subscribedFacultyGroups") private var subscribedGroups: [FacultyGroup] = []
@@ -19,16 +18,17 @@ struct SchedulexApp: App {
 
     var body: some Scene {
         WindowGroup {
-            VStack {
-                if subscribedGroups.isEmpty {
-                    IntroductionView()
-                } else {
-                    DashboardView()
-                }
-            }
-            .sheet(isPresented: $isFacultiesListPresented) { FacultiesListView(service: service) }
-            .preferredColorScheme(appColorScheme.scheme)
-            .environmentObject(service)
+            Text("test")
+//            VStack {
+//                if subscribedGroups.isEmpty {
+//                    IntroductionView()
+//                } else {
+//                    DashboardView()
+//                }
+//            }
+//            .sheet(isPresented: $isFacultiesListPresented) { FacultiesListView(service: service) }
+//            .preferredColorScheme(appColorScheme.scheme)
+//            .environmentObject(service)
         }
     }
 }

@@ -10,13 +10,18 @@ import Resources
 import UIKit
 import Widgets
 
+@main
 final class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         FirebaseApp.configure()
-        FontFamily.registerAllCustomFonts()
+        CoreEnvironmentHolder.setup()
         configureBackButtonAppearance()
         configureNavigationBarTitle()
         return true
+    }
+
+    func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
+        UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
     }
 
     private func configureBackButtonAppearance() {
