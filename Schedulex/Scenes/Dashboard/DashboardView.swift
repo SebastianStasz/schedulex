@@ -20,7 +20,6 @@ struct DashboardView: View {
     @StateObject private var viewModel = DashboardViewModel()
     @StateObject private var notificationsManager = NotificationsManager()
     @StateObject private var appConfigurationService = AppConfigurationService()
-    @EnvironmentObject private var service: FirestoreService
 
     @State private var appVersion: String?
     @State private var areSettingsPresented = false
@@ -68,7 +67,7 @@ struct DashboardView: View {
                              isUpdateAvailable: appConfigurationService.isUpdateAvailable)
                 .environmentObject(notificationsManager)
             }
-            .navigationDestination(isPresented: $areMyGroupsPresented) { ObservedFacultyGroupsView(service: service) }
+//            .navigationDestination(isPresented: $areMyGroupsPresented) { ObservedFacultyGroupsView(service: FirestoreService()) }
         }
         .sheet(isPresented: $isDatePickerPresented) { datePicker }
         .onChange(of: subscribedGroups) { _ in fetchEvents() }
@@ -79,7 +78,7 @@ struct DashboardView: View {
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification).dropFirst()) { _ in onSceneChange(.active)}
         .task {
             fetchEvents()
-            appConfigurationService.subscribe(service: service)
+//            appConfigurationService.subscribe(service: FirestoreService())
             await notificationsManager.updateNotificationsPermission()
         }
     }

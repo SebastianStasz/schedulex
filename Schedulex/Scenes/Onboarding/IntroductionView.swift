@@ -6,24 +6,8 @@
 //
 
 import Resources
-import SchedulexFirebase
 import SwiftUI
 import Widgets
-
-//final class OnboardingStore: RootStore {
-//
-//}
-//
-//struct OnboardingViewModel: ViewModel {
-//    func makeStore() -> OnboardingStore {
-//        let store = OnboardingStore()
-//        return store
-//    }
-//}
-//
-//final class IntroductionViewController: SwiftUIViewController<OnboardingViewModel, IntroductionView> {
-//
-//}
 
 struct IntroductionView: View {
     let onContinue: () -> Void

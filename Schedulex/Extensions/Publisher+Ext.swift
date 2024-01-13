@@ -1,49 +1,14 @@
 //
-//  OnboardingFirstStepView.swift
+//  Publisher+Ext.swift
 //  Schedulex
 //
-//  Created by Sebastian Staszczyk on 07/10/2023.
+//  Created by Sebastian Staszczyk on 13/01/2024.
 //
 
-import Domain
 import Combine
-import Resources
-import SwiftUI
-import Widgets
-import SchedulexFirebase
-
-struct OnboardingFirstStepView: RootView {
-    @ObservedObject var store: StartFirstStepStore
-
-    var rootBody: some View {
-        GroupsSelectionListView(groups: store.facultyGroups, emptyMessage: L10n.startFirstStepNoGroups, selectedGroups: $store.selectedFacultyGroups)
-            .keyboardButton(L10n.nextButton, disabled: store.isLoading, action: store.onNextButton.send)
-            .alert(L10n.startFirstStepAlertTitle, isPresented: $store.isConfirmationAlertPresented) {
-                Button(L10n.continueButton, action: store.onConfirmationAlertContinueButton.send)
-                Button(L10n.cancelButton, role: .cancel) {}
-            } message: {
-                Text(L10n.startFirstStepAlertMessage)
-            }
-    }
-}
-
-final class OnboardingFirstStepViewController: SwiftUIViewController<OnboardingFirstStepViewModel, OnboardingFirstStepView> {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        title = L10n.startFirstStepTitle
-    }
-}
-
-#Preview {
-    OnboardingFirstStepView(store: StartFirstStepStore())
-}
-
-public typealias Driver<T> = AnyPublisher<T, Never>
-public typealias DriverState<T> = CurrentValueSubject<T, Never>
-public typealias DriverSubject<T> = PassthroughSubject<T, Never>
+import Foundation
 
 extension Publisher {
-
     func perform<T>(
         isLoading: DriverState<Bool>? = nil,
         errorTracker: DriverSubject<Error>? = nil,
@@ -103,8 +68,7 @@ extension Publisher where Failure == Never {
     }
 }
 
-public extension Publisher {
-
+extension Publisher {
     func onNext(_ perform: @escaping (Output) -> Void) -> AnyPublisher<Output, Failure> {
         handleEvents(receiveOutput: { perform($0) }).eraseToAnyPublisher()
     }

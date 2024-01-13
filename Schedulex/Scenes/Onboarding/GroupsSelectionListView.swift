@@ -59,5 +59,5 @@ struct GroupsSelectionListView: View {
 }
 
 #Preview {
-        GroupsSelectionListView(groups: [], emptyMessage: "Empty message", selectedGroups: .constant([]))
-    }
+    GroupsSelectionListView(groups: [], emptyMessage: "Empty message", selectedGroups: .constant([]))
+}
