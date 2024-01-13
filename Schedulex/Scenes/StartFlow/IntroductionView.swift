@@ -10,9 +10,23 @@ import SchedulexFirebase
 import SwiftUI
 import Widgets
 
+//final class OnboardingStore: RootStore {
+//
+//}
+//
+//struct OnboardingViewModel: ViewModel {
+//    func makeStore() -> OnboardingStore {
+//        let store = OnboardingStore()
+//        return store
+//    }
+//}
+//
+//final class IntroductionViewController: SwiftUIViewController<OnboardingViewModel, IntroductionView> {
+//
+//}
+
 struct IntroductionView: View {
-    @EnvironmentObject private var service: FirestoreService
-    @State private var isIntroductionFlowSheetPresented = false
+    let onContinue: () -> Void
 
     var body: some View {
         VStack(spacing: 0) {
@@ -41,17 +55,13 @@ struct IntroductionView: View {
             Spacer()
             Spacer()
 
-            Button(action: presentIntroductionFlowSheet) {
+            Button(action: onContinue) {
                 Text(L10n.introductionButtonTitle, style: .titleSmall)
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, .large)
                     .foregroundStyle(.white)
                     .background(.accentPrimary)
                     .cornerRadius(.large)
-            }
-            .fullScreenCover(isPresented: $isIntroductionFlowSheetPresented) {
-                let viewModel = StartFlowViewModel(service: service)
-                StartFirstStepView(viewModel: viewModel)
             }
         }
         .padding(.bottom, bottomSpacing)
@@ -74,12 +84,8 @@ struct IntroductionView: View {
     private var bottomSpacing: CGFloat {
         UIDevice.current.hasNotch ? 40 : .large
     }
-
-    private func presentIntroductionFlowSheet() {
-        isIntroductionFlowSheetPresented = true
-    }
 }
 
 #Preview {
-    IntroductionView()
+    IntroductionView(onContinue: {})
 }
