@@ -10,11 +10,15 @@ import Resources
 
 public struct CalendarPicker: View {
     private let items: [DayPickerItem]
+    private var weekDaySymbols: [String]
     @State private var selectedMonth = YearAndMonth(year: 1, month: 1)
     @Binding private var selectedDate: Date
 
     public init(items: [DayPickerItem], selectedDate: Binding<Date>) {
         self.items = items
+        let firstWeekday = Calendar.current.firstWeekday
+        let symbols = Calendar.current.shortWeekdaySymbols
+        weekDaySymbols = Array(symbols[firstWeekday-1..<symbols.count]) + symbols[0..<firstWeekday-1]
         _selectedMonth.wrappedValue = selectedDate.wrappedValue.toYearAndMonth()
         _selectedDate = selectedDate
         months = Dictionary(grouping: items, by: {
@@ -45,7 +49,7 @@ public struct CalendarPicker: View {
 
             VStack(spacing: .small) {
                 LazyVGrid(columns: rows) {
-                    ForEach(Calendar.current.shortWeekdaySymbols, id: \.self) {
+                    ForEach(weekDaySymbols, id: \.self) {
                         Text($0, style: .footnote)
                             .fontWeight(.medium)
                             .textCase(.uppercase)
