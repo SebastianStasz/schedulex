@@ -11,23 +11,36 @@ import SchedulexFirebase
 import SwiftUI
 import Widgets
 
-struct DashboardView: View {
+final class DashboardViewController: SwiftUIViewController<DashboardViewModel, DashboardView> {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+}
+
+struct DashboardView: RootView {
     @AppStorage("subscribedFacultyGroups") private var subscribedGroups: [FacultyGroup] = []
     @AppStorage("hiddenFacultyGroupsClasses") private var allHiddenClasses: [EditableFacultyGroupClass] = []
     @AppStorage("classNotificationsTime") private var classNotificationsTime = ClassNotificationTime.oneHourBefore
     @AppStorage("classNotificationsEnabled") private var classNotificationsEnabled = false
     @AppStorage("showDashboardSwipeTip") private var showDashboardSwipeTip = true
-    @StateObject private var viewModel = DashboardViewModel()
+    @StateObject private var viewModel = DashboardViewModelOld()
     @StateObject private var notificationsManager = NotificationsManager()
     @StateObject private var appConfigurationService = AppConfigurationService()
 
     @State private var appVersion: String?
     @State private var areSettingsPresented = false
-    @State private var areMyGroupsPresented = false
     @State private var isDatePickerPresented = false
     @State private var swipeCount = 0
 
-    var body: some View {
+    @ObservedObject var store: DashboardStore
+
+    var rootBody: some View {
         NavigationStack {
             VStack(spacing: 0) {
                 LazyVStack {
@@ -56,18 +69,13 @@ struct DashboardView: View {
                 .overlay { loadingIndicatorOrEmptyState }
             }
             .toolbar { toolbarContent }
-            .doubleNavigationTitle(title: viewModel.title, subtitle: viewModel.subtitle, showBadge: appConfigurationService.isUpdateAvailable, openSettings: {
-                areSettingsPresented = true
-            })
-            .navigationTitle("‎‎‎‏‏‎")
-            .navigationBarTitleDisplayMode(.inline)
+            .doubleNavigationTitle(title: viewModel.title, subtitle: viewModel.subtitle, showBadge: appConfigurationService.isUpdateAvailable, openSettings: store.pushObservedFacultyGroupsView.send)
             .navigationDestination(isPresented: $areSettingsPresented) {
                 SettingsView(appVersion: appConfigurationService.appVersion ?? "",
                              contactMail: appConfigurationService.configuration.contactMail,
                              isUpdateAvailable: appConfigurationService.isUpdateAvailable)
                 .environmentObject(notificationsManager)
             }
-//            .navigationDestination(isPresented: $areMyGroupsPresented) { ObservedFacultyGroupsView(service: FirestoreService()) }
         }
         .sheet(isPresented: $isDatePickerPresented) { datePicker }
         .onChange(of: subscribedGroups) { _ in fetchEvents() }
@@ -141,7 +149,7 @@ struct DashboardView: View {
     private var toolbarContent: some ToolbarContent {
         ToolbarItem(placement: .bottomBar) {
             HStack(spacing: 0) {
-                TextButton(L10n.myGroups) { areMyGroupsPresented = true }
+                TextButton(L10n.myGroups, action: store.pushObservedFacultyGroupsView.send)
                     .frame(maxWidth: .infinity, alignment: .leading)
                 TextButton(L10n.today, action: selectTodaysDate)
                     .frame(maxWidth: .infinity)
@@ -192,5 +200,5 @@ struct DashboardView: View {
 }
 
 #Preview {
-    DashboardView()
+    DashboardView(store: DashboardStore())
 }

@@ -53,7 +53,7 @@ struct OnboardingSecondStepViewModel: ViewModel {
             availableColors.removeAll(where: { $0 == color })
             newGroups.append(group)
         }
-        context.appData.subscribedFacultyGroups = newGroups
+        context.appData.subscribeFacultyGroups(newGroups)
         onFinishOnboarding()
     }
 }
