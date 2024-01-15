@@ -27,10 +27,12 @@ struct FacultyGroupListView: RootView {
 
             BaseList(store.facultyGroups) { facultyGroup in
                 let caption = "\(facultyGroup.numberOfEvents) " + L10n.xEvents
-                BaseListItem(title: facultyGroup.name, caption: caption)
-                    .trailingIcon(.info)
-                    .contentShape(Rectangle())
+                FacultyGroupListRow(facultyGroup: facultyGroup, trailingIcon: .chevronRight, iconColor: .accentPrimary)
                     .onTapGesture { store.navigateToFacultyGroupDetails.send(facultyGroup) }
+//                BaseListItem(title: facultyGroup.name, caption: caption)
+//                    .trailingIcon(.info)
+//                    .contentShape(Rectangle())
+//                    .onTapGesture { store.navigateToFacultyGroupDetails.send(facultyGroup) }
             }
         }
 //        .baseListStyle(isEmpty: faculty.groups.isEmpty)

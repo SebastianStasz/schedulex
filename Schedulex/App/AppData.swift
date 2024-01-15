@@ -37,8 +37,19 @@ struct AppData {
         }
     }
 
+    mutating func subscribeFacultyGroup(_ facultyGroup: FacultyGroup) {
+        subscribeFacultyGroups([facultyGroup])
+    }
+
     mutating func subscribeFacultyGroups(_ facultyGroups: [FacultyGroup]) {
+        var facultyGroupsToBeSubscribed = facultyGroups
+        facultyGroupsToBeSubscribed.removeAll(where: { subscribedFacultyGroups.contains($0) })
         subscribedFacultyGroups.append(contentsOf: facultyGroups)
+    }
+
+    mutating func unsubscribeFacultyGroup(_ facultyGroup: FacultyGroup) {
+        subscribedFacultyGroups.removeAll { $0.name == facultyGroup.name }
+        allHiddenClasses.removeAll { $0.facultyGroupName == facultyGroup.name }
     }
 
     mutating func toggleFacultyGroupVisibility(_ facultyGroup: FacultyGroup) {
@@ -47,8 +58,8 @@ struct AppData {
         }
     }
 
-    mutating func deleteFacultyGroup(_ facultyGroup: FacultyGroup) {
-        subscribedFacultyGroups.removeAll { $0.name == facultyGroup.name }
-        allHiddenClasses.removeAll { $0.facultyGroupName == facultyGroup.name }
+    mutating func setFacultyGroupColor(for facultyGroup: FacultyGroup, color: FacultyGroupColor) {
+        guard let index = subscribedFacultyGroups.firstIndex(where: { $0.name == facultyGroup.name }) else { return }
+        subscribedFacultyGroups[index].color = color
     }
 }

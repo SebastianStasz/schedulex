@@ -38,7 +38,7 @@ struct ObservedFacultyGroupsViewModel: ViewModel {
             .store(in: &store.cancellables)
 
         store.editFacultyGroup
-            .sink { presentEditFacultyGroupView(facultyGroup: $0) }
+            .sink { pushFacultyGroupDetailsView($0) }
             .store(in: &store.cancellables)
 
         store.toggleFacultyGroupVisibility
@@ -48,7 +48,7 @@ struct ObservedFacultyGroupsViewModel: ViewModel {
         store.deleteFacultyGroup
             .sinkAndStore(on: store) { store, _ in
                 guard let groupToDelete = store.groupToDelete else { return }
-                context.appData.deleteFacultyGroup(groupToDelete)
+                context.appData.unsubscribeFacultyGroup(groupToDelete)
                 store.groupToDelete = nil
             }
 
@@ -62,10 +62,5 @@ struct ObservedFacultyGroupsViewModel: ViewModel {
         navigationController.setViewControllers([viewController], animated: false)
         navigationController.navigationBar.prefersLargeTitles = true
         self.navigationController?.presentFullScreen(navigationController)
-    }
-
-    private func presentEditFacultyGroupView(facultyGroup: FacultyGroup) {
-        let viewController = UIHostingController(rootView: FacultyGroupDetailsView(facultyGroup: facultyGroup, type: .editable))
-        navigationController?.presentModally(viewController)
     }
 }

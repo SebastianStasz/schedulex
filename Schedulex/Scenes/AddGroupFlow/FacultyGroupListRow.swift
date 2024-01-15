@@ -17,7 +17,7 @@ struct FacultyGroupListRow: View {
 
     var body: some View {
         BaseListItem(title: facultyGroup.name, caption: caption)
-            .trailingIcon(trailingIcon, iconColor: iconColor)
+            .trailingIcon(trailingIcon, iconColor: iconColor, iconSize: 15)
             .contentShape(Rectangle())
     }
 

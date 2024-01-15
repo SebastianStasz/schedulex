@@ -41,7 +41,7 @@ struct FacultiesListView: RootView {
                                 .displayIf(store.faculties.last != $0 || (store.faculties.last == $0 && !store.facultyGroups.isEmpty))
                         }
                         ForEach(store.facultyGroups) { facultyGroup in
-                            FacultyGroupListRow(facultyGroup: facultyGroup, trailingIcon: .info, iconColor: .accentPrimary)
+                            FacultyGroupListRow(facultyGroup: facultyGroup, trailingIcon: .chevronRight, iconColor: .accentPrimary)
                                 .onTapGesture { store.navigateToFacultyGroupDetails.send(facultyGroup) }
 
                             Separator()

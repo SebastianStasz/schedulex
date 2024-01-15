@@ -5,10 +5,10 @@
 //  Created by Sebastian Staszczyk on 13/01/2024.
 //
 
-import Foundation
-
+import UIKit
 
 protocol ViewModel {
+    var navigationController: UINavigationController? { get set }
     associatedtype Store
 
     func makeStore(context: Context) -> Store

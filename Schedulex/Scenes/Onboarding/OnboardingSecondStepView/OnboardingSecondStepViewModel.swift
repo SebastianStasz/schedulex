@@ -6,7 +6,7 @@
 //
 
 import Domain
-import Foundation
+import UIKit
 import SchedulexFirebase
 
 final class OnboardingSecondStepStore: RootStore {
@@ -19,6 +19,7 @@ final class OnboardingSecondStepStore: RootStore {
 }
 
 struct OnboardingSecondStepViewModel: ViewModel {
+    weak var navigationController: UINavigationController?
     let selectedFacultyGroups: [FacultyGroup]
     let onFinishOnboarding: () -> Void
 

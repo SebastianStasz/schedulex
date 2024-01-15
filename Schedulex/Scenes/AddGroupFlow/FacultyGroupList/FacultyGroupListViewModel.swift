@@ -6,7 +6,7 @@
 //
 
 import Domain
-import Foundation
+import UIKit
 
 final class FacultyGroupListStore: RootStore {
     @Published fileprivate(set) var facultyGroups: [FacultyGroup] = []
@@ -17,6 +17,7 @@ final class FacultyGroupListStore: RootStore {
 }
 
 struct FacultyGroupListViewModel: ViewModel {
+    weak var navigationController: UINavigationController?
     let faculty: Faculty
 
     func makeStore(context: Context) -> FacultyGroupListStore {
@@ -31,9 +32,5 @@ struct FacultyGroupListViewModel: ViewModel {
             .store(in: &store.cancellables)
 
         return store
-    }
-
-    private func pushFacultyGroupDetailsView(_ facultyGroup: FacultyGroup) {
-
     }
 }

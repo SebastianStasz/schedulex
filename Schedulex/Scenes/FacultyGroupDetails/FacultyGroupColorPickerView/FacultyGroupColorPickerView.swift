@@ -1,5 +1,5 @@
 //
-//  FacultyGroupColorPickerListView.swift
+//  FacultyGroupColorPickerView.swift
 //  Schedulex
 //
 //  Created by Sebastian Staszczyk on 16/10/2023.
@@ -10,12 +10,10 @@ import SwiftUI
 import Widgets
 import Resources
 
-struct FacultyGroupColorPickerListView: View {
-    @AppStorage("subscribedFacultyGroups") private var subscribedGroups: [FacultyGroup] = []
-    @Environment(\.dismiss) private var dismiss
-    let facultyGroup: FacultyGroup
+struct FacultyGroupColorPickerView: RootView {
+    @ObservedObject var store: FacultyGroupColorPickerStore
 
-    var body: some View {
+    var rootBody: some View {
         ScrollView {
             VStack(spacing: .large) {
                 iconsRow(for: FacultyGroupColor.allCases.prefix(3))
@@ -25,25 +23,26 @@ struct FacultyGroupColorPickerListView: View {
             .padding(.horizontal, .large)
         }
         .background(.backgroundPrimary)
-        .navigationTitle(L10n.selectColor)
     }
 
     private func iconsRow(for colors: ArraySlice<FacultyGroupColor>) -> some View {
         HStack(spacing: .large) {
             ForEach(colors) { color in
                 ColorPickerSquare(color: color.representative, cornerRadius: .large)
-                    .onTapGesture { selectColor(color) }
+                    .onTapGesture { store.setFacultyGroupColor.send(color) }
             }
         }
     }
+}
 
-    private func selectColor(_ color: FacultyGroupColor) {
-        dismiss.callAsFunction()
-        guard let index = subscribedGroups.firstIndex(where: { $0.name == facultyGroup.name }) else { return }
-        subscribedGroups[index].color = color
+final class FacultyGroupColorPickerViewController: SwiftUIViewController<FacultyGroupColorPickerViewModel, FacultyGroupColorPickerView> {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        title = L10n.selectColor
     }
 }
 
 #Preview {
-    FacultyGroupColorPickerListView(facultyGroup: .sample)
+    let store = FacultyGroupColorPickerStore(facultyGroup: .sample)
+    return FacultyGroupColorPickerView(store: store)
 }

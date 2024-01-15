@@ -64,12 +64,8 @@ struct FacultiesListViewModel: ViewModel {
     }
 
     private func pushFacultyGroupList(for faculty: Faculty) {
-        let viewModel = FacultyGroupListViewModel(faculty: faculty)
+        let viewModel = FacultyGroupListViewModel(navigationController: navigationController, faculty: faculty)
         let viewController = FacultyGroupListViewController(viewModel: viewModel)
         navigationController?.push(viewController)
-    }
-
-    private func pushFacultyGroupDetailsView(_ facultyGroup: FacultyGroup) {
-
     }
 }
