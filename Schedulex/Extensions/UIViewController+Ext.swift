@@ -6,8 +6,20 @@
 //
 
 import SwiftUI
+import Widgets
 
 extension UIViewController {
+    func addCloseButton() {
+        let image = UIImage(systemName: "xmark")
+        let closeButton = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(dismissWithAnimation))
+        closeButton.tintColor = .textPrimary
+        navigationItem.rightBarButtonItem = closeButton
+    }
+
+    @objc func dismissWithAnimation() {
+        dismiss(animated: true)
+    }
+
     func display(_ childController: UIViewController, viewConfigurationHandler: ((UIView) -> Void)?) {
         addChild(childController)
         let childControllerView: UIView = childController.view

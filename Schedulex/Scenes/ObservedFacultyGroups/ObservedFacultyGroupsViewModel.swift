@@ -56,8 +56,12 @@ struct ObservedFacultyGroupsViewModel: ViewModel {
     }
 
     private func presentFacultiesList() {
-        let viewController = UIHostingController(rootView: FacultiesListView(service: FirestoreService()))
-        navigationController?.presentModally(viewController)
+        let navigationController = UINavigationController()
+        let viewModel = FacultiesListViewModel(navigationController: navigationController)
+        let viewController = FacultiesListViewController(viewModel: viewModel)
+        navigationController.setViewControllers([viewController], animated: false)
+        navigationController.navigationBar.prefersLargeTitles = true
+        self.navigationController?.presentFullScreen(navigationController)
     }
 
     private func presentEditFacultyGroupView(facultyGroup: FacultyGroup) {

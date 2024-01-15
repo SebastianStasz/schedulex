@@ -21,6 +21,11 @@ extension UINavigationController {
         present(viewController, animated: animated)
     }
 
+    func presentFullScreen(_ viewController: UIViewController, animated: Bool = true) {
+        viewController.modalPresentationStyle = .fullScreen
+        present(viewController, animated: animated)
+    }
+
     func dismiss(animated: Bool = true) {
         dismiss(animated: animated, completion: nil)
     }
