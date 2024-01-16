@@ -43,7 +43,7 @@ struct FacultiesListViewModel: ViewModel {
             .store(in: &store.cancellables)
 
         store.navigateToFacultyGroupDetails
-            .sink { pushFacultyGroupDetailsView($0) }
+            .sink { pushFacultyGroupDetailsView($0, viewType: .preview) }
             .store(in: &store.cancellables)
 
         return store

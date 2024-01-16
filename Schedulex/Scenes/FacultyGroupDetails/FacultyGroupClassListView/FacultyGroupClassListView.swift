@@ -5,79 +5,45 @@
 //  Created by Sebastian Staszczyk on 02/10/2023.
 //
 
-import Domain
 import Resources
 import SwiftUI
 import Widgets
 
-struct EditableFacultyGroupClass: Equatable, Codable {
-    let facultyGroupName: String
-    let facultyGroupClass: FacultyGroupClass
+struct FacultyGroupClassListView: RootView {
+    @ObservedObject var store: FacultyGroupClassListStore
 
-    func toFacultyGroupClass() -> FacultyGroupClass {
-        FacultyGroupClass(name: facultyGroupClass.name, type: facultyGroupClass.type, teacher: facultyGroupClass.teacher)
-    }
-}
-
-extension FacultyGroupClass {
-    func toEditableFacultyGroupClass(facultyGroupName: String) -> EditableFacultyGroupClass {
-        EditableFacultyGroupClass(facultyGroupName: facultyGroupName, facultyGroupClass: self)
-    }
-}
-
-struct FacultyGroupClassListView: View {
-    @AppStorage("hiddenFacultyGroupsClasses") private var allHiddenClasses: [EditableFacultyGroupClass] = []
-    let facultyGroupName: String
-    let classes: [FacultyGroupClass]
-    let viewType: FacultyGroupDetailsView.ViewType
-
-    var body: some View {
+    var rootBody: some View {
         Group {
-            if viewType == .preview {
-                BaseList(classes, id: \.self) { FacultyGroupClassListItem(facultyGroupClass: $0, isSelected: true, action: nil) }
+            if store.viewType == .preview {
+                BaseList(store.classes, id: \.self) { FacultyGroupClassListItem(facultyGroupClass: $0.facultyGroupClass, isSelected: true, action: nil) }
             } else {
                 SectionedList(sections, pinnedHeaders: true) { sectionIndex, groupClass in
-                    FacultyGroupClassListItem(facultyGroupClass: groupClass, isSelected: sectionIndex == 0) {
+                    FacultyGroupClassListItem(facultyGroupClass: groupClass.facultyGroupClass, isSelected: sectionIndex == 0) {
                         if sectionIndex == 0 {
-                            hideClass(groupClass)
+                            store.hideFacultyGroupClass.send(groupClass)
                         } else {
-                            unhideClass(groupClass)
+                            store.unhideFacultyGroupClass.send(groupClass)
                         }
                     }
                 }
-                .animation(.easeInOut, value: allHiddenClasses)
+                .animation(.easeInOut, value: store.hiddenClasses)
             }
         }
-        .navigationTitle(L10n.classes)
-        .baseListStyle()
     }
 
-    private var sections: [ListSection<FacultyGroupClass>] {
-        [ListSection(title: L10n.visible, items: visibleClasses),
-         ListSection(title: L10n.hidden, items: hiddenClasses)]
+    private var sections: [ListSection<EditableFacultyGroupClass>] {
+        [ListSection(title: L10n.visible, items: store.visibleClasses),
+         ListSection(title: L10n.hidden, items: store.hiddenClasses)]
     }
+}
 
-    private var visibleClasses: [FacultyGroupClass] {
-        classes.filter { !hiddenClasses.contains($0) }
-    }
-
-    private var hiddenClasses: [FacultyGroupClass] {
-        allHiddenClasses
-            .filter { $0.facultyGroupName == facultyGroupName }
-            .map { $0.toFacultyGroupClass() }
-    }
-
-    private func hideClass(_ groupClass: FacultyGroupClass) {
-        let groupClass = groupClass.toEditableFacultyGroupClass(facultyGroupName: facultyGroupName)
-        allHiddenClasses.append(groupClass)
-    }
-
-    private func unhideClass(_ groupClass: FacultyGroupClass) {
-        let groupClass = groupClass.toEditableFacultyGroupClass(facultyGroupName: facultyGroupName)
-        allHiddenClasses.removeAll { $0 == groupClass }
+final class FacultyGroupClassListViewController: SwiftUIViewController<FacultyGroupClassListViewModel, FacultyGroupClassListView> {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        title = L10n.classes
     }
 }
 
 #Preview {
-    FacultyGroupClassListView(facultyGroupName: "ZZ", classes: [], viewType: .preview)
+    FacultyGroupClassListView(store: FacultyGroupClassListStore(viewType: .preview))
 }

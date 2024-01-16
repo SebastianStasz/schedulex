@@ -20,7 +20,13 @@ struct AppData {
         }
     }
 
-    private(set) var allHiddenClasses: [EditableFacultyGroupClass] = []
+    private(set) var allHiddenClasses: [EditableFacultyGroupClass] = [] {
+        didSet {
+            let data = try! JSONEncoder().encode(allHiddenClasses)
+            let json = String(data: data, encoding: .utf8)
+            defaults.setValue(json, forKey: "allHiddenClasses")
+        }
+    }
 
     var showDashboardSwipeTip = true {
         didSet { defaults.setValue(showDashboardSwipeTip, forKey: "showDashboardSwipeTip") }
@@ -35,16 +41,24 @@ struct AppData {
             let subscribedFacultyGroups = try? JSONDecoder().decode([FacultyGroup].self, from: data)
             self.subscribedFacultyGroups = subscribedFacultyGroups ?? []
         }
+
+        if let string = UserDefaults.standard.value(forKey: "allHiddenClasses") as? String, let data = string.data(using: .utf8) {
+            let subscribedFacultyGroups = try? JSONDecoder().decode([EditableFacultyGroupClass].self, from: data)
+            self.allHiddenClasses = subscribedFacultyGroups ?? []
+        }
     }
 
     mutating func subscribeFacultyGroup(_ facultyGroup: FacultyGroup) {
-        subscribeFacultyGroups([facultyGroup])
+        guard !subscribedFacultyGroups.contains(where: { $0.name == facultyGroup.name }) else {
+            return
+        }
+        var facultyGroup = facultyGroup
+        facultyGroup.color = availableColors.first ?? .default
+        subscribedFacultyGroups.append(facultyGroup)
     }
 
     mutating func subscribeFacultyGroups(_ facultyGroups: [FacultyGroup]) {
-        var facultyGroupsToBeSubscribed = facultyGroups
-        facultyGroupsToBeSubscribed.removeAll(where: { subscribedFacultyGroups.contains($0) })
-        subscribedFacultyGroups.append(contentsOf: facultyGroups)
+        facultyGroups.forEach { subscribeFacultyGroup($0) }
     }
 
     mutating func unsubscribeFacultyGroup(_ facultyGroup: FacultyGroup) {
@@ -58,8 +72,23 @@ struct AppData {
         }
     }
 
+    mutating func hideFacultyGroupClass(_ facultyGroupClass: EditableFacultyGroupClass) {
+        guard !allHiddenClasses.contains(facultyGroupClass) else { return }
+        allHiddenClasses.append(facultyGroupClass)
+    }
+
+    mutating func unhideFacultyGroupClass(_ facultyGroupClass: EditableFacultyGroupClass) {
+        allHiddenClasses.removeAll(where: { $0 == facultyGroupClass })
+    }
+
     mutating func setFacultyGroupColor(for facultyGroup: FacultyGroup, color: FacultyGroupColor) {
         guard let index = subscribedFacultyGroups.firstIndex(where: { $0.name == facultyGroup.name }) else { return }
         subscribedFacultyGroups[index].color = color
+    }
+
+    private var availableColors: [FacultyGroupColor] {
+        FacultyGroupColor.allCases.filter { color in
+            !subscribedFacultyGroups.contains(where: { $0.color == color })
+        }
     }
 }

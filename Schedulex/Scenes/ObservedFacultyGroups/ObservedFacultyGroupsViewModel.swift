@@ -38,7 +38,7 @@ struct ObservedFacultyGroupsViewModel: ViewModel {
             .store(in: &store.cancellables)
 
         store.editFacultyGroup
-            .sink { pushFacultyGroupDetailsView($0) }
+            .sink { pushFacultyGroupDetailsView($0, viewType: .editable) }
             .store(in: &store.cancellables)
 
         store.toggleFacultyGroupVisibility
