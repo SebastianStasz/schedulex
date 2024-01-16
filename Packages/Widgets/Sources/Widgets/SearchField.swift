@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Resources
 
 public struct SearchField: View {
     @FocusState private var focusState: Bool
@@ -42,6 +43,10 @@ public struct SearchField: View {
             .padding(.small)
             .background(Color(uiColor: .systemGray6))
             .cornerRadius(.medium)
+
+            if focusState {
+                TextButton(L10n.cancelButton, style: .bodyMedium, color: .textPrimary, action: cancelSearch)
+            }
         }
         .padding(.horizontal, .large)
         .onTapGesture { focusState = true }
@@ -54,7 +59,7 @@ public struct SearchField: View {
 
     private func cancelSearch() {
         searchText = ""
-        isFocused = false
+        focusState = false
     }
 }
 
