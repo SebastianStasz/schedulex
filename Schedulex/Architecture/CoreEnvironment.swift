@@ -13,7 +13,7 @@ protocol CoreEnvironment {
 }
 
 struct AppCoreEnvironment: CoreEnvironment {
-    let context = Context(firestoreService: FirestoreService(), appData: AppData())
+    let context = Context(storage: FirestoreStorage(), appData: AppData())
 }
 
 enum CoreEnvironmentHolder {

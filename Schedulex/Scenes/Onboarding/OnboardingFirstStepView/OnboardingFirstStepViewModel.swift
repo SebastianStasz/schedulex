@@ -29,7 +29,7 @@ struct OnboardingFirstStepViewModel: ViewModel {
         let presentStartSecondStepView = DriverSubject<Void>()
 
         store.viewWillAppear
-            .perform { try await context.firestoreService.getCracowUniversityOfEconomics() }
+            .perform { try await context.storage.getCracowUniversityOfEconomicsData() }
             .sinkAndStore(on: store) { $0.facultyGroups = $1.allGroupsWithoutLanguages }
 
         store.onNextButton

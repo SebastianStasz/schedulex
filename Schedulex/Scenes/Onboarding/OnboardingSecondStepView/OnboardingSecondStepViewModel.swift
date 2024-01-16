@@ -27,7 +27,7 @@ struct OnboardingSecondStepViewModel: ViewModel {
         let store = OnboardingSecondStepStore()
 
         store.viewWillAppear
-            .perform { try await context.firestoreService.getCracowUniversityOfEconomics() }
+            .perform { try await context.storage.getCracowUniversityOfEconomicsData() }
             .sinkAndStore(on: store) { $0.languageGroups = $1.languageGroups }
 
         store.$selectedLanguageGroups

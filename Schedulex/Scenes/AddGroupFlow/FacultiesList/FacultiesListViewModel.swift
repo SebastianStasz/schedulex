@@ -27,7 +27,7 @@ struct FacultiesListViewModel: ViewModel {
 
         let school = store.viewWillAppear.share()
             .perform(isLoading: store.isLoading) {
-                try await context.firestoreService.getCracowUniversityOfEconomics()
+                try await context.storage.getCracowUniversityOfEconomicsData()
             }
 
         CombineLatest(school, store.$searchText)
