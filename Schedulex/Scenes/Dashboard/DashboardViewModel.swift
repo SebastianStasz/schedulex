@@ -8,7 +8,8 @@
 import UIKit
 
 final class DashboardStore: RootStore {
-    let pushObservedFacultyGroupsView = DriverSubject<Void>()
+    let navigateToObservedFacultyGroupsView = DriverSubject<Void>()
+    let navigateToSettings = DriverSubject<Void>()
 }
 
 struct DashboardViewModel: ViewModel {
@@ -17,11 +18,23 @@ struct DashboardViewModel: ViewModel {
     func makeStore(context: Context) -> DashboardStore {
         let store = DashboardStore()
 
-        store.pushObservedFacultyGroupsView
+        store.navigateToSettings
+            .sink { pushSettingsView() }
+            .store(in: &store.cancellables)
+
+        store.navigateToObservedFacultyGroupsView
             .sink { pusObservedFacultyGroupsView() }
             .store(in: &store.cancellables)
 
         return store
+    }
+
+    let manager = NotificationsManager()
+
+    private func pushSettingsView() {
+        let viewModel = SettingsViewModel(notificationsManager: manager, navigationController: navigationController)
+        let viewController = SettingsViewController(viewModel: viewModel)
+        navigationController?.push(viewController)
     }
 
     private func pusObservedFacultyGroupsView() {

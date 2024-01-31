@@ -28,14 +28,35 @@ struct AppData {
         }
     }
 
-    var showDashboardSwipeTip = true {
+    var classNotificationsEnabled: Bool = false {
+        didSet { defaults.set(classNotificationsEnabled, forKey: "classNotificationsEnabled") }
+    }
+
+    var classNotificationsTime: ClassNotificationTime = .oneHourBefore {
+        didSet { defaults.set(classNotificationsTime.rawValue, forKey: "classNotificationsTime") }
+    }
+
+    var showDashboardSwipeTip: Bool = true {
         didSet { defaults.setValue(showDashboardSwipeTip, forKey: "showDashboardSwipeTip") }
+    }
+
+    var appColorScheme: AppColorScheme = .system {
+        didSet { defaults.set(appColorScheme.rawValue, forKey: "appColorScheme") }
     }
 
     init(defaults: UserDefaults = .standard) {
         self.defaults = defaults
 
+        classNotificationsEnabled = defaults.bool(forKey: "classNotificationsEnabled")
         showDashboardSwipeTip = defaults.bool(forKey: "showDashboardSwipeTip")
+        
+        if let rawValue = defaults.string(forKey: "appColorScheme"), let appColorScheme = AppColorScheme(rawValue: rawValue) {
+            self.appColorScheme = appColorScheme
+        }
+
+        if let rawValue = defaults.string(forKey: "classNotificationsTime"), let classNotificationsTime = ClassNotificationTime(rawValue: rawValue) {
+            self.classNotificationsTime = classNotificationsTime
+        }
 
         if let string = UserDefaults.standard.value(forKey: "subscribedFacultyGroups") as? String, let data = string.data(using: .utf8) {
             let subscribedFacultyGroups = try? JSONDecoder().decode([FacultyGroup].self, from: data)

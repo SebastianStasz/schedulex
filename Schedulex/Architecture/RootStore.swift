@@ -7,6 +7,7 @@
 
 import Combine
 
+@MainActor
 class RootStore: ObservableObject, CombineHelper {
     var cancellables: Set<AnyCancellable> = []
 

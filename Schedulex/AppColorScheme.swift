@@ -29,10 +29,10 @@ enum AppColorScheme: String, Identifiable, CaseIterable, Pickable {
         }
     }
 
-    var scheme: ColorScheme? {
+    var scheme: UIUserInterfaceStyle {
         switch self {
         case .system:
-            return nil
+            return .unspecified
         case .light:
             return .light
         case .dark:

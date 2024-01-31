@@ -149,7 +149,7 @@ struct DashboardView: RootView {
     private var toolbarContent: some ToolbarContent {
         ToolbarItem(placement: .bottomBar) {
             HStack(spacing: 0) {
-                TextButton(L10n.myGroups, action: store.pushObservedFacultyGroupsView.send)
+                TextButton(L10n.myGroups, action: store.navigateToObservedFacultyGroupsView.send)
                     .frame(maxWidth: .infinity, alignment: .leading)
                 TextButton(L10n.today, action: selectTodaysDate)
                     .frame(maxWidth: .infinity)

@@ -12,7 +12,7 @@ import NotificationCenter
 final class NotificationsManager: ObservableObject {
     private let notificationCenter = UNUserNotificationCenter.current()
     @Published private(set) var areNotificationsSettingsLoaded = false
-    @Published private(set) var canRequestNotificationsAccess: Bool?
+    @Published private(set) var canRequestNotificationsAccess = false
     @Published private(set) var isNotificationsAccessGranted: Bool?
 
     func updateNotificationsPermission() async {

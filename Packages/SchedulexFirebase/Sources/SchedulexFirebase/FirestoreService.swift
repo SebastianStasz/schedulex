@@ -13,7 +13,7 @@ struct FirestoreService {
 
     func subscribe(document: String, from collection: String) -> (ListenerRegistration, AnyPublisher<DocumentSnapshot?, Never>) {
         let publisher = PassthroughSubject<DocumentSnapshot?, Never>()
-        let listenerRegistration = db.collection(document).document(document)
+        let listenerRegistration = db.collection(collection).document(document)
             .addSnapshotListener { document, error in
                 if let document {
                     publisher.send(document)

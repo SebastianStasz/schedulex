@@ -17,6 +17,8 @@ public final class FirestoreStorage: FirestoreStorageProtocol {
     public init() {
         appConfigurationSubscription = AppConfigurationSubscription(firestore: firestore)
         cracowUniversityOfEconomicsService = CracowUniversityOfEconomicsService(firestore: firestore)
+
+        appConfigurationSubscription.subscribe()
     }
     
     public var appConfiguration: AnyPublisher<AppConfiguration, Never> {

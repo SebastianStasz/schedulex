@@ -7,6 +7,7 @@
 
 import UIKit
 
+@MainActor
 protocol ViewModel {
     var navigationController: UINavigationController? { get set }
     associatedtype Store
