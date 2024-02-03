@@ -9,7 +9,7 @@ import SwiftUI
 
 public struct DayPickerItem: Hashable, Identifiable {
     public let id = UUID()
-    let date: Date
+    public let date: Date
     let circleColors: [Color]
     let isSelectable: Bool
 

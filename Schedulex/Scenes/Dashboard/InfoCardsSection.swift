@@ -10,7 +10,7 @@ import SwiftUI
 import Widgets
 
 struct InfoCardsSection: View {
-    @EnvironmentObject private var notificationsManager: NotificationsManager
+//    @EnvironmentObject private var notificationsManager: NotificationsManager
     @AppStorage("classNotificationsEnabled") private var classNotificationsEnabled = false
     @AppStorage("showDashboardSwipeTip") private var showDashboardSwipeTip = true
     @AppStorage("hiddenInfoCards") private var hiddenInfoCards: [InfoCard] = []
@@ -19,10 +19,7 @@ struct InfoCardsSection: View {
         if !infoCardsToDisplay.isEmpty {
             infoCardsView
                 .transition(.scale)
-        } else if showDashboardSwipeTip, notificationsManager.areNotificationsSettingsLoaded {
-            swipeTip
-                .transition(.scale)
-        }
+        } 
     }
     
     private var infoCardsView: some View {
@@ -66,7 +63,8 @@ struct InfoCardsSection: View {
         }
         switch infoCard {
         case .enableNotifications:
-            return notificationsManager.canRequestNotificationsAccess ?? false
+//            return notificationsManager.canRequestNotificationsAccess
+            return false
         default:
             return shouldRateAppInfoCardBeDisplayed()
         }
@@ -76,7 +74,7 @@ struct InfoCardsSection: View {
         switch infoCard {
         case .enableNotifications:
             classNotificationsEnabled = true
-            Task { try? await notificationsManager.requestNotificationsPermission() }
+//            Task { try? await notificationsManager.requestNotificationsPermission() }
         case .rateTheApplication:
             openAppInAppStore()
             hiddenInfoCards.append(.rateTheApplication)

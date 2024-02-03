@@ -24,14 +24,10 @@ final class DashboardViewController: SwiftUIViewController<DashboardViewModel, D
 }
 
 struct DashboardView: RootView {
-    @AppStorage("subscribedFacultyGroups") private var subscribedGroups: [FacultyGroup] = []
-    @AppStorage("hiddenFacultyGroupsClasses") private var allHiddenClasses: [EditableFacultyGroupClass] = []
     @AppStorage("classNotificationsTime") private var classNotificationsTime = ClassNotificationTime.oneHourBefore
     @AppStorage("classNotificationsEnabled") private var classNotificationsEnabled = false
     @AppStorage("showDashboardSwipeTip") private var showDashboardSwipeTip = true
     @StateObject private var viewModel = DashboardViewModelOld()
-    @StateObject private var notificationsManager = NotificationsManager()
-    @StateObject private var appConfigurationService = AppConfigurationService()
 
     @State private var appVersion: String?
     @State private var areSettingsPresented = false
@@ -44,7 +40,7 @@ struct DashboardView: RootView {
         NavigationStack {
             VStack(spacing: 0) {
                 LazyVStack {
-                    DayPickerView(items: viewModel.dayPickerItems ?? [], isDatePickerPresented: $isDatePickerPresented, shouldScrollToDay: $viewModel.shouldScrollToDay, selection: $viewModel.selectedDate)
+                    DayPickerView(items: store.dayPickerItems ?? [], isDatePickerPresented: $isDatePickerPresented, shouldScrollToDay: $store.shouldScrollToDay, selection: $store.selectedDate)
                 }
                 .padding(.top, .xlarge)
                 .padding(.bottom, .medium)
@@ -54,11 +50,11 @@ struct DashboardView: RootView {
 
                 ScrollView(showsIndicators: false) {
                     VStack(spacing: .medium) {
-                        if !(viewModel.dayPickerItems?.isEmpty ?? true) {
+                        if !(store.dayPickerItems == nil) {
                             InfoCardsSection()
-                                .environmentObject(notificationsManager)
+//                                .environmentObject(notificationsManager)
                         }
-                        EventsList(events: (viewModel.dayPickerItems?.isEmpty ?? true) ? [] : viewModel.selectedDateEvents)
+                        EventsList(events: (store.dayPickerItems == nil) ? [] : store.selectedDateEvents)
                             .padding(.vertical, .medium)
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -69,42 +65,42 @@ struct DashboardView: RootView {
                 .overlay { loadingIndicatorOrEmptyState }
             }
             .toolbar { toolbarContent }
-            .doubleNavigationTitle(title: viewModel.title, subtitle: viewModel.subtitle, showBadge: appConfigurationService.isUpdateAvailable, openSettings: store.pushObservedFacultyGroupsView.send)
-            .navigationDestination(isPresented: $areSettingsPresented) {
-                SettingsView(appVersion: appConfigurationService.appVersion ?? "",
-                             contactMail: appConfigurationService.configuration.contactMail,
-                             isUpdateAvailable: appConfigurationService.isUpdateAvailable)
-                .environmentObject(notificationsManager)
-            }
+            .doubleNavigationTitle(title: title, subtitle: subtitle, showBadge: false, openSettings: { store.navigateTo.send(.settings) })
         }
         .sheet(isPresented: $isDatePickerPresented) { datePicker }
-        .onChange(of: subscribedGroups) { _ in fetchEvents() }
-        .onChange(of: allHiddenClasses) { _ in fetchEvents() }
-        .onChange(of: classNotificationsEnabled) { _ in setClassesNotifications() }
-        .onChange(of: classNotificationsTime) { _ in setClassesNotifications() }
-        .onChange(of: notificationsManager.isNotificationsAccessGranted) { _ in setClassesNotifications() }
-        .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification).dropFirst()) { _ in onSceneChange(.active)}
+//        .onChange(of: subscribedGroups) { _ in fetchEvents() }
+//        .onChange(of: allHiddenClasses) { _ in fetchEvents() }
+//        .onChange(of: classNotificationsEnabled) { _ in setClassesNotifications() }
+//        .onChange(of: classNotificationsTime) { _ in setClassesNotifications() }
+//        .onChange(of: notificationsManager.isNotificationsAccessGranted) { _ in setClassesNotifications() }
+//        .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification).dropFirst()) { _ in onSceneChange(.active)}
         .task {
-            fetchEvents()
+//            fetchEvents()
 //            appConfigurationService.subscribe(service: FirestoreService())
-            await notificationsManager.updateNotificationsPermission()
+//            await notificationsManager.updateNotificationsPermission()
         }
+    }
+
+    private var title: String {
+        store.selectedDate.formatted(style: .dateLong)
+    }
+
+    private var subtitle: String {
+        store.selectedDate.isSameDay(as: .now) ? L10n.today : L10n.selectedDate
     }
 
     private var dragGesture: _EndedGesture<DragGesture> {
         DragGesture()
             .onEnded { gesture in
                 if gesture.translation.width >= 30 {
-                    if let date = viewModel.startDate, viewModel.selectedDate > date {
+                    if let date = store.startDate, store.selectedDate > date {
                         onSwipe()
-                        viewModel.shouldScrollToDay = true
-                        viewModel.selectedDate = Calendar.current.date(byAdding: .day, value: -1, to: viewModel.selectedDate)!
+                        store.selectedDate = Calendar.current.date(byAdding: .day, value: -1, to: store.selectedDate)!
                     }
                 } else if gesture.translation.width <= -30 {
-                    if let date = viewModel.endDate, viewModel.selectedDate < date {
+                    if let date = store.endDate, store.selectedDate < date {
                         onSwipe()
-                        viewModel.shouldScrollToDay = true
-                        viewModel.selectedDate = Calendar.current.date(byAdding: .day, value: 1, to: viewModel.selectedDate)!
+                        store.selectedDate = Calendar.current.date(byAdding: .day, value: 1, to: store.selectedDate)!
                     }
                 }
             }
@@ -119,8 +115,8 @@ struct DashboardView: RootView {
 
     @ViewBuilder
     private var datePicker: some View {
-        if let items = viewModel.dayPickerItems {
-            CalendarPicker(items: items, selectedDate: $viewModel.selectedDate)
+        if let items = store.dayPickerItems {
+            CalendarPicker(items: items, selectedDate: $store.selectedDate)
                 .padding(.top, .large)
                 .presentationDetents([.height(380)])
                 .presentationDragIndicator(.visible)
@@ -130,10 +126,10 @@ struct DashboardView: RootView {
 
     @ViewBuilder
     private var loadingIndicatorOrEmptyState: some View {
-        if viewModel.isLoading {
+        if store.isLoading {
             ProgressView()
-        } else if !viewModel.isEmpty && viewModel.selectedDateEvents.isEmpty {
-            let isWeekend = NSCalendar.current.isDateInWeekend(viewModel.selectedDate)
+        } else if !store.isLoading, store.selectedDateEvents.isEmpty {
+            let isWeekend = NSCalendar.current.isDateInWeekend(store.selectedDate)
             HStack(spacing: .micro) {
                 Text(isWeekend ? L10n.noEventsWeekendMessage : L10n.noEventsMessage, style: .body)
                     .foregroundStyle(.grayShade1)
@@ -149,7 +145,7 @@ struct DashboardView: RootView {
     private var toolbarContent: some ToolbarContent {
         ToolbarItem(placement: .bottomBar) {
             HStack(spacing: 0) {
-                TextButton(L10n.myGroups, action: store.navigateToObservedFacultyGroupsView.send)
+                TextButton(L10n.myGroups, action: { store.navigateTo.send(.observedFacultyGroups) })
                     .frame(maxWidth: .infinity, alignment: .leading)
                 TextButton(L10n.today, action: selectTodaysDate)
                     .frame(maxWidth: .infinity)
@@ -161,7 +157,7 @@ struct DashboardView: RootView {
     }
 
     private func selectTodaysDate() {
-        viewModel.shouldScrollToDay = true
+        store.shouldScrollToDay = true
         viewModel.selectedDate = .now
     }
 
@@ -172,6 +168,7 @@ struct DashboardView: RootView {
 
     private func onSwipe() {
         swipeCount += 1
+        store.shouldScrollToDay = true
         guard showDashboardSwipeTip, swipeCount > 3 else { return }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             withAnimation {
@@ -188,12 +185,12 @@ struct DashboardView: RootView {
     private func setClassesNotifications() {
         guard classNotificationsEnabled else { return }
         let notifications = viewModel.allEvents.compactMap { $0.toLocalNotification(time: classNotificationsTime) }
-        Task { await notificationsManager.setNotifications(notifications) }
+//        Task { await notificationsManager.setNotifications(notifications) }
     }
 
     private func fetchEvents() {
         Task {
-            try await viewModel.fetchEvents(for: subscribedGroups, hiddenClasses: allHiddenClasses)
+//            try await viewModel.fetchEvents(for: subscribedGroups, hiddenClasses: allHiddenClasses)
             setClassesNotifications()
         }
     }

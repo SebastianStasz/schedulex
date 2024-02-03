@@ -5,17 +5,7 @@
 //  Created by Sebastian Staszczyk on 16/01/2024.
 //
 
-import Combine
 import SwiftUI
-
-extension NotificationCenter {
-    static var didBecomeActive: AnyPublisher<Void, Never> {
-        NotificationCenter.default
-            .publisher(for: UIApplication.didBecomeActiveNotification)
-            .map { _ in }
-            .eraseToAnyPublisher()
-    }
-}
 
 final class SettingsStore: RootStore {
     @Published fileprivate var areNotificationsEnabled = false
@@ -54,7 +44,7 @@ struct SettingsViewModel: ViewModel {
                 $0.isUpdateAvailable = $1.latestAppVersion != appVersion
             }
 
-        Merge(store.viewWillAppear, NotificationCenter.didBecomeActive)
+        Merge(store.viewWillAppear, NotificationCenter.willEnterForeground)
             .perform { await notificationsManager.updateNotificationsPermission() }
             .sink {}.store(in: &store.cancellables)
 

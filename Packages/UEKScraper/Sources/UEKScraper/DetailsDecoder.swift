@@ -19,7 +19,7 @@ struct DetailsDecoder {
         let eventsData = eventsData(from: rows, for: facultyGroup)
         let events = eventsData.map { $0.toEvent(facultyGroup: facultyGroup, datesDecoder: datesDecoder) }
         let classes = getClasses(from: eventsData)
-        return FacultyGroupDetails(events: events, classes: classes)
+        return FacultyGroupDetails(name: facultyGroup.name, events: events, classes: classes)
     }
 
     private func eventsData(from rows: [Element], for facultyGroup: FacultyGroup) -> [EventData] {

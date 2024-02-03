@@ -8,10 +8,12 @@
 import Foundation
 
 public struct FacultyGroupDetails {
+    public let name: String
     public let events: [Event]
     public let classes: [FacultyGroupClass]
 
-    public init(events: [Event], classes: [FacultyGroupClass]) {
+    public init(name: String, events: [Event], classes: [FacultyGroupClass]) {
+        self.name = name
         self.events = events
         self.classes = classes
     }

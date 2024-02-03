@@ -58,6 +58,14 @@ extension Publisher {
 }
 
 extension Publisher where Failure == Never {
+    /// Wraps this publisher with a type eraser.
+    func asDriver() -> Driver<Output> {
+        eraseToAnyPublisher()
+    }
+
+    func asVoid() -> Driver<Void> {
+        map { _ in }.asDriver()
+    }
 
     func sinkAndStore<VM: CombineHelper>(on viewModel: VM, action: @escaping (VM, Output) -> Void) {
         sink { [weak viewModel] value in
