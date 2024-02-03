@@ -29,8 +29,7 @@ struct ObservedFacultyGroupsViewModel: ViewModel {
     func makeStore(context: Context) -> ObservedFacultyGroupsStore {
         let store = ObservedFacultyGroupsStore()
 
-        context.$appData
-            .map { $0.subscribedFacultyGroups }
+        context.appData.$subscribedFacultyGroups
             .assign(to: &store.$subscribedGroups)
 
         store.presentFacultiesList

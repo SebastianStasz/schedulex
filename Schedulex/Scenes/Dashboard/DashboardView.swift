@@ -51,8 +51,7 @@ struct DashboardView: RootView {
                 ScrollView(showsIndicators: false) {
                     VStack(spacing: .medium) {
                         if !(store.dayPickerItems == nil) {
-                            InfoCardsSection()
-//                                .environmentObject(notificationsManager)
+                            InfoCardsSection(store: store.infoCardsSectionStore)
                         }
                         EventsList(events: (store.dayPickerItems == nil) ? [] : store.selectedDateEvents)
                             .padding(.vertical, .medium)
@@ -68,14 +67,10 @@ struct DashboardView: RootView {
             .doubleNavigationTitle(title: title, subtitle: subtitle, showBadge: false, openSettings: { store.navigateTo.send(.settings) })
         }
         .sheet(isPresented: $isDatePickerPresented) { datePicker }
-//        .onChange(of: subscribedGroups) { _ in fetchEvents() }
-//        .onChange(of: allHiddenClasses) { _ in fetchEvents() }
 //        .onChange(of: classNotificationsEnabled) { _ in setClassesNotifications() }
 //        .onChange(of: classNotificationsTime) { _ in setClassesNotifications() }
 //        .onChange(of: notificationsManager.isNotificationsAccessGranted) { _ in setClassesNotifications() }
-//        .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification).dropFirst()) { _ in onSceneChange(.active)}
         .task {
-//            fetchEvents()
 //            appConfigurationService.subscribe(service: FirestoreService())
 //            await notificationsManager.updateNotificationsPermission()
         }
@@ -158,11 +153,11 @@ struct DashboardView: RootView {
 
     private func selectTodaysDate() {
         store.shouldScrollToDay = true
-        viewModel.selectedDate = .now
+        store.selectedDate = .now
     }
 
     private func showDatePicker() {
-        guard !viewModel.isLoading && !viewModel.isEmpty else { return }
+        guard !store.isLoading && !(store.dayPickerItems?.isEmpty ?? true) else { return }
         isDatePickerPresented = true
     }
 
@@ -177,14 +172,9 @@ struct DashboardView: RootView {
         }
     }
 
-    private func onSceneChange(_ scene: ScenePhase) {
-        guard scene == .active, !viewModel.shouldUseCachedData else { return }
-        fetchEvents()
-    }
-
     private func setClassesNotifications() {
         guard classNotificationsEnabled else { return }
-        let notifications = viewModel.allEvents.compactMap { $0.toLocalNotification(time: classNotificationsTime) }
+//        let notifications = viewModel.allEvents.compactMap { $0.toLocalNotification(time: classNotificationsTime) }
 //        Task { await notificationsManager.setNotifications(notifications) }
     }
 
@@ -197,5 +187,5 @@ struct DashboardView: RootView {
 }
 
 #Preview {
-    DashboardView(store: DashboardStore())
+    DashboardView(store: DashboardStore(infoCardsSectionStore: InfoCardsSectionStore()))
 }

@@ -20,7 +20,7 @@ struct DashboardEventsViewModel {
 
     struct Output {
         let dayPickerItems: Driver<[DayPickerItem]?>
-        let events: Driver<[Event]>
+        let eventsToDisplay: Driver<[Event]>
         let isLoading: Driver<Bool>
     }
 
@@ -49,7 +49,7 @@ struct DashboardEventsViewModel {
             .onNext { _ in isLoading.send(false) }
 
         return Output(dayPickerItems: dayPickerItems.asDriver(),
-                      events: eventsToDisplay.asDriver(),
+                      eventsToDisplay: eventsToDisplay.asDriver(),
                       isLoading: isLoading.asDriver())
     }
 

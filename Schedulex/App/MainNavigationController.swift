@@ -16,13 +16,12 @@ final class MainNavigationController: UINavigationController {
 
         navigationBar.prefersLargeTitles = true
 
-        coreEnvironment.context.$appData
-            .map { $0.appColorScheme }
+        coreEnvironment.context.appData.$appColorScheme
             .sink { [weak self] in self?.overrideUserInterfaceStyle = $0.scheme }
             .store(in: &cancellables)
 
-        coreEnvironment.context.$appData
-            .map { $0.subscribedFacultyGroups.isEmpty }
+        coreEnvironment.context.appData.$subscribedFacultyGroups
+            .map { $0.isEmpty }
             .removeDuplicates()
             .sink { [weak self] in
                 if $0 {

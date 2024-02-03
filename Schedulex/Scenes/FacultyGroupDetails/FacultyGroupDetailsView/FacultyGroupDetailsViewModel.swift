@@ -44,12 +44,12 @@ struct FacultyGroupDetailsViewModel: ViewModel {
             }
             .assign(to: &store.$facultyGroupDetails)
 
-        context.$appData
-            .compactMap { $0.subscribedFacultyGroups.first(where: { $0.name == facultyGroup.name }) }
+        context.appData.$subscribedFacultyGroups
+            .compactMap { $0.first(where: { $0.name == facultyGroup.name }) }
             .assign(to: &store.$facultyGroup)
 
-        context.$appData
-            .map { $0.subscribedFacultyGroups.contains(facultyGroup) }
+        context.appData.$subscribedFacultyGroups
+            .map { $0.contains(facultyGroup) }
             .assign(to: &store.$isFacultyGroupSubscribed)
 
         store.unsubscribeFacultyGroup

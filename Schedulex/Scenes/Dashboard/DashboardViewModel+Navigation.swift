@@ -23,7 +23,7 @@ extension DashboardViewModel {
     }
 
     private func pushSettingsView() {
-        let viewModel = SettingsViewModel(notificationsManager: manager, navigationController: navigationController)
+        let viewModel = SettingsViewModel(notificationsManager: notificationManager, navigationController: navigationController)
         let viewController = SettingsViewController(viewModel: viewModel)
         navigationController?.push(viewController)
     }

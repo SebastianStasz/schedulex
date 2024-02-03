@@ -48,8 +48,8 @@ struct SettingsViewModel: ViewModel {
             .perform { await notificationsManager.updateNotificationsPermission() }
             .sink {}.store(in: &store.cancellables)
 
-        CombineLatest(context.$appData, notificationsManager.$isNotificationsAccessGranted)
-            .map { $0.classNotificationsEnabled && ($1 ?? false) }
+        CombineLatest(context.appData.$classNotificationsEnabled, notificationsManager.$isNotificationsAccessGranted)
+            .map { $0 && ($1 ?? false) }
             .assign(to: &store.$areNotificationsEnabled)
 
         store.$classNotificationsTime

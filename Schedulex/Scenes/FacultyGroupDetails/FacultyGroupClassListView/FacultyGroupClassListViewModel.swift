@@ -33,8 +33,8 @@ struct FacultyGroupClassListViewModel: ViewModel {
         let store = FacultyGroupClassListStore(viewType: viewType)
         store.classes = classes
 
-        let hiddenClasses = context.$appData
-            .map { $0.allHiddenClasses.filter { $0.facultyGroupName == facultyGroupName } }
+        let hiddenClasses = context.appData.$allHiddenClasses
+            .map { $0.filter { $0.facultyGroupName == facultyGroupName } }
 
         hiddenClasses
             .assign(to: &store.$hiddenClasses)

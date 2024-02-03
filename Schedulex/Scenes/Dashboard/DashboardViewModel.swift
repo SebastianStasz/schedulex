@@ -14,6 +14,7 @@ import UEKScraper
 final class DashboardStore: RootStore {
     @Published var selectedDate: Date = .now
     @Published var shouldScrollToDay = false
+    let infoCardsSectionStore: InfoCardsSectionStore
 
     @Published fileprivate(set) var dayPickerItems: [DayPickerItem]?
     @Published fileprivate(set) var selectedDateEvents: [Event] = []
@@ -22,21 +23,32 @@ final class DashboardStore: RootStore {
     @Published fileprivate(set) var endDate: Date?
 
     let navigateTo = DriverSubject<DashboardViewModel.Destination>()
+
+    init(infoCardsSectionStore: InfoCardsSectionStore) {
+        self.infoCardsSectionStore = infoCardsSectionStore
+        super.init()
+    }
 }
 
 struct DashboardViewModel: ViewModel {
     weak var navigationController: UINavigationController?
-    let manager = NotificationsManager()
+    let notificationManager = NotificationsManager()
 
     func makeStore(context: Context) -> DashboardStore {
-        let store = DashboardStore()
+        let infoCardsSectionViewModel = InfoCardsSectionViewModel(notificationsManager: notificationManager)
+        let infoCardsSectionStore = infoCardsSectionViewModel.makeStore(context: context)
+        let store = DashboardStore(infoCardsSectionStore: infoCardsSectionStore)
 
-        let subscribedFacultyGroups = context.$appData.map { $0.subscribedFacultyGroups }
+        let subscribedFacultyGroups = context.appData.$subscribedFacultyGroups
+
+        Merge(store.viewWillAppear, NotificationCenter.willEnterForeground)
+            .perform { await notificationManager.updateNotificationsPermission() }
+            .sinkAndStore(on: store) { _, _ in }
 
         let dashboardEventsOutput = DashboardEventsViewModel()
             .makeOutput(input: .init(viewWillAppear: store.viewWillAppear,
                                      facultyGroups: subscribedFacultyGroups.asDriver(),
-                                     hiddenClasses: context.$appData.map { $0.allHiddenClasses }.asDriver()))
+                                     hiddenClasses: context.appData.$allHiddenClasses.asDriver()))
 
         dashboardEventsOutput.isLoading
             .assign(to: &store.$isLoading)
@@ -53,7 +65,7 @@ struct DashboardViewModel: ViewModel {
                 }
             }
 
-        CombineLatest(store.$selectedDate, dashboardEventsOutput.events)
+        CombineLatest(store.$selectedDate, dashboardEventsOutput.eventsToDisplay)
             .map { getSelectedDayEvents(date: $0, events: $1) }
             .assign(to: &store.$selectedDateEvents)
 
