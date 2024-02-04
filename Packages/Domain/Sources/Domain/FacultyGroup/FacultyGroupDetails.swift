@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct FacultyGroupDetails {
+public struct FacultyGroupDetails: Equatable {
     public let name: String
     public let events: [Event]
     public let classes: [FacultyGroupClass]

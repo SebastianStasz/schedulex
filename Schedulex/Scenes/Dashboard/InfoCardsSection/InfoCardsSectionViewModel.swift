@@ -23,23 +23,23 @@ final class InfoCardsSectionStore: ObservableObject, CombineHelper {
 struct InfoCardsSectionViewModel {
     let notificationsManager: NotificationsManager
 
-    func makeStore(context: Context) -> InfoCardsSectionStore {
+    func makeStore(appData: AppData) -> InfoCardsSectionStore {
         let store = InfoCardsSectionStore()
 
-        CombineLatest(context.appData.$dashboardSwipeTipPresented, notificationsManager.$areNotificationsSettingsLoaded)
+        CombineLatest(appData.$dashboardSwipeTipPresented, notificationsManager.$areNotificationsSettingsLoaded)
             .map { !$0 && $1 }
             .assign(to: &store.$showDashboardSwipeTip)
 
-        CombineLatest(context.appData.$hiddenInfoCards, notificationsManager.$canRequestNotificationsAccess)
+        CombineLatest(appData.$hiddenInfoCards, notificationsManager.$canRequestNotificationsAccess)
             .map { getInfoCardsToDisplay(hiddenInfoCards: $0, canRequestNotificationsAccess: $1) }
             .assign(to: &store.$infoCards)
 
         store.performActionForInfoCard
-            .perform { await performActionForInfoCard($0, appData: context.appData) }
+            .perform { await performActionForInfoCard($0, appData: appData) }
             .sinkAndStore(on: store) { _, _ in }
 
         store.closeInfoCard
-            .sink { context.appData.hideInfoCard($0) }
+            .sink { appData.hideInfoCard($0) }
             .store(in: &store.cancellables)
 
         return store

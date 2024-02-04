@@ -38,6 +38,7 @@ struct DashboardEventsViewModel {
             .onNext { _, _ in isLoading.send(true) }
             .perform { _, facultyGroups in try await fetchFacultyGroupsEvents(for: facultyGroups) }
             .onNext { _ in nextUpdateDate = Calendar.current.date(byAdding: .minute, value: 5, to: .now) }
+            .removeDuplicates()
 
         let eventsToDisplay = CombineLatest(allEvents, input.hiddenClasses)
             .map { $0.0.mapToEventsWithoutHiddenClasses(hiddenClasses: $0.1) }

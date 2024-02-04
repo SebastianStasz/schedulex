@@ -48,22 +48,24 @@ struct SettingsViewModel: ViewModel {
             .perform { await notificationsManager.updateNotificationsPermission() }
             .sink {}.store(in: &store.cancellables)
 
-        CombineLatest(context.appData.$classNotificationsEnabled, notificationsManager.$isNotificationsAccessGranted)
-            .map { $0 && ($1 ?? false) }
+        CombineLatest(context.appData.$classNotificationsEnabled, notificationsManager.isNotificationsAccessGranted)
+            .map { $0 && $1 }
             .assign(to: &store.$areNotificationsEnabled)
 
         store.$classNotificationsTime
+            .dropFirst()
             .sink { context.appData.classNotificationsTime = $0 }
             .store(in: &store.cancellables)
 
         store.$appColorScheme
+            .dropFirst()
             .sink { context.appData.appColorScheme = $0 }
             .store(in: &store.cancellables)
 
         store.enableNotifications
             .perform { [weak store] in
                 context.appData.classNotificationsEnabled = true
-                if !(notificationsManager.isNotificationsAccessGranted ?? true) {
+                if !(notificationsManager.isNotificationsAccessGrantedState ?? true) {
                     if notificationsManager.canRequestNotificationsAccess {
                         try? await notificationsManager.requestNotificationsPermission()
                     } else {

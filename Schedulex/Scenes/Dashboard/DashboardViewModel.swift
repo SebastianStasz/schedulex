@@ -39,7 +39,7 @@ struct DashboardViewModel: ViewModel {
 
     func makeStore(context: Context) -> DashboardStore {
         let infoCardsSectionViewModel = InfoCardsSectionViewModel(notificationsManager: notificationManager)
-        let infoCardsSectionStore = infoCardsSectionViewModel.makeStore(context: context)
+        let infoCardsSectionStore = infoCardsSectionViewModel.makeStore(appData: context.appData)
         let store = DashboardStore(infoCardsSectionStore: infoCardsSectionStore)
 
         let viewWillAppearOrWillEnterForeground = Merge(store.viewWillAppear, NotificationCenter.willEnterForeground)
@@ -80,6 +80,16 @@ struct DashboardViewModel: ViewModel {
                     store.selectedDate = date
                 }
             }
+
+        let classNotificationServiceInput = ClassNotificationService.Input(
+            events: dashboardEventsOutput.eventsToDisplay,
+            classNotificationsEnabled: context.appData.$classNotificationsEnabled.asDriver(),
+            classNotificationsTime: context.appData.$classNotificationsTime.asDriver()
+        )
+        
+        ClassNotificationService(notificationsManager: notificationManager)
+            .registerForEventsNotifications(input: classNotificationServiceInput)
+            .sinkAndStore(on: store) { _, _ in }
 
         CombineLatest(store.$selectedDate, dashboardEventsOutput.eventsToDisplay)
             .map { getSelectedDayEvents(date: $0, events: $1) }

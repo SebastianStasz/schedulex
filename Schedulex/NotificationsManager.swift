@@ -13,12 +13,16 @@ final class NotificationsManager: ObservableObject {
     private let notificationCenter = UNUserNotificationCenter.current()
     @Published private(set) var areNotificationsSettingsLoaded = false
     @Published private(set) var canRequestNotificationsAccess = false
-    @Published private(set) var isNotificationsAccessGranted: Bool?
+    @Published private(set) var isNotificationsAccessGrantedState: Bool?
+
+    var isNotificationsAccessGranted: Driver<Bool> {
+        $isNotificationsAccessGrantedState.compactMap { $0 }.removeDuplicates().asDriver()
+    }
 
     func updateNotificationsPermission() async {
         let settings = await notificationCenter.notificationSettings()
         canRequestNotificationsAccess = settings.authorizationStatus == .notDetermined
-        isNotificationsAccessGranted = settings.authorizationStatus == .authorized
+        isNotificationsAccessGrantedState = settings.authorizationStatus == .authorized
         areNotificationsSettingsLoaded = true
     }
 
