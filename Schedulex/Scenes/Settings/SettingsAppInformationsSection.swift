@@ -25,7 +25,7 @@ struct SettingsAppInformationsSection: View {
 
                 SettingsLabel(title: "UEK Schedule", description: appVersionLabel)
 
-                Button(appVersionButtonTitle, action: openAppInAppStore)
+                Button(appVersionButtonTitle, action: UIApplication.shared.openAppInAppStore)
                     .buttonStyle(.appVersionButtonStyle)
                     .disabled(!isUpdateAvailable)
             }
@@ -51,11 +51,6 @@ struct SettingsAppInformationsSection: View {
 
     private var emailContent: EmailContent {
         .defaultContact(recipient: contactMail, appVersion: appVersion)
-    }
-
-    private func openAppInAppStore() {
-        let url = URL(string: "itms-apps://itunes.apple.com/app/id6468822571")!
-        UIApplication.shared.open(url)
     }
 }
 

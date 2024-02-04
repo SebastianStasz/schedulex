@@ -41,8 +41,8 @@ final class AppData {
         didSet { defaults.set(classNotificationsTime.rawValue, forKey: "classNotificationsTime") }
     }
 
-    @Published var showDashboardSwipeTip: Bool = true {
-        didSet { defaults.setValue(showDashboardSwipeTip, forKey: "showDashboardSwipeTip") }
+    @Published var dashboardSwipeTipPresented: Bool = true {
+        didSet { defaults.setValue(dashboardSwipeTipPresented, forKey: "dashboardSwipeTipPresented") }
     }
 
     @Published var appColorScheme: AppColorScheme = .system {
@@ -53,10 +53,10 @@ final class AppData {
         self.defaults = defaults
 
         classNotificationsEnabled = defaults.bool(forKey: "classNotificationsEnabled")
-        showDashboardSwipeTip = defaults.bool(forKey: "showDashboardSwipeTip")
+        dashboardSwipeTipPresented = defaults.bool(forKey: "dashboardSwipeTipPresented")
 
         if let rawValues = defaults.stringArray(forKey: "hiddenInfoCards") {
-            hiddenInfoCards = []
+            hiddenInfoCards = rawValues.compactMap { InfoCard(rawValue: $0) }
         }
 
         if let rawValue = defaults.string(forKey: "appColorScheme"), let appColorScheme = AppColorScheme(rawValue: rawValue) {

@@ -18,11 +18,14 @@ final class DashboardStore: RootStore {
 
     @Published fileprivate(set) var dayPickerItems: [DayPickerItem]?
     @Published fileprivate(set) var selectedDateEvents: [Event] = []
+    @Published fileprivate(set) var showInfoToUnhideFacultyGroups = false
+    @Published fileprivate(set) var showDashboardSwipeTip = false
     @Published fileprivate(set) var isLoading = true
     @Published fileprivate(set) var startDate: Date?
     @Published fileprivate(set) var endDate: Date?
 
     let navigateTo = DriverSubject<DashboardViewModel.Destination>()
+    let markSwipeTipAsPresented = DriverSubject<Void>()
 
     init(infoCardsSectionStore: InfoCardsSectionStore) {
         self.infoCardsSectionStore = infoCardsSectionStore
@@ -39,14 +42,27 @@ struct DashboardViewModel: ViewModel {
         let infoCardsSectionStore = infoCardsSectionViewModel.makeStore(context: context)
         let store = DashboardStore(infoCardsSectionStore: infoCardsSectionStore)
 
+        let viewWillAppearOrWillEnterForeground = Merge(store.viewWillAppear, NotificationCenter.willEnterForeground)
         let subscribedFacultyGroups = context.appData.$subscribedFacultyGroups
 
-        Merge(store.viewWillAppear, NotificationCenter.willEnterForeground)
+        viewWillAppearOrWillEnterForeground
             .perform { await notificationManager.updateNotificationsPermission() }
             .sinkAndStore(on: store) { _, _ in }
 
+        context.appData.$dashboardSwipeTipPresented
+            .map { !$0 }
+            .assign(to: &store.$showDashboardSwipeTip)
+
+        store.markSwipeTipAsPresented
+            .sink { context.appData.dashboardSwipeTipPresented = true }
+            .store(in: &store.cancellables)
+
+        subscribedFacultyGroups
+            .map { $0.filter { !$0.isHidden }.isEmpty }
+            .assign(to: &store.$showInfoToUnhideFacultyGroups)
+
         let dashboardEventsOutput = DashboardEventsViewModel()
-            .makeOutput(input: .init(viewWillAppear: store.viewWillAppear,
+            .makeOutput(input: .init(fetchEvents: viewWillAppearOrWillEnterForeground.asDriver(),
                                      facultyGroups: subscribedFacultyGroups.asDriver(),
                                      hiddenClasses: context.appData.$allHiddenClasses.asDriver()))
 

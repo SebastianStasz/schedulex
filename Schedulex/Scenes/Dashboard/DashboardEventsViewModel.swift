@@ -13,7 +13,7 @@ import UEKScraper
 
 struct DashboardEventsViewModel {
     struct Input {
-        let viewWillAppear: DriverSubject<Void>
+        let fetchEvents: Driver<Void>
         let facultyGroups: Driver<[FacultyGroup]>
         let hiddenClasses: Driver<[EditableFacultyGroupClass]>
     }
@@ -30,7 +30,7 @@ struct DashboardEventsViewModel {
         let isLoading = DriverState(false)
         var nextUpdateDate: Date?
 
-        let fetchEvents = Merge(input.viewWillAppear, NotificationCenter.willEnterForeground)
+        let fetchEvents = input.fetchEvents
             .filter { !shouldUseCachedData(nextUpdateDate: nextUpdateDate) }
             .share()
 

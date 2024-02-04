@@ -10,16 +10,16 @@ import SwiftUI
 import Widgets
 
 struct InfoCardsSection: View {
-    @AppStorage("classNotificationsEnabled") private var classNotificationsEnabled = false
-    @AppStorage("showDashboardSwipeTip") private var showDashboardSwipeTip = true
-
     @ObservedObject var store: InfoCardsSectionStore
 
     var body: some View {
         if !store.infoCards.isEmpty {
             infoCardsView
                 .transition(.scale)
-        } 
+        } else if store.showDashboardSwipeTip {
+            swipeTip
+                .transition(.scale)
+        }
     }
     
     private var infoCardsView: some View {
@@ -27,7 +27,7 @@ struct InfoCardsSection: View {
             HStack(spacing: .medium) {
                 ForEach(store.infoCards) { infoCard in
                     InfoCardView(card: infoCard, 
-                                 onConfirm: { performInfoCardAction(for: infoCard) },
+                                 onConfirm: { store.performActionForInfoCard.send(infoCard) },
                                  onClose: { store.closeInfoCard.send(infoCard) })
                     .frame(width: cardWidth)
                 }
@@ -35,11 +35,6 @@ struct InfoCardsSection: View {
             .padding(.horizontal, .medium)
         }
         .padding(.horizontal, -.medium)
-    }
-
-    private var cardWidth: CGFloat {
-        let factor: CGFloat = store.infoCards.count > 1 ? 3 : 2
-        return UIScreen.main.bounds.size.width - factor * .medium
     }
 
     private var swipeTip: some View {
@@ -51,20 +46,9 @@ struct InfoCardsSection: View {
         .padding(.vertical, .xlarge)
     }
 
-    private func performInfoCardAction(for infoCard: InfoCard) {
-//        switch infoCard {
-//        case .enableNotifications:
-//            classNotificationsEnabled = true
-////            Task { try? await notificationsManager.requestNotificationsPermission() }
-//        case .rateTheApplication:
-//            openAppInAppStore()
-//            hiddenInfoCards.append(.rateTheApplication)
-//        }
-    }
-
-    private func openAppInAppStore() {
-        let url = URL(string: "itms-apps://itunes.apple.com/app/id6468822571")!
-        UIApplication.shared.open(url)
+    private var cardWidth: CGFloat {
+        let factor: CGFloat = store.infoCards.count > 1 ? 3 : 2
+        return UIScreen.main.bounds.size.width - factor * .medium
     }
 }
 

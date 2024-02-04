@@ -11,23 +11,9 @@ import SchedulexFirebase
 import SwiftUI
 import Widgets
 
-final class DashboardViewController: SwiftUIViewController<DashboardViewModel, DashboardView> {
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: animated)
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: animated)
-    }
-}
-
 struct DashboardView: RootView {
     @AppStorage("classNotificationsTime") private var classNotificationsTime = ClassNotificationTime.oneHourBefore
     @AppStorage("classNotificationsEnabled") private var classNotificationsEnabled = false
-    @AppStorage("showDashboardSwipeTip") private var showDashboardSwipeTip = true
-    @StateObject private var viewModel = DashboardViewModelOld()
 
     @State private var appVersion: String?
     @State private var areSettingsPresented = false
@@ -70,10 +56,6 @@ struct DashboardView: RootView {
 //        .onChange(of: classNotificationsEnabled) { _ in setClassesNotifications() }
 //        .onChange(of: classNotificationsTime) { _ in setClassesNotifications() }
 //        .onChange(of: notificationsManager.isNotificationsAccessGranted) { _ in setClassesNotifications() }
-        .task {
-//            appConfigurationService.subscribe(service: FirestoreService())
-//            await notificationsManager.updateNotificationsPermission()
-        }
     }
 
     private var title: String {
@@ -123,6 +105,8 @@ struct DashboardView: RootView {
     private var loadingIndicatorOrEmptyState: some View {
         if store.isLoading {
             ProgressView()
+        } else if store.showInfoToUnhideFacultyGroups {
+            Text("All subscribed faculty groups are hidden.")
         } else if !store.isLoading, store.selectedDateEvents.isEmpty {
             let isWeekend = NSCalendar.current.isDateInWeekend(store.selectedDate)
             HStack(spacing: .micro) {
@@ -164,10 +148,10 @@ struct DashboardView: RootView {
     private func onSwipe() {
         swipeCount += 1
         store.shouldScrollToDay = true
-        guard showDashboardSwipeTip, swipeCount > 3 else { return }
+        guard store.showDashboardSwipeTip, swipeCount > 3 else { return }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             withAnimation {
-                showDashboardSwipeTip = false
+                store.markSwipeTipAsPresented.send()
             }
         }
     }
@@ -183,6 +167,18 @@ struct DashboardView: RootView {
 //            try await viewModel.fetchEvents(for: subscribedGroups, hiddenClasses: allHiddenClasses)
             setClassesNotifications()
         }
+    }
+}
+
+final class DashboardViewController: SwiftUIViewController<DashboardViewModel, DashboardView> {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
     }
 }
 

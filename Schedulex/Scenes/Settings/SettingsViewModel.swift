@@ -63,10 +63,12 @@ struct SettingsViewModel: ViewModel {
         store.enableNotifications
             .perform { [weak store] in
                 context.appData.classNotificationsEnabled = true
-                if notificationsManager.canRequestNotificationsAccess {
-                    try? await notificationsManager.requestNotificationsPermission()
-                } else {
-                    store?.isEnableNotificationsAlertPresented = true
+                if !(notificationsManager.isNotificationsAccessGranted ?? true) {
+                    if notificationsManager.canRequestNotificationsAccess {
+                        try? await notificationsManager.requestNotificationsPermission()
+                    } else {
+                        store?.isEnableNotificationsAlertPresented = true
+                    }
                 }
             }
             .sink {}.store(in: &store.cancellables)

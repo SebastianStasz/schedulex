@@ -6,13 +6,14 @@
 //
 
 import Combine
-import Foundation
+import UIKit
 import Widgets
 
-final class InfoCardsSectionStore: ObservableObject {
+final class InfoCardsSectionStore: ObservableObject, CombineHelper {
     var cancellables: Set<AnyCancellable> = []
 
     @Published fileprivate(set) var infoCards: [InfoCard] = []
+    @Published fileprivate(set) var showDashboardSwipeTip = false
 
     let closeInfoCard = DriverSubject<InfoCard>()
     let performActionForInfoCard = DriverSubject<InfoCard>()
@@ -25,15 +26,34 @@ struct InfoCardsSectionViewModel {
     func makeStore(context: Context) -> InfoCardsSectionStore {
         let store = InfoCardsSectionStore()
 
+        CombineLatest(context.appData.$dashboardSwipeTipPresented, notificationsManager.$areNotificationsSettingsLoaded)
+            .map { !$0 && $1 }
+            .assign(to: &store.$showDashboardSwipeTip)
+
         CombineLatest(context.appData.$hiddenInfoCards, notificationsManager.$canRequestNotificationsAccess)
             .map { getInfoCardsToDisplay(hiddenInfoCards: $0, canRequestNotificationsAccess: $1) }
             .assign(to: &store.$infoCards)
+
+        store.performActionForInfoCard
+            .perform { await performActionForInfoCard($0, appData: context.appData) }
+            .sinkAndStore(on: store) { _, _ in }
 
         store.closeInfoCard
             .sink { context.appData.hideInfoCard($0) }
             .store(in: &store.cancellables)
 
         return store
+    }
+
+    private func performActionForInfoCard(_ infoCard: InfoCard, appData: AppData) async {
+        switch infoCard {
+        case .enableNotifications:
+            appData.classNotificationsEnabled = true
+            try? await notificationsManager.requestNotificationsPermission()
+        case .rateTheApplication:
+            UIApplication.shared.openAppInAppStore()
+            appData.hideInfoCard(infoCard)
+        }
     }
 
     private func getInfoCardsToDisplay(hiddenInfoCards: [InfoCard], canRequestNotificationsAccess: Bool) -> [InfoCard] {
