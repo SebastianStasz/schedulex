@@ -5,15 +5,11 @@
 //  Created by Sebastian Staszczyk on 31/07/2023.
 //
 
-import Domain
 import Resources
-import SchedulexFirebase
 import SwiftUI
 import Widgets
 
 struct DashboardView: RootView {
-    @State private var appVersion: String?
-    @State private var areSettingsPresented = false
     @State private var isDatePickerPresented = false
     @State private var swipeCount = 0
 
@@ -31,15 +27,15 @@ struct DashboardView: RootView {
 
                 separator()
 
-                ScrollView(showsIndicators: false) {
-                    VStack(spacing: .medium) {
+                ScrollView(scrollViewAxis, showsIndicators: false) {
+                    LazyVStack(spacing: .medium) {
                         if store.dayPickerItems != nil {
                             InfoCardsSection(store: store.infoCardsSectionStore)
                         }
                         EventsList(events: store.selectedDateEvents)
                             .padding(.vertical, .medium)
                     }
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
                     .padding(.medium)
                     .background(.backgroundPrimary)
                 }
@@ -47,7 +43,7 @@ struct DashboardView: RootView {
                 .overlay { loadingIndicatorOrEmptyState }
             }
             .toolbar { toolbarContent }
-            .doubleNavigationTitle(title: title, subtitle: subtitle, showBadge: false, openSettings: { store.navigateTo.send(.settings) })
+            .doubleNavigationTitle(title: title, subtitle: subtitle, showBadge: store.showSettingsBadge, openSettings: { store.navigateTo.send(.settings) })
         }
         .sheet(isPresented: $isDatePickerPresented) { datePicker }
     }
@@ -58,6 +54,10 @@ struct DashboardView: RootView {
 
     private var subtitle: String {
         store.selectedDate.isSameDay(as: .now) ? L10n.today : L10n.selectedDate
+    }
+
+    private var scrollViewAxis: Axis.Set {
+        store.selectedDateEvents.isEmpty ? [] : [.vertical]
     }
 
     private var dragGesture: _EndedGesture<DragGesture> {
@@ -96,7 +96,7 @@ struct DashboardView: RootView {
     }
 
     @ViewBuilder
-    private var loadingIndicator: some View {
+    private var loadingIndicatorOrEmptyState: some View {
         if store.isLoading {
             ProgressView()
         } else if store.showInfoToUnhideFacultyGroups {

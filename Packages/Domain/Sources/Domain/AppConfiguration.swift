@@ -11,5 +11,14 @@ public struct AppConfiguration: Codable {
     public let latestAppVersion: String
     public let contactMail: String
 
+    public var currentAppVersion: String? {
+        let dictionary = Bundle.main.infoDictionary
+        return dictionary?["CFBundleShortVersionString"] as? String
+    }
+
+    public var isAppUpdateAvailable: Bool {
+        latestAppVersion != currentAppVersion
+    }
+
     public static let defaultConfiguration = AppConfiguration(latestAppVersion: "", contactMail: "")
 }

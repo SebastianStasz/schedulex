@@ -34,14 +34,14 @@ struct SettingsViewModel: ViewModel {
     func makeStore(context: Context) -> SettingsStore {
         let store = SettingsStore()
 
-        store.appVersion = appVersion ?? ""
         store.appColorScheme = context.appData.appColorScheme
         store.classNotificationsTime = context.appData.classNotificationsTime
 
         context.storage.appConfiguration
             .sinkAndStore(on: store) {
                 $0.contactMail = $1.contactMail
-                $0.isUpdateAvailable = $1.latestAppVersion != appVersion
+                $0.appVersion = $1.currentAppVersion ?? ""
+                $0.isUpdateAvailable = $1.isAppUpdateAvailable
             }
 
         Merge(store.viewWillAppear, NotificationCenter.willEnterForeground)
@@ -83,10 +83,5 @@ struct SettingsViewModel: ViewModel {
             .sink {}.store(in: &store.cancellables)
 
         return store
-    }
-
-    private var appVersion: String? {
-        let dictionary = Bundle.main.infoDictionary
-        return dictionary?["CFBundleShortVersionString"] as? String
     }
 }

@@ -20,6 +20,7 @@ final class DashboardStore: RootStore {
     @Published fileprivate(set) var selectedDateEvents: [Event] = []
     @Published fileprivate(set) var showInfoToUnhideFacultyGroups = false
     @Published fileprivate(set) var showDashboardSwipeTip = false
+    @Published fileprivate(set) var showSettingsBadge = false
     @Published fileprivate(set) var isLoading = true
     @Published fileprivate(set) var startDate: Date?
     @Published fileprivate(set) var endDate: Date?
@@ -44,6 +45,9 @@ struct DashboardViewModel: ViewModel {
 
         let viewWillAppearOrWillEnterForeground = Merge(store.viewWillAppear, NotificationCenter.willEnterForeground)
         let subscribedFacultyGroups = context.appData.$subscribedFacultyGroups
+
+        context.storage.appConfiguration
+            .sinkAndStore(on: store) { $0.showSettingsBadge = $1.isAppUpdateAvailable }
 
         viewWillAppearOrWillEnterForeground
             .perform { await notificationManager.updateNotificationsPermission() }
