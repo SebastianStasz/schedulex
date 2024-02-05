@@ -32,16 +32,16 @@ struct DashboardEventsViewModel {
 
         let fetchEvents = input.fetchEvents
             .filter { !shouldUseCachedData(nextUpdateDate: nextUpdateDate) }
-            .share()
 
         let allEvents = CombineLatest(fetchEvents, input.facultyGroups)
-            .onNext { _, _ in isLoading.send(true) }
-            .perform { _, facultyGroups in try await fetchFacultyGroupsEvents(for: facultyGroups) }
+            .perform(isLoading: isLoading) { _, facultyGroups in try await fetchFacultyGroupsEvents(for: facultyGroups) }
             .onNext { _ in nextUpdateDate = Calendar.current.date(byAdding: .minute, value: 5, to: .now) }
             .removeDuplicates()
 
         let eventsToDisplay = CombineLatest(allEvents, input.hiddenClasses)
+            .onNext { _ in isLoading.send(true) }
             .map { $0.0.mapToEventsWithoutHiddenClasses(hiddenClasses: $0.1) }
+            .share()
 
         let dayPickerItems = eventsToDisplay
             .receive(on: DispatchQueue.global(qos: .background))

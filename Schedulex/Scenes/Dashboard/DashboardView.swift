@@ -12,9 +12,6 @@ import SwiftUI
 import Widgets
 
 struct DashboardView: RootView {
-    @AppStorage("classNotificationsTime") private var classNotificationsTime = ClassNotificationTime.oneHourBefore
-    @AppStorage("classNotificationsEnabled") private var classNotificationsEnabled = false
-
     @State private var appVersion: String?
     @State private var areSettingsPresented = false
     @State private var isDatePickerPresented = false
@@ -36,10 +33,10 @@ struct DashboardView: RootView {
 
                 ScrollView(showsIndicators: false) {
                     VStack(spacing: .medium) {
-                        if !(store.dayPickerItems == nil) {
+                        if store.dayPickerItems != nil {
                             InfoCardsSection(store: store.infoCardsSectionStore)
                         }
-                        EventsList(events: (store.dayPickerItems == nil) ? [] : store.selectedDateEvents)
+                        EventsList(events: store.selectedDateEvents)
                             .padding(.vertical, .medium)
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -53,9 +50,6 @@ struct DashboardView: RootView {
             .doubleNavigationTitle(title: title, subtitle: subtitle, showBadge: false, openSettings: { store.navigateTo.send(.settings) })
         }
         .sheet(isPresented: $isDatePickerPresented) { datePicker }
-//        .onChange(of: classNotificationsEnabled) { _ in setClassesNotifications() }
-//        .onChange(of: classNotificationsTime) { _ in setClassesNotifications() }
-//        .onChange(of: notificationsManager.isNotificationsAccessGranted) { _ in setClassesNotifications() }
     }
 
     private var title: String {
@@ -102,7 +96,7 @@ struct DashboardView: RootView {
     }
 
     @ViewBuilder
-    private var loadingIndicatorOrEmptyState: some View {
+    private var loadingIndicator: some View {
         if store.isLoading {
             ProgressView()
         } else if store.showInfoToUnhideFacultyGroups {
@@ -155,19 +149,6 @@ struct DashboardView: RootView {
             }
         }
     }
-
-    private func setClassesNotifications() {
-        guard classNotificationsEnabled else { return }
-//        let notifications = viewModel.allEvents.compactMap { $0.toLocalNotification(time: classNotificationsTime) }
-//        Task { await notificationsManager.setNotifications(notifications) }
-    }
-
-    private func fetchEvents() {
-        Task {
-//            try await viewModel.fetchEvents(for: subscribedGroups, hiddenClasses: allHiddenClasses)
-            setClassesNotifications()
-        }
-    }
 }
 
 final class DashboardViewController: SwiftUIViewController<DashboardViewModel, DashboardView> {
@@ -183,5 +164,6 @@ final class DashboardViewController: SwiftUIViewController<DashboardViewModel, D
 }
 
 #Preview {
-    DashboardView(store: DashboardStore(infoCardsSectionStore: InfoCardsSectionStore()))
+    let store = DashboardStore(infoCardsSectionStore: InfoCardsSectionStore())
+    return DashboardView(store: store)
 }

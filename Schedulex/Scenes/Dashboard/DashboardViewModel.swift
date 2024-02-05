@@ -76,9 +76,7 @@ struct DashboardViewModel: ViewModel {
                 $0.startDate = startDate
                 $0.endDate = endDate
                 $0.dayPickerItems = $1
-                if let date = getDefaultSelectedDate(selectedDate: $0.selectedDate, startDate: startDate, endDate: endDate) {
-                    store.selectedDate = date
-                }
+                store.selectedDate = getDefaultSelectedDate(startDate: startDate, endDate: endDate)
             }
 
         let classNotificationServiceInput = ClassNotificationService.Input(
@@ -91,7 +89,7 @@ struct DashboardViewModel: ViewModel {
             .registerForEventsNotifications(input: classNotificationServiceInput)
             .sinkAndStore(on: store) { _, _ in }
 
-        CombineLatest(store.$selectedDate, dashboardEventsOutput.eventsToDisplay)
+        CombineLatest(store.$selectedDate.dropFirst(), dashboardEventsOutput.eventsToDisplay)
             .map { getSelectedDayEvents(date: $0, events: $1) }
             .assign(to: &store.$selectedDateEvents)
 
@@ -102,8 +100,9 @@ struct DashboardViewModel: ViewModel {
         return store
     }
 
-    private func getDefaultSelectedDate(selectedDate: Date, startDate: Date?, endDate: Date?) -> Date? {
-        guard let startDate, let endDate, startDate > selectedDate || endDate < selectedDate else { return nil }
+    private func getDefaultSelectedDate(startDate: Date?, endDate: Date?) -> Date {
+        let todaysDate = Date.now
+        guard let startDate, let endDate, startDate > todaysDate || endDate < todaysDate else { return todaysDate }
         return Date.now < startDate ? startDate : endDate
     }
 
