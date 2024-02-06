@@ -19,7 +19,7 @@ struct DashboardView: RootView {
         NavigationStack {
             VStack(spacing: 0) {
                 LazyVStack {
-                    DayPickerView(items: store.dayPickerItems ?? [], isDatePickerPresented: $isDatePickerPresented, shouldScrollToDay: $store.shouldScrollToDay, selection: $store.selectedDate)
+                    DayPickerView(items: store.dayPickerItems ?? [], selection: $store.selectedDate)
                 }
                 .padding(.top, .xlarge)
                 .padding(.bottom, .medium)
@@ -130,7 +130,6 @@ struct DashboardView: RootView {
     }
 
     private func selectTodaysDate() {
-        store.shouldScrollToDay = true
         store.selectedDate = .now
     }
 
@@ -141,7 +140,6 @@ struct DashboardView: RootView {
 
     private func onSwipe() {
         swipeCount += 1
-        store.shouldScrollToDay = true
         guard store.showDashboardSwipeTip, swipeCount > 3 else { return }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             withAnimation {

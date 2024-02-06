@@ -13,7 +13,6 @@ import UEKScraper
 
 final class DashboardStore: RootStore {
     @Published var selectedDate: Date = .now
-    @Published var shouldScrollToDay = false
     let infoCardsSectionStore: InfoCardsSectionStore
 
     @Published fileprivate(set) var dayPickerItems: [DayPickerItem]?

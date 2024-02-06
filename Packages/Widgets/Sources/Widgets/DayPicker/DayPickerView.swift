@@ -14,14 +14,10 @@ public struct DayPickerView: View {
     @State private var listId = 0
 
     private let items: [DayPickerItem]
-    @Binding private var isDatePickerPresented: Bool
     @Binding private var selectedDate: Date
-    @Binding private var shouldScrollToDay: Bool
 
-    public init(items: [DayPickerItem], isDatePickerPresented: Binding<Bool>, shouldScrollToDay: Binding<Bool>, selection: Binding<Date>) {
+    public init(items: [DayPickerItem], selection: Binding<Date>) {
         self.items = items
-        _isDatePickerPresented = isDatePickerPresented
-        _shouldScrollToDay = shouldScrollToDay
         _selectedDate = selection
     }
 
@@ -39,27 +35,24 @@ public struct DayPickerView: View {
                             .onTapGesture { selectedDate = item.date }
                             .id(item.date.formatted(style: .dateLong))
                             .onChange(of: selectedDate) { date in
-                                if shouldScrollToDay || isDatePickerPresented {
-                                    withAnimation(.easeInOut) {
-                                        proxy.scrollTo(date.formatted(style: .dateLong), anchor: .center)
-                                        shouldScrollToDay = false
-                                    }
+                                withAnimation(.easeInOut) {
+                                    proxy.scrollTo(date.formatted(style: .dateLong), anchor: .center)
                                 }
                             }
                     }
                 }
                 .padding(.horizontal, .medium)
             }
-            .id(listId)
+//            .id(listId)
             .onAppear {
                 proxy.scrollTo(selectedDate.formatted(style: .dateLong), anchor: .center)
             }
-            .onChange(of: items) { _ in
-                listId += 1
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
-                    proxy.scrollTo(selectedDate.formatted(style: .dateLong), anchor: .center)
-                }
-            }
+//            .onChange(of: items) { _ in
+//                listId += 1
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+//                    proxy.scrollTo(selectedDate.formatted(style: .dateLong), anchor: .center)
+//                }
+//            }
         }
         .scrollIndicators(.hidden)
         .onChange(of: scenePhase) { onSceneChange($0) }
