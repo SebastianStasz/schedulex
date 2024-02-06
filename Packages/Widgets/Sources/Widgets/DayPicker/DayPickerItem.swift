@@ -13,6 +13,10 @@ public struct DayPickerItem: Hashable, Identifiable {
     let circleColors: [Color]
     let isSelectable: Bool
 
+    var isToday: Bool {
+        date.isSameDay(as: .now)
+    }
+
     public init(date: Date, circleColors: [Color] = [], isSelectable: Bool = true) {
         self.date = date
         self.circleColors = circleColors

@@ -13,9 +13,9 @@ import UEKScraper
 
 final class DashboardStore: RootStore {
     @Published var selectedDate: Date = .now
+    @Published var dayPickerItems: [DayPickerItem]?
     let infoCardsSectionStore: InfoCardsSectionStore
 
-    @Published fileprivate(set) var dayPickerItems: [DayPickerItem]?
     @Published fileprivate(set) var selectedDateEvents: [Event] = []
     @Published fileprivate(set) var showInfoToUnhideFacultyGroups = false
     @Published fileprivate(set) var showDashboardSwipeTip = false

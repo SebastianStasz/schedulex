@@ -9,58 +9,45 @@ import SwiftUI
 
 public struct DayPickerView: View {
     private static let dayPickerItemWidth = (UIScreen.main.bounds.size.width - (2 * .medium) - (4 * .large)) / 5
-    @Environment(\.scenePhase) private var scenePhase
-    @State private var todayDate: Date = .now
-    @State private var listId = 0
 
-    private let items: [DayPickerItem]
+    @Binding var items: [DayPickerItem]?
     @Binding private var selectedDate: Date
 
-    public init(items: [DayPickerItem], selection: Binding<Date>) {
-        self.items = items
+    public init(items: Binding<[DayPickerItem]?>, selection: Binding<Date>) {
+        _items = items
         _selectedDate = selection
     }
 
     public var body: some View {
         ScrollViewReader { proxy in
             ScrollView(.horizontal) {
-                LazyHStack(spacing: .large) {
-                    ForEach(items, id: \.self) { item in
+                HStack(spacing: .large) {
+                    ForEach(items ?? [], id: \.self.id) { item in
                         let isSelected = item.date.isSameDay(as: selectedDate)
-                        let isToday = todayDate.isSameDay(as: item.date)
-                        
-                        DayPickerItemView(item: item, isSelected: isSelected, isToday: isToday)
+
+                        DayPickerItemView(item: item, isSelected: isSelected, isToday: item.isToday)
                             .frame(width: Self.dayPickerItemWidth)
                             .contentShape(Rectangle())
                             .onTapGesture { selectedDate = item.date }
-                            .id(item.date.formatted(style: .dateLong))
-                            .onChange(of: selectedDate) { date in
-                                withAnimation(.easeInOut) {
-                                    proxy.scrollTo(date.formatted(style: .dateLong), anchor: .center)
-                                }
-                            }
+                            .id(item.id)
                     }
                 }
                 .padding(.horizontal, .medium)
             }
-//            .id(listId)
-            .onAppear {
-                proxy.scrollTo(selectedDate.formatted(style: .dateLong), anchor: .center)
-            }
-//            .onChange(of: items) { _ in
-//                listId += 1
-//                DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
-//                    proxy.scrollTo(selectedDate.formatted(style: .dateLong), anchor: .center)
-//                }
-//            }
+            .onAppear { scrollToSelectedDate(proxy: proxy, animate: false) }
+            .onChange(of: selectedDate) { _ in scrollToSelectedDate(proxy: proxy, animate: true) }
+            .scrollIndicators(.hidden)
         }
-        .scrollIndicators(.hidden)
-        .onChange(of: scenePhase) { onSceneChange($0) }
     }
 
-    private func onSceneChange(_ scene: ScenePhase) {
-        guard scene == .active else { return }
-        todayDate = .now
+    private func scrollToSelectedDate(proxy: ScrollViewProxy, animate: Bool) {
+        if let item = items?.first(where: { $0.date.isSameDay(as: selectedDate) }) {
+            if animate {
+                withAnimation(.easeInOut) { proxy.scrollTo(item.id, anchor: .center) }
+            } else {
+                proxy.scrollTo(item.id, anchor: .center)
+            }
+        }
     }
 }
 
