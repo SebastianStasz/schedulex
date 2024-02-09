@@ -14,4 +14,10 @@ extension NotificationCenter {
             .publisher(for: UIApplication.willEnterForegroundNotification)
             .asVoid()
     }
+
+    static var didEnterBackground: AnyPublisher<Void, Never> {
+        NotificationCenter.default
+            .publisher(for: UIApplication.didEnterBackgroundNotification)
+            .asVoid()
+    }
 }
