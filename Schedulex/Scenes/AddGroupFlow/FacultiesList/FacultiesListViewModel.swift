@@ -59,8 +59,7 @@ struct FacultiesListViewModel: ViewModel {
         guard searchText.count > 1 else { return [] }
         return faculties
             .flatMap { $0.groups }
-            .filterUserSearch(text: searchText, by: { $0.name })
-            .sorted(by: { $0.name < $1.name })
+            .filterByNameAndSort(text: searchText)
     }
 
     private func pushFacultyGroupList(for faculty: Faculty) {

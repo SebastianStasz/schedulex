@@ -56,9 +56,7 @@ struct GroupsSelectionListView: View {
     }
 
     private var availableGroups: [FacultyGroup] {
-        groups
-            .filterUserSearch(text: searchText, by: { $0.name })
-            .sorted(by: { $0.name < $1.name })
+        groups.filterByNameAndSort(text: searchText)
     }
 }
 

@@ -24,7 +24,7 @@ struct FacultyGroupListViewModel: ViewModel {
         let store = FacultyGroupListStore()
 
         store.$searchText
-            .map { faculty.groups.filterUserSearch(text: $0, by: { $0.name }) }
+            .map { faculty.groups.filterByNameAndSort(text: $0) }
             .assign(to: &store.$facultyGroups)
 
         store.navigateToFacultyGroupDetails
