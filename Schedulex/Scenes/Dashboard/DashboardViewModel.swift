@@ -26,6 +26,7 @@ final class DashboardStore: RootStore {
 
     let navigateTo = DriverSubject<DashboardViewModel.Destination>()
     let markSwipeTipAsPresented = DriverSubject<Void>()
+    let refresh = DriverSubject<Void>()
 
     init(infoCardsSectionStore: InfoCardsSectionStore) {
         self.infoCardsSectionStore = infoCardsSectionStore
@@ -69,6 +70,7 @@ struct DashboardViewModel: ViewModel {
 
         let dashboardEventsOutput = DashboardEventsViewModel()
             .makeOutput(input:. init(fetchEvents: viewWillAppearOrWillEnterForeground.asDriver(),
+                                     forceRefresh: store.refresh.asDriver(),
                                      facultyGroups: subscribedFacultyGroups.asDriver(),
                                      hiddenClasses: context.appData.$allHiddenClasses.asDriver()))
 

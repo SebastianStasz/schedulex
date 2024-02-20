@@ -14,6 +14,7 @@ import UEKScraper
 struct DashboardEventsViewModel {
     struct Input {
         let fetchEvents: Driver<Void>
+        let forceRefresh: Driver<Void>
         let facultyGroups: Driver<[FacultyGroup]>
         let hiddenClasses: Driver<[EditableFacultyGroupClass]>
     }
@@ -35,12 +36,13 @@ struct DashboardEventsViewModel {
 
         let fetchEvents = input.fetchEvents
             .filter { !shouldRefreshEvents(nextUpdateDate: nextUpdateDate) }
+
+        let fetchEventsForFacultyGroups = Merge(fetchEvents, input.forceRefresh)
             .withLatestFrom(facultyGroups)
 
-        let allFacultiesGroupsDetails = fetchEvents
+        let allFacultiesGroupsDetails = fetchEventsForFacultyGroups
             .perform(isLoading: isLoading) { try await fetchFacultiesGroupsDetails(for: $0) }
             .onNext { _ in nextUpdateDate = Calendar.current.date(byAdding: .minute, value: 5, to: .now) }
-            .removeDuplicates()
 
         let eventsToDisplay = CombineLatest(allFacultiesGroupsDetails, input.hiddenClasses)
             .onNext { _ in isLoading.send(true) }

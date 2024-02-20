@@ -4,6 +4,7 @@
 "confirm_button" = "Zatwierdź";
 "continue_button" = "Kontynuuj";
 "done_button" = "OK";
+"refresh_button" = "Odśwież";
 
 // dashboard
 "event_finished" = "Zakończone";
@@ -14,7 +15,8 @@
 "break_card_time_suffix" = "g.";
 "event_details_link_to_class" = "Link do zajęć";
 "event_details_business_card" = "e-wizytówka";
-"dashboard_all_groups_are_hidden" = "Wszystkie obserwowane grupy są ukryte. Kliknij \"Moje grupy\" aby nimi zarządzać.";
+"dashboard_all_groups_are_hidden" = "Wszystkie obserwowane grupy są ukryte.\nKliknij \"Moje grupy\" aby nimi zarządzać.";
+"dashboard_no_events_to_display" = "Obserwowane grupy nie zawierają żadnych zajęć.";
 
 // info_cards
 "info_card_enable_notifications_title" = "Nie przegap zajęć!";

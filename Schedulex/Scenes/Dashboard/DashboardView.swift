@@ -102,6 +102,13 @@ struct DashboardView: RootView {
         } else if store.showInfoToUnhideFacultyGroups {
             Text(L10n.dashboardAllGroupsAreHidden)
                 .multilineTextAlignment(.center)
+        } else if store.dayPickerItems?.isEmpty ?? true {
+            VStack(spacing: .medium) {
+                Text(L10n.dashboardNoEventsToDisplay)
+                    .multilineTextAlignment(.center)
+
+                TextButton(L10n.refreshButton, color: .blue, action: store.refresh.send)
+            }
         } else if !store.isLoading, store.selectedDateEvents.isEmpty {
             let isWeekend = NSCalendar.current.isDateInWeekend(store.selectedDate)
             HStack(spacing: .micro) {
