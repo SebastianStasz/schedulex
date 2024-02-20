@@ -32,6 +32,8 @@ public enum L10n {
   public static let confirmButton = L10n.tr("Localizable", "confirm_button", fallback: "Confirm")
   /// Continue
   public static let continueButton = L10n.tr("Localizable", "continue_button", fallback: "Continue")
+  /// All subscribed groups are hidden. Click "My groups" to manage them.
+  public static let dashboardAllGroupsAreHidden = L10n.tr("Localizable", "dashboard_all_groups_are_hidden", fallback: "All subscribed groups are hidden. Click \"My groups\" to manage them.")
   /// Done
   public static let doneButton = L10n.tr("Localizable", "done_button", fallback: "Done")
   /// Business card

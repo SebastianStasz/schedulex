@@ -14,6 +14,7 @@
 "break_card_time_suffix" = "h.";
 "event_details_link_to_class" = "Link to class";
 "event_details_business_card" = "Business card";
+"dashboard_all_groups_are_hidden" = "All subscribed groups are hidden. Click \"My groups\" to manage them.";
 
 // info_cards
 "info_card_enable_notifications_title" = "Don't miss the classes!";

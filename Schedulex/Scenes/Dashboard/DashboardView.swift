@@ -100,7 +100,8 @@ struct DashboardView: RootView {
         if store.isLoading {
             ProgressView()
         } else if store.showInfoToUnhideFacultyGroups {
-            Text("All subscribed faculty groups are hidden.")
+            Text(L10n.dashboardAllGroupsAreHidden)
+                .multilineTextAlignment(.center)
         } else if !store.isLoading, store.selectedDateEvents.isEmpty {
             let isWeekend = NSCalendar.current.isDateInWeekend(store.selectedDate)
             HStack(spacing: .micro) {

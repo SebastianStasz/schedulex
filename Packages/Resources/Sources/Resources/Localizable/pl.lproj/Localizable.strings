@@ -14,6 +14,7 @@
 "break_card_time_suffix" = "g.";
 "event_details_link_to_class" = "Link do zajęć";
 "event_details_business_card" = "e-wizytówka";
+"dashboard_all_groups_are_hidden" = "Wszystkie obserwowane grupy są ukryte. Kliknij \"Moje grupy\" aby nimi zarządzać.";
 
 // info_cards
 "info_card_enable_notifications_title" = "Nie przegap zajęć!";
