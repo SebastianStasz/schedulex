@@ -25,6 +25,7 @@ public struct BaseList<Content: View>: View {
             .padding(.bottom, .xlarge)
             .padding(.horizontal, .large)
         }
+        .scrollDismissesKeyboard(.immediately)
     }
 }
 

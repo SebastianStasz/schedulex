@@ -55,7 +55,7 @@ struct DashboardViewModel: ViewModel {
         viewWillEnterForeground
             .sinkAndStore(on: store) { store, _ in
                 if nextSelectedDateResetDate < .now {
-                    store.selectedDate = .now
+                    store.selectedDate = getDefaultSelectedDate(startDate: store.startDate, endDate: store.endDate)
                 }
             }
 

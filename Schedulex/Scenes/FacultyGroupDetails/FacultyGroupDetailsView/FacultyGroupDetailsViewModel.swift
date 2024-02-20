@@ -49,20 +49,20 @@ struct FacultyGroupDetailsViewModel: ViewModel {
             .assign(to: &store.$facultyGroup)
 
         context.appData.$subscribedFacultyGroups
-            .map { $0.contains(facultyGroup) }
+            .map { $0.contains(where: { $0.name == facultyGroup.name }) }
             .assign(to: &store.$isFacultyGroupSubscribed)
 
         store.unsubscribeFacultyGroup
             .sink {
                 context.appData.unsubscribeFacultyGroup(facultyGroup)
-                navigationController?.pop()
+                dismissOrPop()
             }
             .store(in: &store.cancellables)
 
         store.subscribeFacultyGroup
             .sink {
                 context.appData.subscribeFacultyGroup(facultyGroup)
-                navigationController?.dismiss()
+                dismissOrPop()
             }
             .store(in: &store.cancellables)
 
@@ -80,6 +80,14 @@ struct FacultyGroupDetailsViewModel: ViewModel {
             }
 
         return store
+    }
+
+    private func dismissOrPop() {
+        if viewType == .preview {
+            navigationController?.dismiss()
+        } else {
+            navigationController?.pop()
+        }
     }
 
     private func navigateToFacultyGroupColorSelection() {
