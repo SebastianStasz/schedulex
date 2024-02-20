@@ -10,12 +10,12 @@ import SwiftUI
 import Widgets
 
 struct OnboardingSecondStepView: RootView {
+    @State private var isSearchFocused = false
     @ObservedObject var store: OnboardingSecondStepStore
 
     var rootBody: some View {
-        GroupsSelectionListView(groups: store.languageGroups, emptyMessage: L10n.startSecondStepNoLanguages, selectedGroups: $store.selectedLanguageGroups)
-            .keyboardButton(L10n.confirmButton, disabled: !store.canConfirmSelection, action: store.confirmGroupsSelection.send)
-            .baseListStyle()
+        GroupsSelectionListView(groups: store.languageGroups, emptyMessage: L10n.startSecondStepNoLanguages, isSearchFocused: $isSearchFocused, selectedGroups: $store.selectedLanguageGroups)
+            .keyboardButton(L10n.confirmButton, isKeyboardVisible: $isSearchFocused, disabled: !store.canConfirmSelection, action: store.confirmGroupsSelection.send)
     }
 }
 

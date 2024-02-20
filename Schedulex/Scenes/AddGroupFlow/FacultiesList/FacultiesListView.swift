@@ -52,7 +52,7 @@ struct FacultiesListView: RootView {
             }
         }
         .overlay { loadingIndicatorOrEmptyState }
-//        .baseListStyle(isLoading: store.isLoading.value)
+        .baseListStyle(isLoading: store.isLoading.value)
         .disableAutocorrection(true)
     }
 

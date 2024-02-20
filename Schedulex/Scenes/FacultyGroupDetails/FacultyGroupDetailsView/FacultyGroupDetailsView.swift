@@ -34,7 +34,7 @@ struct FacultyGroupDetailsView: RootView {
                     .trailingIcon(.chevronRight, iconSize: 15)
                     .onTapGesture { store.navigateToEventsList.send() }
             }
-//            .baseListStyle(isLoading: facultyGroupDetails == nil)
+            .baseListStyle(isLoading: isLoading)
             .safeAreaInset(edge: .bottom) {
                 TextButton(store.isFacultyGroupSubscribed ? L10n.unfollow : L10n.addToObserved) {
                     if store.isFacultyGroupSubscribed {
@@ -44,6 +44,7 @@ struct FacultyGroupDetailsView: RootView {
                     }
                 }
                 .padding(.bottom, .large)
+                .opacity(isLoading ? 0 : 1)
             }
     }
 
@@ -56,6 +57,10 @@ struct FacultyGroupDetailsView: RootView {
 
     private var eventsDescription: String {
         L10n.numberOfEvents + " \(store.facultyGroupDetails?.events.count ?? 0)"
+    }
+
+    private var isLoading: Bool {
+        store.facultyGroupDetails == nil
     }
 }
 

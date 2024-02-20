@@ -51,6 +51,7 @@ public struct SearchField: View {
         .padding(.horizontal, .large)
         .onTapGesture { focusState = true }
         .onChange(of: isFocused) { focusState = $0 }
+        .onChange(of: focusState) { isFocused = $0 }
     }
 
     private var promptText: SwiftUI.Text {

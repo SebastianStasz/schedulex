@@ -10,12 +10,13 @@ import UIKit
 import SchedulexFirebase
 
 final class StartFirstStepStore: RootStore {
-    @Published fileprivate(set) var isLoading = false
     @Published fileprivate(set) var facultyGroups: [FacultyGroup] = []
     
     @Published var isConfirmationAlertPresented = false
     @Published var selectedFacultyGroups: [FacultyGroup] = []
 
+    let isLoading = DriverState(true)
+    
     var onNextButton = DriverSubject<Void>()
     var onConfirmationAlertContinueButton = DriverSubject<Void>()
 }
@@ -29,7 +30,7 @@ struct OnboardingFirstStepViewModel: ViewModel {
         let presentStartSecondStepView = DriverSubject<Void>()
 
         store.viewWillAppear
-            .perform { try await context.storage.getCracowUniversityOfEconomicsData() }
+            .perform(isLoading: store.isLoading) { try await context.storage.getCracowUniversityOfEconomicsData() }
             .sinkAndStore(on: store) { $0.facultyGroups = $1.allGroupsWithoutLanguages }
 
         store.onNextButton

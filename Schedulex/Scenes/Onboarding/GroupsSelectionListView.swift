@@ -11,11 +11,12 @@ import Resources
 import Widgets
 
 struct GroupsSelectionListView: View {
-    @State private var isSearchFocused = false
     @State private var searchText = ""
 
     let groups: [FacultyGroup]
     let emptyMessage: String
+    var bottomInset: CGFloat = 0
+    @Binding var isSearchFocused: Bool
     @Binding var selectedGroups: [FacultyGroup]
 
     var body: some View {
@@ -23,7 +24,7 @@ struct GroupsSelectionListView: View {
             SearchField(prompt: L10n.startFirstStepPrompt, searchText: $searchText, isFocused: $isSearchFocused)
 
             ScrollViewReader { proxy in
-                SectionedList(sections) { sectionIndex, facultyGroup in
+                SectionedList(sections, bottomInset: bottomInset) { sectionIndex, facultyGroup in
                     let isSelected = selectedGroups.contains(facultyGroup)
                     let icon: Icon = isSelected ? .checkmark : .circle
                     let color: Color = isSelected ? .greenPrimary : .accentPrimary
@@ -33,15 +34,18 @@ struct GroupsSelectionListView: View {
                     FacultyGroupListRow(facultyGroup: facultyGroup, trailingIcon: icon, iconColor: color)
                         .onTapGesture { isSelected ? deselect() : select() }
                 }
-                .baseListStyle(isLoading: groups.isEmpty)
                 .animation(.easeInOut(duration: 0.15), value: selectedGroups)
                 .onAppear {
                     proxy.scrollTo(0, anchor: .top)
                     isSearchFocused = !groups.isEmpty
                 }
+                .onChange(of: searchText) { _ in
+                    proxy.scrollTo(0, anchor: .top)
+                }
             }
         }
         .padding(.top, .small)
+        .baseListStyle(isLoading: groups.isEmpty)
         .onDisappear { isSearchFocused = false }
         .onChange(of: groups) { isSearchFocused = !$0.isEmpty }
     }
@@ -59,5 +63,5 @@ struct GroupsSelectionListView: View {
 }
 
 #Preview {
-    GroupsSelectionListView(groups: [], emptyMessage: "Empty message", selectedGroups: .constant([]))
+    GroupsSelectionListView(groups: [], emptyMessage: "Empty message", isSearchFocused: .constant(true), selectedGroups: .constant([]))
 }
