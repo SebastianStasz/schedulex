@@ -106,8 +106,10 @@ struct DashboardViewModel: ViewModel {
                 $0.endDate = endDate
                 $0.dayPickerItems = $1
                 setDefaultSelectedDate()
-                store.showInfoToUnhideFacultyGroups = false
-                store.showErrorInfo = false
+                if let items = $1, !items.isEmpty {
+                    store.showInfoToUnhideFacultyGroups = false
+                    store.showErrorInfo = false
+                }
             }
 
         dashboardEventsOutput.facultiesGroupsDetails

@@ -104,7 +104,8 @@ struct DashboardView: RootView {
                 Text(L10n.dashboardFetchingEventsError)
                     .multilineTextAlignment(.center)
 
-                TextButton(L10n.refreshButton, color: .blue, action: store.refresh.send)
+                Button(L10n.refreshButton, action: store.refresh.send)
+                    .buttonStyle(BorderedButtonStyle())
             }
         } else if store.showInfoToUnhideFacultyGroups {
             Text(L10n.dashboardAllGroupsAreHidden)
@@ -114,7 +115,8 @@ struct DashboardView: RootView {
                 Text(L10n.dashboardNoEventsToDisplay)
                     .multilineTextAlignment(.center)
 
-                TextButton(L10n.refreshButton, color: .blue, action: store.refresh.send)
+                Button(L10n.refreshButton, action: store.refresh.send)
+                    .buttonStyle(BorderedButtonStyle())
             }
         } else if !store.isLoading, store.selectedDateEvents.isEmpty {
             let isWeekend = NSCalendar.current.isDateInWeekend(store.selectedDate)
