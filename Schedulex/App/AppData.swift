@@ -122,6 +122,14 @@ final class AppData {
         subscribedFacultyGroups[index].color = color
     }
 
+    func updateNumberOfEventsForSubscribedFacultyGroups(from facultyGroupsDetails: [FacultyGroupDetails]) {
+        for facultyGroupDetail in facultyGroupsDetails {
+            if let index = subscribedFacultyGroups.firstIndex(where: { $0.name == facultyGroupDetail.name }) {
+                subscribedFacultyGroups[index].numberOfEvents = facultyGroupDetail.events.count
+            }
+        }
+    }
+
     private var availableColors: [FacultyGroupColor] {
         FacultyGroupColor.allCases.filter { color in
             !subscribedFacultyGroups.contains(where: { $0.color == color })

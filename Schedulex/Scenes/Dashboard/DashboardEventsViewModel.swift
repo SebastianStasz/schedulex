@@ -21,6 +21,7 @@ struct DashboardEventsViewModel {
 
     struct Output {
         let dayPickerItems: Driver<[DayPickerItem]?>
+        let facultiesGroupsDetails: Driver<[FacultyGroupDetails]>
         let eventsToDisplay: Driver<[Event]>
         let isLoading: Driver<Bool>
     }
@@ -32,10 +33,11 @@ struct DashboardEventsViewModel {
         var nextUpdateDate: Date?
 
         let facultyGroups = input.facultyGroups
+            .removeDuplicates()
             .onNext { _ in nextUpdateDate = nil }
 
         let fetchEvents = input.fetchEvents
-            .filter { !shouldRefreshEvents(nextUpdateDate: nextUpdateDate) }
+            .filter { shouldRefreshEvents(nextUpdateDate: nextUpdateDate) }
 
         let fetchEventsForFacultyGroups = Merge(fetchEvents, input.forceRefresh)
             .withLatestFrom(facultyGroups)
@@ -43,6 +45,7 @@ struct DashboardEventsViewModel {
         let allFacultiesGroupsDetails = fetchEventsForFacultyGroups
             .perform(isLoading: isLoading) { try await fetchFacultiesGroupsDetails(for: $0) }
             .onNext { _ in nextUpdateDate = Calendar.current.date(byAdding: .minute, value: 5, to: .now) }
+            .share()
 
         let eventsToDisplay = CombineLatest(allFacultiesGroupsDetails, input.hiddenClasses)
             .onNext { _ in isLoading.send(true) }
@@ -56,15 +59,14 @@ struct DashboardEventsViewModel {
             .onNext { _ in isLoading.send(false) }
 
         return Output(dayPickerItems: dayPickerItems.asDriver(),
+                      facultiesGroupsDetails: allFacultiesGroupsDetails.asDriver(),
                       eventsToDisplay: eventsToDisplay.asDriver(),
                       isLoading: isLoading.asDriver())
     }
 
     private func shouldRefreshEvents(nextUpdateDate: Date?) -> Bool {
-        guard let nextUpdateDate, nextUpdateDate >= Date.now else {
-            return false
-        }
-        return true
+        guard let nextUpdateDate else { return true }
+        return nextUpdateDate <= Date.now
     }
 
     private func fetchFacultiesGroupsDetails(for facultyGroups: [FacultyGroup]) async throws -> [FacultyGroupDetails] {

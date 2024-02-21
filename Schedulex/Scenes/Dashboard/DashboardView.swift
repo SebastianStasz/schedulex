@@ -87,7 +87,7 @@ struct DashboardView: RootView {
     @ViewBuilder
     private var datePicker: some View {
         if let items = store.dayPickerItems {
-            CalendarPicker(items: items, selectedDate: $store.selectedDate)
+            CalendarPicker(items: items, selectedDate: $store.selectedDate, selectTodaysDate: selectTodaysDate)
                 .padding(.top, .large)
                 .presentationDetents([.height(380)])
                 .presentationDragIndicator(.visible)
@@ -138,7 +138,7 @@ struct DashboardView: RootView {
     }
 
     private func selectTodaysDate() {
-        store.selectedDate = .now
+        store.selectTodaysDate.send()
     }
 
     private func showDatePicker() {

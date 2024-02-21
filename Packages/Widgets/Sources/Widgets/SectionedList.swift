@@ -51,7 +51,6 @@ public struct SectionedList<Item: Hashable, RowContent: View>: View {
             .padding(.top, .medium)
             .padding(.horizontal, .large)
         }
-        .scrollDismissesKeyboard(.immediately)
     }
 
     private func headerView(title: String) -> some View {

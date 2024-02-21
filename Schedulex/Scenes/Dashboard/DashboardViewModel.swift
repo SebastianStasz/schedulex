@@ -26,6 +26,7 @@ final class DashboardStore: RootStore {
 
     let navigateTo = DriverSubject<DashboardViewModel.Destination>()
     let markSwipeTipAsPresented = DriverSubject<Void>()
+    let selectTodaysDate = DriverSubject<Void>()
     let refresh = DriverSubject<Void>()
 
     init(infoCardsSectionStore: InfoCardsSectionStore) {
@@ -49,6 +50,10 @@ struct DashboardViewModel: ViewModel {
         let viewWillAppearOrWillEnterForeground = Merge(store.viewWillAppear, viewWillEnterForeground)
         let subscribedFacultyGroups = context.appData.$subscribedFacultyGroups
 
+        let setDefaultSelectedDate = { [weak store] in
+            store?.selectedDate = getDefaultSelectedDate(startDate: store?.startDate, endDate: store?.endDate)
+        }
+
         NotificationCenter.didEnterBackground
             .sink { nextSelectedDateResetDate = Calendar.current.date(byAdding: .minute, value: 5, to: .now)! }
             .store(in: &store.cancellables)
@@ -56,8 +61,13 @@ struct DashboardViewModel: ViewModel {
         viewWillEnterForeground
             .sinkAndStore(on: store) { store, _ in
                 if nextSelectedDateResetDate < .now {
-                    store.selectedDate = getDefaultSelectedDate(startDate: store.startDate, endDate: store.endDate)
+                    setDefaultSelectedDate()
                 }
+            }
+
+        store.selectTodaysDate
+            .sinkAndStore(on: store) { store, _ in
+                setDefaultSelectedDate()
             }
 
         viewWillAppearOrWillEnterForeground
@@ -70,7 +80,7 @@ struct DashboardViewModel: ViewModel {
 
         let dashboardEventsOutput = DashboardEventsViewModel()
             .makeOutput(input:. init(fetchEvents: viewWillAppearOrWillEnterForeground.asDriver(),
-                                     forceRefresh: store.refresh.asDriver(),
+                                     forceRefresh: store.refresh.asDriver(), 
                                      facultyGroups: subscribedFacultyGroups.asDriver(),
                                      hiddenClasses: context.appData.$allHiddenClasses.asDriver()))
 
@@ -84,8 +94,12 @@ struct DashboardViewModel: ViewModel {
                 $0.startDate = startDate
                 $0.endDate = endDate
                 $0.dayPickerItems = $1
-                store.selectedDate = getDefaultSelectedDate(startDate: startDate, endDate: endDate)
+                setDefaultSelectedDate()
             }
+
+        dashboardEventsOutput.facultiesGroupsDetails
+            .sink { context.appData.updateNumberOfEventsForSubscribedFacultyGroups(from: $0) }
+            .store(in: &store.cancellables)
 
         let classNotificationServiceInput = ClassNotificationService.Input(
             events: dashboardEventsOutput.eventsToDisplay,
