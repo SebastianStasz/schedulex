@@ -24,13 +24,18 @@ struct DashboardEventsViewModel {
         let facultiesGroupsDetails: Driver<[FacultyGroupDetails]>
         let eventsToDisplay: Driver<[Event]>
         let isLoading: Driver<Bool>
+        let errorTracker: Driver<Error>
     }
 
     private let service = UekScheduleService()
 
     func makeOutput(input: Input) -> Output {
         let isLoading = DriverState(false)
+        let errorTracker = DriverSubject<Error>()
         var nextUpdateDate: Date?
+
+        let errorHandler = errorTracker
+            .onNext { _ in nextUpdateDate = nil }
 
         let facultyGroups = input.facultyGroups
             .removeDuplicates()
@@ -43,7 +48,7 @@ struct DashboardEventsViewModel {
             .withLatestFrom(facultyGroups)
 
         let allFacultiesGroupsDetails = fetchEventsForFacultyGroups
-            .perform(isLoading: isLoading) { try await fetchFacultiesGroupsDetails(for: $0) }
+            .perform(isLoading: isLoading, errorTracker: errorTracker) { try await fetchFacultiesGroupsDetails(for: $0) }
             .onNext { _ in nextUpdateDate = Calendar.current.date(byAdding: .minute, value: 5, to: .now) }
             .share()
 
@@ -61,7 +66,8 @@ struct DashboardEventsViewModel {
         return Output(dayPickerItems: dayPickerItems.asDriver(),
                       facultiesGroupsDetails: allFacultiesGroupsDetails.asDriver(),
                       eventsToDisplay: eventsToDisplay.asDriver(),
-                      isLoading: isLoading.asDriver())
+                      isLoading: isLoading.asDriver(), 
+                      errorTracker: errorHandler.asDriver())
     }
 
     private func shouldRefreshEvents(nextUpdateDate: Date?) -> Bool {

@@ -99,6 +99,13 @@ struct DashboardView: RootView {
     private var loadingIndicatorOrEmptyState: some View {
         if store.isLoading {
             ProgressView()
+        } else if store.showErrorInfo {
+            VStack(spacing: .medium) {
+                Text(L10n.dashboardFetchingEventsError)
+                    .multilineTextAlignment(.center)
+
+                TextButton(L10n.refreshButton, color: .blue, action: store.refresh.send)
+            }
         } else if store.showInfoToUnhideFacultyGroups {
             Text(L10n.dashboardAllGroupsAreHidden)
                 .multilineTextAlignment(.center)

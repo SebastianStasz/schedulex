@@ -17,6 +17,7 @@
 "event_details_business_card" = "Business card";
 "dashboard_all_groups_are_hidden" = "All subscribed groups are hidden.\nClick \"My groups\" to manage them.";
 "dashboard_no_events_to_display" = "The groups you follow don't contain any classes.";
+"dashboard_fetching_events_error" = "Sorry. An error occurred while downloading the schedule.";
 
 // info_cards
 "info_card_enable_notifications_title" = "Don't miss the classes!";

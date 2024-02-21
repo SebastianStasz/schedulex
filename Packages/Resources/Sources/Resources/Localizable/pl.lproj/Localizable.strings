@@ -17,6 +17,7 @@
 "event_details_business_card" = "e-wizytówka";
 "dashboard_all_groups_are_hidden" = "Wszystkie obserwowane grupy są ukryte.\nKliknij \"Moje grupy\" aby nimi zarządzać.";
 "dashboard_no_events_to_display" = "Obserwowane grupy nie zawierają żadnych zajęć.";
+"dashboard_fetching_events_error" = "Przepraszamy. Wystąpił błąd podczas pobierania planu zajęć.";
 
 // info_cards
 "info_card_enable_notifications_title" = "Nie przegap zajęć!";

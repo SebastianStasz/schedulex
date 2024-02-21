@@ -20,6 +20,7 @@ final class DashboardStore: RootStore {
     @Published fileprivate(set) var showInfoToUnhideFacultyGroups = false
     @Published fileprivate(set) var showDashboardSwipeTip = false
     @Published fileprivate(set) var showSettingsBadge = false
+    @Published fileprivate(set) var showErrorInfo = false
     @Published fileprivate(set) var isLoading = true
     @Published fileprivate(set) var startDate: Date?
     @Published fileprivate(set) var endDate: Date?
@@ -87,6 +88,16 @@ struct DashboardViewModel: ViewModel {
         dashboardEventsOutput.isLoading
             .assign(to: &store.$isLoading)
 
+        dashboardEventsOutput.errorTracker
+            .sinkAndStore(on: store) { store, _ in
+                store.showErrorInfo = true
+                store.selectedDateEvents = []
+                store.selectedDate = .now
+                store.dayPickerItems = nil
+                store.startDate = nil
+                store.endDate = nil
+            }
+
         dashboardEventsOutput.dayPickerItems
             .sinkAndStore(on: store) {
                 let startDate = $1?.first?.date
@@ -95,6 +106,8 @@ struct DashboardViewModel: ViewModel {
                 $0.endDate = endDate
                 $0.dayPickerItems = $1
                 setDefaultSelectedDate()
+                store.showInfoToUnhideFacultyGroups = false
+                store.showErrorInfo = false
             }
 
         dashboardEventsOutput.facultiesGroupsDetails
