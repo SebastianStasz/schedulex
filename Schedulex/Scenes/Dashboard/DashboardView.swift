@@ -100,24 +100,16 @@ struct DashboardView: RootView {
         if store.isLoading {
             ProgressView()
         } else if store.showErrorInfo {
-            VStack(spacing: .medium) {
-                Text(L10n.dashboardFetchingEventsError)
-                    .multilineTextAlignment(.center)
-
-                Button(L10n.refreshButton, action: store.refresh.send)
-                    .buttonStyle(BorderedButtonStyle())
-            }
+            infoMessage(title: "Whoops", 
+                        message: L10n.dashboardFetchingEventsError,
+                        showRefreshButton: true)
         } else if store.showInfoToUnhideFacultyGroups {
-            Text(L10n.dashboardAllGroupsAreHidden)
-                .multilineTextAlignment(.center)
+            infoMessage(title: L10n.dashboardNoEventsToDisplay,
+                        message: L10n.dashboardAllGroupsAreHidden)
         } else if store.dayPickerItems?.isEmpty ?? true {
-            VStack(spacing: .medium) {
-                Text(L10n.dashboardNoEventsToDisplay)
-                    .multilineTextAlignment(.center)
-
-                Button(L10n.refreshButton, action: store.refresh.send)
-                    .buttonStyle(BorderedButtonStyle())
-            }
+            infoMessage(title: L10n.dashboardNoEventsToDisplay,
+                        message: L10n.dashboardGroupsHaveNoEvents,
+                        showRefreshButton: true)
         } else if !store.isLoading, store.selectedDateEvents.isEmpty {
             let isWeekend = NSCalendar.current.isDateInWeekend(store.selectedDate)
             HStack(spacing: .micro) {
@@ -130,6 +122,26 @@ struct DashboardView: RootView {
                 }
             }
         }
+    }
+
+    private func infoMessage(title: String, message: String, showRefreshButton: Bool = false) -> some View {
+        VStack(spacing: 32) {
+            VStack(spacing: .large) {
+                Text(title, style: .keyboardButton)
+                    .foregroundStyle(.grayShade1)
+
+                Text(message, style: .body)
+                    .foregroundStyle(.textPrimary)
+            }
+
+            Button(L10n.refreshButton, action: store.refresh.send)
+                .buttonStyle(BorderedButtonStyle())
+                .opacity(showRefreshButton ? 1 : 0)
+                .disabled(!showRefreshButton)
+        }
+        .multilineTextAlignment(.center)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .padding(.horizontal, .xlarge)
     }
 
     private var toolbarContent: some ToolbarContent {

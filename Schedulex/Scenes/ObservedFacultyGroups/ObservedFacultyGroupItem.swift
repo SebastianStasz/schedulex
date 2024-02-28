@@ -31,11 +31,11 @@ struct ObservedFacultyGroupItem: View {
             .frame(maxWidth: .infinity, alignment: .leading)
 
             Button(action: trailingIconAction) {
-                Image.icon(.info)
+                Image.icon(.edit)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .foregroundStyle(.accentPrimary)
-                    .frame(height: .xlarge)
+                    .frame(width: .xlarge, height: .xlarge)
             }
             .buttonStyle(.plain)
         }

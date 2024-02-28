@@ -35,10 +35,13 @@ public enum L10n {
   /// All subscribed groups are hidden.
   /// Click "My groups" to manage them.
   public static let dashboardAllGroupsAreHidden = L10n.tr("Localizable", "dashboard_all_groups_are_hidden", fallback: "All subscribed groups are hidden.\nClick \"My groups\" to manage them.")
-  /// Sorry. An error occurred while downloading the schedule.
-  public static let dashboardFetchingEventsError = L10n.tr("Localizable", "dashboard_fetching_events_error", fallback: "Sorry. An error occurred while downloading the schedule.")
-  /// The groups you follow don't contain any classes.
-  public static let dashboardNoEventsToDisplay = L10n.tr("Localizable", "dashboard_no_events_to_display", fallback: "The groups you follow don't contain any classes.")
+  /// Sorry, an error occurred while downloading the schedule.
+  public static let dashboardFetchingEventsError = L10n.tr("Localizable", "dashboard_fetching_events_error", fallback: "Sorry, an error occurred while downloading the schedule.")
+  /// The groups you follow don't contain any classes. 
+  /// Click "My groups" and add another group.
+  public static let dashboardGroupsHaveNoEvents = L10n.tr("Localizable", "dashboard_groups_have_no_events", fallback: "The groups you follow don't contain any classes. \nClick \"My groups\" and add another group.")
+  /// No events to display
+  public static let dashboardNoEventsToDisplay = L10n.tr("Localizable", "dashboard_no_events_to_display", fallback: "No events to display")
   /// Done
   public static let doneButton = L10n.tr("Localizable", "done_button", fallback: "Done")
   /// Business card
