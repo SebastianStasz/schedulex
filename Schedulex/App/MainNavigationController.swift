@@ -10,14 +10,20 @@ import SwiftUI
 
 final class MainNavigationController: UINavigationController {
     private var cancellables: Set<AnyCancellable> = []
+    private(set) weak var window: UIWindow?
 
+    init(window: UIWindow? = nil) {
+        self.window = window
+        super.init(nibName: nil, bundle: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         navigationBar.prefersLargeTitles = true
 
         coreEnvironment.context.appData.$appColorScheme
-            .sink { [weak self] in self?.overrideUserInterfaceStyle = $0.scheme }
+            .sink { [weak self] in self?.window?.overrideUserInterfaceStyle = $0.scheme }
             .store(in: &cancellables)
 
         coreEnvironment.context.appData.$subscribedFacultyGroups
@@ -57,5 +63,8 @@ final class MainNavigationController: UINavigationController {
         navigationController.navigationBar.prefersLargeTitles = true
         present(navigationController, animated: true)
     }
-}
 
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
