@@ -23,6 +23,8 @@ final class SettingsStore: RootStore {
                 set: { $0 ? self.enableNotifications.send() : self.disableNotifications.send() })
     }
 
+    var presentSendEmailSheet = {}
+
     fileprivate let enableNotifications = DriverSubject<Void>()
     fileprivate let disableNotifications = DriverSubject<Void>()
 }
@@ -82,6 +84,18 @@ struct SettingsViewModel: ViewModel {
             }
             .sink {}.store(in: &store.cancellables)
 
+        store.presentSendEmailSheet = { [weak store] in
+            presentSendEmailSheet(recipient: store?.contactMail, appVersion: store?.appVersion)
+        }
+
         return store
+    }
+
+    private func presentSendEmailSheet(recipient: String?, appVersion: String?) {
+        guard let emailContent = EmailContent.defaultContact(recipient: recipient, appVersion: appVersion) else {
+            return
+        }
+        let viewController = SendEmailViewController(emailContent: emailContent)
+        navigationController?.presentModally(viewController)
     }
 }

@@ -37,7 +37,7 @@ final class NotificationsManager: ObservableObject {
 
     func setNotifications(_ notifications: [LocalNotification]) async {
         removeAllPendingNotifications()
-        for notification in notifications {
+        for notification in notifications.prefix(64) {
             let notificationRequest = notification.toUNNotificationRequest()
             try? await notificationCenter.add(notificationRequest)
         }

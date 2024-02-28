@@ -14,7 +14,7 @@ struct SettingsView: RootView {
 
     var rootBody: some View {
         VStack(spacing: .large) {
-            SettingsAppInformationsSection(appVersion: store.appVersion, contactMail: store.contactMail, isUpdateAvailable: store.isUpdateAvailable)
+            SettingsAppInformationsSection(appVersion: store.appVersion, contactMail: store.contactMail, isUpdateAvailable: store.isUpdateAvailable, sendEmailAction: store.presentSendEmailSheet)
             MenuPicker(title: L10n.settingsAppThemeTitle, options: AppColorScheme.allCases, selectedOption: $store.appColorScheme).card()
             ClassNotificationsToggle(areNotificationsEnabled: store.notificationsToggle, classNotificationsTime: $store.classNotificationsTime, isEnableNotificationsAlertPresented: $store.isEnableNotificationsAlertPresented)
             Spacer()
