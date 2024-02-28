@@ -12,6 +12,7 @@ import Widgets
 
 struct EventCardView: View {
     let event: Event
+    let currentDate: Date
 
     var body: some View {
         HStack(spacing: .medium) {
@@ -53,15 +54,15 @@ struct EventCardView: View {
 
     private var status: String? {
         guard let startDate = event.startDate, let endDate = event.endDate else { return nil }
-        if endDate <= .now {
+        if endDate <= currentDate {
             return nil
         } else {
             let formatter = RelativeDateTimeFormatter()
             formatter.unitsStyle = .short
-            let isBeforeEvent = startDate > .now
+            let isBeforeEvent = startDate > currentDate
             let date = isBeforeEvent ? startDate : endDate
             let prefix = isBeforeEvent ? "" : "\(L10n.eventFinishingIn) "
-            let description = formatter.localizedString(for: date, relativeTo: .now)
+            let description = formatter.localizedString(for: date, relativeTo: currentDate)
             return prefix + description
         }
     }
@@ -69,8 +70,8 @@ struct EventCardView: View {
 
 #Preview {
     VStack(spacing: .large) {
-        EventCardView(event: .sample)
-        EventCardView(event: .eventTransfer)
+        EventCardView(event: .sample, currentDate: .now)
+        EventCardView(event: .eventTransfer, currentDate: .now)
     }
     .padding(.large)
 }
