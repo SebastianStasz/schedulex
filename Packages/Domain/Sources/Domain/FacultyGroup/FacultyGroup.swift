@@ -9,7 +9,7 @@ import Foundation
 
 public struct FacultyGroup: Identifiable, Hashable, Codable {
     public let name: String
-    public let numberOfEvents: Int
+    public var numberOfEvents: Int
     public let facultyDocument: String
     public let facultyUrl: String
 
@@ -33,5 +33,15 @@ public struct FacultyGroup: Identifiable, Hashable, Codable {
         self.numberOfEvents = numberOfEvents
         self.facultyDocument = facultyDocument
         self.facultyUrl = facultyUrl
+    }
+}
+
+extension FacultyGroup: Equatable {
+    public static func ==(lhs: FacultyGroup, rhs: FacultyGroup) -> Bool {
+        lhs.name == rhs.name &&
+        lhs.facultyDocument == rhs.facultyDocument &&
+        lhs.facultyUrl == rhs.facultyUrl &&
+        lhs.isHidden == rhs.isHidden &&
+        lhs.color == rhs.color
     }
 }

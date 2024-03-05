@@ -33,14 +33,14 @@ enum EventsListElement {
         return event.endDate?.formatted(style: .timeOnly)
     }
 
-    var circleIcon: Icon {
+    func makeCircleIcon(for date: Date) -> Icon {
         switch self {
         case let .event(event, _, _):
-            guard let endDate = event.endDate, endDate > .now else { return .circleFill }
-            return event.startDate! > .now ? .circle : .doubleCircle
+            guard let endDate = event.endDate, endDate > date else { return .circleFill }
+            return event.startDate! > date ? .circle : .doubleCircle
         case let .break(startDate, endDate, _):
-            guard startDate < .now else { return .circle }
-            return endDate > .now ? .doubleCircle : .circleFill
+            guard startDate < date else { return .circle }
+            return endDate > date ? .doubleCircle : .circleFill
         }
     }
 }

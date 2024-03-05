@@ -2,146 +2,161 @@
 //  DashboardViewModel.swift
 //  Schedulex
 //
-//  Created by Sebastian Staszczyk on 30/08/2023.
+//  Created by Sebastian Staszczyk on 14/01/2024.
 //
 
 import Combine
 import Domain
-import Foundation
-import Resources
-import UEKScraper
+import UIKit
 import Widgets
+import UEKScraper
 
-@MainActor
-final class DashboardViewModel: ObservableObject {
-    @Published private(set) var dayPickerItems: [DayPickerItem]? = nil
-    @Published private(set) var selectedDateEvents: [Event] = []
-    @Published private(set) var startDate: Date?
-    @Published private(set) var endDate: Date?
-    @Published private(set) var isLoading = true
-
-    @Published private var nextUpdateDate: Date?
-    @Published private(set) var allEvents: [Event] = []
-    @Published var shouldScrollToDay = false
+final class DashboardStore: RootStore {
     @Published var selectedDate: Date = .now
+    @Published var dayPickerItems: [DayPickerItem]?
+    let infoCardsSectionStore: InfoCardsSectionStore
 
-    private let service = UekScheduleService()
-    private var cancellables: Set<AnyCancellable> = []
+    @Published fileprivate(set) var selectedDateEvents: [Event] = []
+    @Published fileprivate(set) var showInfoToUnhideFacultyGroups = false
+    @Published fileprivate(set) var showDashboardSwipeTip = false
+    @Published fileprivate(set) var showSettingsBadge = false
+    @Published fileprivate(set) var showErrorInfo = false
+    @Published fileprivate(set) var isLoading = true
+    @Published fileprivate(set) var startDate: Date?
+    @Published fileprivate(set) var endDate: Date?
 
-    init() { bind() }
+    let navigateTo = DriverSubject<DashboardViewModel.Destination>()
+    let markSwipeTipAsPresented = DriverSubject<Void>()
+    let selectTodaysDate = DriverSubject<Void>()
+    let refresh = DriverSubject<Void>()
 
-    var title: String {
-        selectedDate.formatted(style: .dateLong)
+    init(infoCardsSectionStore: InfoCardsSectionStore) {
+        self.infoCardsSectionStore = infoCardsSectionStore
+        super.init()
     }
+}
 
-    var subtitle: String {
-        selectedDate.isSameDay(as: .now) ? L10n.today : L10n.selectedDate
-    }
+struct DashboardViewModel: ViewModel {
+    weak var navigationController: UINavigationController?
+    let notificationManager = NotificationsManager()
 
-    var isEmpty: Bool {
-        allEvents.isEmpty
-    }
+    func makeStore(context: Context) -> DashboardStore {
+        var nextSelectedDateResetDate: Date = .now
 
-    var shouldUseCachedData: Bool {
-        guard let nextUpdateDate, nextUpdateDate >= Date.now else {
-            return false
+        let infoCardsSectionStore = InfoCardsSectionViewModel(notificationsManager: notificationManager)
+            .makeStore(appData: context.appData)
+
+        let store = DashboardStore(infoCardsSectionStore: infoCardsSectionStore)
+        let viewWillEnterForeground = NotificationCenter.willEnterForeground
+        let viewWillAppearOrWillEnterForeground = Merge(store.viewWillAppear, viewWillEnterForeground)
+        let subscribedFacultyGroups = context.appData.$subscribedFacultyGroups
+
+        let setDefaultSelectedDate = { [weak store] in
+            store?.selectedDate = getDefaultSelectedDate(startDate: store?.startDate, endDate: store?.endDate)
         }
-        return true
+
+        NotificationCenter.didEnterBackground
+            .sink { nextSelectedDateResetDate = Calendar.current.date(byAdding: .minute, value: 5, to: .now)! }
+            .store(in: &store.cancellables)
+
+        viewWillEnterForeground
+            .sinkAndStore(on: store) { store, _ in
+                if nextSelectedDateResetDate < .now {
+                    setDefaultSelectedDate()
+                }
+            }
+
+        store.selectTodaysDate
+            .sinkAndStore(on: store) { store, _ in
+                setDefaultSelectedDate()
+            }
+
+        viewWillAppearOrWillEnterForeground
+            .perform { await notificationManager.updateNotificationsPermission() }
+            .sinkAndStore(on: store) { _, _ in }
+
+        subscribedFacultyGroups
+            .map { $0.filter { !$0.isHidden }.isEmpty }
+            .assign(to: &store.$showInfoToUnhideFacultyGroups)
+
+        let dashboardEventsOutput = DashboardEventsViewModel()
+            .makeOutput(input:. init(fetchEvents: viewWillAppearOrWillEnterForeground.asDriver(),
+                                     forceRefresh: store.refresh.asDriver(), 
+                                     facultyGroups: subscribedFacultyGroups.asDriver(),
+                                     hiddenClasses: context.appData.$allHiddenClasses.asDriver()))
+
+        dashboardEventsOutput.isLoading
+            .assign(to: &store.$isLoading)
+
+        dashboardEventsOutput.errorTracker
+            .sinkAndStore(on: store) { store, _ in
+                store.showErrorInfo = true
+                store.selectedDateEvents = []
+                store.selectedDate = .now
+                store.dayPickerItems = nil
+                store.startDate = nil
+                store.endDate = nil
+            }
+
+        dashboardEventsOutput.dayPickerItems
+            .sinkAndStore(on: store) {
+                let startDate = $1?.first?.date
+                let endDate = $1?.last?.date
+                $0.startDate = startDate
+                $0.endDate = endDate
+                $0.dayPickerItems = $1
+                setDefaultSelectedDate()
+                if let items = $1, !items.isEmpty {
+                    store.showInfoToUnhideFacultyGroups = false
+                    store.showErrorInfo = false
+                }
+            }
+
+        dashboardEventsOutput.facultiesGroupsDetails
+            .sink { context.appData.updateNumberOfEventsForSubscribedFacultyGroups(from: $0) }
+            .store(in: &store.cancellables)
+
+        let classNotificationServiceInput = ClassNotificationService.Input(
+            events: dashboardEventsOutput.eventsToDisplay,
+            classNotificationsEnabled: context.appData.$classNotificationsEnabled.asDriver(),
+            classNotificationsTime: context.appData.$classNotificationsTime.asDriver()
+        )
+
+        ClassNotificationService(notificationsManager: notificationManager)
+            .registerForEventsNotifications(input: classNotificationServiceInput)
+            .sinkAndStore(on: store) { _, _ in }
+
+        CombineLatest(store.$selectedDate.dropFirst(), dashboardEventsOutput.eventsToDisplay)
+            .map { getSelectedDayEvents(date: $0, events: $1) }
+            .assign(to: &store.$selectedDateEvents)
+
+        context.storage.appConfiguration
+            .sinkAndStore(on: store) { $0.showSettingsBadge = $1.isAppUpdateAvailable }
+
+        context.appData.$dashboardSwipeTipPresented
+            .map { !$0 }
+            .assign(to: &store.$showDashboardSwipeTip)
+
+        store.markSwipeTipAsPresented
+            .sink { context.appData.dashboardSwipeTipPresented = true }
+            .store(in: &store.cancellables)
+
+        store.navigateTo
+            .sink { navigate(to: $0) }
+            .store(in: &store.cancellables)
+
+        return store
     }
 
-    func fetchEvents(for facultyGroups: [FacultyGroup], hiddenClasses: [EditableFacultyGroupClass]) async throws {
-        isLoading = true
-        var events: [Event] = []
-        for facultyGroup in facultyGroups {
-            guard !facultyGroup.isHidden else {
-                continue
-            }
-            let facultyGroupDetails = try await service.getFacultyGroupDetails(for: facultyGroup)
-            let hiddenClasses = hiddenClasses
-                .filter { $0.facultyGroupName == facultyGroup.name }
-                .map { $0.toFacultyGroupClass() }
-
-            let newEvents = facultyGroupDetails.events
-                .filter { !hiddenClasses.contains($0.class) }
-
-            events.append(contentsOf: newEvents)
-        }
-        allEvents = events
-        nextUpdateDate = Calendar.current.date(byAdding: .minute, value: 5, to: .now)
+    private func getDefaultSelectedDate(startDate: Date?, endDate: Date?) -> Date {
+        let todaysDate = Date.now
+        guard let startDate, let endDate, startDate > todaysDate || endDate < todaysDate else { return todaysDate }
+        return Date.now < startDate ? startDate : endDate
     }
 
-    private func bind() {
-        $allEvents
-            .map { $0.sorted(by: { $0.startDate! < $1.startDate! }) }
-            .compactMap { [weak self] in
-                let startDate = $0.first?.startDate
-                let endDate = $0.last?.startDate
-                self?.startDate = startDate
-                self?.endDate = endDate
-                guard let startDate, let endDate else { return nil }
-                return (startDate, endDate, $0)
-            }
-            .receive(on: DispatchQueue.global(qos: .background))
-            .map { (startDate: Date, endDate: Date, events: [Event]) in
-                let endDate = Calendar.current.date(byAdding: .day, value: 1, to: endDate)!
-                var dates: [Date] = []
-                var date = startDate
-                while date < endDate {
-                    dates.append(date)
-                    date = Calendar.current.date(byAdding: .day, value: 1, to: date)!
-                }
-
-                let eventsByDay = Dictionary(grouping: events, by: { $0.startDate?.formatted(date: .numeric, time: .omitted) })
-
-                return dates.map { date in
-                    if let events = eventsByDay[date.formatted(date: .numeric, time: .omitted)] {
-                        let colors = Array(Set(events.map { $0.facultyGroupColor })).sorted { $0.id < $1.id }.map { $0.representative }
-                        return DayPickerItem(date: date, circleColors: colors)
-                    }
-                    return DayPickerItem(date: date, circleColors: [])
-                }
-            }
-            .receive(on: DispatchQueue.main)
-            .handleEvents(receiveOutput: { [weak self] _ in
-                self?.isLoading = false
-            })
-            .assign(to: &$dayPickerItems)
-
-        $allEvents
-            .map { $0.sorted(by: { $0.startDate! < $1.startDate! }) }
-            .sink { [weak self] in
-                self?.startDate = $0.first?.startDate
-                self?.endDate = $0.last?.startDate
-            }
-            .store(in: &cancellables)
-
-        CombineLatest($startDate.compactMap { $0 }, $endDate.compactMap { $0 })
-            .delay(for: .milliseconds(50), scheduler: DispatchQueue.main)
-            .filter { [weak self] startDate, endDate in
-                guard let selectedDate = self?.selectedDate else {
-                    return true
-                }
-                return startDate > selectedDate || endDate < selectedDate
-            }
-            .map { [weak self] startDate, endDate in
-                self?.shouldScrollToDay = true
-                let todayDate = Date.now
-                if todayDate < startDate {
-                    return startDate
-                } else if todayDate > endDate {
-                    return endDate
-                } else {
-                    return todayDate
-                }
-            }
-            .assign(to: &$selectedDate)
-
-        CombineLatest($allEvents, $selectedDate)
-            .map { allEvents, selectedDate in
-                allEvents
-                    .filter { $0.startDate?.isSameDay(as: selectedDate) ?? false }
-                    .sorted(by: { $0.startDate! < $1.startDate! })
-            }
-            .assign(to: &$selectedDateEvents)
+    private func getSelectedDayEvents(date: Date, events: [Event]) -> [Event] {
+        events
+            .filter { $0.startDate?.isSameDay(as: date) ?? false }
+            .sorted(by: { $0.startDate! < $1.startDate! })
     }
 }

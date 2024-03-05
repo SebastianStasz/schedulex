@@ -14,6 +14,7 @@ struct SettingsAppInformationsSection: View {
     let appVersion: String
     let contactMail: String
     let isUpdateAvailable: Bool
+    let sendEmailAction: () -> Void
 
     var body: some View {
         VStack(spacing: .large) {
@@ -25,7 +26,7 @@ struct SettingsAppInformationsSection: View {
 
                 SettingsLabel(title: "UEK Schedule", description: appVersionLabel)
 
-                Button(appVersionButtonTitle, action: openAppInAppStore)
+                Button(appVersionButtonTitle, action: UIApplication.shared.openAppInAppStore)
                     .buttonStyle(.appVersionButtonStyle)
                     .disabled(!isUpdateAvailable)
             }
@@ -33,12 +34,9 @@ struct SettingsAppInformationsSection: View {
             Separator()
 
             SettingsLabel(title: L10n.settingsContact, description: contactMail, outstanding: true)
-                .onTapGesture { emailPresenter.sendMail(emailContent: emailContent) }
+                .onTapGesture(perform: sendEmailAction)
         }
         .card()
-        .sheet(isPresented: $emailPresenter.isSendEmailViewPresented) {
-            SendEmailView(emailContent: emailContent)
-        }
     }
 
     private var appVersionButtonTitle: String {
@@ -48,21 +46,12 @@ struct SettingsAppInformationsSection: View {
     private var appVersionLabel: String {
         "\(L10n.settingsVersion) \(appVersion)"
     }
-
-    private var emailContent: EmailContent {
-        .defaultContact(recipient: contactMail, appVersion: appVersion)
-    }
-
-    private func openAppInAppStore() {
-        let url = URL(string: "itms-apps://itunes.apple.com/app/id6468822571")!
-        UIApplication.shared.open(url)
-    }
 }
 
 #Preview {
     VStack(spacing: .large) {
-        SettingsAppInformationsSection(appVersion: "1.0.12", contactMail: "sebastianstaszczyk.1999@gmail.com", isUpdateAvailable: false)
-        SettingsAppInformationsSection(appVersion: "1.0.12", contactMail: "sebastianstaszczyk.1999@gmail.com", isUpdateAvailable: true)
+        SettingsAppInformationsSection(appVersion: "1.0.12", contactMail: "sebastianstaszczyk.1999@gmail.com", isUpdateAvailable: false, sendEmailAction: {})
+        SettingsAppInformationsSection(appVersion: "1.0.12", contactMail: "sebastianstaszczyk.1999@gmail.com", isUpdateAvailable: true, sendEmailAction: {})
     }
     .padding(.large)
 }

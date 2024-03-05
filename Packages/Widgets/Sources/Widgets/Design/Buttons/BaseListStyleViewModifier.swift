@@ -13,7 +13,6 @@ private struct BaseListStyleViewModifier: ViewModifier {
 
     func body(content: Content) -> some View {
         content
-            .background(backgroundColor)
             .overlay {
                 ZStack {
                     emptyBackground

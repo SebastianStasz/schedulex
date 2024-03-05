@@ -7,12 +7,16 @@
 
 import Combine
 
-public typealias CombineLatest = Publishers.CombineLatest
-public typealias CombineLatest3 = Publishers.CombineLatest3
-public typealias CombineLatest4 = Publishers.CombineLatest4
+typealias CombineLatest = Publishers.CombineLatest
+typealias CombineLatest3 = Publishers.CombineLatest3
+typealias CombineLatest4 = Publishers.CombineLatest4
 
-public typealias Merge = Publishers.Merge
-public typealias Merge3 = Publishers.Merge3
-public typealias Merge4 = Publishers.Merge4
-public typealias Merge5 = Publishers.Merge5
-public typealias Merge6 = Publishers.Merge6
+typealias Merge = Publishers.Merge
+typealias Merge3 = Publishers.Merge3
+typealias Merge4 = Publishers.Merge4
+typealias Merge5 = Publishers.Merge5
+typealias Merge6 = Publishers.Merge6
+
+typealias Driver<T> = AnyPublisher<T, Never>
+typealias DriverState<T> = CurrentValueSubject<T, Never>
+typealias DriverSubject<T> = PassthroughSubject<T, Never>

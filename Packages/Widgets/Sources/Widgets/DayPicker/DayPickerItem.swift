@@ -9,9 +9,13 @@ import SwiftUI
 
 public struct DayPickerItem: Hashable, Identifiable {
     public let id = UUID()
-    let date: Date
+    public let date: Date
     let circleColors: [Color]
     let isSelectable: Bool
+
+    var isToday: Bool {
+        date.isSameDay(as: .now)
+    }
 
     public init(date: Date, circleColors: [Color] = [], isSelectable: Bool = true) {
         self.date = date

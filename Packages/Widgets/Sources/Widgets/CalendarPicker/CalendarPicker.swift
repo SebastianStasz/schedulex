@@ -11,11 +11,13 @@ import Resources
 public struct CalendarPicker: View {
     private let items: [DayPickerItem]
     private var weekDaySymbols: [String]
+    private let selectTodaysDate: () -> Void
     @State private var selectedMonth = YearAndMonth(year: 1, month: 1)
     @Binding private var selectedDate: Date
 
-    public init(items: [DayPickerItem], selectedDate: Binding<Date>) {
+    public init(items: [DayPickerItem], selectedDate: Binding<Date>, selectTodaysDate: @escaping () -> Void) {
         self.items = items
+        self.selectTodaysDate = selectTodaysDate
         let firstWeekday = Calendar.current.firstWeekday
         let symbols = Calendar.current.shortWeekdaySymbols
         weekDaySymbols = Array(symbols[firstWeekday-1..<symbols.count]) + symbols[0..<firstWeekday-1]
@@ -43,7 +45,7 @@ public struct CalendarPicker: View {
 
                 Spacer()
 
-                TextButton(L10n.today) { selectedDate = .now }
+                TextButton(L10n.today, action: selectTodaysDate)
             }
             .padding(.horizontal, .large)
 
@@ -101,5 +103,5 @@ public struct CalendarPicker: View {
     }
     let colors: [Color?] = [.blue, nil]
     let items = dates.map { DayPickerItem(date: $0, circleColors: [.blue], isSelectable: true) }
-    return CalendarPicker(items: items, selectedDate: .constant(.now))
+    return CalendarPicker(items: items, selectedDate: .constant(.now), selectTodaysDate: {})
 }

@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "🍻" : {
+
+    },
     "Dashboard" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -22,6 +25,9 @@
           }
         }
       }
+    },
+    "Some content" : {
+
     },
     "UEK" : {
       "extractionState" : "stale",

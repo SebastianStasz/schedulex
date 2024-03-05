@@ -26,22 +26,27 @@ public struct SectionedList<Item: Hashable, RowContent: View>: View {
     private let rowContent: (Int, Item) -> RowContent
     private let separatorHeight: CGFloat
     private let pinnedHeaders: Bool
+    private let bottomInset: CGFloat
 
-    public init(_ sections: [ListSection<Item>], pinnedHeaders: Bool = false, separatorHeight: CGFloat = 1, @ViewBuilder rowContent: @escaping (Int, Item) -> RowContent) {
+    public init(_ sections: [ListSection<Item>], bottomInset: CGFloat = 0, pinnedHeaders: Bool = false, separatorHeight: CGFloat = 1, @ViewBuilder rowContent: @escaping (Int, Item) -> RowContent) {
         self.sections = sections
         self.rowContent = rowContent
+        self.bottomInset = bottomInset
         self.pinnedHeaders = pinnedHeaders
         self.separatorHeight = separatorHeight
     }
 
     public var body: some View {
         ScrollView {
-            LazyVStack(spacing: 0, pinnedViews: pinnedHeaders ? [.sectionHeaders] : []) {
-                ForEach(Array(zip(sections.indices, sections)), id: \.0) { sectionIndex, section in
-                    Section(content: { rowsView(for: section, sectionIndex: sectionIndex) },
-                            header: { headerView(title: section.title) })
-                    .id(sectionIndex)
+            VStack(spacing: 0) {
+                LazyVStack(spacing: 0, pinnedViews: pinnedHeaders ? [.sectionHeaders] : []) {
+                    ForEach(Array(zip(sections.indices, sections)), id: \.0) { sectionIndex, section in
+                        Section(content: { rowsView(for: section, sectionIndex: sectionIndex) },
+                                header: { headerView(title: section.title) })
+                        .id(sectionIndex)
+                    }
                 }
+                .padding(.bottom, bottomInset)
             }
             .padding(.top, .medium)
             .padding(.horizontal, .large)

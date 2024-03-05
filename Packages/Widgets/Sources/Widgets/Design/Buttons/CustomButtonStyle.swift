@@ -9,14 +9,19 @@ import SwiftUI
 
 public enum CustomButtonStyle {
     case appVersionButtonStyle
+    case primaryButtonStyle(isKeyboardVisible: Bool)
 }
 
 public extension Button {
+    @ViewBuilder
     func buttonStyle(_ style: CustomButtonStyle) -> some View {
         switch style {
         case .appVersionButtonStyle:
             let style = AppVersionButtonStyle()
-            return self.buttonStyle(style)
+            self.buttonStyle(style)
+        case let .primaryButtonStyle(isKeyboardVisible):
+            let style = PrimaryButtonStyle(isKeyboardVisible: isKeyboardVisible)
+            self.buttonStyle(style)
         }
     }
 }

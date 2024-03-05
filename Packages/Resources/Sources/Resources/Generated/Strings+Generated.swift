@@ -32,6 +32,16 @@ public enum L10n {
   public static let confirmButton = L10n.tr("Localizable", "confirm_button", fallback: "Confirm")
   /// Continue
   public static let continueButton = L10n.tr("Localizable", "continue_button", fallback: "Continue")
+  /// All subscribed groups are hidden.
+  /// Click "My groups" to manage them.
+  public static let dashboardAllGroupsAreHidden = L10n.tr("Localizable", "dashboard_all_groups_are_hidden", fallback: "All subscribed groups are hidden.\nClick \"My groups\" to manage them.")
+  /// Sorry, an error occurred while downloading the schedule.
+  public static let dashboardFetchingEventsError = L10n.tr("Localizable", "dashboard_fetching_events_error", fallback: "Sorry, an error occurred while downloading the schedule.")
+  /// The groups you follow don't contain any classes. 
+  /// Click "My groups" and add another group.
+  public static let dashboardGroupsHaveNoEvents = L10n.tr("Localizable", "dashboard_groups_have_no_events", fallback: "The groups you follow don't contain any classes. \nClick \"My groups\" and add another group.")
+  /// No events to display
+  public static let dashboardNoEventsToDisplay = L10n.tr("Localizable", "dashboard_no_events_to_display", fallback: "No events to display")
   /// Done
   public static let doneButton = L10n.tr("Localizable", "done_button", fallback: "Done")
   /// Business card
@@ -102,6 +112,8 @@ public enum L10n {
   public static let otherHeader = L10n.tr("Localizable", "other_header", fallback: "Other")
   /// Rate the app
   public static let rateTheApp = L10n.tr("Localizable", "rate_the_app", fallback: "Rate the app")
+  /// Refresh
+  public static let refreshButton = L10n.tr("Localizable", "refresh_button", fallback: "Refresh")
   /// Select color
   public static let selectColor = L10n.tr("Localizable", "select_color", fallback: "Select color")
   /// Selected date
