@@ -10,6 +10,7 @@ import SwiftUI
 import Widgets
 
 struct EventsListRow: View {
+    @State private var animate = false
     let element: EventsListElement
 
     var body: some View {
@@ -27,11 +28,15 @@ struct EventsListRow: View {
                 }
 
                 VStack(spacing: 0) {
-                    Image.icon(element.makeCircleIcon(for: timeline.date))
+                    let icon = element.makeCircleIcon(for: timeline.date)
+                    let shouldAnimate = icon == .doubleCircle
+                    Image.icon(icon)
                         .resizable()
                         .frame(width: 12, height: 12)
                         .padding(.top, element.isFirst ? 0 : 5)
                         .padding(.bottom, 5)
+                        .scaleEffect(shouldAnimate ? (animate ? 1 : 1.2) : 1)
+                        .animation(.easeInOut(duration: 2).repeatForever(autoreverses: true), value: animate)
 
                     Rectangle()
                         .frame(width: 1)
@@ -54,6 +59,7 @@ struct EventsListRow: View {
             }
             .fixedSize(horizontal: false, vertical: true)
         }
+        .onAppear { animate = true }
     }
 }
 
