@@ -19,6 +19,7 @@ public struct PrimaryButtonStyle: ButtonStyle {
     public func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .font(.keyboardButton)
+            .foregroundStyle(Color.white)
             .padding(.vertical, verticalPadding)
             .frame(maxWidth: .infinity)
             .background(backgroundColor)
