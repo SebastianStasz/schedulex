@@ -5,6 +5,7 @@
 //  Created by Sebastian Staszczyk on 16/01/2024.
 //
 
+import MessageUI
 import SwiftUI
 
 final class SettingsStore: RootStore {
@@ -92,7 +93,8 @@ struct SettingsViewModel: ViewModel {
     }
 
     private func presentSendEmailSheet(recipient: String?, appVersion: String?) {
-        guard let emailContent = EmailContent.defaultContact(recipient: recipient, appVersion: appVersion) else {
+        guard MFMailComposeViewController.canSendMail(),
+              let emailContent = EmailContent.defaultContact(recipient: recipient, appVersion: appVersion) else {
             return
         }
         AppDelegate.resetBarButtonItemColor()
