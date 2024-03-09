@@ -15,6 +15,9 @@ struct EventsListRow: View {
 
     var body: some View {
         TimelineView(.periodic(from: .now, by: 1)) { timeline in
+            let icon = element.makeCircleIcon(for: timeline.date)
+            let isEventInProgress = icon == .doubleCircle
+            
             HStack(alignment: .top, spacing: .medium) {
                 VStack(alignment: .leading, spacing: .micro) {
                     let startTime = element.startTime ?? Date.now.formatted(style: .timeOnly)
@@ -28,14 +31,12 @@ struct EventsListRow: View {
                 }
 
                 VStack(spacing: 0) {
-                    let icon = element.makeCircleIcon(for: timeline.date)
-                    let shouldAnimate = icon == .doubleCircle
                     Image.icon(icon)
                         .resizable()
                         .frame(width: 12, height: 12)
                         .padding(.top, element.isFirst ? 0 : 5)
                         .padding(.bottom, 5)
-                        .scaleEffect(shouldAnimate ? (animate ? 1 : 1.2) : 1)
+                        .scaleEffect(isEventInProgress ? (animate ? 1 : 1.2) : 1)
                         .animation(.easeInOut(duration: 2).repeatForever(autoreverses: true), value: animate)
 
                     Rectangle()
@@ -50,7 +51,7 @@ struct EventsListRow: View {
 
                 switch element {
                 case let .event(event, _, isLast):
-                    EventCardView(event: event, currentDate: timeline.date)
+                    EventCardView(event: event, currentDate: timeline.date, isEventInProgress: isEventInProgress)
                         .padding(.bottom, isLast ? 0 : .medium)
                 case let .break(_, _, breakTimeComponents):
                     BreakCardView(breakTimeComponents: breakTimeComponents)

@@ -11,8 +11,11 @@ import SwiftUI
 import Widgets
 
 struct EventCardView: View {
+    @Environment(\.openURL) private var openURL
+
     let event: Event
     let currentDate: Date
+    let isEventInProgress: Bool
 
     var body: some View {
         HStack(spacing: .medium) {
@@ -30,11 +33,13 @@ struct EventCardView: View {
 
                     if !event.isEventTransfer {
                         Text(event.place ?? "", style: .footnote)
+                            .opacity(showTeamsButton ? 0 : 1)
                     }
 
                     HStack(spacing: 0) {
                         Text(event.typeDescription, style: .footnote)
                             .foregroundStyle(event.isEventTransfer ? .red : event.facultyGroupColor.shade2)
+                            .opacity(showTeamsButton ? 0 : 1)
 
                         Spacer()
 
@@ -50,6 +55,7 @@ struct EventCardView: View {
         .padding(.medium)
         .background(event.facultyGroupColor.shade4)
         .clipShape(RoundedRectangle(cornerRadius: 12))
+        .overlay(teamsButton.padding(.medium), alignment: .bottomLeading)
     }
 
     private var status: String? {
@@ -66,12 +72,35 @@ struct EventCardView: View {
             return prefix + description
         }
     }
+
+    private var showTeamsButton: Bool {
+        isEventInProgress && event.teamsUrl != nil
+    }
+
+    @ViewBuilder
+    private var teamsButton: some View {
+        if showTeamsButton, let teamsUrl = event.teamsUrl {
+            HStack(spacing: .small) {
+                Image.teamsLogo
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height: 16)
+
+                Text(L10n.dashboardOpenTeams, style: .footnote)
+                    .foregroundStyle(Color.white)
+            }
+            .padding(.small)
+            .background(Color.black.opacity(0.5))
+            .cornerRadius(.medium)
+            .onTapGesture { openURL(teamsUrl) }
+        }
+    }
 }
 
 #Preview {
     VStack(spacing: .large) {
-        EventCardView(event: .sample, currentDate: .now)
-        EventCardView(event: .eventTransfer, currentDate: .now)
+        EventCardView(event: .sample, currentDate: .now, isEventInProgress: false)
+        EventCardView(event: .eventTransfer, currentDate: .now, isEventInProgress: false)
     }
     .padding(.large)
 }

@@ -11,7 +11,7 @@ import Widgets
 import Resources
 
 struct EventDetailsView: View {
-    @Environment(\.openURL) var openURL
+    @Environment(\.openURL) private var openURL
 
     let event: Event
 

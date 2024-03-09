@@ -28,6 +28,7 @@
 "dashboard_groups_have_no_events" = "The groups you follow don't contain any classes. \nClick \"My groups\" and add another group.";
 "dashboard_no_events_to_display" = "No events to display";
 "dashboard_fetching_events_error" = "Sorry, an error occurred while downloading the schedule.";
+"dashboard_open_teams" = "Open Teams";
 
 // info_cards
 "info_card_enable_notifications_title" = "Don't miss the classes!";

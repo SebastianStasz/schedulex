@@ -28,6 +28,7 @@
 "dashboard_groups_have_no_events" = "Obserwowane grupy nie zawierają żadnych zajęć.\nKliknij \"Moje grupy\" i dodaj inną grupę.";
 "dashboard_no_events_to_display" = "Brak zajęć do wyświetlenia";
 "dashboard_fetching_events_error" = "Przepraszamy, wystąpił błąd podczas pobierania planu zajęć.";
+"dashboard_open_teams" = "Otwórz Teams";
 
 // info_cards
 "info_card_enable_notifications_title" = "Nie przegap zajęć!";
