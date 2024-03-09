@@ -186,6 +186,20 @@ public enum L10n {
   public static let unfollowGroupQuestion = L10n.tr("Localizable", "unfollow_group_question", fallback: "Do you want to unfollow group")
   /// Visible
   public static let visible = L10n.tr("Localizable", "visible", fallback: "Visible")
+  /// FRI
+  public static let weekdayFridayShort = L10n.tr("Localizable", "weekday_friday_short", fallback: "FRI")
+  /// MON
+  public static let weekdayMondayShort = L10n.tr("Localizable", "weekday_monday_short", fallback: "MON")
+  /// SAT
+  public static let weekdaySaturdayShort = L10n.tr("Localizable", "weekday_saturday_short", fallback: "SAT")
+  /// SUN
+  public static let weekdaySundayShort = L10n.tr("Localizable", "weekday_sunday_short", fallback: "SUN")
+  /// THU
+  public static let weekdayThursdayShort = L10n.tr("Localizable", "weekday_thursday_short", fallback: "THU")
+  /// TUE
+  public static let weekdayTuesdayShort = L10n.tr("Localizable", "weekday_tuesday_short", fallback: "TUE")
+  /// WED
+  public static let weekdayWednesdayShort = L10n.tr("Localizable", "weekday_wednesday_short", fallback: "WED")
   /// events
   public static let xEvents = L10n.tr("Localizable", "x_events", fallback: "events")
   /// groups

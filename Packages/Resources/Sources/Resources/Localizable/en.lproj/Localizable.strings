@@ -6,6 +6,15 @@
 "done_button" = "Done";
 "refresh_button" = "Refresh";
 
+// calendar
+"weekday_monday_short" = "MON";
+"weekday_tuesday_short" = "TUE";
+"weekday_wednesday_short" = "WED";
+"weekday_thursday_short" = "THU";
+"weekday_friday_short" = "FRI";
+"weekday_saturday_short" = "SAT";
+"weekday_sunday_short" = "SUN";
+
 // dashboard
 "event_finished" = "Ended";
 "event_finishing_in" = "Ends";
