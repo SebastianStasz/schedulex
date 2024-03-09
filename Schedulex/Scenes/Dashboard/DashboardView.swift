@@ -111,16 +111,7 @@ struct DashboardView: RootView {
                         message: L10n.dashboardGroupsHaveNoEvents,
                         showRefreshButton: true)
         } else if !store.isLoading, store.selectedDateEvents.isEmpty {
-            let isWeekend = NSCalendar.current.isDateInWeekend(store.selectedDate)
-            HStack(spacing: .micro) {
-                Text(isWeekend ? L10n.noEventsWeekendMessage : L10n.noEventsMessage, style: .body)
-                    .foregroundStyle(.grayShade1)
-
-                if isWeekend {
-                    SwiftUI.Text("🍻")
-                        .font(.title)
-                }
-            }
+            DashboardNoEvents(date: store.selectedDate)
         }
     }
 
