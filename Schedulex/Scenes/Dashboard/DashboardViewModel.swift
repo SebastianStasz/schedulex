@@ -52,7 +52,9 @@ struct DashboardViewModel: ViewModel {
         let subscribedFacultyGroups = context.appData.$subscribedFacultyGroups
 
         let setDefaultSelectedDate = { [weak store] in
-            store?.selectedDate = getDefaultSelectedDate(startDate: store?.startDate, endDate: store?.endDate)
+            let dateToSelect = getDefaultSelectedDate(startDate: store?.startDate, endDate: store?.endDate)
+            guard !(store?.selectedDate.isSameDay(as: dateToSelect) ?? true) else { return }
+            store?.selectedDate = dateToSelect
         }
 
         NotificationCenter.didEnterBackground
