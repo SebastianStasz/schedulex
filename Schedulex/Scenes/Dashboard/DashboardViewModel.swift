@@ -128,7 +128,7 @@ struct DashboardViewModel: ViewModel {
             .registerForEventsNotifications(input: classNotificationServiceInput)
             .sinkAndStore(on: store) { _, _ in }
 
-        CombineLatest(store.$selectedDate.dropFirst(), dashboardEventsOutput.eventsToDisplay)
+        CombineLatest(store.$selectedDate, dashboardEventsOutput.eventsToDisplay)
             .map { getSelectedDayEvents(date: $0, events: $1) }
             .assign(to: &store.$selectedDateEvents)
 

@@ -5,6 +5,7 @@
 //  Created by Sebastian Staszczyk on 31/07/2023.
 //
 
+import Domain
 import Resources
 import SwiftUI
 import Widgets
@@ -32,7 +33,7 @@ struct DashboardView: RootView {
                         if store.dayPickerItems != nil {
                             InfoCardsSection(store: store.infoCardsSectionStore)
                         }
-                        EventsList(events: store.selectedDateEvents)
+                        EventsList(events: eventsToDisplay)
                             .padding(.vertical, .medium)
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
@@ -46,6 +47,10 @@ struct DashboardView: RootView {
             .doubleNavigationTitle(title: title, subtitle: subtitle, showBadge: store.showSettingsBadge, openSettings: { store.navigateTo.send(.settings) })
         }
         .sheet(isPresented: $isDatePickerPresented) { datePicker }
+    }
+
+    private var eventsToDisplay: [Event] {
+        store.isLoading ? [] : store.selectedDateEvents
     }
 
     private var title: String {
