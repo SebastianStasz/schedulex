@@ -99,6 +99,11 @@
 "rate_the_app" = "Rate the app";
 "settings_app_version_installed" = "Installed";
 "settings_app_version_update" = "Update";
+"settings_section_header_notifications" = "NOTIFICATIONS";
+"settings_section_header_configuration" = "CONFIGURATION";
+"settings_language_title" = "Language";
+"settings_language_english" = "English";
+"settings_language_polish" = "Polish";
 
 // start_flow
 "start_first_step_title" = "Select groups";

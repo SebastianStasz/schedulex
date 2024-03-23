@@ -99,6 +99,11 @@
 "rate_the_app" = "Oceń aplikację";
 "settings_app_version_installed" = "Zainstalowana";
 "settings_app_version_update" = "Aktualizuj";
+"settings_section_header_notifications" = "POWIADOMIENIA";
+"settings_section_header_configuration" = "KONFIGURACJA";
+"settings_language_title" = "Język";
+"settings_language_english" = "Angielski";
+"settings_language_polish" = "Polski";
 
 // start_flow
 "start_first_step_title" = "Wybierz grupy";

@@ -146,6 +146,12 @@ public enum L10n {
   public static let settingsClassNotificationsTitle = L10n.tr("Localizable", "settings_class_notifications_title", fallback: "Class notifications")
   /// Contact:
   public static let settingsContact = L10n.tr("Localizable", "settings_contact", fallback: "Contact:")
+  /// English
+  public static let settingsLanguageEnglish = L10n.tr("Localizable", "settings_language_english", fallback: "English")
+  /// Polish
+  public static let settingsLanguagePolish = L10n.tr("Localizable", "settings_language_polish", fallback: "Polish")
+  /// Language
+  public static let settingsLanguageTitle = L10n.tr("Localizable", "settings_language_title", fallback: "Language")
   /// Not now
   public static let settingsNotificationsAlertCancel = L10n.tr("Localizable", "settings_notifications_alert_cancel", fallback: "Not now")
   /// Notifications can be enabled from settings on your device.
@@ -154,6 +160,10 @@ public enum L10n {
   public static let settingsNotificationsAlertGoToSettings = L10n.tr("Localizable", "settings_notifications_alert_go_to_settings", fallback: "Go to settings")
   /// Enable notifications
   public static let settingsNotificationsAlertTitle = L10n.tr("Localizable", "settings_notifications_alert_title", fallback: "Enable notifications")
+  /// CONFIGURATION
+  public static let settingsSectionHeaderConfiguration = L10n.tr("Localizable", "settings_section_header_configuration", fallback: "CONFIGURATION")
+  /// NOTIFICATIONS
+  public static let settingsSectionHeaderNotifications = L10n.tr("Localizable", "settings_section_header_notifications", fallback: "NOTIFICATIONS")
   /// Settings
   public static let settingsTitle = L10n.tr("Localizable", "settings_title", fallback: "Settings")
   /// Version:

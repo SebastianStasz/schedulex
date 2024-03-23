@@ -40,14 +40,6 @@ struct ClassNotificationsToggle: View {
             Text(L10n.settingsNotificationsAlertDescription)
         }
     }
-
-    private func openSettings() {
-        if let bundle = Bundle.main.bundleIdentifier,
-           let settings = URL(string: UIApplication.openSettingsURLString + bundle),
-           UIApplication.shared.canOpenURL(settings) {
-            UIApplication.shared.open(settings)
-        }
-    }
 }
 
 #Preview {
