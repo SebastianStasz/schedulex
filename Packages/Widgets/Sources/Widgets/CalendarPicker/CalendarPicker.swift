@@ -41,7 +41,7 @@ public struct CalendarPicker: View {
 
                 Spacer()
 
-                TextButton(L10n.today, action: selectTodaysDate)
+                TextButton(L10n.today, action: onTodaysDateClick)
             }
             .padding(.horizontal, .large)
 
@@ -83,8 +83,12 @@ public struct CalendarPicker: View {
                 .animation(nil)
             }
         }
-        .onChange(of: selectedDate) { selectedMonth = $0.toYearAndMonth() }
         .onAppear { selectedMonth = selectedDate.toYearAndMonth() }
+    }
+
+    private func onTodaysDateClick() {
+        selectTodaysDate()
+        selectedMonth = selectedDate.toYearAndMonth()
     }
 }
 
