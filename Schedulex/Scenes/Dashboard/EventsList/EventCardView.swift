@@ -32,7 +32,7 @@ struct EventCardView: View {
                     Text(event.teacher ?? "", style: .footnote)
 
                     if !event.isEventTransfer {
-                        Text(event.place ?? "", style: .footnote)
+                        Text(event.placeDescription ?? "", style: .footnote)
                             .opacity(showTeamsButton ? 0 : 1)
                     }
 

@@ -29,6 +29,7 @@
 "dashboard_no_events_to_display" = "No events to display";
 "dashboard_fetching_events_error" = "Sorry, an error occurred while downloading the schedule.";
 "dashboard_open_teams" = "Open Teams";
+"event_place_remote_classes" = "remote classes";
 
 // info_cards
 "info_card_enable_notifications_title" = "Don't miss the classes!";

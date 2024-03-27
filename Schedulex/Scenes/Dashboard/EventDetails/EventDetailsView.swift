@@ -28,7 +28,7 @@ struct EventDetailsView: View {
 
             VStack(alignment: .leading, spacing: .medium) {
                 line(title: event.teacher ?? "", icon: .person)
-                line(title: event.place ?? "", icon: .building)
+                line(title: event.placeDescription ?? "", icon: .building)
                 line(title: event.type ?? "", icon: .paperPlane)
             }
 

@@ -29,6 +29,7 @@
 "dashboard_no_events_to_display" = "Brak zajęć do wyświetlenia";
 "dashboard_fetching_events_error" = "Przepraszamy, wystąpił błąd podczas pobierania planu zajęć.";
 "dashboard_open_teams" = "Otwórz Teams";
+"event_place_remote_classes" = "zajęcia zdalne";
 
 // info_cards
 "info_card_enable_notifications_title" = "Nie przegap zajęć!";
