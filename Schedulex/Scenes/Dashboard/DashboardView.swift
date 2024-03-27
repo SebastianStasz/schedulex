@@ -32,9 +32,10 @@ struct DashboardView: RootView {
                     LazyVStack(spacing: .medium) {
                         if store.dayPickerItems != nil {
                             InfoCardsSection(store: store.infoCardsSectionStore)
+                            
+                            EventsList(events: eventsToDisplay)
+                                .padding(.vertical, .medium)
                         }
-                        EventsList(events: eventsToDisplay)
-                            .padding(.vertical, .medium)
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
                     .padding(.medium)
@@ -50,7 +51,8 @@ struct DashboardView: RootView {
     }
 
     private var eventsToDisplay: [Event] {
-        store.isLoading ? [] : store.selectedDateEvents
+        let shouldDisplayEvents = !store.showErrorInfo
+        return shouldDisplayEvents ? store.selectedDateEvents : []
     }
 
     private var title: String {
