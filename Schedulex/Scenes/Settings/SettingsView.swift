@@ -13,39 +13,41 @@ struct SettingsView: RootView {
     @ObservedObject var store: SettingsStore
 
     var rootBody: some View {
-        VStack(spacing: 40) {
-            SettingsAppInformationsSection(appVersion: store.appVersion, contactMail: store.contactMail, isUpdateAvailable: store.isUpdateAvailable, sendEmailAction: store.presentSendEmailSheet)
-
-            VStack(spacing: .medium) {
-                sectionHeader(L10n.settingsSectionHeaderNotifications)
+        ScrollView {
+            VStack(spacing: 40) {
+                SettingsAppInformationsSection(appVersion: store.appVersion, contactMail: store.contactMail, isUpdateAvailable: store.isUpdateAvailable, sendEmailAction: store.presentSendEmailSheet)
                 
-                ClassNotificationsToggle(areNotificationsEnabled: store.notificationsToggle, classNotificationsTime: $store.classNotificationsTime, isEnableNotificationsAlertPresented: $store.isEnableNotificationsAlertPresented)
-            }
-
-            VStack(spacing: .medium) {
-                sectionHeader(L10n.settingsSectionHeaderConfiguration)
-
-                VStack(spacing: .large) {
-                    MenuPicker(title: L10n.settingsAppThemeTitle, options: AppColorScheme.allCases, selectedOption: $store.appColorScheme)
+                VStack(spacing: .medium) {
+                    sectionHeader(L10n.settingsSectionHeaderNotifications)
                     
-                    Separator()
-
-                    HStack(spacing: .micro) {
-                        Text(L10n.settingsLanguageTitle, style: .body)
-                            .foregroundStyle(.textPrimary)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-
-                        Text(store.appLanguage?.name ?? "", style: .body)
-                            .foregroundStyle(.accentPrimary)
-                            .contentShape(Rectangle())
-                            .onTapGesture(perform: openSettings)
-                    }
+                    ClassNotificationsToggle(areNotificationsEnabled: store.notificationsToggle, classNotificationsTime: $store.classNotificationsTime, isEnableNotificationsAlertPresented: $store.isEnableNotificationsAlertPresented)
                 }
-                .card()
+                
+                VStack(spacing: .medium) {
+                    sectionHeader(L10n.settingsSectionHeaderConfiguration)
+                    
+                    VStack(spacing: .large) {
+                        MenuPicker(title: L10n.settingsAppThemeTitle, options: AppColorScheme.allCases, selectedOption: $store.appColorScheme)
+                        
+                        Separator()
+                        
+                        HStack(spacing: .micro) {
+                            Text(L10n.settingsLanguageTitle, style: .body)
+                                .foregroundStyle(.textPrimary)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                            
+                            Text(store.appLanguage?.name ?? "", style: .body)
+                                .foregroundStyle(.accentPrimary)
+                                .contentShape(Rectangle())
+                                .onTapGesture(perform: openSettings)
+                        }
+                    }
+                    .card()
+                }
             }
+            .frame(maxHeight: .infinity, alignment: .top)
+            .padding(.large)
         }
-        .frame(maxHeight: .infinity, alignment: .top)
-        .padding(.large)
     }
 
     private func sectionHeader(_ title: String) -> some View {
