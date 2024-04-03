@@ -15,6 +15,10 @@ final class SendEmailViewController: MFMailComposeViewController, MFMailComposeV
         mailComposeDelegate = self
         setToRecipients([emailContent.recipient])
         setSubject(emailContent.subject)
+        
+        if let body = emailContent.body {
+            setMessageBody(body, isHTML: false)
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {

@@ -5,6 +5,7 @@
 //  Created by Sebastian Staszczyk on 16/01/2024.
 //
 
+import Domain
 import MessageUI
 import SwiftUI
 
@@ -88,15 +89,15 @@ struct SettingsViewModel: ViewModel {
             .sink {}.store(in: &store.cancellables)
 
         store.presentSendEmailSheet = { [weak store] in
-            presentSendEmailSheet(recipient: store?.contactMail, appVersion: store?.appVersion)
+            presentSendEmailSheet(recipient: store?.contactMail, appVersion: store?.appVersion, facultyGroups: context.appData.subscribedFacultyGroups)
         }
 
         return store
     }
 
-    private func presentSendEmailSheet(recipient: String?, appVersion: String?) {
+    private func presentSendEmailSheet(recipient: String?, appVersion: String?, facultyGroups: [FacultyGroup]) {
         guard MFMailComposeViewController.canSendMail(),
-              let emailContent = EmailContent.defaultContact(recipient: recipient, appVersion: appVersion) else {
+              let emailContent = EmailContent.defaultContact(recipient: recipient, appVersion: appVersion, facultyGroups: facultyGroups) else {
             return
         }
         AppDelegate.resetBarButtonItemColor()
