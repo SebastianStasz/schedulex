@@ -11,15 +11,17 @@ public struct DayPickerItem: Hashable, Identifiable {
     public let id = UUID()
     public let date: Date
     let circleColors: [Color]
+    let hasFreeHours: Bool
     let isSelectable: Bool
 
     var isToday: Bool {
         date.isSameDay(as: .now)
     }
 
-    public init(date: Date, circleColors: [Color] = [], isSelectable: Bool = true) {
+    public init(date: Date, circleColors: [Color] = [], hasFreeHours: Bool = false, isSelectable: Bool = true) {
         self.date = date
         self.circleColors = circleColors
+        self.hasFreeHours = hasFreeHours
         self.isSelectable = isSelectable
     }
 }

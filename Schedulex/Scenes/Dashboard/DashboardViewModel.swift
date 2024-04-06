@@ -16,6 +16,7 @@ final class DashboardStore: RootStore {
     @Published var dayPickerItems: [DayPickerItem]?
     let infoCardsSectionStore: InfoCardsSectionStore
 
+    @Published fileprivate(set) var dayOff: DayOff?
     @Published fileprivate(set) var selectedDateEvents: [Event] = []
     @Published fileprivate(set) var showInfoToUnhideFacultyGroups = false
     @Published fileprivate(set) var showDashboardSwipeTip = false
@@ -51,6 +52,7 @@ struct DashboardViewModel: ViewModel {
         let viewWillEnterForeground = NotificationCenter.willEnterForeground
         let viewWillAppearOrWillEnterForeground = Merge(store.viewWillAppear, viewWillEnterForeground)
         let subscribedFacultyGroups = context.appData.$subscribedFacultyGroups
+        let daysOff = context.storage.appConfiguration.map { $0.daysOff }
 
         let setDefaultSelectedDate = { [weak store] in
             let dateToSelect = getDefaultSelectedDate(startDate: store?.startDate, endDate: store?.endDate)
@@ -88,7 +90,8 @@ struct DashboardViewModel: ViewModel {
         let dashboardEventsOutput = DashboardEventsViewModel()
             .makeOutput(input:. init(fetchEvents: viewWillAppearOrWillEnterForeground.asDriver(),
                                      forceRefresh: store.refresh.asDriver(), 
-                                     facultyGroups: subscribedFacultyGroups.asDriver(),
+                                     facultyGroups: subscribedFacultyGroups.asDriver(), 
+                                     daysOff: daysOff.asDriver(),
                                      hiddenClasses: context.appData.$allHiddenClasses.asDriver()))
 
         dashboardEventsOutput.isLoading
@@ -135,6 +138,10 @@ struct DashboardViewModel: ViewModel {
         CombineLatest(store.$selectedDate, dashboardEventsOutput.eventsToDisplay)
             .map { getSelectedDayEvents(date: $0, events: $1) }
             .assign(to: &store.$selectedDateEvents)
+
+        CombineLatest(store.$selectedDate, daysOff)
+            .map { date, daysOff in daysOff.first(where: { $0.date.isSameDay(as: date) }) }
+            .assign(to: &store.$dayOff)
 
         context.storage.appConfiguration
             .sinkAndStore(on: store) { $0.showSettingsBadge = $1.isAppUpdateAvailable }

@@ -16,6 +16,7 @@ struct EventCardView: View {
     let event: Event
     let currentDate: Date
     let isEventInProgress: Bool
+    let isCancelled: Bool
 
     var body: some View {
         HStack(spacing: .medium) {
@@ -31,19 +32,19 @@ struct EventCardView: View {
                 VStack(alignment: .leading, spacing: .micro) {
                     Text(event.teacher ?? "", style: .footnote)
 
-                    if !event.isEventTransfer {
+                    if !event.isEventTransfer, !isCancelled {
                         Text(event.placeDescription ?? "", style: .footnote)
                             .opacity(showTeamsButton ? 0 : 1)
                     }
 
                     HStack(spacing: 0) {
-                        Text(event.typeDescription, style: .footnote)
-                            .foregroundStyle(event.isEventTransfer ? .red : event.facultyGroupColor.shade2)
+                        Text(eventDescription, style: .footnote)
+                            .foregroundStyle(event.isEventTransfer || isCancelled ? .red : event.facultyGroupColor.shade2)
                             .opacity(showTeamsButton ? 0 : 1)
 
                         Spacer()
 
-                        if let status, !event.isEventTransfer {
+                        if let status, !event.isEventTransfer, !isCancelled {
                             Text(status, style: .footnote)
                         }
                     }
@@ -56,6 +57,11 @@ struct EventCardView: View {
         .background(event.facultyGroupColor.shade4)
         .clipShape(RoundedRectangle(cornerRadius: 12))
         .overlay(teamsButton.padding(.medium), alignment: .bottomLeading)
+    }
+
+    private var eventDescription: String {
+        guard !event.isEventTransfer else { return event.typeDescription }
+        return isCancelled ? L10n.eventCancelled : event.typeDescription
     }
 
     private var status: String? {
@@ -99,8 +105,8 @@ struct EventCardView: View {
 
 #Preview {
     VStack(spacing: .large) {
-        EventCardView(event: .sample, currentDate: .now, isEventInProgress: false)
-        EventCardView(event: .eventTransfer, currentDate: .now, isEventInProgress: false)
+        EventCardView(event: .sample, currentDate: .now, isEventInProgress: false, isCancelled: false)
+        EventCardView(event: .eventTransfer, currentDate: .now, isEventInProgress: false, isCancelled: false)
     }
     .padding(.large)
 }

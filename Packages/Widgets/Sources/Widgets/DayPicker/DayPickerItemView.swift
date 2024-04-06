@@ -26,7 +26,8 @@ struct DayPickerItemView: View {
             .background(backgroundColor)
             .overlay(border)
             .clipShape(RoundedRectangle(cornerRadius: 12))
-            
+            .overlay(hasFreeHoursBadge, alignment: .bottom)
+
             HStack(spacing: 5) {
                 ForEach(item.circleColors.prefix(4), id: \.self) { color in
                     Circle()
@@ -36,6 +37,19 @@ struct DayPickerItemView: View {
             }
         }
         .frame(maxHeight: .infinity ,alignment: .top)
+    }
+
+    @ViewBuilder
+    private var hasFreeHoursBadge: some View {
+        if item.hasFreeHours {
+            Image.icon(.freeHoursCircleFill)
+                .resizable()
+                .scaledToFit()
+                .frame(height: .large)
+                .offset(y: 6)
+                .symbolRenderingMode(.palette)
+                .foregroundStyle(Color.backgroundPrimary, Color.textPrimary)
+        }
     }
 
     private var border: some View {
@@ -76,6 +90,10 @@ struct DayPickerItemView: View {
         DayPickerItemView(item: DayPickerItem(date: .now), isSelected: false, isToday: true)
         DayPickerItemView(item: DayPickerItem(date: .now), isSelected: true, isToday: false)
         DayPickerItemView(item: DayPickerItem(date: .now), isSelected: true, isToday: true)
+        DayPickerItemView(item: DayPickerItem(date: .now, circleColors: [.blueShade3, .yellowShade3]), isSelected: true, isToday: true)
+        DayPickerItemView(item: DayPickerItem(date: .now, circleColors: [.blueShade3, .yellowShade3], hasFreeHours: true), isSelected: true, isToday: true)
     }
     .frame(width: 65)
+    .padding(.horizontal, 60)
+    .background(.backgroundSecondary)
 }

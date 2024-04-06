@@ -14,6 +14,8 @@ public enum L10n {
   public static let addGroup = L10n.tr("Localizable", "add_group", fallback: "Add group")
   /// Add to observed
   public static let addToObserved = L10n.tr("Localizable", "add_to_observed", fallback: "Add to observed")
+  /// All classes canceled
+  public static let allEventsCancelled = L10n.tr("Localizable", "all_events_cancelled", fallback: "All classes canceled")
   /// h.
   public static let breakCardTimeSuffix = L10n.tr("Localizable", "break_card_time_suffix", fallback: "h.")
   /// Break
@@ -46,6 +48,8 @@ public enum L10n {
   public static let dashboardOpenTeams = L10n.tr("Localizable", "dashboard_open_teams", fallback: "Open Teams")
   /// Done
   public static let doneButton = L10n.tr("Localizable", "done_button", fallback: "Done")
+  /// Class cancelled
+  public static let eventCancelled = L10n.tr("Localizable", "event_cancelled", fallback: "Class cancelled")
   /// Business card
   public static let eventDetailsBusinessCard = L10n.tr("Localizable", "event_details_business_card", fallback: "Business card")
   /// Link to class
@@ -64,6 +68,8 @@ public enum L10n {
   public static let eventPlaceRemoteClasses = L10n.tr("Localizable", "event_place_remote_classes", fallback: "remote classes")
   /// Events
   public static let events = L10n.tr("Localizable", "events", fallback: "Events")
+  /// Classes canceled between
+  public static let eventsCancelledBetweenHours = L10n.tr("Localizable", "events_cancelled_between_hours", fallback: "Classes canceled between")
   /// Faculties
   public static let faculties = L10n.tr("Localizable", "faculties", fallback: "Faculties")
   /// Faculty or group

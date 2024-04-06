@@ -32,8 +32,12 @@ struct DashboardView: RootView {
                     LazyVStack(spacing: .medium) {
                         if store.dayPickerItems != nil {
                             InfoCardsSection(store: store.infoCardsSectionStore)
-                            
-                            EventsList(events: eventsToDisplay)
+
+                            if let dayOff = store.dayOff {
+                                DashboardEventsCancelled(dayOff: dayOff)
+                            }
+
+                            EventsList(events: eventsToDisplay, dayOff: store.dayOff)
                                 .padding(.vertical, .medium)
                         }
                     }

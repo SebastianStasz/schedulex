@@ -10,6 +10,7 @@ import Foundation
 public struct AppConfiguration: Codable {
     public let latestAppVersion: String
     public let contactMail: String
+    public let daysOff: [DayOff]
 
     public var currentAppVersion: String? {
         let dictionary = Bundle.main.infoDictionary
@@ -20,5 +21,5 @@ public struct AppConfiguration: Codable {
         latestAppVersion != currentAppVersion
     }
 
-    public static let defaultConfiguration = AppConfiguration(latestAppVersion: "", contactMail: "")
+    public static let defaultConfiguration = AppConfiguration(latestAppVersion: "", contactMail: "", daysOff: [])
 }

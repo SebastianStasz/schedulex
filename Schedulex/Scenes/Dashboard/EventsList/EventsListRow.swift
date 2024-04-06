@@ -50,8 +50,8 @@ struct EventsListRow: View {
                 .foregroundStyle(.accentPrimary)
 
                 switch element {
-                case let .event(event, _, isLast):
-                    EventCardView(event: event, currentDate: timeline.date, isEventInProgress: isEventInProgress)
+                case let .event(event, _, isLast, _):
+                    EventCardView(event: event, currentDate: timeline.date, isEventInProgress: isEventInProgress, isCancelled: element.isCancelled)
                         .padding(.bottom, isLast ? 0 : .medium)
                 case let .break(_, _, breakTimeComponents):
                     BreakCardView(breakTimeComponents: breakTimeComponents)
@@ -66,7 +66,7 @@ struct EventsListRow: View {
 
 #Preview {
     VStack(spacing: .large) {
-        EventsListRow(element: .event(.sample, isFirst: true, isLast: true))
+        EventsListRow(element: .event(.sample, isFirst: true, isLast: true, dayOff: nil))
         EventsListRow(element: .break(from: .now, to: .now, timeComponents: DateComponents(hour: 1, minute: 45)))
     }
     .padding(.medium)

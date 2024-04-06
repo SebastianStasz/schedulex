@@ -30,6 +30,9 @@
 "dashboard_fetching_events_error" = "Sorry, an error occurred while downloading the schedule.";
 "dashboard_open_teams" = "Open Teams";
 "event_place_remote_classes" = "remote classes";
+"event_cancelled" = "Class cancelled";
+"all_events_cancelled" = "All classes canceled";
+"events_cancelled_between_hours" = "Classes canceled between";
 
 // info_cards
 "info_card_enable_notifications_title" = "Don't miss the classes!";

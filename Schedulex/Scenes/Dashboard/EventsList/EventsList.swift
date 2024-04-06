@@ -12,6 +12,7 @@ import Widgets
 struct EventsList: View {
     @State private var selectedEvent: Event?
     let events: [Event]
+    let dayOff: DayOff?
 
     var body: some View {
         VStack(spacing: 0) {
@@ -21,7 +22,7 @@ struct EventsList: View {
                 let isFirst = events.first == event
                 let isLast = events.last == event
 
-                EventsListRow(element: .event(event, isFirst: isFirst, isLast: isLast))
+                EventsListRow(element: .event(event, isFirst: isFirst, isLast: isLast, dayOff: dayOff))
                     .onTapGesture { selectedEvent = event }
 
                 if let nextEvent,
@@ -44,6 +45,6 @@ struct EventsList: View {
 }
 
 #Preview {
-    EventsList(events: [.sample])
+    EventsList(events: [.sample], dayOff: nil)
         .padding(.horizontal, .large)
 }

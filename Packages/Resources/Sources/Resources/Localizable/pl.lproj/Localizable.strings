@@ -30,6 +30,9 @@
 "dashboard_fetching_events_error" = "Przepraszamy, wystąpił błąd podczas pobierania planu zajęć.";
 "dashboard_open_teams" = "Otwórz Teams";
 "event_place_remote_classes" = "zajęcia zdalne";
+"event_cancelled" = "Godziny rektorskie";
+"all_events_cancelled" = "Całodniowe godziny rektorskie";
+"events_cancelled_between_hours" = "Godziny rektorskie pomiędzy";
 
 // info_cards
 "info_card_enable_notifications_title" = "Nie przegap zajęć!";
