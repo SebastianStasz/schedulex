@@ -10,6 +10,6 @@ import Resources
 
 extension Event {
     var placeDescription: String? {
-        place == "link do zajęć" ? L10n.eventPlaceRemoteClasses : place
+        isRemoteClass ? L10n.eventPlaceRemoteClasses : place
     }
 }

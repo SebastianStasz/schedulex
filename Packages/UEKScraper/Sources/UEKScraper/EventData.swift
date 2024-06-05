@@ -37,6 +37,10 @@ struct EventData {
         teacher != "Studencki Uek Parlament" && type != "rezerwacja" && type != "Przeniesienie zajęć"
     }
 
+    private var isRemoteClass: Bool {
+        place == "link do zajęć"
+    }
+
     var isEventTransfer: Bool {
         type == "Przeniesienie zajęć"
     }
@@ -47,7 +51,7 @@ struct EventData {
 
     func toEvent(facultyGroup: FacultyGroup, datesDecoder: DatesDecoder) -> Event {
         let dates = datesDecoder.getDates(date: date, time: time)
-        return Event(facultyGroupName: facultyGroup.name, facultyGroupColor: facultyGroup.color, isEventTransfer: isEventTransfer, eventTransferNote: eventTransferNote, startDate: dates.0, endDate: dates.1, name: name, place: place, teacher: teacher, teacherProfileUrl: teacherProfileUrl, teamsUrl: teamsUrl, type: type)
+        return Event(facultyGroupName: facultyGroup.name, facultyGroupColor: facultyGroup.color, isEventTransfer: isEventTransfer, isRemoteClass: isRemoteClass, eventTransferNote: eventTransferNote, startDate: dates.0, endDate: dates.1, name: name, place: place, teacher: teacher, teacherProfileUrl: teacherProfileUrl, teamsUrl: teamsUrl, type: type)
     }
 
     func toFacultyGroupClass() -> FacultyGroupClass? {

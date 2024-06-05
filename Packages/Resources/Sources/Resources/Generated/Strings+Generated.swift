@@ -64,8 +64,8 @@ public enum L10n {
     public static let eventNotificationSubtitlePrefix = L10n.tr("Localizable", "event_notification_subtitle_prefix", fallback: "In")
     /// UEK Schedule event
     public static let eventNotificationTitle = L10n.tr("Localizable", "event_notification_title", fallback: "UEK Schedule event")
-    /// remote classes
-    public static let eventPlaceRemoteClasses = L10n.tr("Localizable", "event_place_remote_classes", fallback: "remote classes")
+    /// remote class
+    public static let eventPlaceRemoteClasses = L10n.tr("Localizable", "event_place_remote_classes", fallback: "remote class")
     /// Events
     public static let events = L10n.tr("Localizable", "events", fallback: "Events")
     /// Classes canceled between

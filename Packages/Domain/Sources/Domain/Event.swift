@@ -11,6 +11,7 @@ public struct Event: Hashable, Identifiable {
     public let facultyGroupName: String
     public let facultyGroupColor: FacultyGroupColor
     public let isEventTransfer: Bool
+    public let isRemoteClass: Bool
     public let eventTransferNote: String?
     public let startDate: Date?
     public let endDate: Date?
@@ -25,10 +26,24 @@ public struct Event: Hashable, Identifiable {
         hashValue
     }
 
-    public init(facultyGroupName: String, facultyGroupColor: FacultyGroupColor, isEventTransfer: Bool, eventTransferNote: String?, startDate: Date?, endDate: Date?, name: String?, place: String?, teacher: String?, teacherProfileUrl: URL?, teamsUrl: URL?, type: String?) {
+    public init(facultyGroupName: String,
+                facultyGroupColor: FacultyGroupColor,
+                isEventTransfer: Bool,
+                isRemoteClass: Bool,
+                eventTransferNote: String?,
+                startDate: Date?,
+                endDate: Date?,
+                name: String?,
+                place: String?,
+                teacher: String?,
+                teacherProfileUrl: URL?,
+                teamsUrl: URL?,
+                type: String?)
+    {
         self.facultyGroupName = facultyGroupName
         self.facultyGroupColor = facultyGroupColor
         self.isEventTransfer = isEventTransfer
+        self.isRemoteClass = isRemoteClass
         self.eventTransferNote = eventTransferNote
         self.startDate = startDate
         self.endDate = endDate
