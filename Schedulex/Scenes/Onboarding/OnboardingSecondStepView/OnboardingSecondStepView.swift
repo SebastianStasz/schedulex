@@ -6,9 +6,9 @@
 //
 
 import Resources
+import SchedulexViewModel
 import SwiftUI
 import Widgets
-import SchedulexViewModel
 
 struct OnboardingSecondStepView: RootView {
     @State private var isSearchFocused = false

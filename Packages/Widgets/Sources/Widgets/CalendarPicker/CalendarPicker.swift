@@ -5,8 +5,8 @@
 //  Created by Sebastian Staszczyk on 10/11/2023.
 //
 
-import SwiftUI
 import Resources
+import SwiftUI
 
 public struct CalendarPicker: View {
     private let items: [DayPickerItem]
@@ -34,7 +34,7 @@ public struct CalendarPicker: View {
     }
 
     public var body: some View {
-        VStack(spacing: .large) { 
+        VStack(spacing: .large) {
             HStack(spacing: 0) {
                 SwiftUI.Text(selectedMonth.date.formatted(.dateTime.month(.wide).year()))
                     .font(.headline)
@@ -60,7 +60,7 @@ public struct CalendarPicker: View {
                 TabView(selection: $selectedMonth) {
                     ForEach(months) { month in
                         LazyVGrid(columns: rows, spacing: .micro) {
-                            ForEach(0..<month.daysOffset, id: \.self) { _ in
+                            ForEach(0 ..< month.daysOffset, id: \.self) { _ in
                                 Color.clear
                             }
 

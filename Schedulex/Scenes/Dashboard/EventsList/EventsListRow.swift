@@ -17,7 +17,7 @@ struct EventsListRow: View {
         TimelineView(.periodic(from: .now, by: 1)) { timeline in
             let icon = element.makeCircleIcon(for: timeline.date)
             let isEventInProgress = icon == .doubleCircle
-            
+
             HStack(alignment: .top, spacing: .medium) {
                 VStack(alignment: .leading, spacing: .micro) {
                     let startTime = element.startTime ?? Date.now.formatted(style: .timeOnly)

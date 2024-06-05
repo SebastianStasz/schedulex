@@ -5,11 +5,11 @@
 //  Created by Sebastian Staszczyk on 30/11/2023.
 //
 
+import Resources
+import SchedulexCore
+import SchedulexViewModel
 import SwiftUI
 import Widgets
-import Resources
-import SchedulexViewModel
-import SchedulexCore
 
 struct SettingsView: RootView {
     @ObservedObject var store: SettingsStore
@@ -18,26 +18,26 @@ struct SettingsView: RootView {
         ScrollView {
             VStack(spacing: 40) {
                 SettingsAppInformationsSection(appVersion: store.appVersion, contactMail: store.contactMail, isUpdateAvailable: store.isUpdateAvailable, sendEmailAction: store.presentSendEmailSheet)
-                
+
                 VStack(spacing: .medium) {
                     sectionHeader(L10n.settingsSectionHeaderNotifications)
-                    
+
                     ClassNotificationsToggle(areNotificationsEnabled: store.notificationsToggle, classNotificationsTime: $store.classNotificationsTime, isEnableNotificationsAlertPresented: $store.isEnableNotificationsAlertPresented)
                 }
-                
+
                 VStack(spacing: .medium) {
                     sectionHeader(L10n.settingsSectionHeaderConfiguration)
-                    
+
                     VStack(spacing: .large) {
                         MenuPicker(title: L10n.settingsAppThemeTitle, options: AppColorScheme.allCases, selectedOption: $store.appColorScheme)
-                        
+
                         Separator()
-                        
+
                         HStack(spacing: .micro) {
                             Text(L10n.settingsLanguageTitle, style: .body)
                                 .foregroundStyle(.textPrimary)
                                 .frame(maxWidth: .infinity, alignment: .leading)
-                            
+
                             Text(store.appLanguage?.name ?? "", style: .body)
                                 .foregroundStyle(.accentPrimary)
                                 .contentShape(Rectangle())

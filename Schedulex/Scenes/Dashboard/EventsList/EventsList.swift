@@ -28,7 +28,8 @@ struct EventsList: View {
                 if let nextEvent,
                    let startDate = event.endDate,
                    let endDate = nextEvent.startDate,
-                   let breakTimeComponents = getBreakTimeComponents(startDate: startDate, endDate: endDate) {
+                   let breakTimeComponents = getBreakTimeComponents(startDate: startDate, endDate: endDate)
+                {
                     EventsListRow(element: .break(from: startDate, to: endDate, timeComponents: breakTimeComponents))
                 }
             }

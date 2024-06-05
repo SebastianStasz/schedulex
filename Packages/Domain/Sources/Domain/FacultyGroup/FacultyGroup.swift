@@ -37,11 +37,11 @@ public struct FacultyGroup: Identifiable, Hashable, Codable {
 }
 
 extension FacultyGroup: Equatable {
-    public static func ==(lhs: FacultyGroup, rhs: FacultyGroup) -> Bool {
+    public static func == (lhs: FacultyGroup, rhs: FacultyGroup) -> Bool {
         lhs.name == rhs.name &&
-        lhs.facultyDocument == rhs.facultyDocument &&
-        lhs.facultyUrl == rhs.facultyUrl &&
-        lhs.isHidden == rhs.isHidden &&
-        lhs.color == rhs.color
+            lhs.facultyDocument == rhs.facultyDocument &&
+            lhs.facultyUrl == rhs.facultyUrl &&
+            lhs.isHidden == rhs.isHidden &&
+            lhs.color == rhs.color
     }
 }

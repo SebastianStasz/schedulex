@@ -5,9 +5,9 @@
 //  Created by Sebastian Staszczyk on 24/12/2023.
 //
 
+import Resources
 import SwiftUI
 import Widgets
-import Resources
 
 struct BreakCardView: View {
     let breakTimeComponents: DateComponents

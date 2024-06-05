@@ -24,14 +24,14 @@ struct CalendarPickerMonth: Identifiable {
         var days: [DayPickerItem] = dayPickerItems
 
         if let firstDay = days.first?.date.day, firstDay > 1 {
-            let nonSelectableDays: [DayPickerItem] = (1..<firstDay).compactMap {
+            let nonSelectableDays: [DayPickerItem] = (1 ..< firstDay).compactMap {
                 makeDayPickerItem(for: $0)
             }
             days.insert(contentsOf: nonSelectableDays, at: 0)
         }
         if let lastDay = days.last, lastDay.date.day < yearAndMonth.numberOfDaysInMonth {
             let firstMissingDay = lastDay.date.day + 1
-            let nonSelectableDays: [DayPickerItem] = (firstMissingDay..<yearAndMonth.numberOfDaysInMonth).compactMap {
+            let nonSelectableDays: [DayPickerItem] = (firstMissingDay ..< yearAndMonth.numberOfDaysInMonth).compactMap {
                 makeDayPickerItem(for: $0)
             }
             days.append(contentsOf: nonSelectableDays)

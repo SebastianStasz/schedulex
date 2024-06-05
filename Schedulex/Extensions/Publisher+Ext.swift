@@ -101,7 +101,7 @@ extension Publisher {
     }
 
     func onNext<T: AnyObject>(on object: T, perform: @escaping (T, Output) -> Void) -> AnyPublisher<Output, Failure> {
-        handleEvents(receiveOutput:  { [weak object] output in
+        handleEvents(receiveOutput: { [weak object] output in
             guard let object = object else { return }
             perform(object, output)
         })
@@ -109,7 +109,7 @@ extension Publisher {
     }
 
     func onNext<T: AnyObject>(on object: T, perform: @escaping (T) -> Void) -> AnyPublisher<Output, Failure> where Output == Void {
-        handleEvents(receiveOutput:  { [weak object] output in
+        handleEvents(receiveOutput: { [weak object] _ in
             guard let object = object else { return }
             perform(object)
         })
@@ -192,7 +192,7 @@ extension Publisher {
     /// The first time the upstream publisher emits an element, the previous element will be `nil`.
     /// - Returns: A publisher of a tuple of the previous and current elements from the upstream publisher.
     func withPrevious() -> AnyPublisher<(previous: Output?, current: Output), Failure> {
-        scan(Optional<(Output?, Output)>.none) { ($0?.1, $1) }
+        scan((Output?, Output)?.none) { ($0?.1, $1) }
             .compactMap { $0 }
             .eraseToAnyPublisher()
     }

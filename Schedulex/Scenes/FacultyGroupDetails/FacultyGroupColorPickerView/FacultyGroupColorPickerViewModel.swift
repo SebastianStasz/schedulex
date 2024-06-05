@@ -6,9 +6,9 @@
 //
 
 import Domain
-import UIKit
-import SchedulexViewModel
 import SchedulexCore
+import SchedulexViewModel
+import UIKit
 
 final class FacultyGroupColorPickerStore: RootStore {
     let facultyGroup: FacultyGroup

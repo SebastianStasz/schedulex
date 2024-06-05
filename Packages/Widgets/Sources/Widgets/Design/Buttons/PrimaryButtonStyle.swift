@@ -9,7 +9,7 @@ import SwiftUI
 
 public struct PrimaryButtonStyle: ButtonStyle {
     @Environment(\.isEnabled) private var isEnabled
-    
+
     private let isKeyboardVisible: Bool
 
     public init(isKeyboardVisible: Bool) {

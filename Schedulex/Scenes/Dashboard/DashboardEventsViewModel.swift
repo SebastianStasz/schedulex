@@ -8,9 +8,9 @@
 import Combine
 import Domain
 import Foundation
-import Widgets
-import UEKScraper
 import SchedulexCore
+import UEKScraper
+import Widgets
 
 struct DashboardEventsViewModel {
     struct Input {
@@ -68,7 +68,7 @@ struct DashboardEventsViewModel {
         return Output(dayPickerItems: dayPickerItems.asDriver(),
                       facultiesGroupsDetails: allFacultiesGroupsDetails.asDriver(),
                       eventsToDisplay: eventsToDisplay.asDriver(),
-                      isLoading: isLoading.asDriver(), 
+                      isLoading: isLoading.asDriver(),
                       errorTracker: errorHandler.asDriver())
     }
 
@@ -108,7 +108,7 @@ private extension [FacultyGroupDetails] {
 private extension [Event] {
     func mapToDayPickerItems(daysOff: [DayOff]) -> [DayPickerItem]? {
         let eventsByDate = sorted(by: { $0.startDate! < $1.startDate! })
-        
+
         guard let startDate = eventsByDate.first?.startDate,
               let endDate = eventsByDate.last?.startDate
         else { return nil }
@@ -116,7 +116,7 @@ private extension [Event] {
         let stopDate = Calendar.current.date(byAdding: .day, value: 1, to: endDate)!
         var dates: [Date] = []
         var date = startDate
-        
+
         while date < stopDate {
             dates.append(date)
             date = Calendar.current.date(byAdding: .day, value: 1, to: date)!
@@ -150,7 +150,8 @@ public extension Publisher {
     ///             specified result selector function.
     func withLatestFrom<Other: Publisher, Result>(_ other: Other,
                                                   resultSelector: @escaping (Output, Other.Output) -> Result)
-    -> Publishers.WithLatestFrom<Self, Other, Result> {
+        -> Publishers.WithLatestFrom<Self, Other, Result>
+    {
         return .init(upstream: self, second: other, resultSelector: resultSelector)
     }
 
@@ -161,16 +162,19 @@ public extension Publisher {
     ///
     ///  - returns: A publisher containing the latest value from the second publisher, if any.
     func withLatestFrom<Other: Publisher>(_ other: Other)
-    -> Publishers.WithLatestFrom<Self, Other, Other.Output> {
+        -> Publishers.WithLatestFrom<Self, Other, Other.Output>
+    {
         return .init(upstream: self, second: other) { $1 }
     }
 }
 
 // MARK: - Publisher
-extension Publishers {
-    public struct WithLatestFrom<Upstream: Publisher,
-                                 Other: Publisher,
-                                 Output>: Publisher where Upstream.Failure == Other.Failure {
+
+public extension Publishers {
+    struct WithLatestFrom<Upstream: Publisher,
+        Other: Publisher,
+        Output>: Publisher where Upstream.Failure == Other.Failure
+    {
         public typealias Failure = Upstream.Failure
         public typealias ResultSelector = (Upstream.Output, Other.Output) -> Output
 
@@ -181,7 +185,8 @@ extension Publishers {
 
         init(upstream: Upstream,
              second: Other,
-             resultSelector: @escaping ResultSelector) {
+             resultSelector: @escaping ResultSelector)
+        {
             self.upstream = upstream
             self.second = second
             self.resultSelector = resultSelector
@@ -198,6 +203,7 @@ extension Publishers {
 }
 
 // MARK: - Subscription
+
 extension Publishers.WithLatestFrom {
     private class Subscription<S: Subscriber>: Combine.Subscription where S.Input == Output, S.Failure == Failure {
         private let subscriber: S
@@ -213,7 +219,8 @@ extension Publishers.WithLatestFrom {
         init(upstream: Upstream,
              second: Other,
              resultSelector: @escaping ResultSelector,
-             subscriber: S) {
+             subscriber: S)
+        {
             self.upstream = upstream
             self.second = second
             self.subscriber = subscriber
@@ -221,7 +228,7 @@ extension Publishers.WithLatestFrom {
             trackLatestFromSecond()
         }
 
-        func request(_ demand: Subscribers.Demand) {
+        func request(_: Subscribers.Demand) {
             // withLatestFrom always takes one latest value from the second
             // observable, so demand doesn't really have a meaning here.
             firstSubscription = upstream
@@ -232,7 +239,8 @@ extension Publishers.WithLatestFrom {
 
                         guard let latest = self.latestValue else { return }
                         _ = self.subscriber.receive(self.resultSelector(value, latest))
-                    })
+                    }
+                )
         }
 
         // Create an internal subscription to the `Other` publisher,
@@ -247,9 +255,10 @@ extension Publishers.WithLatestFrom {
                     self?.latestValue = value
                     return .unlimited
                 },
-                receiveCompletion: nil)
+                receiveCompletion: nil
+            )
 
-            self.second.subscribe(subscriber)
+            second.subscribe(subscriber)
         }
 
         func cancel() {

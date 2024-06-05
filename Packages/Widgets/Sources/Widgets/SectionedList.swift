@@ -43,7 +43,7 @@ public struct SectionedList<Item: Hashable, RowContent: View>: View {
                     ForEach(Array(zip(sections.indices, sections)), id: \.0) { sectionIndex, section in
                         Section(content: { rowsView(for: section, sectionIndex: sectionIndex) },
                                 header: { headerView(title: section.title) })
-                        .id(sectionIndex)
+                            .id(sectionIndex)
                     }
                 }
                 .padding(.bottom, bottomInset)

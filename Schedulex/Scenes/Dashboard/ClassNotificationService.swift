@@ -17,7 +17,7 @@ struct ClassNotificationService {
         let classNotificationsEnabled: Driver<Bool>
         let classNotificationsTime: Driver<ClassNotificationTime>
     }
-    
+
     let notificationsManager: NotificationsManager
 
     func registerForEventsNotifications(input: Input) -> Driver<Void> {

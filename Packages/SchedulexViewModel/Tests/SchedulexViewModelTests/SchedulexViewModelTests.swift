@@ -1,5 +1,5 @@
-import XCTest
 @testable import SchedulexViewModel
+import XCTest
 
 final class SchedulexViewModelTests: XCTestCase {
     func testExample() throws {

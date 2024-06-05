@@ -7,9 +7,9 @@
 
 import Domain
 import Resources
+import SchedulexViewModel
 import SwiftUI
 import Widgets
-import SchedulexViewModel
 
 struct DashboardView: RootView {
     @State private var isDatePickerPresented = false
@@ -112,7 +112,7 @@ struct DashboardView: RootView {
         if store.isLoading {
             ProgressView()
         } else if store.showErrorInfo {
-            infoMessage(title: "Whoops", 
+            infoMessage(title: "Whoops",
                         message: L10n.dashboardFetchingEventsError,
                         showRefreshButton: true)
         } else if store.showInfoToUnhideFacultyGroups {

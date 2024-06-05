@@ -5,8 +5,8 @@
 //  Created by Sebastian Staszczyk on 09/03/2024.
 //
 
-import SwiftUI
 import Resources
+import SwiftUI
 import Widgets
 
 struct DashboardNoEvents: View {

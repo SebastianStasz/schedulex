@@ -24,6 +24,7 @@ struct SettingsLabel: View {
         .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
+
 #Preview {
     SettingsLabel(title: "Title", description: "Some description")
 }

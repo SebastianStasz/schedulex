@@ -18,10 +18,10 @@ public extension Button {
         switch style {
         case .appVersionButtonStyle:
             let style = AppVersionButtonStyle()
-            self.buttonStyle(style)
+            buttonStyle(style)
         case let .primaryButtonStyle(isKeyboardVisible):
             let style = PrimaryButtonStyle(isKeyboardVisible: isKeyboardVisible)
-            self.buttonStyle(style)
+            buttonStyle(style)
         }
     }
 }

@@ -5,8 +5,8 @@
 //  Created by Sebastian Staszczyk on 08/10/2023.
 //
 
-import SwiftUI
 import Resources
+import SwiftUI
 
 public struct SearchField: View {
     @FocusState private var focusState: Bool
@@ -16,8 +16,8 @@ public struct SearchField: View {
 
     public init(prompt: String, searchText: Binding<String>, isFocused: Binding<Bool>) {
         self.prompt = prompt
-        self._searchText = searchText
-        self._isFocused = isFocused
+        _searchText = searchText
+        _isFocused = isFocused
     }
 
     public var body: some View {

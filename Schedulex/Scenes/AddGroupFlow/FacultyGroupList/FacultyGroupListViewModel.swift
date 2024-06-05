@@ -6,9 +6,9 @@
 //
 
 import Domain
-import UIKit
-import SchedulexViewModel
 import SchedulexCore
+import SchedulexViewModel
+import UIKit
 
 final class FacultyGroupListStore: RootStore {
     @Published fileprivate(set) var facultyGroups: [FacultyGroup] = []
@@ -22,7 +22,7 @@ struct FacultyGroupListViewModel: ViewModel {
     weak var navigationController: UINavigationController?
     let faculty: Faculty
 
-    func makeStore(context: Context) -> FacultyGroupListStore {
+    func makeStore(context _: Context) -> FacultyGroupListStore {
         let store = FacultyGroupListStore()
 
         store.$searchText

@@ -5,8 +5,8 @@
 //  Created by Sebastian Staszczyk on 19/09/2023.
 //
 
-import SwiftUI
 import Resources
+import SwiftUI
 
 public enum Typography: CaseIterable {
     case titleSmall

@@ -7,9 +7,9 @@
 
 import Domain
 import Resources
+import SchedulexViewModel
 import SwiftUI
 import Widgets
-import SchedulexViewModel
 
 struct ObservedFacultyGroupsView: RootView {
     @ObservedObject var store: ObservedFacultyGroupsStore

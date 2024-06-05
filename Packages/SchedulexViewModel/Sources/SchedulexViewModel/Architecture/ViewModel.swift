@@ -5,8 +5,8 @@
 //  Created by Sebastian Staszczyk on 13/01/2024.
 //
 
-import UIKit
 import SchedulexCore
+import UIKit
 
 @MainActor
 public protocol ViewModel {

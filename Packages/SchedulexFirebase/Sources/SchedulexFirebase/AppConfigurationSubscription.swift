@@ -25,7 +25,7 @@ final class AppConfigurationSubscription {
         let subscription = firestore.subscribe(document: "configuration", from: "app")
 
         listenerRegistration = subscription.0
-        
+
         subscriptionCancellable = subscription.1
             .compactMap { try? $0?.data(as: AppConfiguration.self) }
             .sink { [weak self] in self?.appConfiguration = $0 }

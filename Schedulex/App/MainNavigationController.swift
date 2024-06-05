@@ -16,7 +16,7 @@ final class MainNavigationController: UINavigationController {
         self.window = window
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -64,7 +64,8 @@ final class MainNavigationController: UINavigationController {
         present(navigationController, animated: true)
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }

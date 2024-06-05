@@ -4,42 +4,42 @@
 import SwiftUI
 
 public extension Color {
-  // Colors.xcassets
-  static var blueShade1 : Color { Color("blue_shade_1", bundle: .module) }
-  static var blueShade2 : Color { Color("blue_shade_2", bundle: .module) }
-  static var blueShade3 : Color { Color("blue_shade_3", bundle: .module) }
-  static var blueShade4 : Color { Color("blue_shade_4", bundle: .module) }
-  static var greenShade1 : Color { Color("green_shade_1", bundle: .module) }
-  static var greenShade2 : Color { Color("green_shade_2", bundle: .module) }
-  static var greenShade3 : Color { Color("green_shade_3", bundle: .module) }
-  static var greenShade4 : Color { Color("green_shade_4", bundle: .module) }
-  static var orangeShade1 : Color { Color("orange_shade_1", bundle: .module) }
-  static var orangeShade2 : Color { Color("orange_shade_2", bundle: .module) }
-  static var orangeShade3 : Color { Color("orange_shade_3", bundle: .module) }
-  static var orangeShade4 : Color { Color("orange_shade_4", bundle: .module) }
-  static var purpleShade1 : Color { Color("purple_shade_1", bundle: .module) }
-  static var purpleShade2 : Color { Color("purple_shade_2", bundle: .module) }
-  static var purpleShade3 : Color { Color("purple_shade_3", bundle: .module) }
-  static var purpleShade4 : Color { Color("purple_shade_4", bundle: .module) }
-  static var redShade1 : Color { Color("red_shade_1", bundle: .module) }
-  static var redShade2 : Color { Color("red_shade_2", bundle: .module) }
-  static var redShade3 : Color { Color("red_shade_3", bundle: .module) }
-  static var redShade4 : Color { Color("red_shade_4", bundle: .module) }
-  static var textDark : Color { Color("text_dark", bundle: .module) }
-  static var textPrimary : Color { Color("text_primary", bundle: .module) }
-  static var textSecondary : Color { Color("text_secondary", bundle: .module) }
-  static var yellowShade1 : Color { Color("yellow_shade_1", bundle: .module) }
-  static var yellowShade2 : Color { Color("yellow_shade_2", bundle: .module) }
-  static var yellowShade3 : Color { Color("yellow_shade_3", bundle: .module) }
-  static var yellowShade4 : Color { Color("yellow_shade_4", bundle: .module) }
-  static var accentPrimary : Color { Color("accent_primary", bundle: .module) }
-  static var backgroundPrimary : Color { Color("background_primary", bundle: .module) }
-  static var backgroundSecondary : Color { Color("background_secondary", bundle: .module) }
-  static var backgroundTertiary : Color { Color("background_tertiary", bundle: .module) }
-  static var grayShade1 : Color { Color("gray_shade_1", bundle: .module) }
-  static var greenPrimary : Color { Color("green_primary", bundle: .module) }
-  static var yellowPrimary : Color { Color("yellow_primary", bundle: .module) }
-  // Images.xcassets
+    // Colors.xcassets
+    static var blueShade1: Color { Color("blue_shade_1", bundle: .module) }
+    static var blueShade2: Color { Color("blue_shade_2", bundle: .module) }
+    static var blueShade3: Color { Color("blue_shade_3", bundle: .module) }
+    static var blueShade4: Color { Color("blue_shade_4", bundle: .module) }
+    static var greenShade1: Color { Color("green_shade_1", bundle: .module) }
+    static var greenShade2: Color { Color("green_shade_2", bundle: .module) }
+    static var greenShade3: Color { Color("green_shade_3", bundle: .module) }
+    static var greenShade4: Color { Color("green_shade_4", bundle: .module) }
+    static var orangeShade1: Color { Color("orange_shade_1", bundle: .module) }
+    static var orangeShade2: Color { Color("orange_shade_2", bundle: .module) }
+    static var orangeShade3: Color { Color("orange_shade_3", bundle: .module) }
+    static var orangeShade4: Color { Color("orange_shade_4", bundle: .module) }
+    static var purpleShade1: Color { Color("purple_shade_1", bundle: .module) }
+    static var purpleShade2: Color { Color("purple_shade_2", bundle: .module) }
+    static var purpleShade3: Color { Color("purple_shade_3", bundle: .module) }
+    static var purpleShade4: Color { Color("purple_shade_4", bundle: .module) }
+    static var redShade1: Color { Color("red_shade_1", bundle: .module) }
+    static var redShade2: Color { Color("red_shade_2", bundle: .module) }
+    static var redShade3: Color { Color("red_shade_3", bundle: .module) }
+    static var redShade4: Color { Color("red_shade_4", bundle: .module) }
+    static var textDark: Color { Color("text_dark", bundle: .module) }
+    static var textPrimary: Color { Color("text_primary", bundle: .module) }
+    static var textSecondary: Color { Color("text_secondary", bundle: .module) }
+    static var yellowShade1: Color { Color("yellow_shade_1", bundle: .module) }
+    static var yellowShade2: Color { Color("yellow_shade_2", bundle: .module) }
+    static var yellowShade3: Color { Color("yellow_shade_3", bundle: .module) }
+    static var yellowShade4: Color { Color("yellow_shade_4", bundle: .module) }
+    static var accentPrimary: Color { Color("accent_primary", bundle: .module) }
+    static var backgroundPrimary: Color { Color("background_primary", bundle: .module) }
+    static var backgroundSecondary: Color { Color("background_secondary", bundle: .module) }
+    static var backgroundTertiary: Color { Color("background_tertiary", bundle: .module) }
+    static var grayShade1: Color { Color("gray_shade_1", bundle: .module) }
+    static var greenPrimary: Color { Color("green_primary", bundle: .module) }
+    static var yellowPrimary: Color { Color("yellow_primary", bundle: .module) }
+    // Images.xcassets
 }
 
 public extension UIColor {
@@ -73,9 +73,9 @@ public extension UIColor {
 }
 
 public extension Image {
-  // Colors.xcassets
-  // Images.xcassets
-  static var teamsLogo : Image { Image("teams_logo", bundle: .module) }
+    // Colors.xcassets
+    // Images.xcassets
+    static var teamsLogo: Image { Image("teams_logo", bundle: .module) }
 }
 
 public extension UIImage {
@@ -83,7 +83,5 @@ public extension UIImage {
 }
 
 private final class BundleToken {
-  static let bundle: Bundle = {
-    Bundle(for: BundleToken.self)
-  }()
+    static let bundle: Bundle = .init(for: BundleToken.self)
 }

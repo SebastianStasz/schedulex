@@ -28,7 +28,7 @@ extension UIViewController {
             childViewController.view.leftAnchor.constraint(equalTo: containerView.leftAnchor),
             childViewController.view.rightAnchor.constraint(equalTo: containerView.rightAnchor),
             childViewController.view.topAnchor.constraint(equalTo: containerView.topAnchor),
-            childViewController.view.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
+            childViewController.view.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
         ])
         childViewController.didMove(toParent: self)
     }

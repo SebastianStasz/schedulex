@@ -5,8 +5,8 @@
 //  Created by Sebastian Staszczyk on 22/09/2023.
 //
 
-import SwiftUI
 import Resources
+import SwiftUI
 
 private struct CloseButtonViewModifier: ViewModifier {
     @Environment(\.dismiss) private var dismiss

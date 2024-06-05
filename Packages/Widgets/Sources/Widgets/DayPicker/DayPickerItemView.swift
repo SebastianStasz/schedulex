@@ -36,7 +36,7 @@ struct DayPickerItemView: View {
                 }
             }
         }
-        .frame(maxHeight: .infinity ,alignment: .top)
+        .frame(maxHeight: .infinity, alignment: .top)
     }
 
     @ViewBuilder

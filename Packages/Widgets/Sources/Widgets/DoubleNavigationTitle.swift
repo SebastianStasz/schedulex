@@ -5,8 +5,8 @@
 //  Created by Sebastian Staszczyk on 21/09/2023.
 //
 
-import SwiftUI
 import Resources
+import SwiftUI
 
 private struct DoubleNavigationTitle: ViewModifier {
     let title: String

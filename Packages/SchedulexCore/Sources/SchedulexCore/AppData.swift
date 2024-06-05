@@ -74,7 +74,7 @@ public final class AppData {
 
         if let string = UserDefaults.standard.value(forKey: "allHiddenClasses") as? String, let data = string.data(using: .utf8) {
             let subscribedFacultyGroups = try? JSONDecoder().decode([EditableFacultyGroupClass].self, from: data)
-            self.allHiddenClasses = subscribedFacultyGroups ?? []
+            allHiddenClasses = subscribedFacultyGroups ?? []
         }
     }
 

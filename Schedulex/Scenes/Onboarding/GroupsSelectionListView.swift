@@ -6,8 +6,8 @@
 //
 
 import Domain
-import SwiftUI
 import Resources
+import SwiftUI
 import Widgets
 
 struct GroupsSelectionListView: View {
@@ -24,7 +24,7 @@ struct GroupsSelectionListView: View {
             SearchField(prompt: L10n.startFirstStepPrompt, searchText: $searchText, isFocused: $isSearchFocused)
 
             ScrollViewReader { proxy in
-                SectionedList(sections, bottomInset: bottomInset) { sectionIndex, facultyGroup in
+                SectionedList(sections, bottomInset: bottomInset) { _, facultyGroup in
                     let isSelected = selectedGroups.contains(facultyGroup)
                     let icon: Icon = isSelected ? .checkmark : .circle
                     let color: Color = isSelected ? .greenPrimary : .accentPrimary

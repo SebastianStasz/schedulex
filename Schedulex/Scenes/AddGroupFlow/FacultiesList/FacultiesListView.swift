@@ -8,9 +8,9 @@
 import Domain
 import Resources
 import SchedulexFirebase
+import SchedulexViewModel
 import SwiftUI
 import Widgets
-import SchedulexViewModel
 
 final class FacultiesListViewController: SwiftUIViewController<FacultiesListViewModel, FacultiesListView> {
     override func viewDidLoad() {

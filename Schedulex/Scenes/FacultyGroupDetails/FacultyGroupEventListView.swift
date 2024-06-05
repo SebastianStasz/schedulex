@@ -21,11 +21,10 @@ struct FacultyGroupEventListView: View {
         .baseListStyle()
     }
 
-
     private var listSections: [ListSection<Event>]? {
         events
             .filter { $0.startDate != nil }
-            .reduce(into: [ListSection<Event>](), { result, event in
+            .reduce(into: [ListSection<Event>]()) { result, event in
                 let date = event.startDateWithoutTime!.formatted(style: .dateLong)
                 if let sectionIndex = result.firstIndex(where: { $0.title == date }) {
                     let items = result[sectionIndex].items
@@ -34,7 +33,7 @@ struct FacultyGroupEventListView: View {
                 } else {
                     result.append(ListSection(title: date, items: [event]))
                 }
-            })
+            }
     }
 }
 

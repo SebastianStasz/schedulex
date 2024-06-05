@@ -6,8 +6,8 @@
 //
 
 import Domain
-import Foundation
 import FirebaseFirestoreSwift
+import Foundation
 
 final class CracowUniversityOfEconomicsService {
     private let firestore: FirestoreService

@@ -17,29 +17,29 @@ open class SwiftUIViewController<VM: ViewModel, View: RootView>: UIViewControlle
         super.init(nibName: nil, bundle: nil)
     }
 
-    open override func viewDidLoad() {
+    override open func viewDidLoad() {
         super.viewDidLoad()
         let view = View(store: store)
         displayView(view)
         store.viewDidLoad.send()
     }
 
-    open override func viewWillAppear(_ animated: Bool) {
+    override open func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         store.viewWillAppear.send()
     }
 
-    open override func viewDidAppear(_ animated: Bool) {
+    override open func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         store.viewDidAppear.send()
     }
 
-    open override func viewWillDisappear(_ animated: Bool) {
+    override open func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         store.viewWillDisappear.send()
     }
 
-    open override func viewDidDisappear(_ animated: Bool) {
+    override open func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         store.viewDidDisappear.send()
     }

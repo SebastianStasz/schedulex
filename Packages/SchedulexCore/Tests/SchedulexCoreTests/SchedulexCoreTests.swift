@@ -1,5 +1,5 @@
-import XCTest
 @testable import SchedulexCore
+import XCTest
 
 final class SchedulexCoreTests: XCTestCase {
     func testExample() throws {

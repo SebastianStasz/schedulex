@@ -5,8 +5,8 @@
 //  Created by Sebastian Staszczyk on 31/07/2023.
 //
 
-import SwiftUI
 import Resources
+import SwiftUI
 
 public struct BaseListItem: View {
     let title: String

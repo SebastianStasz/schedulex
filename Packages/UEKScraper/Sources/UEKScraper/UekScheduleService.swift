@@ -12,7 +12,7 @@ public struct UekScheduleService {
     private let apiService = APIService()
     private let detailsDecoder = DetailsDecoder()
 
-    public init () {}
+    public init() {}
 
     public func getFacultyGroupDetails(for facultyGroup: FacultyGroup) async throws -> FacultyGroupDetails {
         try await getDetails(for: facultyGroup)

@@ -6,9 +6,9 @@
 //
 
 import Domain
+import Resources
 import SwiftUI
 import Widgets
-import Resources
 
 struct EventDetailsView: View {
     @Environment(\.openURL) private var openURL

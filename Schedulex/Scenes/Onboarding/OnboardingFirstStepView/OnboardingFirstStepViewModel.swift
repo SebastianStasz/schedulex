@@ -1,24 +1,24 @@
 //
-//  StartFirstStepViewModel.swift
+//  OnboardingFirstStepViewModel.swift
 //  Schedulex
 //
 //  Created by Sebastian Staszczyk on 13/01/2024.
 //
 
 import Domain
-import UIKit
+import SchedulexCore
 import SchedulexFirebase
 import SchedulexViewModel
-import SchedulexCore
+import UIKit
 
 final class StartFirstStepStore: RootStore {
     @Published fileprivate(set) var facultyGroups: [FacultyGroup] = []
-    
+
     @Published var isConfirmationAlertPresented = false
     @Published var selectedFacultyGroups: [FacultyGroup] = []
 
     let isLoading = DriverState(true)
-    
+
     var onNextButton = DriverSubject<Void>()
     var onConfirmationAlertContinueButton = DriverSubject<Void>()
 }

@@ -10,7 +10,8 @@ let package = Package(
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
             name: "SchedulexViewModel",
-            targets: ["SchedulexViewModel"]),
+            targets: ["SchedulexViewModel"]
+        ),
     ],
     dependencies: [
         .package(name: "SchedulexCore", path: "../SchedulexCore"),
@@ -21,10 +22,12 @@ let package = Package(
         .target(
             name: "SchedulexViewModel",
             dependencies: [
-                "SchedulexCore"
-            ]),
+                "SchedulexCore",
+            ]
+        ),
         .testTarget(
             name: "SchedulexViewModelTests",
-            dependencies: ["SchedulexViewModel"]),
+            dependencies: ["SchedulexViewModel"]
+        ),
     ]
 )

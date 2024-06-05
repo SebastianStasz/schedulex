@@ -6,10 +6,10 @@
 //
 
 import Domain
+import SchedulexCore
+import SchedulexViewModel
 import SwiftUI
 import UEKScraper
-import SchedulexViewModel
-import SchedulexCore
 
 final class FacultyGroupDetailsStore: RootStore {
     let isLoading = DriverState(true)

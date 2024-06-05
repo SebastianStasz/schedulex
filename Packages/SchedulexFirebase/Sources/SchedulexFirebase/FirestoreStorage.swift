@@ -20,7 +20,7 @@ public final class FirestoreStorage: FirestoreStorageProtocol {
 
         appConfigurationSubscription.subscribe()
     }
-    
+
     public var appConfiguration: AnyPublisher<AppConfiguration, Never> {
         appConfigurationSubscription.$appConfiguration
             .map { $0 ?? .defaultConfiguration }

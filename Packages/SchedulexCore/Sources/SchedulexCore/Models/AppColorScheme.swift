@@ -5,8 +5,8 @@
 //  Created by Sebastian Staszczyk on 24/12/2023.
 //
 
-import SwiftUI
 import Resources
+import SwiftUI
 import Widgets
 
 public enum AppColorScheme: String, Identifiable, CaseIterable, Pickable {

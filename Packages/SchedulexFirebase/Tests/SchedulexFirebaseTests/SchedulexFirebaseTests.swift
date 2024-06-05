@@ -1,5 +1,5 @@
-import XCTest
 @testable import SchedulexFirebase
+import XCTest
 
 final class SchedulexFirebaseTests: XCTestCase {
     func testExample() throws {

@@ -7,9 +7,9 @@
 
 import Domain
 import MessageUI
-import SwiftUI
-import SchedulexViewModel
 import SchedulexCore
+import SchedulexViewModel
+import SwiftUI
 
 final class SettingsStore: RootStore {
     @Published fileprivate var areNotificationsEnabled = false
@@ -99,9 +99,9 @@ struct SettingsViewModel: ViewModel {
 
     private func presentSendEmailSheet(recipient: String?, appVersion: String?, facultyGroups: [FacultyGroup]) {
         guard MFMailComposeViewController.canSendMail(),
-              let emailContent = EmailContent.defaultContact(recipient: recipient, appVersion: appVersion, facultyGroups: facultyGroups) else {
-            return
-        }
+              let emailContent = EmailContent.defaultContact(recipient: recipient, appVersion: appVersion, facultyGroups: facultyGroups)
+        else { return }
+
         AppDelegate.resetBarButtonItemColor()
         let viewController = SendEmailViewController(emailContent: emailContent)
         navigationController?.presentModally(viewController)

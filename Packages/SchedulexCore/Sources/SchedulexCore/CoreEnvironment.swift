@@ -5,8 +5,8 @@
 //  Created by Sebastian Staszczyk on 13/01/2024.
 //
 
-import UIKit
 import SchedulexFirebase
+import UIKit
 
 public protocol CoreEnvironment {
     var context: Context { get }
@@ -28,8 +28,8 @@ public protocol CoreEnvironmentProvider {
     var coreEnvironment: CoreEnvironment { get }
 }
 
-extension CoreEnvironmentProvider {
-    public var coreEnvironment: CoreEnvironment {
+public extension CoreEnvironmentProvider {
+    var coreEnvironment: CoreEnvironment {
         CoreEnvironmentHolder.currentCoreEnvironment
     }
 }

@@ -6,10 +6,10 @@
 //
 
 import Combine
+import SchedulexCore
+import SchedulexViewModel
 import UIKit
 import Widgets
-import SchedulexViewModel
-import SchedulexCore
 
 final class InfoCardsSectionStore: ObservableObject, CombineHelper {
     var cancellables: Set<AnyCancellable> = []

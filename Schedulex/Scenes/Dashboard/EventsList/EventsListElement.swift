@@ -61,6 +61,6 @@ enum EventsListElement {
 
 extension Date {
     func isBetweenOrEqual(_ date1: Date, and date2: Date) -> Bool {
-        self == date1 || (min(date1, date2)...max(date1, date2)).contains(self)
+        self == date1 || (min(date1, date2) ... max(date1, date2)).contains(self)
     }
 }

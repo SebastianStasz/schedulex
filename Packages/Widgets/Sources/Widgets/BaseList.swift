@@ -40,7 +40,7 @@ public extension BaseList {
         }
     }
 
-    @MainActor init<Data, RowContent>(_ data: Data,  @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent) where Content == ForEach<Data, Data.Element.ID, TupleView<(RowContent, Separator?)>>, RowContent: View, Data.Element: Identifiable {
+    @MainActor init<Data, RowContent>(_ data: Data, @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent) where Content == ForEach<Data, Data.Element.ID, TupleView<(RowContent, Separator?)>>, RowContent: View, Data.Element: Identifiable {
         let ids = data.map { $0.id }
         self.init {
             ForEach(data) {

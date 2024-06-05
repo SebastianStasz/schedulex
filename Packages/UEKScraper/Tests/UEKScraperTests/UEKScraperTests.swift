@@ -1,5 +1,5 @@
-import XCTest
 @testable import UEKScraper
+import XCTest
 
 final class UEKScraperTests: XCTestCase {
     func testExample() throws {

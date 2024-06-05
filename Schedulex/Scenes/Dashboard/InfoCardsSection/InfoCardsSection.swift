@@ -21,15 +21,15 @@ struct InfoCardsSection: View {
                 .transition(.scale)
         }
     }
-    
+
     private var infoCardsView: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: .medium) {
                 ForEach(store.infoCards) { infoCard in
-                    InfoCardView(card: infoCard, 
+                    InfoCardView(card: infoCard,
                                  onConfirm: { store.performActionForInfoCard.send(infoCard) },
                                  onClose: { store.closeInfoCard.send(infoCard) })
-                    .frame(width: cardWidth)
+                        .frame(width: cardWidth)
                 }
             }
             .padding(.horizontal, .medium)

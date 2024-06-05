@@ -7,11 +7,11 @@
 
 import Combine
 import Domain
+import SchedulexCore
+import SchedulexViewModel
+import UEKScraper
 import UIKit
 import Widgets
-import UEKScraper
-import SchedulexViewModel
-import SchedulexCore
 
 final class DashboardStore: RootStore {
     @Published var selectedDate: Date = .now
@@ -70,14 +70,14 @@ struct DashboardViewModel: ViewModel {
             .store(in: &store.cancellables)
 
         viewWillEnterForeground
-            .sinkAndStore(on: store) { store, _ in
+            .sinkAndStore(on: store) { _, _ in
                 if nextSelectedDateResetDate < .now {
                     setDefaultSelectedDate()
                 }
             }
 
         store.selectTodaysDate
-            .sinkAndStore(on: store) { store, _ in
+            .sinkAndStore(on: store) { _, _ in
                 setDefaultSelectedDate()
             }
 
@@ -90,9 +90,9 @@ struct DashboardViewModel: ViewModel {
             .assign(to: &store.$showInfoToUnhideFacultyGroups)
 
         let dashboardEventsOutput = DashboardEventsViewModel()
-            .makeOutput(input:. init(fetchEvents: viewWillAppearOrWillEnterForeground.asDriver(),
-                                     forceRefresh: store.refresh.asDriver(), 
-                                     facultyGroups: subscribedFacultyGroups.asDriver(), 
+            .makeOutput(input: .init(fetchEvents: viewWillAppearOrWillEnterForeground.asDriver(),
+                                     forceRefresh: store.refresh.asDriver(),
+                                     facultyGroups: subscribedFacultyGroups.asDriver(),
                                      daysOff: daysOff.asDriver(),
                                      hiddenClasses: context.appData.$allHiddenClasses.asDriver()))
 

@@ -56,7 +56,7 @@ struct DetailsDecoder {
                                   time: cells[1],
                                   place: cells[5].nilIfEmpty(),
                                   teacher: cells[4].nilIfEmpty(),
-                                  teacherProfileLink: teacherProfileLink, 
+                                  teacherProfileLink: teacherProfileLink,
                                   teamsLink: teamsLink,
                                   eventTransferNote: nil)
         return eventData.isValidEvent(for: facultyGroup) ? eventData : nil
