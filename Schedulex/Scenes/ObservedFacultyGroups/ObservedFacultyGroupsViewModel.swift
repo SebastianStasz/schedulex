@@ -8,6 +8,8 @@
 import Domain
 import SwiftUI
 import SchedulexFirebase
+import SchedulexViewModel
+import SchedulexCore
 
 final class ObservedFacultyGroupsStore: RootStore {
     @Published fileprivate(set) var subscribedGroups: [FacultyGroup] = []

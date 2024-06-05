@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-protocol RootView: View {
+public protocol RootView: View {
     associatedtype RootBody: View
     associatedtype Store: RootStore
 
@@ -17,7 +17,7 @@ protocol RootView: View {
     var store: Store { get }
 }
 
-extension RootView {
+public extension RootView {
     var body: some View {
         rootBody
     }

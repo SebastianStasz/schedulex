@@ -7,6 +7,8 @@
 
 import Domain
 import UIKit
+import SchedulexViewModel
+import SchedulexCore
 
 final class FacultyGroupClassListStore: RootStore {
     let viewType: FacultyGroupDetailsViewType

@@ -7,6 +7,7 @@
 
 import Combine
 import Foundation
+import SchedulexViewModel
 
 extension Publisher {
     func perform<T>(

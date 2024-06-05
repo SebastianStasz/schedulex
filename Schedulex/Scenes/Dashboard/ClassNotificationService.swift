@@ -8,6 +8,7 @@
 import Combine
 import Domain
 import Foundation
+import SchedulexCore
 
 @MainActor
 struct ClassNotificationService {

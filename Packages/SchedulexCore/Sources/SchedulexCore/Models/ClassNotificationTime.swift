@@ -9,18 +9,18 @@ import Foundation
 import Resources
 import Widgets
 
-enum ClassNotificationTime: String, Identifiable, CaseIterable, Pickable {
+public enum ClassNotificationTime: String, Identifiable, CaseIterable, Pickable {
     case fiveMinutesBefore
     case tenMinutesBefore
     case fifteenMinutesBefore
     case thirtyMinutesBefore
     case oneHourBefore
 
-    var id: String {
+    public var id: String {
         rawValue
     }
 
-    var title: String {
+    public var title: String {
         switch self {
         case .oneHourBefore:
             return L10n.settingsClassNotificationsTimeHourBefore
@@ -29,7 +29,7 @@ enum ClassNotificationTime: String, Identifiable, CaseIterable, Pickable {
         }
     }
 
-    var minutes: Int {
+    public var minutes: Int {
         switch self {
         case .fiveMinutesBefore:
             return 5

@@ -42,6 +42,8 @@ targets:
       - package: Resources
       - package: SchedulexFirebase
       - package: UEKScraper
+      - package: SchedulexCore
+      - package: SchedulexViewModel
       - package: SwiftSoup
       - package: Firebase
         product: FirebaseAuth
@@ -85,6 +87,8 @@ localPackages:
   - ./Packages/Resources
   - ./Packages/SchedulexFirebase
   - ./Packages/UEKScraper
+  - ./Packages/SchedulexViewModel
+  - ./Packages/SchedulexCore
 
 packages:
   Firebase:

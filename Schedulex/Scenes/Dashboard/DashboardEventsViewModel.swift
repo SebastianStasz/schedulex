@@ -10,6 +10,7 @@ import Domain
 import Foundation
 import Widgets
 import UEKScraper
+import SchedulexCore
 
 struct DashboardEventsViewModel {
     struct Input {

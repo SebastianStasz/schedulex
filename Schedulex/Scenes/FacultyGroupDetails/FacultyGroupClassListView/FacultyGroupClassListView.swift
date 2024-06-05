@@ -8,6 +8,8 @@
 import Resources
 import SwiftUI
 import Widgets
+import SchedulexViewModel
+import SchedulexCore
 
 struct FacultyGroupClassListView: RootView {
     @ObservedObject var store: FacultyGroupClassListStore

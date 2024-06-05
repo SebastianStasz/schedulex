@@ -7,6 +7,7 @@
 
 import Domain
 import Foundation
+import SchedulexViewModel
 
 extension ViewModel {
     func pushFacultyGroupDetailsView(_ facultyGroup: FacultyGroup, viewType: FacultyGroupDetailsViewType) {

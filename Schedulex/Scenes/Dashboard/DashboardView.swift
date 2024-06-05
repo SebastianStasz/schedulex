@@ -9,6 +9,7 @@ import Domain
 import Resources
 import SwiftUI
 import Widgets
+import SchedulexViewModel
 
 struct DashboardView: RootView {
     @State private var isDatePickerPresented = false

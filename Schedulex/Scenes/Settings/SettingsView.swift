@@ -8,6 +8,8 @@
 import SwiftUI
 import Widgets
 import Resources
+import SchedulexViewModel
+import SchedulexCore
 
 struct SettingsView: RootView {
     @ObservedObject var store: SettingsStore

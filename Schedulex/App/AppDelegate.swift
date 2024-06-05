@@ -9,6 +9,7 @@ import FirebaseCore
 import Resources
 import UIKit
 import Widgets
+import SchedulexCore
 
 @main
 final class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDelegate {

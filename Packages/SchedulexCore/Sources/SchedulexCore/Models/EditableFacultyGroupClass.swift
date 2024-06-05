@@ -8,16 +8,16 @@
 import Domain
 import Foundation
 
-struct EditableFacultyGroupClass: Equatable, Hashable, Codable {
-    let facultyGroupName: String
-    let facultyGroupClass: FacultyGroupClass
+public struct EditableFacultyGroupClass: Equatable, Hashable, Codable {
+    public let facultyGroupName: String
+    public let facultyGroupClass: FacultyGroupClass
 
-    func toFacultyGroupClass() -> FacultyGroupClass {
+    public func toFacultyGroupClass() -> FacultyGroupClass {
         FacultyGroupClass(name: facultyGroupClass.name, type: facultyGroupClass.type, teacher: facultyGroupClass.teacher)
     }
 }
 
-extension FacultyGroupClass {
+public extension FacultyGroupClass {
     func toEditableFacultyGroupClass(facultyGroupName: String) -> EditableFacultyGroupClass {
         EditableFacultyGroupClass(facultyGroupName: facultyGroupName, facultyGroupClass: self)
     }

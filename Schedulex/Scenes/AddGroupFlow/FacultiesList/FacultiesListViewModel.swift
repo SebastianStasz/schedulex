@@ -7,6 +7,8 @@
 
 import Domain
 import UIKit
+import SchedulexViewModel
+import SchedulexCore
 
 final class FacultiesListStore: RootStore {
     @Published fileprivate(set) var faculties: [Faculty] = []
@@ -24,9 +26,10 @@ struct FacultiesListViewModel: ViewModel {
 
     func makeStore(context: Context) -> FacultiesListStore {
         let store = FacultiesListStore()
+        let errorTracker = DriverSubject<Error>()
 
         let school = store.viewWillAppear.share()
-            .perform(isLoading: store.isLoading) {
+            .perform(isLoading: store.isLoading, errorTracker: errorTracker) {
                 try await context.storage.getCracowUniversityOfEconomicsData()
             }
 

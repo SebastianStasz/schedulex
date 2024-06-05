@@ -9,10 +9,10 @@ import Domain
 import Foundation
 import Widgets
 
-final class AppData {
+public final class AppData {
     private let defaults: UserDefaults
 
-    @Published private(set) var subscribedFacultyGroups: [FacultyGroup] = [] {
+    @Published public private(set) var subscribedFacultyGroups: [FacultyGroup] = [] {
         didSet {
             let groups = subscribedFacultyGroups.sorted(by: { $0.name < $1.name })
             let data = try! JSONEncoder().encode(groups)
@@ -21,7 +21,7 @@ final class AppData {
         }
     }
 
-    @Published private(set) var allHiddenClasses: [EditableFacultyGroupClass] = [] {
+    @Published public private(set) var allHiddenClasses: [EditableFacultyGroupClass] = [] {
         didSet {
             let data = try! JSONEncoder().encode(allHiddenClasses)
             let json = String(data: data, encoding: .utf8)
@@ -29,23 +29,23 @@ final class AppData {
         }
     }
 
-    @Published private(set) var hiddenInfoCards: [InfoCard] = [] {
+    @Published public private(set) var hiddenInfoCards: [InfoCard] = [] {
         didSet { defaults.set(hiddenInfoCards.map { $0.rawValue }, forKey: "hiddenInfoCards") }
     }
 
-    @Published var classNotificationsEnabled: Bool = false {
+    @Published public var classNotificationsEnabled: Bool = false {
         didSet { defaults.set(classNotificationsEnabled, forKey: "classNotificationsEnabled") }
     }
 
-    @Published var classNotificationsTime: ClassNotificationTime = .oneHourBefore {
+    @Published public var classNotificationsTime: ClassNotificationTime = .oneHourBefore {
         didSet { defaults.set(classNotificationsTime.rawValue, forKey: "classNotificationsTime") }
     }
 
-    @Published var dashboardSwipeTipPresented: Bool = true {
+    @Published public var dashboardSwipeTipPresented: Bool = true {
         didSet { defaults.setValue(dashboardSwipeTipPresented, forKey: "dashboardSwipeTipPresented") }
     }
 
-    @Published var appColorScheme: AppColorScheme = .system {
+    @Published public var appColorScheme: AppColorScheme = .system {
         didSet { defaults.set(appColorScheme.rawValue, forKey: "appColorScheme") }
     }
 
@@ -78,6 +78,14 @@ final class AppData {
         }
     }
 
+    private var availableColors: [FacultyGroupColor] {
+        FacultyGroupColor.allCases.filter { color in
+            !subscribedFacultyGroups.contains(where: { $0.color == color })
+        }
+    }
+}
+
+public extension AppData {
     func hideInfoCard(_ infoCard: InfoCard) {
         if !hiddenInfoCards.contains(infoCard) {
             hiddenInfoCards.append(infoCard)
@@ -127,12 +135,6 @@ final class AppData {
             if let index = subscribedFacultyGroups.firstIndex(where: { $0.name == facultyGroupDetail.name }) {
                 subscribedFacultyGroups[index].numberOfEvents = facultyGroupDetail.events.count
             }
-        }
-    }
-
-    private var availableColors: [FacultyGroupColor] {
-        FacultyGroupColor.allCases.filter { color in
-            !subscribedFacultyGroups.contains(where: { $0.color == color })
         }
     }
 }

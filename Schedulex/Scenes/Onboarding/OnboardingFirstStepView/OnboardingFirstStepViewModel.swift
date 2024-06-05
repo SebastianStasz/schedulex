@@ -8,6 +8,8 @@
 import Domain
 import UIKit
 import SchedulexFirebase
+import SchedulexViewModel
+import SchedulexCore
 
 final class StartFirstStepStore: RootStore {
     @Published fileprivate(set) var facultyGroups: [FacultyGroup] = []

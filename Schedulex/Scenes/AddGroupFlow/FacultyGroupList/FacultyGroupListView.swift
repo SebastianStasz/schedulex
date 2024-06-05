@@ -9,6 +9,7 @@ import Domain
 import Resources
 import SwiftUI
 import Widgets
+import SchedulexViewModel
 
 final class FacultyGroupListViewController: SwiftUIViewController<FacultyGroupListViewModel, FacultyGroupListView> {
     override func viewDidLoad() {

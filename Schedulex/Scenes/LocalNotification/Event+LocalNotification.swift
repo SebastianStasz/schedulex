@@ -8,6 +8,7 @@
 import Domain
 import Foundation
 import Resources
+import SchedulexCore
 
 extension Event {
     func toLocalNotification(time: ClassNotificationTime) -> LocalNotification? {

@@ -10,6 +10,7 @@ import Resources
 import SwiftUI
 import UEKScraper
 import Widgets
+import SchedulexViewModel
 
 struct FacultyGroupDetailsView: RootView {
     @ObservedObject var store: FacultyGroupDetailsStore

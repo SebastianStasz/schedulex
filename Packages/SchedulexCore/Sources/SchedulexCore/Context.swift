@@ -8,9 +8,9 @@
 import Foundation
 import SchedulexFirebase
 
-final class Context {
-    let storage: FirestoreStorage
-    @Published var appData: AppData
+public final class Context {
+    public let storage: FirestoreStorage
+    @Published public var appData: AppData
 
     init(storage: FirestoreStorage, appData: AppData) {
         self.storage = storage

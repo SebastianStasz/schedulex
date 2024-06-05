@@ -9,6 +9,7 @@ import Domain
 import SwiftUI
 import Widgets
 import Resources
+import SchedulexViewModel
 
 struct FacultyGroupColorPickerView: RootView {
     @ObservedObject var store: FacultyGroupColorPickerStore

@@ -6,9 +6,10 @@
 //
 
 import UIKit
+import SchedulexCore
 
 @MainActor
-protocol ViewModel {
+public protocol ViewModel {
     var navigationController: UINavigationController? { get set }
     associatedtype Store
 

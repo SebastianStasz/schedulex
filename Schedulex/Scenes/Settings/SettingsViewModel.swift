@@ -8,6 +8,8 @@
 import Domain
 import MessageUI
 import SwiftUI
+import SchedulexViewModel
+import SchedulexCore
 
 final class SettingsStore: RootStore {
     @Published fileprivate var areNotificationsEnabled = false

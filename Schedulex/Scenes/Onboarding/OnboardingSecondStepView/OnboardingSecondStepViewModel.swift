@@ -8,6 +8,8 @@
 import Domain
 import UIKit
 import SchedulexFirebase
+import SchedulexViewModel
+import SchedulexCore
 
 final class OnboardingSecondStepStore: RootStore {
     @Published fileprivate(set) var languageGroups: [FacultyGroup] = []

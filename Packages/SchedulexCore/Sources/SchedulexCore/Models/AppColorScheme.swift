@@ -9,16 +9,16 @@ import SwiftUI
 import Resources
 import Widgets
 
-enum AppColorScheme: String, Identifiable, CaseIterable, Pickable {
+public enum AppColorScheme: String, Identifiable, CaseIterable, Pickable {
     case system
     case light
     case dark
 
-    var id: String { 
+    public var id: String {
         rawValue
     }
 
-    var title: String {
+    public var title: String {
         switch self {
         case .system:
             return L10n.settingsAppThemeSystemTitle
@@ -29,7 +29,7 @@ enum AppColorScheme: String, Identifiable, CaseIterable, Pickable {
         }
     }
 
-    var scheme: UIUserInterfaceStyle {
+    public var scheme: UIUserInterfaceStyle {
         switch self {
         case .system:
             return .unspecified

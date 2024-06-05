@@ -17,8 +17,8 @@ struct DashboardNoEvents: View {
             Text(message, style: .body)
                 .foregroundStyle(.grayShade1)
 
-            SwiftUI.Text(emoji)
-                .font(.title)
+//            SwiftUI.Text(emoji)
+//                .font(.title)
         }
     }
 

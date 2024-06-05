@@ -10,6 +10,8 @@ import Domain
 import UIKit
 import Widgets
 import UEKScraper
+import SchedulexViewModel
+import SchedulexCore
 
 final class DashboardStore: RootStore {
     @Published var selectedDate: Date = .now

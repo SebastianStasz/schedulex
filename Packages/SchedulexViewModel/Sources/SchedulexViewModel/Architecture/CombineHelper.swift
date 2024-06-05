@@ -7,6 +7,6 @@
 
 import Combine
 
-protocol CombineHelper: AnyObject {
+public protocol CombineHelper: AnyObject {
     var cancellables: Set<AnyCancellable> { get set }
 }

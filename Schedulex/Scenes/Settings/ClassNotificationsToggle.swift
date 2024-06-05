@@ -8,6 +8,7 @@
 import Resources
 import SwiftUI
 import Widgets
+import SchedulexCore
 
 struct ClassNotificationsToggle: View {
     @Binding var areNotificationsEnabled: Bool

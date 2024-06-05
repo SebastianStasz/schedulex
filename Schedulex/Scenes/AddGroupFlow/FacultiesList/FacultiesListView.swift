@@ -10,6 +10,7 @@ import Resources
 import SchedulexFirebase
 import SwiftUI
 import Widgets
+import SchedulexViewModel
 
 final class FacultiesListViewController: SwiftUIViewController<FacultiesListViewModel, FacultiesListView> {
     override func viewDidLoad() {
