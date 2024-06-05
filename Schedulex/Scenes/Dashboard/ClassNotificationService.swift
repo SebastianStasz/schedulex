@@ -29,9 +29,15 @@ struct ClassNotificationService {
             .perform { _ in notificationsManager.removeAllPendingNotifications() }
 
         let enableClassNotifications = CombineLatest3(input.events, input.classNotificationsTime, areClassNotificationsEnabled.filter { $0 })
-            .map { events, notificationsTime, _ in events.compactMap { $0.toLocalNotification(time: notificationsTime) } }
+            .map { events, notificationsTime, _ in
+                filterAndMapToLocalNotification(events: events, time: notificationsTime)
+            }
             .perform { await notificationsManager.setNotifications($0) }
 
         return Merge(disableClassNotifications, enableClassNotifications).asVoid()
+    }
+
+    private func filterAndMapToLocalNotification(events: [Event], time: ClassNotificationTime) -> [LocalNotification] {
+        events.filter { !$0.isEventTransfer }.compactMap { $0.toLocalNotification(time: time) }
     }
 }
