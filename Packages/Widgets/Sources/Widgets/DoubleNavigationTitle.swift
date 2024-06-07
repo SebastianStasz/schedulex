@@ -31,7 +31,7 @@ private struct DoubleNavigationTitle: ViewModifier {
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
 
-                Button(L10n.pavilionsListTitle, icon: .building, action: openRoomsList)
+                Button(L10n.pavilionsListTitle, icon: .pavilionsList, action: openRoomsList)
                     .labelStyle(.iconOnly)
                     .font(.title2)
                     .foregroundStyle(.textPrimary)
