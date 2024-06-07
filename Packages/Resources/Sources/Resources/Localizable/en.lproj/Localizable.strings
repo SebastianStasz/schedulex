@@ -83,6 +83,12 @@
 "minutes_suffix" = "minutes.";
 "event_notification_subtitle_hour" = "In 1 hour.";
 
+// pavilions_list
+"pavilions_list_title" = "Pavilions";
+"pavilions_list_search_prompt" = "Pavilion name";
+"pavilions_list_classrooms" = "classrooms";
+"pavilions_list_classroom" = "classrom";
+
 // settings
 "settings_title" = "Settings";
 "settings_version" = "Version:";

@@ -120,6 +120,14 @@ public enum L10n {
     public static let observedTitle = L10n.tr("Localizable", "observed_title", fallback: "Observed")
     /// Other
     public static let otherHeader = L10n.tr("Localizable", "other_header", fallback: "Other")
+    /// classrom
+    public static let pavilionsListClassroom = L10n.tr("Localizable", "pavilions_list_classroom", fallback: "classrom")
+    /// classrooms
+    public static let pavilionsListClassrooms = L10n.tr("Localizable", "pavilions_list_classrooms", fallback: "classrooms")
+    /// Pavilion name
+    public static let pavilionsListSearchPrompt = L10n.tr("Localizable", "pavilions_list_search_prompt", fallback: "Pavilion name")
+    /// Pavilions
+    public static let pavilionsListTitle = L10n.tr("Localizable", "pavilions_list_title", fallback: "Pavilions")
     /// Rate the app
     public static let rateTheApp = L10n.tr("Localizable", "rate_the_app", fallback: "Rate the app")
     /// Refresh

@@ -83,6 +83,12 @@
 "minutes_suffix" = "minut.";
 "event_notification_subtitle_hour" = "Za godzinę.";
 
+// pavilions_list
+"pavilions_list_title" = "Pawilony";
+"pavilions_list_search_prompt" = "Nazwa pawilonu";
+"pavilions_list_classrooms" = "sal";
+"pavilions_list_classroom" = "sala";
+
 // settings
 "settings_title" = "Ustawienia";
 "settings_version" = "Wersja:";
