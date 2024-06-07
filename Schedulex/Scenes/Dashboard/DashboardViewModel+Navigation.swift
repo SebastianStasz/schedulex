@@ -10,6 +10,7 @@ import Foundation
 extension DashboardViewModel {
     enum Destination {
         case settings
+        case roomsList
         case observedFacultyGroups
     }
 
@@ -17,6 +18,8 @@ extension DashboardViewModel {
         switch destination {
         case .settings:
             pushSettingsView()
+        case .roomsList:
+            pushRoomsListView()
         case .observedFacultyGroups:
             pushObservedFacultyGroupsView()
         }
@@ -25,6 +28,12 @@ extension DashboardViewModel {
     private func pushSettingsView() {
         let viewModel = SettingsViewModel(notificationsManager: notificationManager, navigationController: navigationController)
         let viewController = SettingsViewController(viewModel: viewModel)
+        navigationController?.push(viewController)
+    }
+
+    private func pushRoomsListView() {
+        let viewModel = PavilionsListViewModel()
+        let viewController = RoomsListViewController(viewModel: viewModel)
         navigationController?.push(viewController)
     }
 
