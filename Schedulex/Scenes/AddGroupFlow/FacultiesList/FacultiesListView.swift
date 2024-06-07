@@ -42,7 +42,7 @@ struct FacultiesListView: RootView {
                                 .displayIf(store.faculties.last != $0 || (store.faculties.last == $0 && !store.facultyGroups.isEmpty))
                         }
                         ForEach(store.facultyGroups) { facultyGroup in
-                            FacultyGroupListRow(facultyGroup: facultyGroup, trailingIcon: .chevronRight, iconColor: .accentPrimary)
+                            BaseListRow(facultyGroup: facultyGroup)
                                 .onTapGesture { store.navigateToFacultyGroupDetails.send(facultyGroup) }
 
                             Separator()
@@ -52,19 +52,18 @@ struct FacultiesListView: RootView {
                 }
             }
         }
-        .overlay { loadingIndicatorOrEmptyState }
+        .overlay { emptyState }
         .baseListStyle(isLoading: store.isLoading.value)
         .disableAutocorrection(true)
     }
 
     private func facultyListRow(faculty: Faculty) -> some View {
-        BaseListItem(title: faculty.name, caption: "\(faculty.numberOfGroups) " + L10n.xGroups)
-            .trailingIcon(.chevronRight, iconSize: 15)
+        BaseListRow(faculty: faculty)
             .onTapGesture { store.navigateToFacultyGroupList.send(faculty) }
     }
 
     @ViewBuilder
-    private var loadingIndicatorOrEmptyState: some View {
+    private var emptyState: some View {
         if isSearchEmpty {
             EmptyStateView()
         }

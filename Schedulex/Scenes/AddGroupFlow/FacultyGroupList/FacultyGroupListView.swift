@@ -27,7 +27,7 @@ struct FacultyGroupListView: RootView {
             SearchField(prompt: L10n.group, searchText: $store.searchText, isFocused: $isSearchFocused)
 
             BaseList(store.facultyGroups) { facultyGroup in
-                FacultyGroupListRow(facultyGroup: facultyGroup, trailingIcon: .chevronRight, iconColor: .accentPrimary)
+                BaseListRow(facultyGroup: facultyGroup)
                     .onTapGesture { store.navigateToFacultyGroupDetails.send(facultyGroup) }
             }
         }
