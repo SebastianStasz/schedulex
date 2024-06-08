@@ -31,7 +31,7 @@ struct PavilionsListViewModel: ViewModel {
             }
 
         CombineLatest(school, store.$searchText)
-            .map { mapToPavilions($0.pavilions, searchText: $1) }
+            .map { $0.0.pavilions.filterUserSearch(text: $0.1) }
             .assign(to: &store.$pavilions)
 
         store.navigateToClassroomsListForPavilion
@@ -39,12 +39,6 @@ struct PavilionsListViewModel: ViewModel {
             .store(in: &store.cancellables)
 
         return store
-    }
-
-    private func mapToPavilions(_ pavilions: [Pavilion], searchText: String) -> [Pavilion] {
-        pavilions
-            .filterUserSearch(text: searchText, by: { $0.name })
-            .sorted(by: { $0.name < $1.name })
     }
 
     private func navigateToClassroomsList(for pavilion: Pavilion) {

@@ -24,15 +24,9 @@ struct ClassRoomsListViewModel: ViewModel {
         let store = ClassRoomsListStore()
 
         CombineLatest(Just(pavilion.classrooms), store.$searchText)
-            .map { mapToClassrooms($0, searchText: $1) }
+            .map { $0.0.filterUserSearch(text: $0.1) }
             .assign(to: &store.$classrooms)
 
         return store
-    }
-
-    private func mapToClassrooms(_ classrooms: [Classroom], searchText: String) -> [Classroom] {
-        classrooms
-            .filterUserSearch(text: searchText, by: { $0.name })
-            .sorted(by: { $0.name < $1.name })
     }
 }
