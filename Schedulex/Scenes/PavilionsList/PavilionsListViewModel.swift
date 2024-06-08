@@ -15,6 +15,7 @@ final class PavilionsListStore: RootStore {
     @Published var searchText = ""
 
     let isLoading = DriverState(true)
+    let navigateToClassroomsListForPavilion = DriverSubject<Pavilion>()
 }
 
 struct PavilionsListViewModel: ViewModel {
@@ -33,12 +34,22 @@ struct PavilionsListViewModel: ViewModel {
             .map { mapToPavilions($0.pavilions, searchText: $1) }
             .assign(to: &store.$pavilions)
 
+        store.navigateToClassroomsListForPavilion
+            .sink { navigateToClassroomsList(for: $0) }
+            .store(in: &store.cancellables)
+
         return store
     }
 
     private func mapToPavilions(_ pavilions: [Pavilion], searchText: String) -> [Pavilion] {
         pavilions
-            .filterUserSearch(text: searchText, by: { $0.pavilion })
-            .sorted(by: { $0.pavilion < $1.pavilion })
+            .filterUserSearch(text: searchText, by: { $0.name })
+            .sorted(by: { $0.name < $1.name })
+    }
+
+    private func navigateToClassroomsList(for pavilion: Pavilion) {
+        let viewModel = ClassRoomsListViewModel(pavilion: pavilion)
+        let viewController = ClassRoomsListViewController(viewModel: viewModel)
+        navigationController?.push(viewController)
     }
 }

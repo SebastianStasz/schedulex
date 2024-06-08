@@ -18,8 +18,9 @@ struct PavilionsListView: RootView {
         VStack(spacing: .medium) {
             SearchField(prompt: L10n.pavilionsListSearchPrompt, searchText: $store.searchText, isFocused: $isSearchFocused)
 
-            BaseList(store.pavilions) {
-                BaseListRow(pavilion: $0)
+            BaseList(store.pavilions) { pavilion in
+                BaseListRow(pavilion: pavilion)
+                    .onTapGesture { store.navigateToClassroomsListForPavilion.send(pavilion) }
             }
         }
         .baseListStyle(isLoading: store.isLoading.value)

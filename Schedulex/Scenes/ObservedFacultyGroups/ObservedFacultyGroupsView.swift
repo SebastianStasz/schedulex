@@ -16,7 +16,7 @@ struct ObservedFacultyGroupsView: RootView {
 
     var rootBody: some View {
         BaseList(store.subscribedGroups) { facultyGroup in
-            let caption = "\(facultyGroup.numberOfEvents) " + L10n.xEvents
+            let caption = L10n.numberOfEvents + " \(facultyGroup.numberOfEvents)"
             let isSelected = !facultyGroup.isHidden
             let action = { store.editFacultyGroup.send(facultyGroup) }
 

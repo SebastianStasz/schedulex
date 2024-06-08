@@ -26,19 +26,22 @@ struct BaseListRow: View {
 extension BaseListRow {
     init(faculty: Faculty) {
         title = faculty.name
-        caption = "\(faculty.numberOfGroups) " + L10n.xGroups
+        caption = L10n.numberOfGroups + " \(faculty.numberOfGroups)"
     }
 
     init(facultyGroup: FacultyGroup, trailingIcon _: Icon = .chevronRight, iconColor _: Color = .accentPrimary) {
         title = facultyGroup.name
-        caption = "\(facultyGroup.numberOfEvents) " + L10n.xEvents
+        caption = L10n.numberOfEvents + " \(facultyGroup.numberOfEvents)"
     }
 
     init(pavilion: Pavilion) {
-        title = pavilion.pavilion
-        let numberOfClassrooms = pavilion.numberOfClassrooms
-        let captionSuffix = numberOfClassrooms > 1 ? L10n.pavilionsListClassrooms : L10n.pavilionsListClassroom
-        caption = "\(numberOfClassrooms) " + captionSuffix
+        title = pavilion.name
+        caption = L10n.pavilionsListNumberOfClassrooms + " \(pavilion.numberOfClassrooms)"
+    }
+
+    init(classroom: Classroom) {
+        title = classroom.name
+        caption = ""
     }
 }
 

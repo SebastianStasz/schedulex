@@ -28,6 +28,8 @@ public enum L10n {
     public static let changeColorOfEvents = L10n.tr("Localizable", "change_color_of_events", fallback: "Change color of events")
     /// Classes
     public static let classes = L10n.tr("Localizable", "classes", fallback: "Classes")
+    /// Classroom name
+    public static let classroomsListSearchPrompt = L10n.tr("Localizable", "classrooms_list_search_prompt", fallback: "Classroom name")
     /// Color
     public static let color = L10n.tr("Localizable", "color", fallback: "Color")
     /// Confirm
@@ -116,14 +118,14 @@ public enum L10n {
     public static let numberOfClasses = L10n.tr("Localizable", "number_of_classes", fallback: "Number of classes:")
     /// Number of events:
     public static let numberOfEvents = L10n.tr("Localizable", "number_of_events", fallback: "Number of events:")
+    /// Number of groups:
+    public static let numberOfGroups = L10n.tr("Localizable", "number_of_groups", fallback: "Number of groups:")
     /// Observed
     public static let observedTitle = L10n.tr("Localizable", "observed_title", fallback: "Observed")
     /// Other
     public static let otherHeader = L10n.tr("Localizable", "other_header", fallback: "Other")
-    /// classrom
-    public static let pavilionsListClassroom = L10n.tr("Localizable", "pavilions_list_classroom", fallback: "classrom")
-    /// classrooms
-    public static let pavilionsListClassrooms = L10n.tr("Localizable", "pavilions_list_classrooms", fallback: "classrooms")
+    /// Number of classrooms:
+    public static let pavilionsListNumberOfClassrooms = L10n.tr("Localizable", "pavilions_list_number_of_classrooms", fallback: "Number of classrooms:")
     /// Pavilion name
     public static let pavilionsListSearchPrompt = L10n.tr("Localizable", "pavilions_list_search_prompt", fallback: "Pavilion name")
     /// Pavilions
@@ -228,10 +230,6 @@ public enum L10n {
     public static let weekdayTuesdayShort = L10n.tr("Localizable", "weekday_tuesday_short", fallback: "TUE")
     /// WED
     public static let weekdayWednesdayShort = L10n.tr("Localizable", "weekday_wednesday_short", fallback: "WED")
-    /// events
-    public static let xEvents = L10n.tr("Localizable", "x_events", fallback: "events")
-    /// groups
-    public static let xGroups = L10n.tr("Localizable", "x_groups", fallback: "groups")
 }
 
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length

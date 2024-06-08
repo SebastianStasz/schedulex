@@ -67,10 +67,9 @@
 "other_header" = "Other";
 "for_everyone_header" = "For everyone";
 "faculty_or_group_prompt" = "Faculty or group";
-"x_groups" = "groups";
-"x_events" = "events";
 "number_of_classes" = "Number of classes:";
 "number_of_events" = "Number of events:";
+"number_of_groups" = "Number of groups:";
 "set_classes_visibility" = "Set visibility of classes";
 "hidden" = "Hidden";
 "visible" = "Visible";
@@ -86,8 +85,8 @@
 // pavilions_list
 "pavilions_list_title" = "Pavilions";
 "pavilions_list_search_prompt" = "Pavilion name";
-"pavilions_list_classrooms" = "classrooms";
-"pavilions_list_classroom" = "classrom";
+"pavilions_list_number_of_classrooms" = "Number of classrooms:";
+"classrooms_list_search_prompt" = "Classroom name";
 
 // settings
 "settings_title" = "Settings";

@@ -8,12 +8,12 @@
 import Foundation
 
 public struct Pavilion: Decodable, Identifiable {
-    public let pavilion: String
+    public let name: String
     public let classrooms: [Classroom]
 
     public var numberOfClassrooms: Int {
         classrooms.count
     }
 
-    public var id: String { pavilion }
+    public var id: String { name }
 }

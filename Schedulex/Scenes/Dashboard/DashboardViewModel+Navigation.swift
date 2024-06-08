@@ -32,7 +32,7 @@ extension DashboardViewModel {
     }
 
     private func pushRoomsListView() {
-        let viewModel = PavilionsListViewModel()
+        let viewModel = PavilionsListViewModel(navigationController: navigationController)
         let viewController = RoomsListViewController(viewModel: viewModel)
         navigationController?.push(viewController)
     }
