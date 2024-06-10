@@ -41,7 +41,7 @@ extension BaseListRow {
 
     init(classroom: Classroom) {
         title = classroom.name
-        caption = ""
+        caption = L10n.numberOfEvents + " \(classroom.numberOfEvents)"
     }
 }
 

@@ -1,5 +1,5 @@
 //
-//  ClassRoomsListView.swift
+//  ClassroomsListView.swift
 //  Schedulex
 //
 //  Created by Sebastian Staszczyk on 07/06/2024.
@@ -10,9 +10,9 @@ import SchedulexViewModel
 import SwiftUI
 import Widgets
 
-struct ClassRoomsListView: RootView {
+struct ClassroomsListView: RootView {
     @State private var isSearchFocused = false
-    @ObservedObject var store: ClassRoomsListStore
+    @ObservedObject var store: ClassroomsListStore
 
     var rootBody: some View {
         VStack(spacing: .medium) {
@@ -25,7 +25,7 @@ struct ClassRoomsListView: RootView {
     }
 }
 
-final class ClassRoomsListViewController: SwiftUIViewController<ClassRoomsListViewModel, ClassRoomsListView> {
+final class ClassroomsListViewController: SwiftUIViewController<ClassroomsListViewModel, ClassroomsListView> {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = viewModel.pavilion.name
@@ -33,5 +33,5 @@ final class ClassRoomsListViewController: SwiftUIViewController<ClassRoomsListVi
 }
 
 #Preview {
-    ClassRoomsListView(store: ClassRoomsListStore())
+    ClassroomsListView(store: ClassroomsListStore())
 }

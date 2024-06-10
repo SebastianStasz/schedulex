@@ -22,7 +22,7 @@ struct DetailsDecoder {
         return FacultyGroupDetails(name: facultyGroup.name, isHidden: facultyGroup.isHidden, events: events, classes: classes)
     }
 
-    private func eventsData(from rows: [Element], for facultyGroup: FacultyGroup) -> [EventData] {
+    private func eventsData(from rows: [Element], for facultyGroup: FacultyGroup?) -> [EventData] {
         var events: [EventData] = []
         for (index, row) in rows.enumerated() {
             if var eventData = toEventData(from: row, for: facultyGroup) {
@@ -41,7 +41,7 @@ struct DetailsDecoder {
         return notes.first
     }
 
-    private func toEventData(from row: Element, for facultyGroup: FacultyGroup) -> EventData? {
+    private func toEventData(from row: Element, for facultyGroup: FacultyGroup?) -> EventData? {
         guard let columns = try? row.select("td").array() else { return nil }
 
         let cells = columns.compactMap { try? $0.text() }

@@ -42,8 +42,8 @@ struct PavilionsListViewModel: ViewModel {
     }
 
     private func navigateToClassroomsList(for pavilion: Pavilion) {
-        let viewModel = ClassRoomsListViewModel(pavilion: pavilion)
-        let viewController = ClassRoomsListViewController(viewModel: viewModel)
+        let viewModel = ClassroomsListViewModel(pavilion: pavilion)
+        let viewController = ClassroomsListViewController(viewModel: viewModel)
         navigationController?.push(viewController)
     }
 }

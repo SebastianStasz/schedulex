@@ -45,8 +45,11 @@ struct EventData {
         type == "Przeniesienie zajęć"
     }
 
-    func isValidEvent(for facultyGroup: FacultyGroup) -> Bool {
-        !(!facultyGroup.isLanguage && isLanguageEvent)
+    func isValidEvent(for facultyGroup: FacultyGroup?) -> Bool {
+        if let facultyGroup {
+            return !(!facultyGroup.isLanguage && isLanguageEvent)
+        }
+        return true
     }
 
     func toEvent(facultyGroup: FacultyGroup, datesDecoder: DatesDecoder) -> Event {
