@@ -106,7 +106,7 @@ struct FacultyGroupDetailsViewModel: ViewModel {
     }
 
     private func navigateToFacultyGroupEventsListView(events: [Event]) {
-        let view = FacultyGroupEventListView(facultyGroup: facultyGroup, events: events)
+        let view = FacultyGroupEventListView(title: facultyGroup.name, color: facultyGroup.color, events: events)
         let viewController = UIHostingController(rootView: view)
         viewController.title = facultyGroup.name
         navigationController?.push(viewController)

@@ -37,6 +37,8 @@ struct ClassroomsListViewModel: ViewModel {
     }
 
     private func navigateToEventsListView(classroom: Classroom) {
-
+        let viewModel = ClassroomEventsListViewModel(classroom: classroom)
+        let viewController = ClassroomEventsListViewController(viewModel: viewModel)
+        navigationController?.push(viewController)
     }
 }

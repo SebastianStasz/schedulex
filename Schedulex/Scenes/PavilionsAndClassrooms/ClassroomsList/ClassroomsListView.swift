@@ -18,8 +18,9 @@ struct ClassroomsListView: RootView {
         VStack(spacing: .medium) {
             SearchField(prompt: L10n.classroomsListSearchPrompt, searchText: $store.searchText, isFocused: $isSearchFocused)
 
-            BaseList(store.classrooms) {
-                BaseListRow(classroom: $0)
+            BaseList(store.classrooms) { classroom in
+                BaseListRow(classroom: classroom)
+                    .onTapGesture { store.navigateToEventsListView.send(classroom) }
             }
         }
     }
