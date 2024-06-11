@@ -47,7 +47,7 @@ final class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCent
         var config = UIImage.SymbolConfiguration(paletteColors: [.label])
         config = config.applying(UIImage.SymbolConfiguration(font: .systemFont(ofSize: 18, weight: .medium)))
 
-        let backButtonImage = UIImage(systemName: "chevron.backward", withConfiguration: config)?
+        let backButtonImage = UIImage(systemName: "arrow.backward", withConfiguration: config)?
             .withAlignmentRectInsets(UIEdgeInsets(top: 0, left: -4, bottom: 0, right: 0))
 
         UINavigationBar.appearance().backIndicatorImage = backButtonImage
