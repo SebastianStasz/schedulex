@@ -14,13 +14,15 @@ public struct UekScheduleService {
 
     public init() {}
 
-    public func getFacultyGroupDetails(for facultyGroup: FacultyGroup) async throws -> FacultyGroupDetails {
-        try await getDetails(for: facultyGroup)
+    public func getEvents(from urlString: String) async throws -> [Event] {
+        let webContent = try await apiService.getWebContent(from: urlString)
+        let events = try detailsDecoder.toEvents(from: webContent)
+        return events
     }
 
-    private func getDetails(for facultyGroup: FacultyGroup) async throws -> FacultyGroupDetails {
+    public func getFacultyGroupDetails(for facultyGroup: FacultyGroup) async throws -> FacultyGroupDetails {
         let webContent = try await apiService.getWebContent(from: facultyGroup.facultyUrl)
-        let details = try detailsDecoder.decodeDetails(from: webContent, facultyGroup: facultyGroup)
+        let details = try detailsDecoder.toFacultyGroupDetails(from: webContent, facultyGroup: facultyGroup)
         return details
     }
 }

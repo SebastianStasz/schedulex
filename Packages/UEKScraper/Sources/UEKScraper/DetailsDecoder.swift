@@ -10,22 +10,34 @@ import Foundation
 import SwiftSoup
 
 struct DetailsDecoder {
+    typealias EventDataValidator = (EventData) -> Bool
     private let datesDecoder = DatesDecoder()
 
-    func decodeDetails(from content: String, facultyGroup: FacultyGroup) throws -> FacultyGroupDetails {
-        let document = try SwiftSoup.parse(content)
-        let table = try document.select("table")
-        let rows = try table.select("tr").array()
-        let eventsData = eventsData(from: rows, for: facultyGroup)
-        let events = eventsData.map { $0.toEvent(facultyGroup: facultyGroup, datesDecoder: datesDecoder) }
+    func toFacultyGroupDetails(from content: String, facultyGroup: FacultyGroup) throws -> FacultyGroupDetails {
+        let eventsData = try decodeEventsData(from: content, omitLanguageClasses: !facultyGroup.isLanguage)
+        let events = eventsData.compactMap { $0.toEvent(datesDecoder: datesDecoder) }
         let classes = getClasses(from: eventsData)
         return FacultyGroupDetails(facultyGroup: facultyGroup, isHidden: facultyGroup.isHidden, events: events, classes: classes)
     }
 
-    private func eventsData(from rows: [Element], for facultyGroup: FacultyGroup?) -> [EventData] {
+    func toEvents(from content: String) throws -> [Event] {
+        let eventsData = try decodeEventsData(from: content, omitLanguageClasses: false)
+        let events = eventsData.compactMap { $0.toEvent(datesDecoder: datesDecoder) }
+        return events
+    }
+
+    private func decodeEventsData(from content: String, omitLanguageClasses: Bool) throws -> [EventData] {
+        let document = try SwiftSoup.parse(content)
+        let table = try document.select("table")
+        let rows = try table.select("tr").array()
+        let eventsData = eventsData(from: rows, omitLanguageClasses: omitLanguageClasses)
+        return eventsData
+    }
+
+    private func eventsData(from rows: [Element], omitLanguageClasses: Bool) -> [EventData] {
         var events: [EventData] = []
         for (index, row) in rows.enumerated() {
-            if var eventData = toEventData(from: row, for: facultyGroup) {
+            if var eventData = toEventData(from: row, omitLanguageClasses: omitLanguageClasses) {
                 if eventData.isEventTransfer, let row = rows[safe: index + 1] {
                     let eventTransferNote = eventTransferNote(from: row)
                     eventData.eventTransferNote = eventTransferNote
@@ -41,7 +53,7 @@ struct DetailsDecoder {
         return notes.first
     }
 
-    private func toEventData(from row: Element, for facultyGroup: FacultyGroup?) -> EventData? {
+    private func toEventData(from row: Element, omitLanguageClasses: Bool) -> EventData? {
         guard let columns = try? row.select("td").array() else { return nil }
 
         let cells = columns.compactMap { try? $0.text() }
@@ -59,7 +71,8 @@ struct DetailsDecoder {
                                   teacherProfileLink: teacherProfileLink,
                                   teamsLink: teamsLink,
                                   eventTransferNote: nil)
-        return eventData.isValidEvent(for: facultyGroup) ? eventData : nil
+        let isValidEvent = eventData.isValidEvent(omitLanguageClasses: omitLanguageClasses)
+        return isValidEvent ? eventData : nil
     }
 
     private func getClasses(from events: [EventData]) -> [FacultyGroupClass] {
