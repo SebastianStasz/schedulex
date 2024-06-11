@@ -24,6 +24,7 @@
 "break_card_time_suffix" = "h.";
 "event_details_link_to_class" = "Link to class";
 "event_details_business_card" = "Business card";
+"dashboard_title" = "Homepage";
 "dashboard_all_groups_are_hidden" = "All subscribed groups are hidden.\nClick \"My groups\" to manage them.";
 "dashboard_groups_have_no_events" = "The groups you follow don't contain any classes. \nClick \"My groups\" and add another group.";
 "dashboard_no_events_to_display" = "No events to display";
@@ -67,9 +68,9 @@
 "other_header" = "Other";
 "for_everyone_header" = "For everyone";
 "faculty_or_group_prompt" = "Faculty or group";
+"number_of_groups" = "Number of groups:";
 "number_of_classes" = "Number of classes:";
 "number_of_events" = "Number of events:";
-"number_of_groups" = "Number of groups:";
 "set_classes_visibility" = "Set visibility of classes";
 "hidden" = "Hidden";
 "visible" = "Visible";
