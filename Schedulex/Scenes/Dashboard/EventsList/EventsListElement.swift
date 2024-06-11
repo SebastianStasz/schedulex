@@ -10,31 +10,31 @@ import Foundation
 import Widgets
 
 enum EventsListElement {
-    case event(Event, isFirst: Bool, isLast: Bool, dayOff: DayOff?)
+    case event(Event, color: FacultyGroupColor, isFirst: Bool, isLast: Bool, dayOff: DayOff?)
     case `break`(from: Date, to: Date, timeComponents: DateComponents)
 
     var isFirst: Bool {
-        guard case let .event(_, isFirst, _, _) = self else { return false }
+        guard case let .event(_, _, isFirst, _, _) = self else { return false }
         return isFirst
     }
 
     var isLast: Bool {
-        guard case let .event(_, _, isLast, _) = self else { return false }
+        guard case let .event(_, _, _, isLast, _) = self else { return false }
         return isLast
     }
 
     var startTime: String? {
-        guard case let .event(event, _, _, _) = self else { return nil }
+        guard case let .event(event, _, _, _, _) = self else { return nil }
         return event.startDate?.formatted(style: .timeOnly)
     }
 
     var endTime: String? {
-        guard case let .event(event, _, _, _) = self else { return nil }
+        guard case let .event(event, _, _, _, _) = self else { return nil }
         return event.endDate?.formatted(style: .timeOnly)
     }
 
     var isCancelled: Bool {
-        guard case let .event(event, _, _, dayOff) = self else { return false }
+        guard case let .event(event, _, _, _, dayOff) = self else { return false }
         guard let startDate = event.startDate, let endDate = event.endDate, let dayOff else {
             return false
         }
@@ -48,7 +48,7 @@ enum EventsListElement {
 
     func makeCircleIcon(for date: Date) -> Icon {
         switch self {
-        case let .event(event, _, _, _):
+        case let .event(event, _, _, _, _):
             guard !isCancelled else { return .freeHoursCircleFill }
             guard let endDate = event.endDate, endDate > date else { return .circleFill }
             return event.startDate! > date ? .circle : .doubleCircle

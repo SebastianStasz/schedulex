@@ -55,7 +55,7 @@ struct DashboardView: RootView {
         .sheet(isPresented: $isDatePickerPresented) { datePicker }
     }
 
-    private var eventsToDisplay: [Event] {
+    private var eventsToDisplay: [FacultyGroupEvent] {
         let shouldDisplayEvents = !store.showErrorInfo
         return shouldDisplayEvents ? store.selectedDateEvents : []
     }

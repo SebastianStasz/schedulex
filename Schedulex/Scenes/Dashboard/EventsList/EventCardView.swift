@@ -14,6 +14,7 @@ struct EventCardView: View {
     @Environment(\.openURL) private var openURL
 
     let event: Event
+    let color: FacultyGroupColor
     let currentDate: Date
     let isEventInProgress: Bool
     let isCancelled: Bool
@@ -27,7 +28,7 @@ struct EventCardView: View {
 
                     Image(systemName: "info.square")
                 }
-                .foregroundStyle(event.facultyGroupColor.shade1)
+                .foregroundStyle(color.shade1)
 
                 VStack(alignment: .leading, spacing: .micro) {
                     Text(event.teacher ?? "", style: .footnote)
@@ -39,7 +40,7 @@ struct EventCardView: View {
 
                     HStack(spacing: 0) {
                         Text(eventDescription, style: .footnote)
-                            .foregroundStyle(event.isEventTransfer || isCancelled ? .red : event.facultyGroupColor.shade2)
+                            .foregroundStyle(event.isEventTransfer || isCancelled ? .red : color.shade2)
                             .opacity(showTeamsButton ? 0 : 1)
 
                         Spacer()
@@ -49,12 +50,12 @@ struct EventCardView: View {
                         }
                     }
                 }
-                .foregroundStyle(event.facultyGroupColor.shade2)
+                .foregroundStyle(color.shade2)
             }
         }
         .lineLimit(1, reservesSpace: true)
         .padding(.medium)
-        .background(event.facultyGroupColor.shade4)
+        .background(color.shade4)
         .clipShape(RoundedRectangle(cornerRadius: 12))
         .overlay(teamsButton.padding(.medium), alignment: .bottomLeading)
     }
@@ -105,8 +106,8 @@ struct EventCardView: View {
 
 #Preview {
     VStack(spacing: .large) {
-        EventCardView(event: .sample, currentDate: .now, isEventInProgress: false, isCancelled: false)
-        EventCardView(event: .eventTransfer, currentDate: .now, isEventInProgress: false, isCancelled: false)
+        EventCardView(event: .sample, color: .blue, currentDate: .now, isEventInProgress: false, isCancelled: false)
+        EventCardView(event: .eventTransfer, color: .green, currentDate: .now, isEventInProgress: false, isCancelled: false)
     }
     .padding(.large)
 }

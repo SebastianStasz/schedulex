@@ -24,7 +24,7 @@ struct DashboardEventsViewModel {
     struct Output {
         let dayPickerItems: Driver<[DayPickerItem]?>
         let facultiesGroupsDetails: Driver<[FacultyGroupDetails]>
-        let eventsToDisplay: Driver<[Event]>
+        let eventsToDisplay: Driver<[FacultyGroupEvent]>
         let isLoading: Driver<Bool>
         let errorTracker: Driver<Error>
     }
@@ -88,8 +88,8 @@ struct DashboardEventsViewModel {
 }
 
 private extension [FacultyGroupDetails] {
-    func mapToEventsWithoutHiddenClasses(hiddenClasses: [EditableFacultyGroupClass]) -> [Event] {
-        var events: [Event] = []
+    func mapToEventsWithoutHiddenClasses(hiddenClasses: [EditableFacultyGroupClass]) -> [FacultyGroupEvent] {
+        var events: [FacultyGroupEvent] = []
         for facultyGroupDetails in self {
             guard !facultyGroupDetails.isHidden else { continue }
             let hiddenClasses = hiddenClasses
@@ -98,6 +98,7 @@ private extension [FacultyGroupDetails] {
 
             let newEvents = facultyGroupDetails.events
                 .filter { !hiddenClasses.contains($0.class) }
+                .map { $0.toFacultyGroupEvent(facultyGroup: facultyGroupDetails) }
 
             events.append(contentsOf: newEvents)
         }
@@ -105,7 +106,7 @@ private extension [FacultyGroupDetails] {
     }
 }
 
-private extension [Event] {
+private extension [FacultyGroupEvent] {
     func mapToDayPickerItems(daysOff: [DayOff]) -> [DayPickerItem]? {
         let eventsByDate = sorted(by: { $0.startDate! < $1.startDate! })
 
@@ -127,7 +128,7 @@ private extension [Event] {
         return dates.map { date in
             let hasFreeHours = daysOff.contains(where: { $0.date.isSameDay(as: date) })
             if let events = eventsByDay[date.formatted(date: .numeric, time: .omitted)] {
-                let colors = Set(events.map { $0.facultyGroupColor })
+                let colors = Set(events.map { $0.color })
                     .sorted(by: { $0.id < $1.id })
                     .map { $0.representative }
                 return DayPickerItem(date: date, circleColors: colors, hasFreeHours: hasFreeHours)

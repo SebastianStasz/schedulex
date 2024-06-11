@@ -10,14 +10,14 @@ import SwiftUI
 import Widgets
 
 struct FacultyGroupEventListView: View {
-    let facultyGroupName: String
+    let facultyGroup: FacultyGroup
     let events: [Event]
 
     var body: some View {
         SectionedList(listSections ?? [], separatorHeight: .medium) { _, event in
-            EventCardView(event: event, currentDate: .now, isEventInProgress: false, isCancelled: false)
+            EventCardView(event: event, color: facultyGroup.color, currentDate: .now, isEventInProgress: false, isCancelled: false)
         }
-        .navigationTitle(facultyGroupName)
+        .navigationTitle(facultyGroup.name)
         .baseListStyle()
     }
 
@@ -38,5 +38,5 @@ struct FacultyGroupEventListView: View {
 }
 
 #Preview {
-    FacultyGroupEventListView(facultyGroupName: "", events: [])
+    FacultyGroupEventListView(facultyGroup: .sample, events: [])
 }

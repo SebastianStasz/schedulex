@@ -10,7 +10,6 @@ import SwiftUI
 import Widgets
 
 struct EventsListRow: View {
-//    @State private var animate = false
     let element: EventsListElement
 
     var body: some View {
@@ -36,8 +35,6 @@ struct EventsListRow: View {
                         .frame(width: 12, height: 12)
                         .padding(.top, element.isFirst ? 0 : 5)
                         .padding(.bottom, 5)
-//                        .scaleEffect(isEventInProgress ? (animate ? 1 : 1.2) : 1)
-//                        .animation(.easeInOut(duration: 2).repeatForever(autoreverses: true), value: animate)
 
                     Rectangle()
                         .frame(width: 1)
@@ -50,8 +47,8 @@ struct EventsListRow: View {
                 .foregroundStyle(.accentPrimary)
 
                 switch element {
-                case let .event(event, _, isLast, _):
-                    EventCardView(event: event, currentDate: timeline.date, isEventInProgress: isEventInProgress, isCancelled: element.isCancelled)
+                case let .event(event, color, _, isLast, _):
+                    EventCardView(event: event, color: color, currentDate: timeline.date, isEventInProgress: isEventInProgress, isCancelled: element.isCancelled)
                         .padding(.bottom, isLast ? 0 : .medium)
                 case let .break(_, _, breakTimeComponents):
                     BreakCardView(breakTimeComponents: breakTimeComponents)
@@ -60,13 +57,12 @@ struct EventsListRow: View {
             }
             .fixedSize(horizontal: false, vertical: true)
         }
-//        .onAppear { animate = true }
     }
 }
 
 #Preview {
     VStack(spacing: .large) {
-        EventsListRow(element: .event(.sample, isFirst: true, isLast: true, dayOff: nil))
+        EventsListRow(element: .event(.sample, color: .blue, isFirst: true, isLast: true, dayOff: nil))
         EventsListRow(element: .break(from: .now, to: .now, timeComponents: DateComponents(hour: 1, minute: 45)))
     }
     .padding(.medium)
