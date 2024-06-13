@@ -6,11 +6,11 @@
 //
 
 import Domain
+import SchedulexCore
+import SchedulexViewModel
+import UEKScraper
 import UIKit
 import Widgets
-import SchedulexViewModel
-import SchedulexCore
-import UEKScraper
 
 final class EventsListStore: RootStore {
     @Published var searchText = ""
@@ -32,7 +32,8 @@ struct EventsListViewModel: ViewModel {
         let store = EventsListStore(color: input.color)
         let eventsPublisher = DriverSubject<[Event]>()
 
-        eventsPublisher
+        CombineLatest(eventsPublisher, store.$searchText)
+            .map { filterEvents($0, searchText: $1) }
             .map { makeSections(from: $0) }
             .assign(to: &store.$sections)
 
@@ -52,17 +53,16 @@ struct EventsListViewModel: ViewModel {
         return store
     }
 
+    private func filterEvents(_ events: [Event], searchText: String) -> [Event] {
+        searchText.isEmpty ? events : events.filter {
+            let fields = [$0.type, $0.name, $0.place, $0.teacher]
+            return fields.contains { $0?.containsCaseInsensitive(searchText) ?? false }
+        }
+    }
+
     private func makeSections(from events: [Event]) -> [ListSection<Event>] {
-        events
-            .reduce(into: [ListSection<Event>]()) { result, event in
-                let date = event.startDateWithoutTime.formatted(style: .dateLong)
-                if let sectionIndex = result.firstIndex(where: { $0.title == date }) {
-                    let items = result[sectionIndex].items
-                    result.remove(at: sectionIndex)
-                    result.append(ListSection(title: date, items: items + [event]))
-                } else {
-                    result.append(ListSection(title: date, items: [event]))
-                }
-            }
+        Dictionary(grouping: events) { $0.startDateWithoutTime }
+            .sorted { $0.key < $1.key }
+            .map { ListSection(title: $0.formatted(style: .dateLong), items: $1) }
     }
 }

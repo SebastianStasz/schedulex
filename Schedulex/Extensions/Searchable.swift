@@ -5,7 +5,6 @@
 //  Created by Sebastian Staszczyk on 08/06/2024.
 //
 
-
 import Domain
 
 protocol Searchable {

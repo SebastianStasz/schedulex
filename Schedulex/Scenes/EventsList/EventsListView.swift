@@ -5,10 +5,9 @@
 //  Created by Sebastian Staszczyk on 02/10/2023.
 //
 
-import Domain
+import SchedulexViewModel
 import SwiftUI
 import Widgets
-import SchedulexViewModel
 
 struct EventsListView: RootView {
     @State private var isSearchFocused = false
@@ -18,13 +17,17 @@ struct EventsListView: RootView {
         VStack(spacing: 0) {
             SearchField(prompt: "Search", searchText: $store.searchText, isFocused: $isSearchFocused)
 
-            ScrollViewReader { proxy in
+            ScrollViewReader { _ in
                 SectionedList(store.sections, pinnedHeaders: true, separatorHeight: .medium) { _, event in
                     EventCardView(event: event, color: store.color, currentDate: .now, isEventInProgress: false, isCancelled: false)
                 }
             }
         }
-        .baseListStyle(isEmpty: store.sections.isEmpty, isLoading: store.isLoading.value)
+        .baseListStyle(isEmpty: isEmpty, isLoading: store.isLoading.value)
+    }
+
+    private var isEmpty: Bool {
+        store.sections.isEmpty && store.searchText.isEmpty
     }
 }
 

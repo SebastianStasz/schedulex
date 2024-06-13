@@ -48,8 +48,8 @@ public enum L10n {
     public static let dashboardNoEventsToDisplay = L10n.tr("Localizable", "dashboard_no_events_to_display", fallback: "No events to display")
     /// Open Teams
     public static let dashboardOpenTeams = L10n.tr("Localizable", "dashboard_open_teams", fallback: "Open Teams")
-  /// Homepage
-  public static let dashboardTitle = L10n.tr("Localizable", "dashboard_title", fallback: "Homepage")
+    /// Homepage
+    public static let dashboardTitle = L10n.tr("Localizable", "dashboard_title", fallback: "Homepage")
     /// Done
     public static let doneButton = L10n.tr("Localizable", "done_button", fallback: "Done")
     /// Class cancelled
