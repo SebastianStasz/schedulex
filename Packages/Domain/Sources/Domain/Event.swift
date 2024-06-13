@@ -11,8 +11,8 @@ public struct Event: Hashable, Identifiable {
     public let isEventTransfer: Bool
     public let isRemoteClass: Bool
     public let eventTransferNote: String?
-    public let startDate: Date?
-    public let endDate: Date?
+    public let startDate: Date
+    public let endDate: Date
     public let name: String?
     public let place: String?
     public let teacher: String?
@@ -27,8 +27,8 @@ public struct Event: Hashable, Identifiable {
     public init(isEventTransfer: Bool,
                 isRemoteClass: Bool,
                 eventTransferNote: String?,
-                startDate: Date?,
-                endDate: Date?,
+                startDate: Date,
+                endDate: Date,
                 name: String?,
                 place: String?,
                 teacher: String?,
@@ -63,7 +63,6 @@ public struct Event: Hashable, Identifiable {
     }
 
     public var startDateWithoutTime: Date? {
-        guard let startDate else { return nil }
-        return Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: startDate)
+        Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: startDate)
     }
 }

@@ -66,14 +66,13 @@ struct EventCardView: View {
     }
 
     private var status: String? {
-        guard let startDate = event.startDate, let endDate = event.endDate else { return nil }
-        if endDate <= currentDate {
+        if event.endDate <= currentDate {
             return nil
         } else {
             let formatter = RelativeDateTimeFormatter()
             formatter.unitsStyle = .short
-            let isBeforeEvent = startDate > currentDate
-            let date = isBeforeEvent ? startDate : endDate
+            let isBeforeEvent = event.startDate > currentDate
+            let date = isBeforeEvent ? event.startDate : event.endDate
             let prefix = isBeforeEvent ? "" : "\(L10n.eventFinishingIn) "
             let description = formatter.localizedString(for: date, relativeTo: currentDate)
             return prefix + description

@@ -25,17 +25,17 @@ enum EventsListElement {
 
     var startTime: String? {
         guard case let .event(event, _, _, _, _) = self else { return nil }
-        return event.startDate?.formatted(style: .timeOnly)
+        return event.startDate.formatted(style: .timeOnly)
     }
 
     var endTime: String? {
         guard case let .event(event, _, _, _, _) = self else { return nil }
-        return event.endDate?.formatted(style: .timeOnly)
+        return event.endDate.formatted(style: .timeOnly)
     }
 
     var isCancelled: Bool {
         guard case let .event(event, _, _, _, dayOff) = self else { return false }
-        guard let startDate = event.startDate, let endDate = event.endDate, let dayOff else {
+        guard let dayOff else {
             return false
         }
         guard let startTime = dayOff.startTime, let endTime = dayOff.endTime else {
@@ -43,15 +43,15 @@ enum EventsListElement {
         }
         let startTime2 = Calendar.current.date(byAdding: .second, value: -1, to: startTime)!
         let endTime2 = Calendar.current.date(byAdding: .second, value: 1, to: endTime)!
-        return startDate > startTime2 && endDate < endTime2
+        return event.startDate > startTime2 && event.endDate < endTime2
     }
 
     func makeCircleIcon(for date: Date) -> Icon {
         switch self {
         case let .event(event, _, _, _, _):
             guard !isCancelled else { return .freeHoursCircleFill }
-            guard let endDate = event.endDate, endDate > date else { return .circleFill }
-            return event.startDate! > date ? .circle : .doubleCircle
+            guard event.endDate > date else { return .circleFill }
+            return event.startDate > date ? .circle : .doubleCircle
         case let .break(startDate, endDate, _):
             guard startDate < date else { return .circle }
             return endDate > date ? .doubleCircle : .circleFill

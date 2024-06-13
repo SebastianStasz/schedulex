@@ -62,10 +62,9 @@ struct EventDetailsView: View {
     }
 
     private var subtitle: String {
-        guard let startDate = event.startDate, let endDate = event.endDate else { return "" }
-        let date = startDate.formatted(style: .dateLong)
-        let startTime = startDate.formatted(style: .timeOnly)
-        let endTime = endDate.formatted(style: .timeOnly)
+        let date = event.startDate.formatted(style: .dateLong)
+        let startTime = event.startDate.formatted(style: .timeOnly)
+        let endTime = event.endDate.formatted(style: .timeOnly)
         return "\(date)  |  \(startTime) - \(endTime)"
     }
 }
