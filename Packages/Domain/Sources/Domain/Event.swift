@@ -62,7 +62,7 @@ public struct Event: Hashable, Identifiable {
         FacultyGroupClass(name: name ?? "", type: type ?? "", teacher: teacher ?? "")
     }
 
-    public var startDateWithoutTime: Date? {
-        Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: startDate)
+    public var startDateWithoutTime: Date {
+        Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: startDate) ?? startDate
     }
 }

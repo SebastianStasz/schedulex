@@ -15,4 +15,10 @@ extension ViewModel {
         let viewController = FacultyGroupDetailsViewController(viewModel: viewModel)
         navigationController?.push(viewController)
     }
+
+    func pushEventsListView(input: EventsListInput) {
+        let viewModel = EventsListViewModel(input: input)
+        let viewController = EventsListViewController(viewModel: viewModel)
+        navigationController?.push(viewController)
+    }
 }
