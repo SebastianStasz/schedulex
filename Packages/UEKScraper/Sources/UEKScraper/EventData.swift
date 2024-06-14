@@ -15,8 +15,9 @@ struct EventData {
     let time: String
     let place: String?
     let teacher: String?
-    let teacherProfileLink: String?
     let teamsLink: String?
+    let facultyGroup: String?
+    let teacherProfileLink: String?
     var eventTransferNote: String?
 
     private var teacherProfileUrl: URL? {
@@ -52,7 +53,7 @@ struct EventData {
 
     func toEvent(datesDecoder: DatesDecoder) -> Event? {
         guard let (startDate, endDate) = datesDecoder.getDates(date: date, time: time) else { return nil }
-        return Event(isEventTransfer: isEventTransfer, isRemoteClass: isRemoteClass, eventTransferNote: eventTransferNote, startDate: startDate, endDate: endDate, name: name, place: place, teacher: teacher, teacherProfileUrl: teacherProfileUrl, teamsUrl: teamsUrl, type: type)
+        return Event(name: name, type: type, startDate: startDate, endDate: endDate, place: place, teamsUrl: teamsUrl, isRemoteClass: isRemoteClass, isEventTransfer: isEventTransfer, eventTransferNote: eventTransferNote, teacher: teacher, teacherProfileUrl: teacherProfileUrl, facultyGroup: facultyGroup)
     }
 
     func toFacultyGroupClass() -> FacultyGroupClass? {

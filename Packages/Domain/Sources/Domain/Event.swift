@@ -8,45 +8,49 @@
 import Foundation
 
 public struct Event: Hashable, Identifiable {
-    public let isEventTransfer: Bool
-    public let isRemoteClass: Bool
-    public let eventTransferNote: String?
+    public let name: String?
+    public let type: String?
     public let startDate: Date
     public let endDate: Date
-    public let name: String?
     public let place: String?
+    public let teamsUrl: URL?
+    public let isRemoteClass: Bool
+    public let isEventTransfer: Bool
+    public let eventTransferNote: String?
     public let teacher: String?
     public let teacherProfileUrl: URL?
-    public let teamsUrl: URL?
-    public let type: String?
+    public let facultyGroup: String?
 
     public var id: Int {
         hashValue
     }
 
-    public init(isEventTransfer: Bool,
-                isRemoteClass: Bool,
-                eventTransferNote: String?,
-                startDate: Date,
-                endDate: Date,
-                name: String?,
-                place: String?,
-                teacher: String?,
-                teacherProfileUrl: URL?,
-                teamsUrl: URL?,
-                type: String?)
-    {
-        self.isEventTransfer = isEventTransfer
-        self.isRemoteClass = isRemoteClass
-        self.eventTransferNote = eventTransferNote
+    public init(
+        name: String? = nil,
+        type: String? = nil,
+        startDate: Date,
+        endDate: Date,
+        place: String? = nil,
+        teamsUrl: URL? = nil,
+        isRemoteClass: Bool,
+        isEventTransfer: Bool,
+        eventTransferNote: String? = nil,
+        teacher: String? = nil,
+        teacherProfileUrl: URL? = nil,
+        facultyGroup: String? = nil
+    ) {
+        self.name = name
+        self.type = type
         self.startDate = startDate
         self.endDate = endDate
-        self.name = name
         self.place = place
+        self.teamsUrl = teamsUrl
+        self.isRemoteClass = isRemoteClass
+        self.isEventTransfer = isEventTransfer
+        self.eventTransferNote = eventTransferNote
         self.teacher = teacher
         self.teacherProfileUrl = teacherProfileUrl
-        self.teamsUrl = teamsUrl
-        self.type = type
+        self.facultyGroup = facultyGroup
     }
 
     public var typeDescription: String {
