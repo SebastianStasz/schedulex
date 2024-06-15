@@ -29,9 +29,11 @@ extension BaseListRow {
         caption = L10n.numberOfGroups + " \(faculty.numberOfGroups)"
     }
 
-    init(facultyGroup: FacultyGroup, trailingIcon _: Icon = .chevronRight, iconColor _: Color = .accentPrimary) {
+    init(facultyGroup: FacultyGroup, trailingIcon: Icon = .chevronRight, iconColor: Color = .accentPrimary) {
         title = facultyGroup.name
         caption = L10n.numberOfEvents + " \(facultyGroup.numberOfEvents)"
+        self.trailingIcon = trailingIcon
+        self.iconColor = iconColor
     }
 
     init(pavilion: Pavilion) {
