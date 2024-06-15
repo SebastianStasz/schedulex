@@ -6,6 +6,7 @@
 //
 
 import Domain
+import Resources
 import SchedulexViewModel
 import SwiftUI
 import Widgets
@@ -17,10 +18,10 @@ struct EventsListView: RootView {
 
     var rootBody: some View {
         VStack(spacing: 0) {
-            SearchField(prompt: "Search", searchText: $store.searchText, isFocused: $isSearchFocused)
+            SearchField(prompt: L10n.classroomEventsListSearchPrompt, searchText: $store.searchText, isFocused: $isSearchFocused)
 
             ScrollViewReader { proxy in
-                SectionedList(store.sections, pinnedHeaders: true, separatorHeight: .medium) { sectionIndex, event in
+                SectionedList(store.sections, pinnedHeaders: true, separatorHeight: .medium) { _, event in
                     EventCardView(event: event, color: store.color, currentDate: .now, isEventInProgress: false, isCancelled: false, isForFacultyGroup: false)
                         .onTapGesture { selectedEvent = event }
                 }

@@ -88,6 +88,7 @@
 "pavilions_list_search_prompt" = "Pavilion name";
 "pavilions_list_number_of_classrooms" = "Number of classrooms:";
 "classrooms_list_search_prompt" = "Classroom name";
+"classroom_events_list_search_prompt" = "Name, teacher, classroom, type";
 
 // settings
 "settings_title" = "Settings";

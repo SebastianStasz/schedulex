@@ -28,6 +28,8 @@ public enum L10n {
     public static let changeColorOfEvents = L10n.tr("Localizable", "change_color_of_events", fallback: "Change color of events")
     /// Classes
     public static let classes = L10n.tr("Localizable", "classes", fallback: "Classes")
+    /// Name, teacher, classroom, type
+    public static let classroomEventsListSearchPrompt = L10n.tr("Localizable", "classroom_events_list_search_prompt", fallback: "Name, teacher, classroom, type")
     /// Classroom name
     public static let classroomsListSearchPrompt = L10n.tr("Localizable", "classrooms_list_search_prompt", fallback: "Classroom name")
     /// Color

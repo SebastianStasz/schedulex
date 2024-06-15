@@ -88,6 +88,7 @@
 "pavilions_list_search_prompt" = "Nazwa pawilonu";
 "pavilions_list_number_of_classrooms" = "Liczba sal:";
 "classrooms_list_search_prompt" = "Nazwa sali";
+"classroom_events_list_search_prompt" = "Nazwa, prowadzący, sala, typ";
 
 // settings
 "settings_title" = "Ustawienia";
