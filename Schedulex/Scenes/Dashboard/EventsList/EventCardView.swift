@@ -24,7 +24,7 @@ struct EventCardView: View {
         HStack(spacing: .medium) {
             VStack(alignment: .leading, spacing: .small) {
                 HStack(spacing: .micro) {
-                    Text(event.name ?? "", style: .bodyMedium)
+                    Text(event.nameLocalized, style: .bodyMedium)
                         .frame(maxWidth: .infinity, alignment: .leading)
 
                     Image(systemName: "info.square")
@@ -62,7 +62,7 @@ struct EventCardView: View {
     }
 
     private var placeOrFacultyGroup: String {
-        let text = isForFacultyGroup ? event.placeDescription : event.facultyGroup
+        let text = isForFacultyGroup ? event.placeLocalized : event.facultyGroup
         return text ?? ""
     }
 

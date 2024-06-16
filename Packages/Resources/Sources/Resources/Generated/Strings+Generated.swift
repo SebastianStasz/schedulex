@@ -72,6 +72,8 @@ public enum L10n {
     public static let eventNotificationTitle = L10n.tr("Localizable", "event_notification_title", fallback: "UEK Schedule event")
     /// remote class
     public static let eventPlaceRemoteClasses = L10n.tr("Localizable", "event_place_remote_classes", fallback: "remote class")
+    /// Unknown title
+    public static let eventUnknownTitle = L10n.tr("Localizable", "event_unknown_title", fallback: "Unknown title")
     /// Events
     public static let events = L10n.tr("Localizable", "events", fallback: "Events")
     /// Classes canceled between

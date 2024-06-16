@@ -9,7 +9,10 @@ import Domain
 import Resources
 
 extension Event {
-    var placeDescription: String? {
+    var nameLocalized: String {
+        name ?? L10n.eventUnknownTitle
+    }
+    var placeLocalized: String? {
         isRemoteClass ? L10n.eventPlaceRemoteClasses : place
     }
 

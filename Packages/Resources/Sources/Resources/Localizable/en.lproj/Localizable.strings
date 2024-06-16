@@ -82,6 +82,7 @@
 "event_notification_subtitle_prefix" = "In";
 "minutes_suffix" = "minutes.";
 "event_notification_subtitle_hour" = "In 1 hour.";
+"event_unknown_title" = "Unknown title";
 
 // pavilions_list
 "pavilions_list_title" = "Pavilions";

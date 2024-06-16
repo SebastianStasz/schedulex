@@ -22,7 +22,7 @@ struct EventDetailsView: View {
                 Text(subtitle, style: .body)
                     .foregroundStyle(.grayShade1)
 
-                Text(event.name ?? "", style: .titleSmall)
+                Text(event.nameLocalized, style: .titleSmall)
                     .foregroundStyle(.textPrimary)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -51,7 +51,7 @@ struct EventDetailsView: View {
     }
 
     private var placeOrFacultyGroup: String {
-        let text = isForFacultyGroup ? event.placeDescription : event.facultyGroup
+        let text = isForFacultyGroup ? event.placeLocalized : event.facultyGroup
         return text ?? ""
     }
 

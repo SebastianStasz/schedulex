@@ -82,6 +82,7 @@
 "event_notification_subtitle_prefix" = "Za";
 "minutes_suffix" = "minut.";
 "event_notification_subtitle_hour" = "Za godzinę.";
+"event_unknown_title" = "Brak tytułu";
 
 // pavilions_list
 "pavilions_list_title" = "Pawilony";
