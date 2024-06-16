@@ -15,8 +15,9 @@ struct EventData {
     let time: String
     let place: String?
     let teacher: String?
-    let teacherProfileLink: String?
     let teamsLink: String?
+    let facultyGroup: String?
+    let teacherProfileLink: String?
     var eventTransferNote: String?
 
     private var teacherProfileUrl: URL? {
@@ -30,7 +31,7 @@ struct EventData {
     }
 
     private var isLanguageEvent: Bool {
-        name?.contains("grupa przedmiotów") ?? false || place == "Wybierz swoją grupę językową" || type == "lektorat"
+        name?.contains("Język obcy") ?? false || place == "Wybierz swoją grupę językową" || type == "lektorat"
     }
 
     private var isValidClass: Bool {
@@ -45,13 +46,14 @@ struct EventData {
         type == "Przeniesienie zajęć"
     }
 
-    func isValidEvent(for facultyGroup: FacultyGroup) -> Bool {
-        !(!facultyGroup.isLanguage && isLanguageEvent)
+    func isValidEvent(omitLanguageClasses: Bool) -> Bool {
+        if omitLanguageClasses { return !isLanguageEvent }
+        return true
     }
 
-    func toEvent(facultyGroup: FacultyGroup, datesDecoder: DatesDecoder) -> Event {
-        let dates = datesDecoder.getDates(date: date, time: time)
-        return Event(facultyGroupName: facultyGroup.name, facultyGroupColor: facultyGroup.color, isEventTransfer: isEventTransfer, isRemoteClass: isRemoteClass, eventTransferNote: eventTransferNote, startDate: dates.0, endDate: dates.1, name: name, place: place, teacher: teacher, teacherProfileUrl: teacherProfileUrl, teamsUrl: teamsUrl, type: type)
+    func toEvent(datesDecoder: DatesDecoder) -> Event? {
+        guard let (startDate, endDate) = datesDecoder.getDates(date: date, time: time) else { return nil }
+        return Event(name: name, type: type, startDate: startDate, endDate: endDate, place: place, teamsUrl: teamsUrl, isRemoteClass: isRemoteClass, isEventTransfer: isEventTransfer, eventTransferNote: eventTransferNote, teacher: teacher, teacherProfileUrl: teacherProfileUrl, facultyGroup: facultyGroup)
     }
 
     func toFacultyGroupClass() -> FacultyGroupClass? {

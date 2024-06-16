@@ -13,6 +13,7 @@ private struct DoubleNavigationTitle: ViewModifier {
     let subtitle: String
     let showBadge: Bool
     let openSettings: () -> Void
+    let openRoomsList: () -> Void
 
     func body(content: Content) -> some View {
         VStack(spacing: 0) {
@@ -29,6 +30,11 @@ private struct DoubleNavigationTitle: ViewModifier {
                         .foregroundStyle(.textPrimary)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
+
+                Button(L10n.pavilionsListTitle, icon: .pavilionsList, action: openRoomsList)
+                    .labelStyle(.iconOnly)
+                    .font(.title2)
+                    .foregroundStyle(.textPrimary)
 
                 Button(L10n.settingsTitle, icon: .settings, action: openSettings)
                     .labelStyle(.iconOnly)
@@ -59,13 +65,13 @@ private struct DoubleNavigationTitle: ViewModifier {
 }
 
 public extension View {
-    func doubleNavigationTitle(title: String, subtitle: String, showBadge: Bool, openSettings: @escaping () -> Void) -> some View {
-        modifier(DoubleNavigationTitle(title: title, subtitle: subtitle, showBadge: showBadge, openSettings: openSettings))
+    func doubleNavigationTitle(title: String, subtitle: String, showBadge: Bool, openSettings: @escaping () -> Void, openRoomsList: @escaping () -> Void) -> some View {
+        modifier(DoubleNavigationTitle(title: title, subtitle: subtitle, showBadge: showBadge, openSettings: openSettings, openRoomsList: openRoomsList))
     }
 }
 
 #Preview {
     Text("Content", style: .body)
         .frame(maxHeight: .infinity)
-        .doubleNavigationTitle(title: "30 listopada 2023", subtitle: "Dzisiaj", showBadge: true, openSettings: {})
+        .doubleNavigationTitle(title: "30 listopada 2023", subtitle: "Dzisiaj", showBadge: true, openSettings: {}, openRoomsList: {})
 }

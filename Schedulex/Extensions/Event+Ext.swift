@@ -12,4 +12,8 @@ extension Event {
     var placeDescription: String? {
         isRemoteClass ? L10n.eventPlaceRemoteClasses : place
     }
+
+    func toFacultyGroupEvent(facultyGroup: FacultyGroupDetails) -> FacultyGroupEvent {
+        FacultyGroupEvent(facultyGroupName: facultyGroup.name, color: facultyGroup.color, event: self)
+    }
 }

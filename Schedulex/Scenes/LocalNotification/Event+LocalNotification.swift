@@ -20,7 +20,7 @@ extension Event {
     }
 
     private func notificationDateComponents(time: ClassNotificationTime) -> DateComponents? {
-        guard let startDate, let date = Calendar.current.date(byAdding: .minute, value: -time.minutes, to: startDate) else { return nil }
+        guard let date = Calendar.current.date(byAdding: .minute, value: -time.minutes, to: startDate) else { return nil }
         return Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: date)
     }
 

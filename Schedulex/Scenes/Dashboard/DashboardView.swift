@@ -50,12 +50,12 @@ struct DashboardView: RootView {
                 .overlay { loadingIndicatorOrEmptyState }
             }
             .toolbar { toolbarContent }
-            .doubleNavigationTitle(title: title, subtitle: subtitle, showBadge: store.showSettingsBadge, openSettings: { store.navigateTo.send(.settings) })
+            .doubleNavigationTitle(title: title, subtitle: subtitle, showBadge: store.showSettingsBadge, openSettings: { store.navigateTo.send(.settings) }, openRoomsList: { store.navigateTo.send(.roomsList) })
         }
         .sheet(isPresented: $isDatePickerPresented) { datePicker }
     }
 
-    private var eventsToDisplay: [Event] {
+    private var eventsToDisplay: [FacultyGroupEvent] {
         let shouldDisplayEvents = !store.showErrorInfo
         return shouldDisplayEvents ? store.selectedDateEvents : []
     }
@@ -182,6 +182,11 @@ struct DashboardView: RootView {
 }
 
 final class DashboardViewController: SwiftUIViewController<DashboardViewModel, DashboardView> {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        title = L10n.dashboardTitle
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)

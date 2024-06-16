@@ -8,51 +8,49 @@
 import Foundation
 
 public struct Event: Hashable, Identifiable {
-    public let facultyGroupName: String
-    public let facultyGroupColor: FacultyGroupColor
-    public let isEventTransfer: Bool
-    public let isRemoteClass: Bool
-    public let eventTransferNote: String?
-    public let startDate: Date?
-    public let endDate: Date?
     public let name: String?
+    public let type: String?
+    public let startDate: Date
+    public let endDate: Date
     public let place: String?
+    public let teamsUrl: URL?
+    public let isRemoteClass: Bool
+    public let isEventTransfer: Bool
+    public let eventTransferNote: String?
     public let teacher: String?
     public let teacherProfileUrl: URL?
-    public let teamsUrl: URL?
-    public let type: String?
+    public let facultyGroup: String?
 
     public var id: Int {
         hashValue
     }
 
-    public init(facultyGroupName: String,
-                facultyGroupColor: FacultyGroupColor,
-                isEventTransfer: Bool,
-                isRemoteClass: Bool,
-                eventTransferNote: String?,
-                startDate: Date?,
-                endDate: Date?,
-                name: String?,
-                place: String?,
-                teacher: String?,
-                teacherProfileUrl: URL?,
-                teamsUrl: URL?,
-                type: String?)
-    {
-        self.facultyGroupName = facultyGroupName
-        self.facultyGroupColor = facultyGroupColor
-        self.isEventTransfer = isEventTransfer
-        self.isRemoteClass = isRemoteClass
-        self.eventTransferNote = eventTransferNote
+    public init(
+        name: String? = nil,
+        type: String? = nil,
+        startDate: Date,
+        endDate: Date,
+        place: String? = nil,
+        teamsUrl: URL? = nil,
+        isRemoteClass: Bool,
+        isEventTransfer: Bool,
+        eventTransferNote: String? = nil,
+        teacher: String? = nil,
+        teacherProfileUrl: URL? = nil,
+        facultyGroup: String? = nil
+    ) {
+        self.name = name
+        self.type = type
         self.startDate = startDate
         self.endDate = endDate
-        self.name = name
         self.place = place
+        self.teamsUrl = teamsUrl
+        self.isRemoteClass = isRemoteClass
+        self.isEventTransfer = isEventTransfer
+        self.eventTransferNote = eventTransferNote
         self.teacher = teacher
         self.teacherProfileUrl = teacherProfileUrl
-        self.teamsUrl = teamsUrl
-        self.type = type
+        self.facultyGroup = facultyGroup
     }
 
     public var typeDescription: String {
@@ -68,8 +66,7 @@ public struct Event: Hashable, Identifiable {
         FacultyGroupClass(name: name ?? "", type: type ?? "", teacher: teacher ?? "")
     }
 
-    public var startDateWithoutTime: Date? {
-        guard let startDate else { return nil }
-        return Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: startDate)
+    public var startDateWithoutTime: Date {
+        Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: startDate) ?? startDate
     }
 }

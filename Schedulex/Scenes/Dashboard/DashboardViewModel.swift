@@ -19,7 +19,7 @@ final class DashboardStore: RootStore {
     let infoCardsSectionStore: InfoCardsSectionStore
 
     @Published fileprivate(set) var dayOff: DayOff?
-    @Published fileprivate(set) var selectedDateEvents: [Event] = []
+    @Published fileprivate(set) var selectedDateEvents: [FacultyGroupEvent] = []
     @Published fileprivate(set) var showInfoToUnhideFacultyGroups = false
     @Published fileprivate(set) var showDashboardSwipeTip = false
     @Published fileprivate(set) var showSettingsBadge = false
@@ -128,7 +128,7 @@ struct DashboardViewModel: ViewModel {
             .store(in: &store.cancellables)
 
         let classNotificationServiceInput = ClassNotificationService.Input(
-            events: dashboardEventsOutput.eventsToDisplay,
+            events: dashboardEventsOutput.eventsToDisplay.map { $0.map { $0.event } }.asDriver(),
             classNotificationsEnabled: context.appData.$classNotificationsEnabled.asDriver(),
             classNotificationsTime: context.appData.$classNotificationsTime.asDriver()
         )
@@ -169,7 +169,7 @@ struct DashboardViewModel: ViewModel {
         return Date.now < startDate ? startDate : endDate
     }
 
-    private func getSelectedDayEvents(date: Date, events: [Event]) -> [Event] {
+    private func getSelectedDayEvents(date: Date, events: [FacultyGroupEvent]) -> [FacultyGroupEvent] {
         events
             .filter { $0.startDate?.isSameDay(as: date) ?? false }
             .sorted(by: { $0.startDate! < $1.startDate! })

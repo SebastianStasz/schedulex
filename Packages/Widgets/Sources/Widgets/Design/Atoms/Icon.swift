@@ -17,6 +17,7 @@ public enum Icon: String, Identifiable, CaseIterable {
     case chevronRight
     case plusCircle
     case person
+    case pavilionsList
     case building
     case paperPlane
     case contactCard
@@ -52,6 +53,8 @@ public enum Icon: String, Identifiable, CaseIterable {
             return "plus.circle"
         case .person:
             return "person.fill"
+        case .pavilionsList:
+            return "building.2.crop.circle"
         case .building:
             return "building.fill"
         case .paperPlane:

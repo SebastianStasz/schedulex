@@ -8,13 +8,21 @@
 import Foundation
 
 public struct FacultyGroupDetails: Equatable {
-    public let name: String
+    public let facultyGroup: FacultyGroup
     public let isHidden: Bool
     public let events: [Event]
     public let classes: [FacultyGroupClass]
 
-    public init(name: String, isHidden: Bool, events: [Event], classes: [FacultyGroupClass]) {
-        self.name = name
+    public var name: String {
+        facultyGroup.name
+    }
+
+    public var color: FacultyGroupColor {
+        facultyGroup.color
+    }
+
+    public init(facultyGroup: FacultyGroup, isHidden: Bool, events: [Event], classes: [FacultyGroupClass]) {
+        self.facultyGroup = facultyGroup
         self.isHidden = isHidden
         self.events = events
         self.classes = classes

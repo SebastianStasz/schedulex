@@ -14,6 +14,7 @@ struct EventDetailsView: View {
     @Environment(\.openURL) private var openURL
 
     let event: Event
+    var isForFacultyGroup = true
 
     var body: some View {
         VStack(alignment: .leading, spacing: 28) {
@@ -28,7 +29,7 @@ struct EventDetailsView: View {
 
             VStack(alignment: .leading, spacing: .medium) {
                 line(title: event.teacher ?? "", icon: .person)
-                line(title: event.placeDescription ?? "", icon: .building)
+                line(title: placeOrFacultyGroup, icon: .building)
                 line(title: event.type ?? "", icon: .paperPlane)
             }
 
@@ -49,6 +50,11 @@ struct EventDetailsView: View {
         .presentationDetents([UIDevice.current.hasNotch ? .medium : .height(440)])
     }
 
+    private var placeOrFacultyGroup: String {
+        let text = isForFacultyGroup ? event.placeDescription : event.facultyGroup
+        return text ?? ""
+    }
+
     private func line(title: String, icon: Icon) -> some View {
         HStack(spacing: .medium) {
             Image.icon(icon)
@@ -62,10 +68,9 @@ struct EventDetailsView: View {
     }
 
     private var subtitle: String {
-        guard let startDate = event.startDate, let endDate = event.endDate else { return "" }
-        let date = startDate.formatted(style: .dateLong)
-        let startTime = startDate.formatted(style: .timeOnly)
-        let endTime = endDate.formatted(style: .timeOnly)
+        let date = event.startDate.formatted(style: .dateLong)
+        let startTime = event.startDate.formatted(style: .timeOnly)
+        let endTime = event.endDate.formatted(style: .timeOnly)
         return "\(date)  |  \(startTime) - \(endTime)"
     }
 }

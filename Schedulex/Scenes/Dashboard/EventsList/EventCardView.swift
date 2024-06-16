@@ -14,9 +14,11 @@ struct EventCardView: View {
     @Environment(\.openURL) private var openURL
 
     let event: Event
+    let color: FacultyGroupColor
     let currentDate: Date
     let isEventInProgress: Bool
     let isCancelled: Bool
+    var isForFacultyGroup = true
 
     var body: some View {
         HStack(spacing: .medium) {
@@ -27,19 +29,19 @@ struct EventCardView: View {
 
                     Image(systemName: "info.square")
                 }
-                .foregroundStyle(event.facultyGroupColor.shade1)
+                .foregroundStyle(color.shade1)
 
                 VStack(alignment: .leading, spacing: .micro) {
                     Text(event.teacher ?? "", style: .footnote)
 
                     if !event.isEventTransfer, !isCancelled {
-                        Text(event.placeDescription ?? "", style: .footnote)
+                        Text(placeOrFacultyGroup, style: .footnote)
                             .opacity(showTeamsButton ? 0 : 1)
                     }
 
                     HStack(spacing: 0) {
                         Text(eventDescription, style: .footnote)
-                            .foregroundStyle(event.isEventTransfer || isCancelled ? .red : event.facultyGroupColor.shade2)
+                            .foregroundStyle(event.isEventTransfer || isCancelled ? .red : color.shade2)
                             .opacity(showTeamsButton ? 0 : 1)
 
                         Spacer()
@@ -49,14 +51,19 @@ struct EventCardView: View {
                         }
                     }
                 }
-                .foregroundStyle(event.facultyGroupColor.shade2)
+                .foregroundStyle(color.shade2)
             }
         }
         .lineLimit(1, reservesSpace: true)
         .padding(.medium)
-        .background(event.facultyGroupColor.shade4)
+        .background(color.shade4)
         .clipShape(RoundedRectangle(cornerRadius: 12))
         .overlay(teamsButton.padding(.medium), alignment: .bottomLeading)
+    }
+
+    private var placeOrFacultyGroup: String {
+        let text = isForFacultyGroup ? event.placeDescription : event.facultyGroup
+        return text ?? ""
     }
 
     private var eventDescription: String {
@@ -65,14 +72,13 @@ struct EventCardView: View {
     }
 
     private var status: String? {
-        guard let startDate = event.startDate, let endDate = event.endDate else { return nil }
-        if endDate <= currentDate {
+        if event.endDate <= currentDate {
             return nil
         } else {
             let formatter = RelativeDateTimeFormatter()
             formatter.unitsStyle = .short
-            let isBeforeEvent = startDate > currentDate
-            let date = isBeforeEvent ? startDate : endDate
+            let isBeforeEvent = event.startDate > currentDate
+            let date = isBeforeEvent ? event.startDate : event.endDate
             let prefix = isBeforeEvent ? "" : "\(L10n.eventFinishingIn) "
             let description = formatter.localizedString(for: date, relativeTo: currentDate)
             return prefix + description
@@ -105,8 +111,8 @@ struct EventCardView: View {
 
 #Preview {
     VStack(spacing: .large) {
-        EventCardView(event: .sample, currentDate: .now, isEventInProgress: false, isCancelled: false)
-        EventCardView(event: .eventTransfer, currentDate: .now, isEventInProgress: false, isCancelled: false)
+        EventCardView(event: .sample, color: .blue, currentDate: .now, isEventInProgress: false, isCancelled: false)
+        EventCardView(event: .eventTransfer, color: .green, currentDate: .now, isEventInProgress: false, isCancelled: false)
     }
     .padding(.large)
 }

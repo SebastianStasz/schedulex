@@ -10,8 +10,8 @@ import SwiftUI
 import Widgets
 
 struct EventsList: View {
-    @State private var selectedEvent: Event?
-    let events: [Event]
+    @State private var selectedEvent: FacultyGroupEvent?
+    let events: [FacultyGroupEvent]
     let dayOff: DayOff?
 
     var body: some View {
@@ -22,7 +22,7 @@ struct EventsList: View {
                 let isFirst = events.first == event
                 let isLast = events.last == event
 
-                EventsListRow(element: .event(event, isFirst: isFirst, isLast: isLast, dayOff: dayOff))
+                EventsListRow(element: .event(event.event, color: event.color, isFirst: isFirst, isLast: isLast, dayOff: dayOff))
                     .onTapGesture { selectedEvent = event }
 
                 if let nextEvent,
@@ -34,7 +34,7 @@ struct EventsList: View {
                 }
             }
         }
-        .sheet(item: $selectedEvent) { EventDetailsView(event: $0) }
+        .sheet(item: $selectedEvent) { EventDetailsView(event: $0.event) }
     }
 
     private func getBreakTimeComponents(startDate: Date, endDate: Date) -> DateComponents? {

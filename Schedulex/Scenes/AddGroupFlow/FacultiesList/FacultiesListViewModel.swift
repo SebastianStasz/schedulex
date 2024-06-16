@@ -34,7 +34,7 @@ struct FacultiesListViewModel: ViewModel {
             }
 
         CombineLatest(school, store.$searchText)
-            .map { mapToFaculties($0.faculties, searchText: $1) }
+            .map { $0.0.faculties.filterUserSearch(text: $0.1) }
             .assign(to: &store.$faculties)
 
         CombineLatest(school, store.$searchText)
@@ -50,12 +50,6 @@ struct FacultiesListViewModel: ViewModel {
             .store(in: &store.cancellables)
 
         return store
-    }
-
-    private func mapToFaculties(_ faculties: [Faculty], searchText: String) -> [Faculty] {
-        faculties
-            .filterUserSearch(text: searchText, by: { $0.name })
-            .sorted(by: { $0.name < $1.name })
     }
 
     private func mapToFacultyGroups(_ faculties: [Faculty], searchText: String) -> [FacultyGroup] {

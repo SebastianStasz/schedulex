@@ -24,6 +24,7 @@
 "break_card_time_suffix" = "g.";
 "event_details_link_to_class" = "Link do zajęć";
 "event_details_business_card" = "e-wizytówka";
+"dashboard_title" = "Strona główna";
 "dashboard_all_groups_are_hidden" = "Wszystkie obserwowane grupy są ukryte.\nKliknij \"Moje grupy\" aby nimi zarządzać.";
 "dashboard_groups_have_no_events" = "Obserwowane grupy nie zawierają żadnych zajęć.\nKliknij \"Moje grupy\" i dodaj inną grupę.";
 "dashboard_no_events_to_display" = "Brak zajęć do wyświetlenia";
@@ -67,10 +68,9 @@
 "other_header" = "Inne";
 "for_everyone_header" = "Dla wszystkich";
 "faculty_or_group_prompt" = "Kierunek lub grupa";
-"x_groups" = "grup";
-"x_events" = "zajęć";
-"number_of_classes" = "Liczba typów zajęć";
-"number_of_events" = "Liczba zajęć";
+"number_of_groups" = "Liczba grup:";
+"number_of_classes" = "Liczba typów zajęć:";
+"number_of_events" = "Liczba zajęć:";
 "set_classes_visibility" = "Zmień widoczność zajęć";
 "hidden" = "Ukryte";
 "visible" = "Widoczne";
@@ -82,6 +82,13 @@
 "event_notification_subtitle_prefix" = "Za";
 "minutes_suffix" = "minut.";
 "event_notification_subtitle_hour" = "Za godzinę.";
+
+// pavilions_list
+"pavilions_list_title" = "Pawilony";
+"pavilions_list_search_prompt" = "Nazwa pawilonu";
+"pavilions_list_number_of_classrooms" = "Liczba sal:";
+"classrooms_list_search_prompt" = "Nazwa sali";
+"classroom_events_list_search_prompt" = "Nazwa, prowadzący, sala, typ";
 
 // settings
 "settings_title" = "Ustawienia";

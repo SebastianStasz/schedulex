@@ -31,7 +31,7 @@ struct GroupsSelectionListView: View {
                     let select = { selectedGroups.append(facultyGroup) }
                     let deselect = { selectedGroups.removeAll(where: { $0 == facultyGroup }) }
 
-                    FacultyGroupListRow(facultyGroup: facultyGroup, trailingIcon: icon, iconColor: color)
+                    BaseListRow(facultyGroup: facultyGroup, trailingIcon: icon, iconColor: color)
                         .onTapGesture { isSelected ? deselect() : select() }
                 }
                 .animation(.easeInOut(duration: 0.15), value: selectedGroups)
