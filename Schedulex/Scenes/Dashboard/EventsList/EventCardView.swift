@@ -18,6 +18,7 @@ struct EventCardView: View {
     let currentDate: Date
     let isEventInProgress: Bool
     let isCancelled: Bool
+    var isForFacultyGroup = true
 
     var body: some View {
         HStack(spacing: .medium) {
@@ -34,7 +35,7 @@ struct EventCardView: View {
                     Text(event.teacher ?? "", style: .footnote)
 
                     if !event.isEventTransfer, !isCancelled {
-                        Text(event.placeDescription ?? "", style: .footnote)
+                        Text(placeOrFacultyGroup, style: .footnote)
                             .opacity(showTeamsButton ? 0 : 1)
                     }
 
@@ -58,6 +59,11 @@ struct EventCardView: View {
         .background(color.shade4)
         .clipShape(RoundedRectangle(cornerRadius: 12))
         .overlay(teamsButton.padding(.medium), alignment: .bottomLeading)
+    }
+
+    private var placeOrFacultyGroup: String {
+        let text = isForFacultyGroup ? event.placeDescription : event.facultyGroup
+        return text ?? ""
     }
 
     private var eventDescription: String {

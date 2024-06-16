@@ -25,13 +25,16 @@ struct EventsListView: RootView {
                     EventCardView(event: event, color: store.color, currentDate: .now, isEventInProgress: false, isCancelled: false, isForFacultyGroup: false)
                         .onTapGesture { selectedEvent = event }
                 }
+                .onReceive(store.scrollToSection) {
+                    proxy.scrollTo(store.sectionIndexToScroll, anchor: .top)
+                }
                 .onChange(of: store.sections) { _ in
                     proxy.scrollTo(store.sectionIndexToScroll, anchor: .top)
                 }
             }
         }
         .baseListStyle(isEmpty: isEmpty, isLoading: store.isLoading.value)
-        .sheet(item: $selectedEvent) { EventDetailsView(event: $0) }
+        .sheet(item: $selectedEvent) { EventDetailsView(event: $0, isForFacultyGroup: false) }
     }
 
     private var isEmpty: Bool {

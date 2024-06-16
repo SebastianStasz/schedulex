@@ -19,7 +19,7 @@ final class EventsListStore: RootStore {
 
     let color: FacultyGroupColor
     let isLoading = DriverState(false)
-    let scrollToSection = DriverSubject<Int>()
+    let scrollToSection = DriverSubject<Void>()
 
     init(color: FacultyGroupColor) {
         self.color = color
@@ -30,9 +30,10 @@ struct EventsListViewModel: ViewModel {
     var navigationController: UINavigationController?
     let input: EventsListInput
 
-    func makeStore(context _: Context) -> EventsListStore {
+    func makeStore(context: Context) -> EventsListStore {
         let store = EventsListStore(color: input.color)
         let eventsPublisher = DriverSubject<[Event]>()
+        var scrollToSectionOnViewDidAppear = false
 
         CombineLatest(eventsPublisher, store.$searchText)
             .map { filterAndGroupByDate(events: $0, searchText: $1) }
@@ -41,8 +42,15 @@ struct EventsListViewModel: ViewModel {
                 $0.sections = mapToListSections(eventsByDate: $1)
             }
 
+        store.viewDidAppear
+            .filter { scrollToSectionOnViewDidAppear }
+            .sinkAndStore(on: store) { store, _ in
+                store.scrollToSection.send()
+            }
+
         switch input {
         case let .facultyGroup(_, events):
+            scrollToSectionOnViewDidAppear = true
             eventsPublisher.send(events)
 
         case let .classroom(classroom):
@@ -63,7 +71,7 @@ struct EventsListViewModel: ViewModel {
     }
 
     private func mapToListSections(eventsByDate: [(Date, [Event])]) -> [ListSection<Event>] {
-        eventsByDate.map { ListSection(title: $0.formatted(style: .dateLong), items: $1) }
+        eventsByDate.map { ListSection(title: $0.formatted(style: .dateLong), items: $1, isLazy: true) }
     }
 
     private func filterEvents(_ events: [Event], searchText: String) -> [Event] {

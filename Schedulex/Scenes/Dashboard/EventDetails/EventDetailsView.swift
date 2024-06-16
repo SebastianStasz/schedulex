@@ -14,6 +14,7 @@ struct EventDetailsView: View {
     @Environment(\.openURL) private var openURL
 
     let event: Event
+    var isForFacultyGroup = true
 
     var body: some View {
         VStack(alignment: .leading, spacing: 28) {
@@ -28,7 +29,7 @@ struct EventDetailsView: View {
 
             VStack(alignment: .leading, spacing: .medium) {
                 line(title: event.teacher ?? "", icon: .person)
-                line(title: event.placeDescription ?? "", icon: .building)
+                line(title: placeOrFacultyGroup, icon: .building)
                 line(title: event.type ?? "", icon: .paperPlane)
             }
 
@@ -47,6 +48,11 @@ struct EventDetailsView: View {
         .background(.backgroundSecondary)
         .presentationDragIndicator(.visible)
         .presentationDetents([UIDevice.current.hasNotch ? .medium : .height(440)])
+    }
+
+    private var placeOrFacultyGroup: String {
+        let text = isForFacultyGroup ? event.placeDescription : event.facultyGroup
+        return text ?? ""
     }
 
     private func line(title: String, icon: Icon) -> some View {
