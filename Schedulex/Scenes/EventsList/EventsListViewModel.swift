@@ -71,7 +71,7 @@ struct EventsListViewModel: ViewModel {
     }
 
     private func mapToListSections(eventsByDate: [(Date, [Event])]) -> [ListSection<Event>] {
-        eventsByDate.map { ListSection(title: $0.formatted(style: .dateLong), items: $1, isLazy: true) }
+        eventsByDate.map { ListSection(title: $0.formatted(style: .dateLong), items: $1) }
     }
 
     private func filterEvents(_ events: [Event], searchText: String) -> [Event] {
