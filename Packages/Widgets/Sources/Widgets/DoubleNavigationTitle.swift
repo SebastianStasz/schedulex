@@ -31,16 +31,13 @@ private struct DoubleNavigationTitle: ViewModifier {
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
 
-                Button(L10n.pavilionsListTitle, icon: .pavilionsList, action: openRoomsList)
-                    .labelStyle(.iconOnly)
-                    .font(.title2)
-                    .foregroundStyle(.textPrimary)
+                HStack(spacing: .medium) {
+                    Button(L10n.pavilionsListTitle, action: openRoomsList)
+                        .buttonStyle(.circleNavigationButtonStyle(icon: .pavilionsList))
 
-                Button(L10n.settingsTitle, icon: .settings, action: openSettings)
-                    .labelStyle(.iconOnly)
-                    .font(.title2)
-                    .foregroundStyle(.textPrimary)
-                    .overlay { badgeOverlay }
+                    Button(L10n.settingsTitle, action: openSettings)
+                        .buttonStyle(.circleNavigationButtonStyle(icon: .settings, showBadge: showBadge))
+                }
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.horizontal, .medium)
@@ -49,14 +46,6 @@ private struct DoubleNavigationTitle: ViewModifier {
             content
         }
         .ignoresSafeArea(edges: .top)
-    }
-
-    private var badgeOverlay: some View {
-        Circle()
-            .fill(.red)
-            .frame(width: 9, height: 9)
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-            .opacity(showBadge ? 1 : 0)
     }
 
     private var topSpacing: CGFloat {
@@ -73,5 +62,5 @@ public extension View {
 #Preview {
     Text("Content", style: .body)
         .frame(maxHeight: .infinity)
-        .doubleNavigationTitle(title: "30 listopada 2023", subtitle: "Dzisiaj", showBadge: true, openSettings: {}, openRoomsList: {})
+        .doubleNavigationTitle(title: "30 listopada 2023", subtitle: "Dzisiaj", showBadge: false, openSettings: {}, openRoomsList: {})
 }

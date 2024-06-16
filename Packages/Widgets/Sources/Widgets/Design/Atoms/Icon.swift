@@ -32,7 +32,7 @@ public enum Icon: String, Identifiable, CaseIterable {
     var name: String {
         switch self {
         case .settings:
-            return "gearshape"
+            return "gearshape.fill"
         case .closeButton:
             return "xmark"
         case .delete:
@@ -54,7 +54,7 @@ public enum Icon: String, Identifiable, CaseIterable {
         case .person:
             return "person.fill"
         case .pavilionsList:
-            return "building.2.crop.circle"
+            return "building.2.fill"
         case .building:
             return "building.fill"
         case .paperPlane:

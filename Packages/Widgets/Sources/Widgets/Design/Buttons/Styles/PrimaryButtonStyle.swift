@@ -7,16 +7,12 @@
 
 import SwiftUI
 
-public struct PrimaryButtonStyle: ButtonStyle {
+struct PrimaryButtonStyle: ButtonStyle {
     @Environment(\.isEnabled) private var isEnabled
 
-    private let isKeyboardVisible: Bool
+    let isKeyboardVisible: Bool
 
-    public init(isKeyboardVisible: Bool) {
-        self.isKeyboardVisible = isKeyboardVisible
-    }
-
-    public func makeBody(configuration: Configuration) -> some View {
+    func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .font(.keyboardButton)
             .foregroundStyle(Color.white)

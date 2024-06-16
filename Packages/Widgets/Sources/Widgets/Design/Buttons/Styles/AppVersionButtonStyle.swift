@@ -7,10 +7,10 @@
 
 import SwiftUI
 
-public struct AppVersionButtonStyle: ButtonStyle {
+struct AppVersionButtonStyle: ButtonStyle {
     @Environment(\.isEnabled) private var isEnabled
 
-    public func makeBody(configuration: Configuration) -> some View {
+    func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .font(.footnoteBig)
             .foregroundStyle(textColor)

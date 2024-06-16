@@ -10,6 +10,7 @@ import SwiftUI
 public enum CustomButtonStyle {
     case appVersionButtonStyle
     case primaryButtonStyle(isKeyboardVisible: Bool)
+    case circleNavigationButtonStyle(icon: Icon, showBadge: Bool = false)
 }
 
 public extension Button {
@@ -21,6 +22,9 @@ public extension Button {
             buttonStyle(style)
         case let .primaryButtonStyle(isKeyboardVisible):
             let style = PrimaryButtonStyle(isKeyboardVisible: isKeyboardVisible)
+            buttonStyle(style)
+        case let .circleNavigationButtonStyle(icon, showBadge):
+            let style = CircleNavigationButtonStyle(icon: icon, showBadge: showBadge)
             buttonStyle(style)
         }
     }
