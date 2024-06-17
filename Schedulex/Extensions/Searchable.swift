@@ -20,3 +20,11 @@ extension Array where Element: Searchable {
 extension Faculty: Searchable {}
 extension Pavilion: Searchable {}
 extension Classroom: Searchable {}
+
+extension TeacherGroup: Searchable {
+    var name: String { group }
+}
+
+extension Teacher: Searchable {
+    var name: String { fullName }
+}

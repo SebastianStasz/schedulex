@@ -15,8 +15,15 @@ public struct UekScheduleService {
 
     public func getEvents(for classroom: Classroom) async throws -> [Event] {
         let decoder = ClassroomDecoder(classroom: classroom)
-        let webContent = try await apiService.getWebContent(from: classroom.classroomUrl)
+        let webContent = try await apiService.getWebContent(from: classroom.eventsUrl)
         let events = try decoder.decodeEvents(from: webContent, classroom: classroom)
+        return events
+    }
+
+    public func getEvents(for teacher: Teacher) async throws -> [Event] {
+        let decoder = TeacherDecoder(teacher: teacher)
+        let webContent = try await apiService.getWebContent(from: teacher.eventsUrl)
+        let events = try decoder.decodeEvents(from: webContent)
         return events
     }
 

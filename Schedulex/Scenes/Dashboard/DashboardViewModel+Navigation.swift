@@ -11,6 +11,7 @@ extension DashboardViewModel {
     enum Destination {
         case settings
         case roomsList
+        case teacherGroupsList
         case observedFacultyGroups
     }
 
@@ -20,6 +21,8 @@ extension DashboardViewModel {
             pushSettingsView()
         case .roomsList:
             pushRoomsListView()
+        case .teacherGroupsList:
+            pushTeacherGroupsList()
         case .observedFacultyGroups:
             pushObservedFacultyGroupsView()
         }
@@ -34,6 +37,12 @@ extension DashboardViewModel {
     private func pushRoomsListView() {
         let viewModel = PavilionsListViewModel(navigationController: navigationController)
         let viewController = RoomsListViewController(viewModel: viewModel)
+        navigationController?.push(viewController)
+    }
+
+    private func pushTeacherGroupsList() {
+        let viewModel = TeacherGroupsListViewModel(navigationController: navigationController)
+        let viewController = TeacherGroupsListViewController(viewModel: viewModel)
         navigationController?.push(viewController)
     }
 

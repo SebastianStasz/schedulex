@@ -7,7 +7,10 @@
 
 import Foundation
 
-public struct Teacher: Decodable {
+public struct Teacher: Decodable, Identifiable {
     public let fullName: String
     public let degree: String?
+    public let eventsUrl: String
+
+    public var id: String { fullName }
 }

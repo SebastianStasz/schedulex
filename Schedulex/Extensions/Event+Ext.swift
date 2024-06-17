@@ -12,6 +12,7 @@ extension Event {
     var nameLocalized: String {
         name ?? L10n.eventUnknownTitle
     }
+
     var placeLocalized: String? {
         isRemoteClass ? L10n.eventPlaceRemoteClasses : place
     }

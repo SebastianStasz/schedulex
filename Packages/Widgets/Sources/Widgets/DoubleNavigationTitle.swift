@@ -14,6 +14,7 @@ private struct DoubleNavigationTitle: ViewModifier {
     let showBadge: Bool
     let openSettings: () -> Void
     let openRoomsList: () -> Void
+    let openTeacherGroupsList: () -> Void
 
     func body(content: Content) -> some View {
         VStack(spacing: 0) {
@@ -31,7 +32,10 @@ private struct DoubleNavigationTitle: ViewModifier {
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
 
-                HStack(spacing: .medium) {
+                HStack(spacing: 10) {
+                    Button("Teachers list", action: openTeacherGroupsList)
+                        .buttonStyle(.circleNavigationButtonStyle(icon: .teachersList))
+
                     Button(L10n.pavilionsListTitle, action: openRoomsList)
                         .buttonStyle(.circleNavigationButtonStyle(icon: .pavilionsList))
 
@@ -54,13 +58,13 @@ private struct DoubleNavigationTitle: ViewModifier {
 }
 
 public extension View {
-    func doubleNavigationTitle(title: String, subtitle: String, showBadge: Bool, openSettings: @escaping () -> Void, openRoomsList: @escaping () -> Void) -> some View {
-        modifier(DoubleNavigationTitle(title: title, subtitle: subtitle, showBadge: showBadge, openSettings: openSettings, openRoomsList: openRoomsList))
+    func doubleNavigationTitle(title: String, subtitle: String, showBadge: Bool, openSettings: @escaping () -> Void, openRoomsList: @escaping () -> Void, openTeacherGroupsList: @escaping () -> Void) -> some View {
+        modifier(DoubleNavigationTitle(title: title, subtitle: subtitle, showBadge: showBadge, openSettings: openSettings, openRoomsList: openRoomsList, openTeacherGroupsList: openTeacherGroupsList))
     }
 }
 
 #Preview {
     Text("Content", style: .body)
         .frame(maxHeight: .infinity)
-        .doubleNavigationTitle(title: "30 listopada 2023", subtitle: "Dzisiaj", showBadge: false, openSettings: {}, openRoomsList: {})
+        .doubleNavigationTitle(title: "30 listopada 2023", subtitle: "Dzisiaj", showBadge: false, openSettings: {}, openRoomsList: {}, openTeacherGroupsList: {})
 }

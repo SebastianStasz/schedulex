@@ -7,7 +7,13 @@
 
 import Foundation
 
-public struct TeacherGroup: Decodable {
+public struct TeacherGroup: Decodable, Identifiable {
     public let group: String
     public let teachers: [Teacher]
+
+    public var id: String { group }
+
+    public var numberOfTeachers: Int {
+        teachers.count
+    }
 }

@@ -50,7 +50,7 @@ struct DashboardView: RootView {
                 .overlay { loadingIndicatorOrEmptyState }
             }
             .toolbar { toolbarContent }
-            .doubleNavigationTitle(title: title, subtitle: subtitle, showBadge: store.showSettingsBadge, openSettings: { store.navigateTo.send(.settings) }, openRoomsList: { store.navigateTo.send(.roomsList) })
+            .doubleNavigationTitle(title: title, subtitle: subtitle, showBadge: store.showSettingsBadge, openSettings: { store.navigateTo.send(.settings) }, openRoomsList: { store.navigateTo.send(.roomsList) }, openTeacherGroupsList: { store.navigateTo.send(.teacherGroupsList) })
         }
         .sheet(isPresented: $isDatePickerPresented) { datePicker }
     }
