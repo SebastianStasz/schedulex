@@ -89,7 +89,7 @@
 "pavilions_list_search_prompt" = "Nazwa pawilonu";
 "pavilions_list_number_of_classrooms" = "Liczba sal:";
 "classrooms_list_search_prompt" = "Nazwa sali";
-"classroom_events_list_search_prompt" = "Nazwa, prowadzący, sala, typ";
+"classroom_events_list_search_prompt" = "Tytuł, prowadzący, sala, typ";
 
 // settings
 "settings_title" = "Ustawienia";
@@ -127,4 +127,10 @@
 "start_first_step_alert_message" = "Nie wybrano żadnej grupy. Czy kontynuować mimo to?";
 "start_second_step_title" = "Wybierz języki";
 "start_second_step_no_languages" = "Brak wybranych języków";
+
+// teachers_list
+"teachers_list_title" = "Prowadzący";
+"teacher_list_search_prompt" = "Prowadzący";
+"teacher_groups_list_search_prompt" = "Litera nazwiska";
+"teacher_groups_list_number_of_teachers" = "Liczba prowadzących:";
 

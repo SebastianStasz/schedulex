@@ -5,6 +5,7 @@
 //  Created by Sebastian Staszczyk on 16/06/2024.
 //
 
+import Resources
 import SchedulexViewModel
 import SwiftUI
 import Widgets
@@ -15,7 +16,7 @@ struct TeacherGroupsListView: RootView {
 
     var rootBody: some View {
         VStack(spacing: .medium) {
-            SearchField(prompt: "Teacher group", searchText: $store.searchText, isFocused: $isSearchFocused)
+            SearchField(prompt: L10n.teacherGroupsListSearchPrompt, searchText: $store.searchText, isFocused: $isSearchFocused)
 
             BaseList(store.teacherGroups) { teacherGroup in
                 BaseListRow(teacherGroup: teacherGroup)
@@ -29,7 +30,7 @@ struct TeacherGroupsListView: RootView {
 final class TeacherGroupsListViewController: SwiftUIViewController<TeacherGroupsListViewModel, TeacherGroupsListView> {
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Teacher groups"
+        title = L10n.teachersListTitle
     }
 }
 

@@ -24,9 +24,18 @@ enum DecodingType {
     func getPlace(from text: String?) -> String? {
         switch self {
         case .facultyGroup, .teacher:
-            return text
+            return text?.nilIfEmpty()
         case let .classroom(classroom):
             return classroom.name
+        }
+    }
+
+    func getTeacher(from text: String?) -> String? {
+        switch self {
+        case .facultyGroup, .classroom:
+            return text
+        case let .teacher(teacher):
+            return teacher.fullName
         }
     }
 

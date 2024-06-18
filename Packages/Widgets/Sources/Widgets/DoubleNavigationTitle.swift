@@ -33,7 +33,7 @@ private struct DoubleNavigationTitle: ViewModifier {
                 .frame(maxWidth: .infinity, alignment: .leading)
 
                 HStack(spacing: 10) {
-                    Button("Teachers list", action: openTeacherGroupsList)
+                    Button(L10n.teachersListTitle, action: openTeacherGroupsList)
                         .buttonStyle(.circleNavigationButtonStyle(icon: .teachersList))
 
                     Button(L10n.pavilionsListTitle, action: openRoomsList)
