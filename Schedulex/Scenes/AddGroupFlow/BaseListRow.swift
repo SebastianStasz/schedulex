@@ -45,6 +45,16 @@ extension BaseListRow {
         title = classroom.name
         caption = L10n.numberOfEvents + " \(classroom.numberOfEvents)"
     }
+
+    init(teacherGroup: TeacherGroup) {
+        title = teacherGroup.group
+        caption = L10n.teacherGroupsListNumberOfTeachers + " \(teacherGroup.numberOfTeachers)"
+    }
+
+    init(teacher: Teacher) {
+        title = teacher.fullName
+        caption = L10n.numberOfEvents + " \(teacher.numberOfEvents)"
+    }
 }
 
 #Preview {

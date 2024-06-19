@@ -89,7 +89,7 @@
 "pavilions_list_search_prompt" = "Pavilion name";
 "pavilions_list_number_of_classrooms" = "Number of classrooms:";
 "classrooms_list_search_prompt" = "Classroom name";
-"classroom_events_list_search_prompt" = "Name, teacher, classroom, type";
+"classroom_events_list_search_prompt" = "Title, teacher, classroom, type";
 
 // settings
 "settings_title" = "Settings";
@@ -127,4 +127,10 @@
 "start_first_step_alert_message" = "No group selected. Do you want to continue anyway?";
 "start_second_step_title" = "Select languages";
 "start_second_step_no_languages" = "No languages selected";
+
+// teachers_list
+"teachers_list_title" = "Teachers";
+"teacher_list_search_prompt" = "Teacher";
+"teacher_groups_list_search_prompt" = "Last name initial";
+"teacher_groups_list_number_of_teachers" = "Number of teachers:";
 

@@ -10,22 +10,32 @@ import Domain
 enum DecodingType {
     case facultyGroup(FacultyGroup)
     case classroom(Classroom)
+    case teacher(Teacher)
 
     var omitLanguageClasses: Bool {
         switch self {
         case let .facultyGroup(facultyGroup):
             return !facultyGroup.isLanguage
-        case .classroom:
+        case .classroom, .teacher:
             return false
         }
     }
 
     func getPlace(from text: String?) -> String? {
         switch self {
-        case .facultyGroup:
-            return text
+        case .facultyGroup, .teacher:
+            return text?.nilIfEmpty()
         case let .classroom(classroom):
             return classroom.name
+        }
+    }
+
+    func getTeacher(from text: String?) -> String? {
+        switch self {
+        case .facultyGroup, .classroom:
+            return text
+        case let .teacher(teacher):
+            return teacher.fullName
         }
     }
 
@@ -33,7 +43,7 @@ enum DecodingType {
         switch self {
         case let .facultyGroup(facultyGroup):
             return facultyGroup.name
-        case .classroom:
+        case .classroom, .teacher:
             return text
         }
     }

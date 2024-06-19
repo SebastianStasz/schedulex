@@ -60,6 +60,14 @@ struct EventsListViewModel: ViewModel {
                 }
                 .sink { eventsPublisher.send($0) }
                 .store(in: &store.cancellables)
+
+        case let.teacher(teacher):
+            store.viewWillAppear
+                .perform(isLoading: store.isLoading) {
+                    try await UekScheduleService().getEvents(for: teacher)
+                }
+                .sink { eventsPublisher.send($0) }
+                .store(in: &store.cancellables)
         }
 
         return store

@@ -10,6 +10,7 @@ import Domain
 enum EventsListInput {
     case facultyGroup(FacultyGroup, [Event])
     case classroom(Classroom)
+    case teacher(Teacher)
 
     var title: String {
         switch self {
@@ -17,6 +18,8 @@ enum EventsListInput {
             return facultyGroup.name
         case let .classroom(classroom):
             return classroom.name
+        case let .teacher(teacher):
+            return teacher.fullName
         }
     }
 
@@ -24,7 +27,7 @@ enum EventsListInput {
         switch self {
         case let .facultyGroup(facultyGroup, _):
             return facultyGroup.color
-        case .classroom:
+        case .classroom, .teacher:
             return .blue
         }
     }

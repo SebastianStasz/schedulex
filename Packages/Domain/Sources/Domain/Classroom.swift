@@ -10,7 +10,7 @@ import Foundation
 public struct Classroom: Decodable, Identifiable {
     public let name: String
     public let numberOfEvents: Int
-    public let classroomUrl: String
+    public let eventsUrl: String
 
     public var id: String { name }
 }

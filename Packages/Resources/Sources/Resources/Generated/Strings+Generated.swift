@@ -28,8 +28,8 @@ public enum L10n {
     public static let changeColorOfEvents = L10n.tr("Localizable", "change_color_of_events", fallback: "Change color of events")
     /// Classes
     public static let classes = L10n.tr("Localizable", "classes", fallback: "Classes")
-    /// Name, teacher, classroom, type
-    public static let classroomEventsListSearchPrompt = L10n.tr("Localizable", "classroom_events_list_search_prompt", fallback: "Name, teacher, classroom, type")
+  /// Title, teacher, classroom, type
+  public static let classroomEventsListSearchPrompt = L10n.tr("Localizable", "classroom_events_list_search_prompt", fallback: "Title, teacher, classroom, type")
     /// Classroom name
     public static let classroomsListSearchPrompt = L10n.tr("Localizable", "classrooms_list_search_prompt", fallback: "Classroom name")
     /// Color
@@ -214,6 +214,14 @@ public enum L10n {
     public static let swipeTipDescription = L10n.tr("Localizable", "swipe_tip_description", fallback: "Change days with a swipe of your finger!")
     /// ⬅️  Swipe right or left  ➡️
     public static let swipeTipTitle = L10n.tr("Localizable", "swipe_tip_title", fallback: "⬅️  Swipe right or left  ➡️")
+    /// Number of teachers:
+    public static let teacherGroupsListNumberOfTeachers = L10n.tr("Localizable", "teacher_groups_list_number_of_teachers", fallback: "Number of teachers:")
+    /// Last name initial
+    public static let teacherGroupsListSearchPrompt = L10n.tr("Localizable", "teacher_groups_list_search_prompt", fallback: "Last name initial")
+    /// Teacher
+    public static let teacherListSearchPrompt = L10n.tr("Localizable", "teacher_list_search_prompt", fallback: "Teacher")
+    /// Teachers
+    public static let teachersListTitle = L10n.tr("Localizable", "teachers_list_title", fallback: "Teachers")
     /// Today
     public static let today = L10n.tr("Localizable", "today", fallback: "Today")
     /// Unfollow
