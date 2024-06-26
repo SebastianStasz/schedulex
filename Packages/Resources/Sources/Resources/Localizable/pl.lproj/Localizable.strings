@@ -83,6 +83,8 @@
 "minutes_suffix" = "minut.";
 "event_notification_subtitle_hour" = "Za godzinę.";
 "event_unknown_title" = "Brak tytułu";
+"list_empty_state_title" = "Lista jest pusta";
+"list_empty_state_description" = "Spróbuj ponownie później";
 
 // pavilions_list
 "pavilions_list_title" = "Pawilony";

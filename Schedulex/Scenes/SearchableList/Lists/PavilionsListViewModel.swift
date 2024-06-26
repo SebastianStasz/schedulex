@@ -6,23 +6,23 @@
 //
 
 import Domain
+import Resources
 import SchedulexCore
 import SchedulexViewModel
 import UIKit
 
-final class PavilionsListStore: RootStore {
-    @Published fileprivate(set) var pavilions: [Pavilion] = []
-    @Published var searchText = ""
-
-    let isLoading = DriverState(true)
-    let navigateToClassroomsListForPavilion = DriverSubject<Pavilion>()
+final class RoomsListViewController: SwiftUIViewController<PavilionsListViewModel, SearchableListView<Pavilion>> {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        title = L10n.pavilionsListTitle
+    }
 }
 
 struct PavilionsListViewModel: ViewModel {
     var navigationController: UINavigationController?
 
-    func makeStore(context: Context) -> PavilionsListStore {
-        let store = PavilionsListStore()
+    func makeStore(context: Context) -> SearchableListStore<Pavilion> {
+        let store = SearchableListStore<Pavilion>()
         let errorTracker = DriverSubject<Error>()
 
         let school = store.viewWillAppear.share()
@@ -32,9 +32,9 @@ struct PavilionsListViewModel: ViewModel {
 
         CombineLatest(school, store.$searchText)
             .map { $0.0.pavilions.filterUserSearch(text: $0.1) }
-            .assign(to: &store.$pavilions)
+            .assign(to: &store.$items)
 
-        store.navigateToClassroomsListForPavilion
+        store.onSelectListItem
             .sink { navigateToClassroomsList(for: $0) }
             .store(in: &store.cancellables)
 

@@ -28,8 +28,8 @@ public enum L10n {
     public static let changeColorOfEvents = L10n.tr("Localizable", "change_color_of_events", fallback: "Change color of events")
     /// Classes
     public static let classes = L10n.tr("Localizable", "classes", fallback: "Classes")
-  /// Title, teacher, classroom, type
-  public static let classroomEventsListSearchPrompt = L10n.tr("Localizable", "classroom_events_list_search_prompt", fallback: "Title, teacher, classroom, type")
+    /// Title, teacher, classroom, type
+    public static let classroomEventsListSearchPrompt = L10n.tr("Localizable", "classroom_events_list_search_prompt", fallback: "Title, teacher, classroom, type")
     /// Classroom name
     public static let classroomsListSearchPrompt = L10n.tr("Localizable", "classrooms_list_search_prompt", fallback: "Classroom name")
     /// Color
@@ -108,6 +108,10 @@ public enum L10n {
     public static let introductionPoint2 = L10n.tr("Localizable", "introduction_point_2", fallback: "Receive notifications before classes.")
     /// Hide classes you don't want to see.
     public static let introductionPoint3 = L10n.tr("Localizable", "introduction_point_3", fallback: "Hide classes you don't want to see.")
+    /// Please check back later
+    public static let listEmptyStateDescription = L10n.tr("Localizable", "list_empty_state_description", fallback: "Please check back later")
+    /// Nothing here
+    public static let listEmptyStateTitle = L10n.tr("Localizable", "list_empty_state_title", fallback: "Nothing here")
     /// minutes.
     public static let minutesSuffix = L10n.tr("Localizable", "minutes_suffix", fallback: "minutes.")
     /// My groups

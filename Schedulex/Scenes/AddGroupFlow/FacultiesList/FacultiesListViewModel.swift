@@ -13,7 +13,6 @@ import UIKit
 final class FacultiesListStore: RootStore {
     @Published fileprivate(set) var faculties: [Faculty] = []
     @Published fileprivate(set) var facultyGroups: [FacultyGroup] = []
-
     @Published var searchText = ""
 
     let isLoading = DriverState(true)

@@ -16,5 +16,5 @@ struct FacultyGroupEvent: Hashable, Identifiable {
     var startDate: Date? { event.startDate }
     var endDate: Date? { event.endDate }
 
-    var id: Int { event.id }
+    var id: UUID { event.id }
 }

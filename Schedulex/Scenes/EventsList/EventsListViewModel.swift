@@ -17,6 +17,9 @@ final class EventsListStore: RootStore {
     @Published fileprivate(set) var sectionIndexToScroll: Int?
     @Published fileprivate(set) var sections: [ListSection<Event>] = []
 
+    var isListEmpty: Bool { sections.isEmpty }
+    var isSearching: Bool { !searchText.isEmpty }
+
     let color: FacultyGroupColor
     let isLoading = DriverState(false)
     let scrollToSection = DriverSubject<Void>()

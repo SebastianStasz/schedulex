@@ -11,13 +11,6 @@ import SchedulexViewModel
 import SwiftUI
 import Widgets
 
-final class FacultyGroupListViewController: SwiftUIViewController<FacultyGroupListViewModel, FacultyGroupListView> {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        title = viewModel.faculty.name
-    }
-}
-
 struct FacultyGroupListView: RootView {
     @State private var isSearchFocused = false
     @ObservedObject var store: FacultyGroupListStore
@@ -32,14 +25,14 @@ struct FacultyGroupListView: RootView {
             }
         }
         .disableAutocorrection(true)
-        .overlay { emptyState }
+        .baseListStyle(isEmpty: store.isListEmpty, isSearching: store.isSearching)
     }
+}
 
-    @ViewBuilder
-    private var emptyState: some View {
-        if !store.searchText.isEmpty && store.facultyGroups.isEmpty {
-            EmptyStateView()
-        }
+final class FacultyGroupListViewController: SwiftUIViewController<FacultyGroupListViewModel, FacultyGroupListView> {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        title = viewModel.faculty.name
     }
 }
 

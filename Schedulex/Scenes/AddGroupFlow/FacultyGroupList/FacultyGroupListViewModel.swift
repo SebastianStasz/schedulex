@@ -12,8 +12,10 @@ import UIKit
 
 final class FacultyGroupListStore: RootStore {
     @Published fileprivate(set) var facultyGroups: [FacultyGroup] = []
-
     @Published var searchText = ""
+
+    var isListEmpty: Bool { facultyGroups.isEmpty }
+    var isSearching: Bool { !searchText.isEmpty }
 
     let navigateToFacultyGroupDetails = DriverSubject<FacultyGroup>()
 }

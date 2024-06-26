@@ -33,12 +33,8 @@ struct EventsListView: RootView {
                 }
             }
         }
-        .baseListStyle(isEmpty: isEmpty, isLoading: store.isLoading.value)
+        .baseListStyle(isEmpty: store.isListEmpty, isLoading: store.isLoading.value, isSearching: store.isSearching)
         .sheet(item: $selectedEvent) { EventDetailsView(event: $0, isForFacultyGroup: false) }
-    }
-
-    private var isEmpty: Bool {
-        store.sections.isEmpty && store.searchText.isEmpty
     }
 }
 

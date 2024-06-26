@@ -7,29 +7,30 @@
 
 import Combine
 import Domain
+import Resources
 import SchedulexCore
 import SchedulexViewModel
 import UIKit
 
-final class ClassroomsListStore: RootStore {
-    @Published fileprivate(set) var classrooms: [Classroom] = []
-    @Published var searchText = ""
-
-    let navigateToEventsListView = DriverSubject<Classroom>()
+final class ClassroomsListViewController: SwiftUIViewController<ClassroomsListViewModel, SearchableListView<Classroom>> {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        title = viewModel.pavilion.name
+    }
 }
 
 struct ClassroomsListViewModel: ViewModel {
     let pavilion: Pavilion
     var navigationController: UINavigationController?
 
-    func makeStore(context _: Context) -> ClassroomsListStore {
-        let store = ClassroomsListStore()
+    func makeStore(context _: Context) -> SearchableListStore<Classroom> {
+        let store = SearchableListStore<Classroom>()
 
         CombineLatest(Just(pavilion.classrooms), store.$searchText)
             .map { $0.0.filterUserSearch(text: $0.1) }
-            .assign(to: &store.$classrooms)
+            .assign(to: &store.$items)
 
-        store.navigateToEventsListView
+        store.onSelectListItem
             .sink { navigateToEventsListView(classroom: $0) }
             .store(in: &store.cancellables)
 

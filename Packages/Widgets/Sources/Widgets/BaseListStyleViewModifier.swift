@@ -10,6 +10,7 @@ import SwiftUI
 private struct BaseListStyleViewModifier: ViewModifier {
     let isEmpty: Bool
     let isLoading: Bool
+    let isSearching: Bool
 
     func body(content: Content) -> some View {
         content
@@ -17,6 +18,7 @@ private struct BaseListStyleViewModifier: ViewModifier {
                 ZStack {
                     emptyBackground
                     loadingIndicator
+                    emptyStateView
                 }
             }
             .allowsHitTesting(!isLoading)
@@ -24,7 +26,7 @@ private struct BaseListStyleViewModifier: ViewModifier {
 
     @ViewBuilder
     private var emptyBackground: some View {
-        if isEmpty || isLoading {
+        if (isEmpty || isLoading) && !isSearching {
             backgroundColor.ignoresSafeArea()
         }
     }
@@ -34,13 +36,21 @@ private struct BaseListStyleViewModifier: ViewModifier {
         if isLoading { ProgressView() }
     }
 
+    @ViewBuilder
+    private var emptyStateView: some View {
+        if isEmpty && !isLoading && !isSearching {
+            EmptyStateView()
+                .padding(.bottom, 60)
+        }
+    }
+
     private var backgroundColor: Color {
         Color.backgroundPrimary
     }
 }
 
 public extension View {
-    func baseListStyle(isEmpty: Bool = false, isLoading: Bool = false) -> some View {
-        modifier(BaseListStyleViewModifier(isEmpty: isEmpty, isLoading: isLoading))
+    func baseListStyle(isEmpty: Bool = false, isLoading: Bool = false, isSearching: Bool = false) -> some View {
+        modifier(BaseListStyleViewModifier(isEmpty: isEmpty, isLoading: isLoading, isSearching: isSearching))
     }
 }

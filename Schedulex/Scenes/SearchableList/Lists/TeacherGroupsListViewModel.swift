@@ -6,23 +6,23 @@
 //
 
 import Domain
+import Resources
 import SchedulexCore
 import SchedulexViewModel
 import UIKit
 
-final class TeacherGroupsListStore: RootStore {
-    @Published fileprivate(set) var teacherGroups: [TeacherGroup] = []
-    @Published var searchText = ""
-
-    let isLoading = DriverState(true)
-    let navigateToTeachersList = DriverSubject<TeacherGroup>()
+final class TeacherGroupsListViewController: SwiftUIViewController<TeacherGroupsListViewModel, SearchableListView<TeacherGroup>> {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        title = L10n.teachersListTitle
+    }
 }
 
 struct TeacherGroupsListViewModel: ViewModel {
     var navigationController: UINavigationController?
 
-    func makeStore(context: Context) -> TeacherGroupsListStore {
-        let store = TeacherGroupsListStore()
+    func makeStore(context: Context) -> SearchableListStore<TeacherGroup> {
+        let store = SearchableListStore<TeacherGroup>()
         let errorTracker = DriverSubject<Error>()
 
         let school = store.viewWillAppear.share()
@@ -32,9 +32,9 @@ struct TeacherGroupsListViewModel: ViewModel {
 
         CombineLatest(school, store.$searchText)
             .map { $0.0.teacherGroups.filterUserSearch(text: $0.1) }
-            .assign(to: &store.$teacherGroups)
+            .assign(to: &store.$items)
 
-        store.navigateToTeachersList
+        store.onSelectListItem
             .sink { navigateToTeachersList(for: $0) }
             .store(in: &store.cancellables)
 

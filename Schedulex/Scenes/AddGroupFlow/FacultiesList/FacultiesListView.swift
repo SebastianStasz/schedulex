@@ -12,14 +12,6 @@ import SchedulexViewModel
 import SwiftUI
 import Widgets
 
-final class FacultiesListViewController: SwiftUIViewController<FacultiesListViewModel, FacultiesListView> {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        title = L10n.addGroup
-        addCloseButton()
-    }
-}
-
 struct FacultiesListView: RootView {
     @State private var isSearchFocused = false
     @ObservedObject var store: FacultiesListStore
@@ -52,25 +44,13 @@ struct FacultiesListView: RootView {
                 }
             }
         }
-        .overlay { emptyState }
-        .baseListStyle(isLoading: store.isLoading.value)
+        .baseListStyle(isLoading: store.isLoading.value, isSearching: !store.searchText.isEmpty)
         .disableAutocorrection(true)
     }
 
     private func facultyListRow(faculty: Faculty) -> some View {
-        BaseListRow(faculty: faculty)
+        BaseListRow(item: faculty)
             .onTapGesture { store.navigateToFacultyGroupList.send(faculty) }
-    }
-
-    @ViewBuilder
-    private var emptyState: some View {
-        if isSearchEmpty {
-            EmptyStateView()
-        }
-    }
-
-    private var isSearchEmpty: Bool {
-        !store.searchText.isEmpty && store.faculties.isEmpty && store.facultyGroups.isEmpty
     }
 
     private var sections: [ListSection<Faculty>] {
@@ -81,6 +61,14 @@ struct FacultiesListView: RootView {
 
     private func getFaculties(ofType type: FacultyType) -> [Faculty] {
         store.faculties.filter { $0.type == type }.sorted(by: { $0.name < $1.name })
+    }
+}
+
+final class FacultiesListViewController: SwiftUIViewController<FacultiesListViewModel, FacultiesListView> {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        title = L10n.addGroup
+        addCloseButton()
     }
 }
 
