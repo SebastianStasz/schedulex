@@ -38,7 +38,7 @@ struct SettingsView: RootView {
                                 .foregroundStyle(.textPrimary)
                                 .frame(maxWidth: .infinity, alignment: .leading)
 
-                            Text(store.appLanguage?.name ?? "", style: .body)
+                            Text(store.appLanguage.name, style: .body)
                                 .foregroundStyle(.accentPrimary)
                                 .contentShape(Rectangle())
                                 .onTapGesture(perform: openSettings)

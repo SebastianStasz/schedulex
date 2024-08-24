@@ -20,7 +20,7 @@ final class SettingsStore: RootStore {
 
     @Published var classNotificationsTime: ClassNotificationTime = .oneHourBefore
     @Published var appColorScheme: AppColorScheme = .system
-    @Published var appLanguage: AppLanguage?
+    @Published var appLanguage: AppLanguage = .firstPreferredLanguageOrDefault
     @Published var isEnableNotificationsAlertPresented = false
 
     var notificationsToggle: Binding<Bool> {
@@ -43,7 +43,6 @@ struct SettingsViewModel: ViewModel {
 
         store.appColorScheme = context.appData.appColorScheme
         store.classNotificationsTime = context.appData.classNotificationsTime
-        store.appLanguage = Locale.preferredLanguages[safe: 0]?.toLanguage()
 
         context.storage.appConfiguration
             .sinkAndStore(on: store) {
@@ -105,12 +104,5 @@ struct SettingsViewModel: ViewModel {
         AppDelegate.resetBarButtonItemColor()
         let viewController = SendEmailViewController(emailContent: emailContent)
         navigationController?.presentModally(viewController)
-    }
-}
-
-private extension String {
-    func toLanguage() -> AppLanguage? {
-        let code = String(prefix(2))
-        return AppLanguage(rawValue: code)
     }
 }
