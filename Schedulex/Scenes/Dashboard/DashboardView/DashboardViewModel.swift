@@ -75,20 +75,20 @@ struct DashboardViewModel: ViewModel {
             .store(in: &store.cancellables)
 
         viewWillEnterForeground
-            .sinkAndStore(on: store) { _, _ in
+            .sink(on: store) {
                 if nextSelectedDateResetDate < .now {
                     setDefaultSelectedDate()
                 }
             }
 
         store.selectTodaysDate
-            .sinkAndStore(on: store) { _, _ in
+            .sink(on: store) {
                 setDefaultSelectedDate()
             }
 
         viewWillAppearOrWillEnterForeground
             .perform { await notificationManager.updateNotificationsPermission() }
-            .sinkAndStore(on: store) { _, _ in }
+            .sink(on: store)
 
         subscribedFacultyGroups
             .map { $0.filter { !$0.isHidden }.isEmpty }
@@ -105,7 +105,7 @@ struct DashboardViewModel: ViewModel {
             .assign(to: &store.$isLoading)
 
         dashboardEventsOutput.errorTracker
-            .sinkAndStore(on: store) { store, _ in
+            .sink(on: store) { store, _ in
                 store.showErrorInfo = true
                 store.selectedDateEvents = []
                 store.selectedDate = .now
@@ -115,7 +115,7 @@ struct DashboardViewModel: ViewModel {
             }
 
         dashboardEventsOutput.dayPickerItems
-            .sinkAndStore(on: store) {
+            .sink(on: store) {
                 let startDate = $1?.first?.date
                 let endDate = $1?.last?.date
                 $0.startDate = startDate
@@ -140,7 +140,7 @@ struct DashboardViewModel: ViewModel {
 
         ClassNotificationService(notificationsManager: notificationManager)
             .registerForEventsNotifications(input: classNotificationServiceInput)
-            .sinkAndStore(on: store) { _, _ in }
+            .sink(on: store)
 
         CombineLatest(store.$selectedDate, dashboardEventsOutput.eventsToDisplay)
             .map { getSelectedDayEvents(date: $0, events: $1) }
@@ -151,7 +151,7 @@ struct DashboardViewModel: ViewModel {
             .assign(to: &store.$dayOff)
 
         context.storage.appConfiguration
-            .sinkAndStore(on: store) { $0.showSettingsBadge = $1.isAppUpdateAvailable }
+            .sink(on: store) { $0.showSettingsBadge = $1.isAppUpdateAvailable }
 
         context.appData.$dashboardSwipeTipPresented
             .map { !$0 }

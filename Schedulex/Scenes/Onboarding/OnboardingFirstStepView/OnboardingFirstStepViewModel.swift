@@ -33,10 +33,10 @@ struct OnboardingFirstStepViewModel: ViewModel {
 
         store.viewWillAppear
             .perform(isLoading: store.isLoading) { try await context.storage.getCracowUniversityOfEconomicsData() }
-            .sinkAndStore(on: store) { $0.facultyGroups = $1.allGroupsWithoutLanguages }
+            .sink(on: store) { $0.facultyGroups = $1.allGroupsWithoutLanguages }
 
         store.onNextButton
-            .sinkAndStore(on: store) { store, _ in
+            .sink(on: store) { store in
                 if store.selectedFacultyGroups.isEmpty {
                     store.isConfirmationAlertPresented = true
                 } else {
@@ -49,7 +49,7 @@ struct OnboardingFirstStepViewModel: ViewModel {
             .store(in: &store.cancellables)
 
         presentStartSecondStepView
-            .sinkAndStore(on: store) { store, _ in
+            .sink(on: store) { store in
                 let viewModel = OnboardingSecondStepViewModel(selectedFacultyGroups: store.selectedFacultyGroups, onFinishOnboarding: onFinishOnboarding)
                 let viewController = OnboardingSecondStepViewController(viewModel: viewModel)
                 navigationController?.pushViewController(viewController, animated: true)

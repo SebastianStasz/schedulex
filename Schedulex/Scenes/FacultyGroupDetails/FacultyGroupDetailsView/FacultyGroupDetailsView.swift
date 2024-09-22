@@ -37,13 +37,10 @@ struct FacultyGroupDetailsView: RootView {
         }
         .baseListStyle(isLoading: isLoading)
         .safeAreaInset(edge: .bottom) {
-            TextButton(store.isFacultyGroupSubscribed ? L10n.unfollow : L10n.addToObserved) {
-                if store.isFacultyGroupSubscribed {
-                    store.unsubscribeFacultyGroup.send()
-                } else {
-                    store.subscribeFacultyGroup.send()
-                }
+            Button(store.isFacultyGroupSubscribed ? L10n.unfollow : L10n.addToObserved) {
+                store.subscribeOrUnsubscribeFacultyGroup.send()
             }
+            .foregroundStyle(.red)
             .padding(.bottom, .large)
             .opacity(isLoading ? 0 : 1)
         }
@@ -72,8 +69,7 @@ final class FacultyGroupDetailsViewController: SwiftUIViewController<FacultyGrou
     }
 }
 
-struct FacultyGroupView_Previews: PreviewProvider {
-    static var previews: some View {
-        FacultyGroupDetailsView(store: FacultyGroupDetailsStore(facultyGroup: .sample, viewType: .preview))
-    }
+#Preview {
+    let store = FacultyGroupDetailsStore(facultyGroup: .sample, viewType: .preview)
+    return FacultyGroupDetailsView(store: store)
 }

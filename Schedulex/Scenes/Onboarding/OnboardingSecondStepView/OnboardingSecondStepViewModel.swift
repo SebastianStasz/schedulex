@@ -30,14 +30,14 @@ struct OnboardingSecondStepViewModel: ViewModel {
 
         store.viewWillAppear
             .perform { try await context.storage.getCracowUniversityOfEconomicsData() }
-            .sinkAndStore(on: store) { $0.languageGroups = $1.languageGroups }
+            .sink(on: store) { $0.languageGroups = $1.languageGroups }
 
         store.$selectedLanguageGroups
             .map { !$0.isEmpty || !selectedFacultyGroups.isEmpty }
             .assign(to: &store.$canConfirmSelection)
 
         store.confirmGroupsSelection
-            .sinkAndStore(on: store) { store, _ in
+            .sink(on: store) { store in
                 let allGroups = selectedFacultyGroups + store.selectedLanguageGroups
                 confirmGroupsSelection(allGroups, context: context)
             }

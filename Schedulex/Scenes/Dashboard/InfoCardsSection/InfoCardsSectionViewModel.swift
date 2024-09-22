@@ -38,7 +38,7 @@ struct InfoCardsSectionViewModel {
 
         store.performActionForInfoCard
             .perform { await performActionForInfoCard($0, appData: appData) }
-            .sinkAndStore(on: store) { _, _ in }
+            .sink(on: store)
 
         store.closeInfoCard
             .sink { appData.hideInfoCard($0) }

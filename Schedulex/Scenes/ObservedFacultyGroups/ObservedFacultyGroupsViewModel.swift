@@ -47,10 +47,10 @@ struct ObservedFacultyGroupsViewModel: ViewModel {
             .store(in: &store.cancellables)
 
         store.deleteFacultyGroup
-            .sinkAndStore(on: store) { store, _ in
-                guard let groupToDelete = store.groupToDelete else { return }
+            .sink(on: store) {
+                guard let groupToDelete = $0.groupToDelete else { return }
                 context.appData.unsubscribeFacultyGroup(groupToDelete)
-                store.groupToDelete = nil
+                $0.groupToDelete = nil
             }
 
         return store

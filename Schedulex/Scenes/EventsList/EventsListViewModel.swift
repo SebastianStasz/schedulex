@@ -40,16 +40,14 @@ struct EventsListViewModel: ViewModel {
 
         CombineLatest(eventsPublisher, store.$searchText)
             .map { filterAndGroupByDate(events: $0, searchText: $1) }
-            .sinkAndStore(on: store) {
+            .sink(on: store) {
                 $0.sectionIndexToScroll = getClosestSectionIndexByTodaysDate(eventsByDate: $1)
                 $0.sections = mapToListSections(eventsByDate: $1)
             }
 
         store.viewDidAppear
             .filter { scrollToSectionOnViewDidAppear }
-            .sinkAndStore(on: store) { store, _ in
-                store.scrollToSection.send()
-            }
+            .sink(on: store) { $0.scrollToSection.send() }
 
         switch input {
         case let .facultyGroup(_, events):

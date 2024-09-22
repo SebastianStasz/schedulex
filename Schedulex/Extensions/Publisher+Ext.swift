@@ -68,10 +68,30 @@ extension Publisher where Failure == Never {
         map { _ in }.asDriver()
     }
 
-    func sinkAndStore<VM: CombineHelper>(on viewModel: VM, action: @escaping (VM, Output) -> Void) {
+    func sink<VM: CombineHelper>(on viewModel: VM, action: @escaping (VM, Output) -> Void) {
         sink { [weak viewModel] value in
             guard let viewModel = viewModel else { return }
             action(viewModel, value)
+        }
+        .store(in: &viewModel.cancellables)
+    }
+    
+    func sink<VM: CombineHelper>(on viewModel: VM, action: @escaping (Output) -> Void) {
+        sink { action($0) }
+            .store(in: &viewModel.cancellables)
+    }
+
+    func sink<VM: CombineHelper>(on viewModel: VM) {
+        sink { _ in }
+            .store(in: &viewModel.cancellables)
+    }
+}
+
+extension Publisher where Failure == Never, Output == Void {
+    func sink<VM: CombineHelper>(on viewModel: VM, action: @escaping (VM) -> Void) {
+        sink { [weak viewModel] _ in
+            guard let viewModel = viewModel else { return }
+            action(viewModel)
         }
         .store(in: &viewModel.cancellables)
     }

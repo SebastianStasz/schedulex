@@ -45,7 +45,7 @@ struct SettingsViewModel: ViewModel {
         store.classNotificationsTime = context.appData.classNotificationsTime
 
         context.storage.appConfiguration
-            .sinkAndStore(on: store) {
+            .sink(on: store) {
                 $0.contactMail = $1.contactMail
                 $0.appVersion = $1.currentAppVersion ?? ""
                 $0.isUpdateAvailable = $1.isAppUpdateAvailable
