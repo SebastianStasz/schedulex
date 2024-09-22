@@ -55,7 +55,7 @@
 "calendar" = "Calendar";
 "classes" = "Classes";
 "events" = "Events";
-"my_groups" = "My groups";
+"groups" = "Groups";
 "add_to_observed" = "Add to observed";
 "group" = "Group";
 "faculties" = "Faculties";

@@ -11,13 +11,13 @@ let package = Package(
         .library(
             name: "SchedulexCore",
             targets: ["SchedulexCore"]
-        ),
+        )
     ],
     dependencies: [
         .package(name: "Domain", path: "../Domain"),
         .package(name: "Resources", path: "../Resources"),
         .package(name: "Widgets", path: "../Widgets"),
-        .package(name: "SchedulexFirebase", path: "../SchedulexFirebase"),
+        .package(name: "SchedulexFirebase", path: "../SchedulexFirebase")
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -28,12 +28,12 @@ let package = Package(
                 "Domain",
                 "Resources",
                 "Widgets",
-                "SchedulexFirebase",
+                "SchedulexFirebase"
             ]
         ),
         .testTarget(
             name: "SchedulexCoreTests",
             dependencies: ["SchedulexCore"]
-        ),
+        )
     ]
 )

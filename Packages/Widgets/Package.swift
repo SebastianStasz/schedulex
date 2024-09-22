@@ -11,10 +11,10 @@ let package = Package(
         .library(
             name: "Widgets",
             targets: ["Widgets"]
-        ),
+        )
     ],
     dependencies: [
-        .package(name: "Resources", path: "../Resources"),
+        .package(name: "Resources", path: "../Resources")
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -26,6 +26,6 @@ let package = Package(
         .testTarget(
             name: "WidgetsTests",
             dependencies: ["Widgets"]
-        ),
+        )
     ]
 )

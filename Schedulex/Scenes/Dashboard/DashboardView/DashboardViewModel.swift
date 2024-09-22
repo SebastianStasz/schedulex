@@ -34,6 +34,11 @@ final class DashboardStore: RootStore {
     let scrollToDate = DriverSubject<Void>()
     let refresh = DriverSubject<Void>()
 
+    var isTodaySelected: Bool {
+        guard let endDate else { return true }
+        return selectedDate.isSameDay(as: endDate)
+    }
+
     init(infoCardsSectionStore: InfoCardsSectionStore) {
         self.infoCardsSectionStore = infoCardsSectionStore
         super.init()

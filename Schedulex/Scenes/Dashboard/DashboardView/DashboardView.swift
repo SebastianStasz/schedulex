@@ -44,15 +44,20 @@ struct DashboardView: RootView {
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
                     .padding(.medium)
+                    .padding(.bottom, 40)
                     .background(.backgroundPrimary)
                 }
                 .gesture(dragGesture)
                 .overlay { loadingIndicatorOrEmptyState }
             }
-            .toolbar { toolbarContent }
-            .doubleNavigationTitle(title: title, subtitle: subtitle, showBadge: store.showSettingsBadge, openSettings: { store.navigateTo.send(.settings) }, openRoomsList: { store.navigateTo.send(.roomsList) }, openTeacherGroupsList: { store.navigateTo.send(.teacherGroupsList) })
+            .doubleNavigationTitle(title: title, subtitle: subtitle, showBadge: store.showSettingsBadge, showSettings: { store.navigateTo.send(.settings) }, showGroups: { store.navigateTo.send(.observedFacultyGroups) })
         }
         .sheet(isPresented: $isDatePickerPresented) { datePicker }
+        .overlay(alignment: .bottom) { DashboardBottomPanel(isTodaySelected: store.isTodaySelected,
+                                                            showDatePicker: showDatePicker,
+                                                            selectTodaysDate: selectTodaysDate,
+                                                            showTeachersList: { store.navigateTo.send(.teacherGroupsList) },
+                                                            showPavilionsList: { store.navigateTo.send(.roomsList) }) }
     }
 
     private var eventsToDisplay: [FacultyGroupEvent] {
@@ -147,20 +152,6 @@ struct DashboardView: RootView {
         .padding(.horizontal, .xlarge)
     }
 
-    private var toolbarContent: some ToolbarContent {
-        ToolbarItem(placement: .bottomBar) {
-            HStack(spacing: 0) {
-                TextButton(L10n.myGroups, action: { store.navigateTo.send(.observedFacultyGroups) })
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                TextButton(L10n.today, action: selectTodaysDate)
-                    .frame(maxWidth: .infinity)
-                TextButton(L10n.calendar, action: showDatePicker)
-                    .frame(maxWidth: .infinity, alignment: .trailing)
-            }
-            .padding(.horizontal, .micro)
-        }
-    }
-
     private func selectTodaysDate() {
         store.selectTodaysDate.send()
     }
@@ -178,23 +169,6 @@ struct DashboardView: RootView {
                 store.markSwipeTipAsPresented.send()
             }
         }
-    }
-}
-
-final class DashboardViewController: SwiftUIViewController<DashboardViewModel, DashboardView> {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        title = L10n.dashboardTitle
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: animated)
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: animated)
     }
 }
 

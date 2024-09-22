@@ -13,13 +13,13 @@ struct CircleNavigationButtonStyle: ButtonStyle {
 
     func makeBody(configuration _: Configuration) -> some View {
         Circle()
-            .fill(.backgroundTertiary)
+            .fill(.grayShade2)
             .frame(width: 42, height: 42)
             .overlay {
                 Image.icon(icon)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .foregroundStyle(.textPrimary)
+                    .foregroundStyle(.textTertiary)
                     .padding(3)
                     .overlay(badgeOverlay)
                     .padding(7)

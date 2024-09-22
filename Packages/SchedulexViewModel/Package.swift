@@ -11,10 +11,10 @@ let package = Package(
         .library(
             name: "SchedulexViewModel",
             targets: ["SchedulexViewModel"]
-        ),
+        )
     ],
     dependencies: [
-        .package(name: "SchedulexCore", path: "../SchedulexCore"),
+        .package(name: "SchedulexCore", path: "../SchedulexCore")
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -22,12 +22,12 @@ let package = Package(
         .target(
             name: "SchedulexViewModel",
             dependencies: [
-                "SchedulexCore",
+                "SchedulexCore"
             ]
         ),
         .testTarget(
             name: "SchedulexViewModelTests",
             dependencies: ["SchedulexViewModel"]
-        ),
+        )
     ]
 )

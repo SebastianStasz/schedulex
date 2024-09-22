@@ -12,9 +12,8 @@ private struct DoubleNavigationTitle: ViewModifier {
     let title: String
     let subtitle: String
     let showBadge: Bool
-    let openSettings: () -> Void
-    let openRoomsList: () -> Void
-    let openTeacherGroupsList: () -> Void
+    let showSettings: () -> Void
+    let showGroups: () -> Void
 
     func body(content: Content) -> some View {
         VStack(spacing: 0) {
@@ -33,13 +32,10 @@ private struct DoubleNavigationTitle: ViewModifier {
                 .frame(maxWidth: .infinity, alignment: .leading)
 
                 HStack(spacing: 10) {
-                    Button(L10n.teachersListTitle, action: openTeacherGroupsList)
-                        .buttonStyle(.circleNavigationButtonStyle(icon: .teachersList))
+                    Button(L10n.groups, action: showGroups)
+                        .buttonStyle(.expandableButtonStyle(isExpanded: true))
 
-                    Button(L10n.pavilionsListTitle, action: openRoomsList)
-                        .buttonStyle(.circleNavigationButtonStyle(icon: .pavilionsList))
-
-                    Button(L10n.settingsTitle, action: openSettings)
+                    Button(L10n.settingsTitle, action: showSettings)
                         .buttonStyle(.circleNavigationButtonStyle(icon: .settings, showBadge: showBadge))
                 }
             }
@@ -58,13 +54,13 @@ private struct DoubleNavigationTitle: ViewModifier {
 }
 
 public extension View {
-    func doubleNavigationTitle(title: String, subtitle: String, showBadge: Bool, openSettings: @escaping () -> Void, openRoomsList: @escaping () -> Void, openTeacherGroupsList: @escaping () -> Void) -> some View {
-        modifier(DoubleNavigationTitle(title: title, subtitle: subtitle, showBadge: showBadge, openSettings: openSettings, openRoomsList: openRoomsList, openTeacherGroupsList: openTeacherGroupsList))
+    func doubleNavigationTitle(title: String, subtitle: String, showBadge: Bool, showSettings: @escaping () -> Void, showGroups: @escaping () -> Void) -> some View {
+        modifier(DoubleNavigationTitle(title: title, subtitle: subtitle, showBadge: showBadge, showSettings: showSettings, showGroups: showGroups))
     }
 }
 
 #Preview {
     Text("Content", style: .body)
         .frame(maxHeight: .infinity)
-        .doubleNavigationTitle(title: "30 listopada 2023", subtitle: "Dzisiaj", showBadge: false, openSettings: {}, openRoomsList: {}, openTeacherGroupsList: {})
+        .doubleNavigationTitle(title: "30 listopada 2023", subtitle: "Dzisiaj", showBadge: false, showSettings: {}, showGroups: {})
 }

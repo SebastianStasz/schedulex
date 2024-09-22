@@ -1,0 +1,6 @@
+--exclude Packages/Resources/Sources/Resources/Generated
+
+--disable redundantRawValues
+
+--commas inline
+--stripunusedargs unnamed-only

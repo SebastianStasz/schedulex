@@ -11,6 +11,7 @@ public enum Icon: String, Identifiable, CaseIterable {
     case delete
     case info
     case circle
+    case recordCircle
     case doubleCircle
     case circleFill
     case checkmark
@@ -24,7 +25,10 @@ public enum Icon: String, Identifiable, CaseIterable {
     case contactCard
     case menu
     case edit
+    case more
     case freeHoursCircleFill
+    case calendar
+    case chevronForwardCircle
 
     public var id: String {
         rawValue
@@ -42,6 +46,8 @@ public enum Icon: String, Identifiable, CaseIterable {
             return "info.circle"
         case .circle:
             return "circle"
+        case .recordCircle:
+            return "record.circle"
         case .doubleCircle:
             return "circle.circle"
         case .circleFill:
@@ -70,6 +76,12 @@ public enum Icon: String, Identifiable, CaseIterable {
             return "slider.horizontal.3"
         case .freeHoursCircleFill:
             return "r.circle.fill"
+        case .calendar:
+            return "calendar"
+        case .more:
+            return "ellipsis.circle"
+        case .chevronForwardCircle:
+            return "chevron.forward.circle"
         }
     }
 }

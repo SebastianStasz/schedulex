@@ -11,11 +11,11 @@ let package = Package(
         .library(
             name: "SchedulexFirebase",
             targets: ["SchedulexFirebase"]
-        ),
+        )
     ],
     dependencies: [
         .package(name: "Domain", path: "../Domain"),
-        .package(name: "Firebase", url: "https://github.com/firebase/firebase-ios-sdk", from: Version(10, 0, 0)),
+        .package(name: "Firebase", url: "https://github.com/firebase/firebase-ios-sdk", from: Version(10, 0, 0))
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
@@ -25,12 +25,12 @@ let package = Package(
             dependencies: [
                 "Domain",
                 .product(name: "FirebaseFirestore", package: "Firebase"),
-                .product(name: "FirebaseFirestoreSwift", package: "Firebase"),
+                .product(name: "FirebaseFirestoreSwift", package: "Firebase")
             ]
         ),
         .testTarget(
             name: "SchedulexFirebaseTests",
             dependencies: ["SchedulexFirebase"]
-        ),
+        )
     ]
 )

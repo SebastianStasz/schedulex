@@ -12,7 +12,7 @@ let package = Package(
         .library(
             name: "Resources",
             targets: ["Resources"]
-        ),
+        )
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -21,12 +21,12 @@ let package = Package(
             name: "Resources",
             dependencies: [],
             resources: [
-                .process("Fonts"),
+                .process("Fonts")
             ]
         ),
         .testTarget(
             name: "ResourcesTests",
             dependencies: ["Resources"]
-        ),
+        )
     ]
 )

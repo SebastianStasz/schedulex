@@ -13,10 +13,12 @@ public enum ColorStyle: CaseIterable {
     case backgroundSecondary
     case backgroundTertiary
     case grayShade1
+    case grayShade2
     case accentPrimary
     case greenPrimary
     case textPrimary
     case textSecondary
+    case textTertiary
     case blueShade1
     case blueShade2
     case blueShade3
@@ -32,6 +34,8 @@ public enum ColorStyle: CaseIterable {
             return "background_tertiary"
         case .grayShade1:
             return "gray_shade_1"
+        case .grayShade2:
+            return "gray_shade_2"
         case .accentPrimary:
             return "accent_primary"
         case .greenPrimary:
@@ -40,6 +44,8 @@ public enum ColorStyle: CaseIterable {
             return "text_primary"
         case .textSecondary:
             return "text_secondary"
+        case .textTertiary:
+            return "text_tertiary"
         case .blueShade1:
             return "blue_shade_1"
         case .blueShade2:
@@ -61,6 +67,8 @@ public enum ColorStyle: CaseIterable {
             return .backgroundTertiary
         case .grayShade1:
             return .grayShade1
+        case .grayShade2:
+            return .grayShade2
         case .accentPrimary:
             return .accentPrimary
         case .greenPrimary:
@@ -69,6 +77,8 @@ public enum ColorStyle: CaseIterable {
             return .textPrimary
         case .textSecondary:
             return .textSecondary
+        case .textTertiary:
+            return .textTertiary
         case .blueShade1:
             return .blueShade1
         case .blueShade2:

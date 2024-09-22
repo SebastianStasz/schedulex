@@ -11,6 +11,7 @@ public enum CustomButtonStyle {
     case appVersionButtonStyle
     case primaryButtonStyle(isKeyboardVisible: Bool)
     case circleNavigationButtonStyle(icon: Icon, showBadge: Bool = false)
+    case expandableButtonStyle(icon: Icon? = nil, fillMaxWidth: Bool = false, isExpanded: Bool = false)
 }
 
 public extension Button {
@@ -18,14 +19,13 @@ public extension Button {
     func buttonStyle(_ style: CustomButtonStyle) -> some View {
         switch style {
         case .appVersionButtonStyle:
-            let style = AppVersionButtonStyle()
-            buttonStyle(style)
+            buttonStyle(AppVersionButtonStyle())
         case let .primaryButtonStyle(isKeyboardVisible):
-            let style = PrimaryButtonStyle(isKeyboardVisible: isKeyboardVisible)
-            buttonStyle(style)
+            buttonStyle(PrimaryButtonStyle(isKeyboardVisible: isKeyboardVisible))
         case let .circleNavigationButtonStyle(icon, showBadge):
-            let style = CircleNavigationButtonStyle(icon: icon, showBadge: showBadge)
-            buttonStyle(style)
+            buttonStyle(CircleNavigationButtonStyle(icon: icon, showBadge: showBadge))
+        case let .expandableButtonStyle(icon, fillMaxWidth, isExpanded):
+            buttonStyle(ExpandableButtonStyle(icon: icon, fillMaxWidth: fillMaxWidth, isExpanded: isExpanded))
         }
     }
 }
