@@ -22,7 +22,8 @@ final class FacultyGroupDetailsStore: RootStore {
     let navigateToEventsList = DriverSubject<Void>()
     let navigateToClassList = DriverSubject<Void>()
     let navigateToColorSelection = DriverSubject<Void>()
-    let subscribeOrUnsubscribeFacultyGroup = DriverSubject<Void>()
+    let subscribeFacultyGroup = DriverSubject<Void>()
+    let unsubscribeFacultyGroup = DriverSubject<Void>()
 
     init(facultyGroup: FacultyGroup, viewType: FacultyGroupDetailsViewType) {
         self.facultyGroup = facultyGroup
@@ -53,15 +54,19 @@ struct FacultyGroupDetailsViewModel: ViewModel {
             .map { $0.contains(where: { $0.name == facultyGroup.name }) }
             .assign(to: &store.$isFacultyGroupSubscribed)
 
-        store.subscribeOrUnsubscribeFacultyGroup
-            .sink(on: store) {
-                if $0.isFacultyGroupSubscribed {
-                    context.appData.unsubscribeFacultyGroup(facultyGroup)
-                } else {
-                    context.appData.subscribeFacultyGroup(facultyGroup)
-                }
+        store.unsubscribeFacultyGroup
+            .sink {
+                context.appData.unsubscribeFacultyGroup(facultyGroup)
                 dismissOrPop()
             }
+            .store(in: &store.cancellables)
+
+        store.subscribeFacultyGroup
+            .sink {
+                context.appData.subscribeFacultyGroup(facultyGroup)
+                dismissOrPop()
+            }
+            .store(in: &store.cancellables)
 
         store.navigateToColorSelection
             .sink { navigateToFacultyGroupColorSelection() }

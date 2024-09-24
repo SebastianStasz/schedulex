@@ -19,7 +19,7 @@ final class SettingsStore: RootStore {
     @Published fileprivate(set) var isUpdateAvailable = false
 
     @Published var classNotificationsTime: ClassNotificationTime = .oneHourBefore
-    @Published var appColorScheme: AppColorScheme = .system
+    @Published var appColorScheme: AppColorScheme = .dark
     @Published var appLanguage: AppLanguage = .firstPreferredLanguageOrDefault
     @Published var isEnableNotificationsAlertPresented = false
 

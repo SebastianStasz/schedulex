@@ -53,7 +53,7 @@ struct DashboardView: RootView {
             .doubleNavigationTitle(title: title, subtitle: subtitle, showBadge: store.showSettingsBadge, showSettings: { store.navigateTo.send(.settings) }, showGroups: { store.navigateTo.send(.observedFacultyGroups) })
         }
         .sheet(isPresented: $isDatePickerPresented) { datePicker }
-        .overlay(alignment: .bottom) { DashboardBottomPanel(isTodaySelected: store.isTodaySelected,
+        .overlay(alignment: .bottom) { DashboardBottomPanel(isDefaultDateSelected: store.isDefaultDateSelected,
                                                             showDatePicker: showDatePicker,
                                                             selectTodaysDate: selectTodaysDate,
                                                             showTeachersList: { store.navigateTo.send(.teacherGroupsList) },

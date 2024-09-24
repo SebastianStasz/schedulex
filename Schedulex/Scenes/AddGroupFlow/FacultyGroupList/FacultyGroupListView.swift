@@ -20,8 +20,7 @@ struct FacultyGroupListView: RootView {
             SearchField(prompt: L10n.group, searchText: $store.searchText, isFocused: $isSearchFocused)
 
             BaseList(store.facultyGroups) { facultyGroup in
-                BaseListRow(facultyGroup: facultyGroup)
-                    .onTapGesture { store.navigateToFacultyGroupDetails.send(facultyGroup) }
+                NavigationRow(facultyGroup: facultyGroup) { store.navigateToFacultyGroupDetails.send(facultyGroup) }
             }
         }
         .disableAutocorrection(true)

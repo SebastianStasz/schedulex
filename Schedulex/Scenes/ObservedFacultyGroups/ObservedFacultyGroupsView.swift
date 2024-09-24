@@ -16,22 +16,22 @@ struct ObservedFacultyGroupsView: RootView {
 
     var rootBody: some View {
         BaseList(store.subscribedGroups) { facultyGroup in
-            let caption = L10n.numberOfEvents + " \(facultyGroup.numberOfEvents)"
             let isSelected = !facultyGroup.isHidden
-            let action = { store.editFacultyGroup.send(facultyGroup) }
+            let editGroup = { store.editFacultyGroup.send(facultyGroup) }
 
             if facultyGroup == store.subscribedGroups.first {
                 addGroupRow()
                 Separator()
             }
 
-            ObservedFacultyGroupItem(title: facultyGroup.name, caption: caption, color: facultyGroup.color.representative, isSelected: isSelected, trailingIconAction: action)
-                .onTapGesture { store.toggleFacultyGroupVisibility.send(facultyGroup) }
-                .contextMenu { UnfollowGroupButton { store.groupToDelete = facultyGroup } }
+            BaseListItem(facultyGroup: facultyGroup, icon: .edit, iconSize: .xlarge, iconAction: editGroup) {
+                SelectionIcon(isSelected: isSelected, color: facultyGroup.color.representative)
+                    .frame(height: .xlarge)
+            }
+            .onTapGesture { store.toggleFacultyGroupVisibility.send(facultyGroup) }
+            .contextMenu { UnfollowGroupButton { store.groupToDelete = facultyGroup } }
         }
-        .confirmationDialog(unfollowGroupQuestion, isPresented: store.isGroupDeleteConfirmationPresented, titleVisibility: .visible) {
-            Button(L10n.unfollow, role: .destructive, action: store.deleteFacultyGroup.send)
-        }
+        .confirmationDialogUnfollowGroup(name: store.groupToDelete?.name, isPresented: store.isGroupDeleteConfirmationPresented, action: store.deleteFacultyGroup.send)
     }
 
     private func addGroupRow() -> some View {
@@ -48,10 +48,6 @@ struct ObservedFacultyGroupsView: RootView {
         .card(vertical: .xlarge)
         .foregroundStyle(.accentPrimary)
         .onTapGesture(perform: store.presentFacultiesList.send)
-    }
-
-    private var unfollowGroupQuestion: String {
-        L10n.unfollowGroupQuestion + " \(store.groupToDelete?.name ?? "")?"
     }
 }
 

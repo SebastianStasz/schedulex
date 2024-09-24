@@ -5,8 +5,8 @@
 //  Created by Sebastian Staszczyk on 15/09/2024.
 //
 
-import SchedulexViewModel
 import Resources
+import SchedulexViewModel
 
 final class DashboardViewController: SwiftUIViewController<DashboardViewModel, DashboardView> {
     override func viewDidLoad() {

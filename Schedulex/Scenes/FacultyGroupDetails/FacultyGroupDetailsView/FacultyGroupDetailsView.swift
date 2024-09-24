@@ -13,37 +13,37 @@ import UEKScraper
 import Widgets
 
 struct FacultyGroupDetailsView: RootView {
+    @State private var isGroupDeleteConfirmationPresented = false
     @ObservedObject var store: FacultyGroupDetailsStore
 
     var rootBody: some View {
         BaseList {
             if store.viewType == .editable {
-                BaseListItem(title: L10n.color, caption: L10n.changeColorOfEvents, color: store.facultyGroup.color.representative)
-                    .trailingIcon(.chevronRight, iconSize: 15)
-                    .onTapGesture { store.navigateToColorSelection.send() }
-
+                NavigationRow(title: L10n.color, caption: L10n.changeColorOfEvents, action: store.navigateToColorSelection.send) {
+                    ColorPickerSquare(color: store.facultyGroup.color.representative, cornerRadius: .mini)
+                        .fixedSize(horizontal: true, vertical: false)
+                }
                 Separator()
             }
-
-            BaseListItem(title: L10n.classes, caption: classesDescription)
-                .trailingIcon(.chevronRight, iconSize: 15)
-                .onTapGesture { store.navigateToClassList.send() }
-
+            NavigationRow(title: L10n.classes, caption: classesDescription, action: store.navigateToClassList.send)
             Separator()
-
-            BaseListItem(title: L10n.events, caption: eventsDescription)
-                .trailingIcon(.chevronRight, iconSize: 15)
-                .onTapGesture { store.navigateToEventsList.send() }
+            NavigationRow(title: L10n.events, caption: eventsDescription, action: store.navigateToEventsList.send)
         }
         .baseListStyle(isLoading: isLoading)
-        .safeAreaInset(edge: .bottom) {
-            Button(store.isFacultyGroupSubscribed ? L10n.unfollow : L10n.addToObserved) {
-                store.subscribeOrUnsubscribeFacultyGroup.send()
-            }
-            .foregroundStyle(.red)
-            .padding(.bottom, .large)
-            .opacity(isLoading ? 0 : 1)
+        .safeAreaInset(edge: .bottom, content: bottomButton)
+        .confirmationDialogUnfollowGroup(name: store.facultyGroup.name, isPresented: $isGroupDeleteConfirmationPresented, action: store.unsubscribeFacultyGroup.send)
+    }
+
+    private func bottomButton() -> some View {
+        Group {
+            UnfollowGroupButton { isGroupDeleteConfirmationPresented = true }
+                .opacity(store.isFacultyGroupSubscribed ? 1 : 0)
+
+            FollowGroupButton { store.subscribeFacultyGroup.send() }
+                .opacity(store.isFacultyGroupSubscribed ? 0 : 1)
         }
+        .opacity(isLoading ? 0 : 1)
+        .padding(.bottom, .large)
     }
 
     private var classesDescription: String {

@@ -34,14 +34,20 @@ final class DashboardStore: RootStore {
     let scrollToDate = DriverSubject<Void>()
     let refresh = DriverSubject<Void>()
 
-    var isTodaySelected: Bool {
-        guard let endDate else { return true }
-        return selectedDate.isSameDay(as: endDate)
+    var isDefaultDateSelected: Bool {
+        let defaultSelectedDate = getDefaultSelectedDate()
+        return selectedDate.isSameDay(as: defaultSelectedDate)
     }
 
     init(infoCardsSectionStore: InfoCardsSectionStore) {
         self.infoCardsSectionStore = infoCardsSectionStore
         super.init()
+    }
+
+    fileprivate func getDefaultSelectedDate() -> Date {
+        let todaysDate = Date.now
+        guard let startDate, let endDate, startDate > todaysDate || endDate < todaysDate else { return todaysDate }
+        return Date.now < startDate ? startDate : endDate
     }
 }
 
@@ -62,7 +68,7 @@ struct DashboardViewModel: ViewModel {
         let daysOff = context.storage.appConfiguration.map { $0.daysOff }
 
         let setDefaultSelectedDate = { [weak store] in
-            let dateToSelect = getDefaultSelectedDate(startDate: store?.startDate, endDate: store?.endDate)
+            let dateToSelect = store?.getDefaultSelectedDate() ?? .now
             guard !(store?.selectedDate.isSameDay(as: dateToSelect) ?? true) else {
                 store?.scrollToDate.send()
                 return
@@ -166,12 +172,6 @@ struct DashboardViewModel: ViewModel {
             .store(in: &store.cancellables)
 
         return store
-    }
-
-    private func getDefaultSelectedDate(startDate: Date?, endDate: Date?) -> Date {
-        let todaysDate = Date.now
-        guard let startDate, let endDate, startDate > todaysDate || endDate < todaysDate else { return todaysDate }
-        return Date.now < startDate ? startDate : endDate
     }
 
     private func getSelectedDayEvents(date: Date, events: [FacultyGroupEvent]) -> [FacultyGroupEvent] {

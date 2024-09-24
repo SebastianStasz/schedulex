@@ -10,7 +10,7 @@ import SwiftUI
 import Widgets
 
 struct DashboardBottomPanel: View {
-    let isTodaySelected: Bool
+    let isDefaultDateSelected: Bool
     let showDatePicker: () -> Void
     let selectTodaysDate: () -> Void
     let showTeachersList: () -> Void
@@ -22,7 +22,7 @@ struct DashboardBottomPanel: View {
                 Button(L10n.teachersListTitle, icon: .teachersList, action: showTeachersList)
                 Button(L10n.pavilionsListTitle, icon: .pavilionsList, action: showPavilionsList)
             } label: {
-                Button("More", action: {})
+                Button(L10n.more, action: {})
                     .buttonStyle(.expandableButtonStyle(icon: .more))
             }
 
@@ -30,18 +30,18 @@ struct DashboardBottomPanel: View {
                 .buttonStyle(.expandableButtonStyle(icon: .calendar, fillMaxWidth: true, isExpanded: true))
 
             Button(L10n.today, action: selectTodaysDate)
-                .buttonStyle(.expandableButtonStyle(icon: selectTodaysDateButtonIcon, isExpanded: !isTodaySelected))
-                .disabled(isTodaySelected)
+                .buttonStyle(.expandableButtonStyle(icon: dateSelectionButtonIcon, isExpanded: !isDefaultDateSelected))
+                .disabled(isDefaultDateSelected)
         }
         .padding(.horizontal, .large)
-        .animation(.easeInOut(duration: 0.2), value: isTodaySelected)
+        .animation(.easeInOut(duration: 0.2), value: isDefaultDateSelected)
     }
 
-    private var selectTodaysDateButtonIcon: Icon {
-        isTodaySelected ? .recordCircle : .chevronForwardCircle
+    private var dateSelectionButtonIcon: Icon {
+        isDefaultDateSelected ? .recordCircle : .chevronForwardCircle
     }
 }
 
 #Preview {
-    DashboardBottomPanel(isTodaySelected: true, showDatePicker: {}, selectTodaysDate: {}, showTeachersList: {}, showPavilionsList: {})
+    DashboardBottomPanel(isDefaultDateSelected: true, showDatePicker: {}, selectTodaysDate: {}, showTeachersList: {}, showPavilionsList: {})
 }

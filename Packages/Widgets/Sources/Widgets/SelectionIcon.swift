@@ -28,7 +28,11 @@ public struct SelectionIcon: View {
     }
 
     private var iconColor: Color {
-        color ?? (isSelected ? .greenPrimary : .accentPrimary)
+        color ?? selectionColor
+    }
+
+    private var selectionColor: Color {
+        isSelected ? .greenPrimary : .accentPrimary
     }
 }
 

@@ -19,8 +19,7 @@ struct SearchableListView<Item: SearchableItem>: RootView {
             SearchField(prompt: Item.searchPrompt, searchText: $store.searchText, isFocused: $isSearchFocused)
 
             BaseList(store.items) { item in
-                BaseListRow(item: item)
-                    .onTapGesture { store.onSelectListItem.send(item) }
+                NavigationRow(item: item) { store.onSelectListItem.send(item) }
             }
         }
         .baseListStyle(isEmpty: store.isListEmpty, isLoading: store.isLoading.value, isSearching: store.isSearching)

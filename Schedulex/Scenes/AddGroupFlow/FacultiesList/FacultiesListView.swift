@@ -34,8 +34,7 @@ struct FacultiesListView: RootView {
                                 .displayIf(store.faculties.last != $0 || (store.faculties.last == $0 && !store.facultyGroups.isEmpty))
                         }
                         ForEach(store.facultyGroups) { facultyGroup in
-                            BaseListRow(facultyGroup: facultyGroup)
-                                .onTapGesture { store.navigateToFacultyGroupDetails.send(facultyGroup) }
+                            NavigationRow(facultyGroup: facultyGroup) { store.navigateToFacultyGroupDetails.send(facultyGroup) }
 
                             Separator()
                                 .displayIf(store.facultyGroups.last != facultyGroup)
@@ -49,8 +48,7 @@ struct FacultiesListView: RootView {
     }
 
     private func facultyListRow(faculty: Faculty) -> some View {
-        BaseListRow(item: faculty)
-            .onTapGesture { store.navigateToFacultyGroupList.send(faculty) }
+        NavigationRow(item: faculty) { store.navigateToFacultyGroupList.send(faculty) }
     }
 
     private var sections: [ListSection<Faculty>] {

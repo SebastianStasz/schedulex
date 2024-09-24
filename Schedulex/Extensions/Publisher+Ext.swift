@@ -75,7 +75,7 @@ extension Publisher where Failure == Never {
         }
         .store(in: &viewModel.cancellables)
     }
-    
+
     func sink<VM: CombineHelper>(on viewModel: VM, action: @escaping (Output) -> Void) {
         sink { action($0) }
             .store(in: &viewModel.cancellables)

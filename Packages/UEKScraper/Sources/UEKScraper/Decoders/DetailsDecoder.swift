@@ -55,9 +55,9 @@ struct DetailsDecoder {
             time: cells[1],
             place: decodingType.getPlace(from: cells[5]),
             teacher: decodingType.getTeacher(from: cells[4]),
-            teamsLink: teacherProfileLink,
+            teamsLink: teamsLink,
             facultyGroup: decodingType.getFacultyGroup(from: cells[5]),
-            teacherProfileLink: teamsLink,
+            teacherProfileLink: teacherProfileLink,
             eventTransferNote: nil
         )
         let isValidEvent = eventData.isValidEvent(omitLanguageClasses: decodingType.omitLanguageClasses)

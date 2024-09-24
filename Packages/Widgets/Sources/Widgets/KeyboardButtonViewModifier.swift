@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-private struct KeyboardButtonViewModifier: ViewModifier, KeyboardReadable {
+private struct KeyboardButtonViewModifier: ViewModifier {
     @Binding var isKeyboardVisible: Bool
 
     let title: String

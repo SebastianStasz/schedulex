@@ -44,8 +44,8 @@ public enum L10n {
   /// Sorry, an error occurred while downloading the schedule.
   public static let dashboardFetchingEventsError = L10n.tr("Localizable", "dashboard_fetching_events_error", fallback: "Sorry, an error occurred while downloading the schedule.")
   /// The groups you follow don't contain any classes. 
-  /// Click "My groups" and add another group.
-  public static let dashboardGroupsHaveNoEvents = L10n.tr("Localizable", "dashboard_groups_have_no_events", fallback: "The groups you follow don't contain any classes. \nClick \"My groups\" and add another group.")
+  /// Click "Groups" and add another group.
+  public static let dashboardGroupsHaveNoEvents = L10n.tr("Localizable", "dashboard_groups_have_no_events", fallback: "The groups you follow don't contain any classes. \nClick \"Groups\" and add another group.")
   /// No events to display
   public static let dashboardNoEventsToDisplay = L10n.tr("Localizable", "dashboard_no_events_to_display", fallback: "No events to display")
   /// Open Teams
@@ -116,6 +116,8 @@ public enum L10n {
   public static let listEmptyStateTitle = L10n.tr("Localizable", "list_empty_state_title", fallback: "Nothing here")
   /// minutes.
   public static let minutesSuffix = L10n.tr("Localizable", "minutes_suffix", fallback: "minutes.")
+  /// More
+  public static let more = L10n.tr("Localizable", "more", fallback: "More")
   /// Next
   public static let nextButton = L10n.tr("Localizable", "next_button", fallback: "Next")
   /// No events here

@@ -29,12 +29,9 @@ struct FacultyGroupClassListItem: View {
             .frame(maxWidth: .infinity, alignment: .leading)
 
             if let action {
-                Image.icon(isSelected ? .checkmark : .circle)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 20)
-                    .foregroundStyle(isSelected ? .greenPrimary : .accentPrimary)
-                    .onTapGesture { action() }
+                SelectionIcon(isSelected: isSelected)
+                    .frame(height: .xlarge)
+                    .onTapGesture(perform: action)
             }
         }
         .card(vertical: .medium)

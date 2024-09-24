@@ -21,7 +21,7 @@ private struct DoubleNavigationTitle: ViewModifier {
                 .fill(.backgroundSecondary)
                 .frame(height: topSpacing)
 
-            HStack(spacing: .xlarge) {
+            HStack(spacing: .micro) {
                 VStack(alignment: .leading, spacing: .micro) {
                     Text(subtitle, style: .body)
                         .foregroundStyle(.grayShade1)
