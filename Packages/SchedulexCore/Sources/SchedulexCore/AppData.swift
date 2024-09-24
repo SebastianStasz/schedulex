@@ -49,6 +49,8 @@ public final class AppData {
         didSet { defaults.set(appColorScheme.rawValue, forKey: "appColorScheme") }
     }
 
+    private var didResetRateTheApplicationInfoCard: Bool
+
     init(defaults: UserDefaults = .standard) {
         self.defaults = defaults
 
@@ -75,6 +77,12 @@ public final class AppData {
         if let string = UserDefaults.standard.value(forKey: "allHiddenClasses") as? String, let data = string.data(using: .utf8) {
             let subscribedFacultyGroups = try? JSONDecoder().decode([EditableFacultyGroupClass].self, from: data)
             allHiddenClasses = subscribedFacultyGroups ?? []
+        }
+
+        didResetRateTheApplicationInfoCard = defaults.bool(forKey: "didResetRateTheApplicationInfoCard")
+        if !didResetRateTheApplicationInfoCard {
+            hiddenInfoCards.removeAll(where: { $0 == .rateTheApplication })
+            defaults.set(true, forKey: "didResetRateTheApplicationInfoCard")
         }
     }
 
