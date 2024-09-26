@@ -9,6 +9,18 @@
             "state" : "translated",
             "value" : "Pulpit"
           }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dashboard"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dashboard"
+          }
         }
       }
     },
@@ -22,6 +34,9 @@
           }
         }
       }
+    },
+    "Some content" : {
+
     },
     "UEK" : {
       "extractionState" : "stale",

@@ -25,7 +25,7 @@
 "event_details_link_to_class" = "Link do zajęć";
 "event_details_business_card" = "e-wizytówka";
 "dashboard_title" = "Strona główna";
-"dashboard_all_groups_are_hidden" = "Wszystkie obserwowane grupy są ukryte.\nKliknij \"Moje grupy\" aby nimi zarządzać.";
+"dashboard_all_groups_are_hidden" = "Wszystkie obserwowane grupy są ukryte.\nKliknij \"Grupy\" aby nimi zarządzać.";
 "dashboard_groups_have_no_events" = "Obserwowane grupy nie zawierają żadnych zajęć.\nKliknij \"Grupy\" i dodaj inną grupę.";
 "dashboard_no_events_to_display" = "Brak zajęć do wyświetlenia";
 "dashboard_fetching_events_error" = "Przepraszamy, wystąpił błąd podczas pobierania planu zajęć.";
@@ -119,6 +119,8 @@
 "settings_language_title" = "Język";
 "settings_language_english" = "Angielski";
 "settings_language_polish" = "Polski";
+"settings_language_russian" = "Rosyjski";
+"settings_language_ukrainian" = "Ukraiński";
 
 // start_flow
 "start_first_step_title" = "Wybierz grupy";

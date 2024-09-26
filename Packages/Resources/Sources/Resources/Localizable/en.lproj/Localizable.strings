@@ -25,8 +25,8 @@
 "event_details_link_to_class" = "Link to class";
 "event_details_business_card" = "Business card";
 "dashboard_title" = "Homepage";
-"dashboard_all_groups_are_hidden" = "All subscribed groups are hidden.\nClick \"My groups\" to manage them.";
-"dashboard_groups_have_no_events" = "The groups you follow don't contain any classes. \nClick \"Groups\" and add another group.";
+"dashboard_all_groups_are_hidden" = "All subscribed groups are hidden.\nClick \"Groups\" to manage them.";
+"dashboard_groups_have_no_events" = "The groups you follow don't contain any classes.\nClick \"Groups\" and add another group.";
 "dashboard_no_events_to_display" = "No events to display";
 "dashboard_fetching_events_error" = "Sorry, an error occurred while downloading the schedule.";
 "dashboard_open_teams" = "Open Teams";
@@ -119,6 +119,8 @@
 "settings_language_title" = "Language";
 "settings_language_english" = "English";
 "settings_language_polish" = "Polish";
+"settings_language_russian" = "Russian";
+"settings_language_ukrainian" = "Ukrainian";
 
 // start_flow
 "start_first_step_title" = "Select groups";

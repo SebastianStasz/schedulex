@@ -1,0 +1,141 @@
+// button
+"cancel_button" = "Отменить";
+"next_button" = "Далее";
+"confirm_button" = "Подтвердить";
+"continue_button" = "Продолжить";
+"done_button" = "Готово";
+"refresh_button" = "Обновить";
+
+// calendar
+"weekday_monday_short" = "ПН";
+"weekday_tuesday_short" = "ВТ";
+"weekday_wednesday_short" = "СР";
+"weekday_thursday_short" = "ЧТ";
+"weekday_friday_short" = "ПТ";
+"weekday_saturday_short" = "СБ";
+"weekday_sunday_short" = "ВС";
+
+// dashboard
+"event_finished" = "Завершено";
+"event_finishing_in" = "Конец";
+"swipe_tip_title" = "⬅️  Проведите вправо или влево  ➡️";
+"swipe_tip_description" = "Меняйте дни в календаре свайпом пальца!";
+"break_card_title" = "Перерыв";
+"break_card_time_suffix" = "ч.";
+"event_details_link_to_class" = "Ссылка на занятие";
+"event_details_business_card" = "Визитная карточка";
+"dashboard_title" = "Главная страница";
+"dashboard_all_groups_are_hidden" = "Все подписанные группы скрыты.\nНажмите \"Группы\", чтобы управлять ими.";
+"dashboard_groups_have_no_events" = "Группы, на которые вы подписаны, не содержат занятий.\nНажмите \"Группы\" и добавьте другую группу.";
+"dashboard_no_events_to_display" = "Нет занятий для отображения";
+"dashboard_fetching_events_error" = "Извините, произошла ошибка при загрузке расписания.";
+"dashboard_open_teams" = "Открыть Teams";
+"event_place_remote_classes" = "дистанционное занятие";
+"event_cancelled" = "Занятие отменено";
+"all_events_cancelled" = "Все занятия отменены";
+"events_cancelled_between_hours" = "Занятия отменены между";
+
+// info_cards
+"info_card_enable_notifications_title" = "Не пропустите занятия!";
+"info_card_enable_notifications_description" = "Получайте уведомления за час до начала занятий. Время уведомлений можно изменить в настройках.";
+"info_card_enable_notifications_button" = "Включить уведомления";
+"info_card_rate_the_app_title" = "Оцените UEK Schedule";
+"info_card_rate_the_app_description" = "Поделитесь своей оценкой. Нажмите на кнопку ниже, чтобы перейти на страницу приложения.";
+"info_card_rate_the_app_button" = "Оценить приложение";
+
+// introduction_screen
+"introduction_point_1" = "Выберите группы, которые хотите отслеживать и видеть на главной.";
+"introduction_point_2" = "Получайте уведомления перед занятиями.";
+"introduction_point_3" = "Скрывайте предметы, которые не хотите видеть.";
+"introduction_button_title" = "Начнём";
+
+// main
+"add_group" = "Добавить группу";
+"today" = "Сегодня";
+"calendar" = "Календарь";
+"more" = "Больше";
+"classes" = "Предметы";
+"events" = "Занятия";
+"groups" = "Группы";
+"add_to_observed" = "Добавить в наблюдаемые";
+"group" = "Группа";
+"faculties" = "Факультеты";
+"unfollow" = "Удалить из наблюдаемых";
+"unfollow_group_question" = "Хотите отписаться от группы?";
+"selected_date" = "Выбранная дата";
+"observed_title" = "Наблюдаемые";
+"no_events_message" = "Занятий нет";
+"no_events_weekend_message" = "Выходные!";
+"other_header" = "Другое";
+"for_everyone_header" = "Для всех";
+"faculty_or_group_prompt" = "Факультет или группа";
+"number_of_groups" = "Количество групп:";
+"number_of_classes" = "Количество типов занятий:";
+"number_of_events" = "Количество занятий:";
+"set_classes_visibility" = "Изменить видимость занятий";
+"hidden" = "Скрытые";
+"visible" = "Видимые";
+"no_result_message" = "Результаты не найдены";
+"color" = "Цвет";
+"select_color" = "Выберите цвет";
+"change_color_of_events" = "Изменить цвет занятий";
+"event_notification_title" = "Событие в расписании UEK";
+"event_notification_subtitle_prefix" = "Через";
+"minutes_suffix" = "минут.";
+"event_notification_subtitle_hour" = "Через час.";
+"event_unknown_title" = "Без названия";
+"list_empty_state_title" = "Здесь ничего нет";
+"list_empty_state_description" = "Пожалуйста, попробуйте позже";
+
+// pavilions_list
+"pavilions_list_title" = "Павильоны";
+"pavilions_list_search_prompt" = "Название павильона";
+"pavilions_list_number_of_classrooms" = "Количество аудиторий:";
+"classrooms_list_search_prompt" = "Название аудитории";
+"classroom_events_list_search_prompt" = "Название, преподаватель, аудитория, тип";
+
+// settings
+"settings_title" = "Настройки";
+"settings_version" = "Версия:";
+"settings_contact" = "Контакт:";
+"settings_app_theme_title" = "Тема приложения";
+"settings_app_theme_system_title" = "Системная";
+"settings_app_theme_light_title" = "Светлая";
+"settings_app_theme_dark_title" = "Тёмная";
+"settings_class_notifications_title" = "Уведомления о занятиях";
+"settings_class_notifications_time_title" = "Время уведомлений";
+"settings_class_notifications_time_description" = "Получайте уведомления перед началом занятий.";
+"settings_class_notifications_time_hour_before" = "За 1 час до начала";
+"settings_class_notifications_time_minutes_before" = "минут до начала";
+"settings_notifications_alert_title" = "Включить уведомления";
+"settings_notifications_alert_description" = "Уведомления можно включить в настройках вашего устройства.";
+"settings_notifications_alert_go_to_settings" = "Перейти в настройки";
+"settings_notifications_alert_cancel" = "Не сейчас";
+"rate_the_app" = "Оценить приложение";
+"settings_app_version_installed" = "Установлено";
+"settings_app_version_update" = "Обновить";
+"settings_section_header_notifications" = "УВЕДОМЛЕНИЯ";
+"settings_section_header_configuration" = "КОНФИГУРАЦИЯ";
+"settings_language_title" = "Язык";
+"settings_language_english" = "Английский";
+"settings_language_polish" = "Польский";
+"settings_language_russian" = "Русский";
+"settings_language_ukrainian" = "Украинский";
+
+// start_flow
+"start_first_step_title" = "Выберите группы";
+"start_first_step_prompt" = "Поиск группы";
+"start_first_step_selected" = "Выбрано";
+"start_first_step_no_groups" = "Группы не выбраны";
+"start_first_step_all_groups" = "Доступные группы";
+"start_first_step_alert_title" = "Группа не выбрана";
+"start_first_step_alert_message" = "Группа не выбрана. Продолжить без выбора?";
+"start_second_step_title" = "Выберите языки";
+"start_second_step_no_languages" = "Языки не выбраны";
+
+// teachers_list
+"teachers_list_title" = "Преподаватели";
+"teacher_list_search_prompt" = "Преподаватель";
+"teacher_groups_list_search_prompt" = "Первая буква фамилии";
+"teacher_groups_list_number_of_teachers" = "Количество преподавателей:";
+

@@ -11,6 +11,8 @@ import Resources
 enum AppLanguage: String {
     case pl
     case en
+    case ru
+    case uk
 
     var name: String {
         switch self {
@@ -18,6 +20,10 @@ enum AppLanguage: String {
             return L10n.settingsLanguagePolish
         case .en:
             return L10n.settingsLanguageEnglish
+        case .ru:
+            return L10n.settingsLanguageRussian
+        case .uk:
+            return L10n.settingsLanguageUkrainian
         }
     }
 

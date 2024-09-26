@@ -39,13 +39,13 @@ public enum L10n {
   /// Continue
   public static let continueButton = L10n.tr("Localizable", "continue_button", fallback: "Continue")
   /// All subscribed groups are hidden.
-  /// Click "My groups" to manage them.
-  public static let dashboardAllGroupsAreHidden = L10n.tr("Localizable", "dashboard_all_groups_are_hidden", fallback: "All subscribed groups are hidden.\nClick \"My groups\" to manage them.")
+  /// Click "Groups" to manage them.
+  public static let dashboardAllGroupsAreHidden = L10n.tr("Localizable", "dashboard_all_groups_are_hidden", fallback: "All subscribed groups are hidden.\nClick \"Groups\" to manage them.")
   /// Sorry, an error occurred while downloading the schedule.
   public static let dashboardFetchingEventsError = L10n.tr("Localizable", "dashboard_fetching_events_error", fallback: "Sorry, an error occurred while downloading the schedule.")
-  /// The groups you follow don't contain any classes. 
+  /// The groups you follow don't contain any classes.
   /// Click "Groups" and add another group.
-  public static let dashboardGroupsHaveNoEvents = L10n.tr("Localizable", "dashboard_groups_have_no_events", fallback: "The groups you follow don't contain any classes. \nClick \"Groups\" and add another group.")
+  public static let dashboardGroupsHaveNoEvents = L10n.tr("Localizable", "dashboard_groups_have_no_events", fallback: "The groups you follow don't contain any classes.\nClick \"Groups\" and add another group.")
   /// No events to display
   public static let dashboardNoEventsToDisplay = L10n.tr("Localizable", "dashboard_no_events_to_display", fallback: "No events to display")
   /// Open Teams
@@ -180,8 +180,12 @@ public enum L10n {
   public static let settingsLanguageEnglish = L10n.tr("Localizable", "settings_language_english", fallback: "English")
   /// Polish
   public static let settingsLanguagePolish = L10n.tr("Localizable", "settings_language_polish", fallback: "Polish")
+  /// Russian
+  public static let settingsLanguageRussian = L10n.tr("Localizable", "settings_language_russian", fallback: "Russian")
   /// Language
   public static let settingsLanguageTitle = L10n.tr("Localizable", "settings_language_title", fallback: "Language")
+  /// Ukrainian
+  public static let settingsLanguageUkrainian = L10n.tr("Localizable", "settings_language_ukrainian", fallback: "Ukrainian")
   /// Not now
   public static let settingsNotificationsAlertCancel = L10n.tr("Localizable", "settings_notifications_alert_cancel", fallback: "Not now")
   /// Notifications can be enabled from settings on your device.
