@@ -104,7 +104,7 @@ struct DashboardView: RootView {
     @ViewBuilder
     private var datePicker: some View {
         if let items = store.dayPickerItems {
-            CalendarPicker(items: items, selectedDate: $store.selectedDate, selectDefaultDate: selectDefaultDate)
+            CalendarPicker(items: items, isDefaultDateSelected: store.isDefaultDateSelected, selectedDate: $store.selectedDate, selectDefaultDate: selectDefaultDate)
                 .padding(.top, .large)
                 .presentationDetents([.height(380)])
                 .presentationDragIndicator(.visible)

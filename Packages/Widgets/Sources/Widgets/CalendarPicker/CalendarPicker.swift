@@ -10,12 +10,14 @@ import SwiftUI
 
 public struct CalendarPicker: View {
     private let items: [DayPickerItem]
+    let isDefaultDateSelected: Bool
     private let selectDefaultDate: () -> Void
     @State private var selectedMonth = YearAndMonth(year: 1, month: 1)
     @Binding private var selectedDate: Date
 
-    public init(items: [DayPickerItem], selectedDate: Binding<Date>, selectDefaultDate: @escaping () -> Void) {
+    public init(items: [DayPickerItem], isDefaultDateSelected: Bool, selectedDate: Binding<Date>, selectDefaultDate: @escaping () -> Void) {
         self.items = items
+        self.isDefaultDateSelected = isDefaultDateSelected
         self.selectDefaultDate = selectDefaultDate
         _selectedMonth.wrappedValue = selectedDate.wrappedValue.toYearAndMonth()
         _selectedDate = selectedDate
@@ -41,7 +43,7 @@ public struct CalendarPicker: View {
 
                 Spacer()
 
-                TextButton(L10n.today, action: onTodaysDateClick)
+                SetDefaultDateButton(isDefaultDateSelected: isDefaultDateSelected, action: onSelectDefaultDate)
             }
             .padding(.horizontal, .large)
 
@@ -86,7 +88,7 @@ public struct CalendarPicker: View {
         .onAppear { selectedMonth = selectedDate.toYearAndMonth() }
     }
 
-    private func onTodaysDateClick() {
+    private func onSelectDefaultDate() {
         selectDefaultDate()
         selectedMonth = selectedDate.toYearAndMonth()
     }
@@ -103,5 +105,5 @@ public struct CalendarPicker: View {
     }
     let colors: [Color?] = [.blue, nil]
     let items = dates.map { DayPickerItem(date: $0, circleColors: [.blue], isSelectable: true) }
-    return CalendarPicker(items: items, selectedDate: .constant(.now), selectDefaultDate: {})
+    return CalendarPicker(items: items, isDefaultDateSelected: true, selectedDate: .constant(.now), selectDefaultDate: {})
 }

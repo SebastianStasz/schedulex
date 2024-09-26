@@ -29,16 +29,10 @@ struct DashboardBottomPanel: View {
             Button(L10n.calendar, action: showDatePicker)
                 .buttonStyle(.expandableButtonStyle(icon: .calendar, fillMaxWidth: true, isExpanded: true))
 
-            Button(L10n.today, action: selectDefaultDate)
-                .buttonStyle(.expandableButtonStyle(icon: dateSelectionButtonIcon, isExpanded: !isDefaultDateSelected))
-                .disabled(isDefaultDateSelected)
+            SetDefaultDateButton(isDefaultDateSelected: isDefaultDateSelected, action: selectDefaultDate)
         }
         .padding(.horizontal, .large)
         .animation(.easeInOut(duration: 0.2), value: isDefaultDateSelected)
-    }
-
-    private var dateSelectionButtonIcon: Icon {
-        isDefaultDateSelected ? .recordCircle : .chevronForwardCircle
     }
 }
 
