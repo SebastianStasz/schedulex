@@ -1,56 +1,49 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "Dashboard" : {
-      "extractionState" : "stale",
+    "Some content" : {
       "localizations" : {
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pulpit"
+            "value" : "Some content"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dashboard"
+            "value" : "Some content"
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dashboard"
-          }
-        }
-      }
-    },
-    "Faculty or group" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Kierunek lub grupa"
-          }
-        }
-      }
-    },
-    "Some content" : {
-
-    },
-    "UEK" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "UEK"
+            "value" : "Some content"
           }
         }
       }
     },
     "UEK Schedule" : {
-
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "UEK Schedule"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "UEK Schedule"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "UEK Schedule"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

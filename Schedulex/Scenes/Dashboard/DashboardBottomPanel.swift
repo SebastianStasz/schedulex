@@ -12,7 +12,7 @@ import Widgets
 struct DashboardBottomPanel: View {
     let isDefaultDateSelected: Bool
     let showDatePicker: () -> Void
-    let selectTodaysDate: () -> Void
+    let selectDefaultDate: () -> Void
     let showTeachersList: () -> Void
     let showPavilionsList: () -> Void
 
@@ -29,7 +29,7 @@ struct DashboardBottomPanel: View {
             Button(L10n.calendar, action: showDatePicker)
                 .buttonStyle(.expandableButtonStyle(icon: .calendar, fillMaxWidth: true, isExpanded: true))
 
-            Button(L10n.today, action: selectTodaysDate)
+            Button(L10n.today, action: selectDefaultDate)
                 .buttonStyle(.expandableButtonStyle(icon: dateSelectionButtonIcon, isExpanded: !isDefaultDateSelected))
                 .disabled(isDefaultDateSelected)
         }
@@ -43,5 +43,5 @@ struct DashboardBottomPanel: View {
 }
 
 #Preview {
-    DashboardBottomPanel(isDefaultDateSelected: true, showDatePicker: {}, selectTodaysDate: {}, showTeachersList: {}, showPavilionsList: {})
+    DashboardBottomPanel(isDefaultDateSelected: true, showDatePicker: {}, selectDefaultDate: {}, showTeachersList: {}, showPavilionsList: {})
 }

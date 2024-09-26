@@ -30,7 +30,7 @@ final class DashboardStore: RootStore {
 
     let navigateTo = DriverSubject<DashboardViewModel.Destination>()
     let markSwipeTipAsPresented = DriverSubject<Void>()
-    let selectTodaysDate = DriverSubject<Void>()
+    let selectDefaultDate = DriverSubject<Void>()
     let scrollToDate = DriverSubject<Void>()
     let refresh = DriverSubject<Void>()
 
@@ -87,7 +87,7 @@ struct DashboardViewModel: ViewModel {
                 }
             }
 
-        store.selectTodaysDate
+        store.selectDefaultDate
             .sink(on: store) {
                 setDefaultSelectedDate()
             }

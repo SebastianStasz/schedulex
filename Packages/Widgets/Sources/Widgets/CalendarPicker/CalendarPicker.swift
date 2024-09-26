@@ -10,13 +10,13 @@ import SwiftUI
 
 public struct CalendarPicker: View {
     private let items: [DayPickerItem]
-    private let selectTodaysDate: () -> Void
+    private let selectDefaultDate: () -> Void
     @State private var selectedMonth = YearAndMonth(year: 1, month: 1)
     @Binding private var selectedDate: Date
 
-    public init(items: [DayPickerItem], selectedDate: Binding<Date>, selectTodaysDate: @escaping () -> Void) {
+    public init(items: [DayPickerItem], selectedDate: Binding<Date>, selectDefaultDate: @escaping () -> Void) {
         self.items = items
-        self.selectTodaysDate = selectTodaysDate
+        self.selectDefaultDate = selectDefaultDate
         _selectedMonth.wrappedValue = selectedDate.wrappedValue.toYearAndMonth()
         _selectedDate = selectedDate
         months = Dictionary(grouping: items, by: {
@@ -87,7 +87,7 @@ public struct CalendarPicker: View {
     }
 
     private func onTodaysDateClick() {
-        selectTodaysDate()
+        selectDefaultDate()
         selectedMonth = selectedDate.toYearAndMonth()
     }
 }
@@ -103,5 +103,5 @@ public struct CalendarPicker: View {
     }
     let colors: [Color?] = [.blue, nil]
     let items = dates.map { DayPickerItem(date: $0, circleColors: [.blue], isSelectable: true) }
-    return CalendarPicker(items: items, selectedDate: .constant(.now), selectTodaysDate: {})
+    return CalendarPicker(items: items, selectedDate: .constant(.now), selectDefaultDate: {})
 }

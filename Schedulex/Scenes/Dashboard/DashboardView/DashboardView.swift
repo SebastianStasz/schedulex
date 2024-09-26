@@ -55,7 +55,7 @@ struct DashboardView: RootView {
         .sheet(isPresented: $isDatePickerPresented) { datePicker }
         .overlay(alignment: .bottom) { DashboardBottomPanel(isDefaultDateSelected: store.isDefaultDateSelected,
                                                             showDatePicker: showDatePicker,
-                                                            selectTodaysDate: selectTodaysDate,
+                                                            selectDefaultDate: selectDefaultDate,
                                                             showTeachersList: { store.navigateTo.send(.teacherGroupsList) },
                                                             showPavilionsList: { store.navigateTo.send(.roomsList) }) }
     }
@@ -104,7 +104,7 @@ struct DashboardView: RootView {
     @ViewBuilder
     private var datePicker: some View {
         if let items = store.dayPickerItems {
-            CalendarPicker(items: items, selectedDate: $store.selectedDate, selectTodaysDate: selectTodaysDate)
+            CalendarPicker(items: items, selectedDate: $store.selectedDate, selectDefaultDate: selectDefaultDate)
                 .padding(.top, .large)
                 .presentationDetents([.height(380)])
                 .presentationDragIndicator(.visible)
@@ -152,8 +152,8 @@ struct DashboardView: RootView {
         .padding(.horizontal, .xlarge)
     }
 
-    private func selectTodaysDate() {
-        store.selectTodaysDate.send()
+    private func selectDefaultDate() {
+        store.selectDefaultDate.send()
     }
 
     private func showDatePicker() {
