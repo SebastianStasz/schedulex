@@ -28,15 +28,15 @@ struct DetailsDecoder {
     private func eventsData(from rows: [Element]) -> [EventData] {
         rows.enumerated().compactMap { index, row in
             guard var eventData = toEventData(from: row) else { return nil }
-            if eventData.isEventTransfer, let nextRow = rows[safe: index + 1] {
-                eventData.eventTransferNote = eventTransferNote(from: nextRow)
-            }
+            guard let nextRow = rows[safe: index + 1] else { return eventData }
+            eventData.note = getEventNote(from: nextRow)
             return eventData
         }
     }
 
-    private func eventTransferNote(from row: Element) -> String? {
-        try? row.select("td").array().compactMap { try? $0.text() }.first { !$0.isEmpty }
+    private func getEventNote(from row: Element) -> String? {
+        guard let cells = (try? row.select("td").array().compactMap { try? $0.text() }), cells.count == 1 else { return nil }
+        return cells.first { !$0.isEmpty }
     }
 
     private func toEventData(from row: Element) -> EventData? {
@@ -58,7 +58,7 @@ struct DetailsDecoder {
             teamsLink: teamsLink,
             facultyGroup: decodingType.getFacultyGroup(from: cells[5]),
             teacherProfileLink: teacherProfileLink,
-            eventTransferNote: nil
+            note: nil
         )
         let isValidEvent = eventData.isValidEvent(omitLanguageClasses: decodingType.omitLanguageClasses)
         return isValidEvent ? eventData : nil

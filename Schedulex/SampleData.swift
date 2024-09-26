@@ -29,7 +29,7 @@ extension FacultyGroupClass {
 extension Event {
     static let sample = Event(name: .eventName, type: "wykład do wyboru", startDate: .now, endDate: .now, place: .place, isRemoteClass: false, isEventTransfer: false, teacher: .teacher, teacherProfileUrl: .profileUrl, facultyGroup: "ZIIAS1-1111")
 
-    static let eventTransfer = Event(name: .eventName, type: "Przeniesienie zajęć", startDate: .now, endDate: .now, place: .place, isRemoteClass: true, isEventTransfer: true, eventTransferNote: "na 17.01.2024", teacher: .teacher, teacherProfileUrl: .profileUrl, facultyGroup: "ZIIAS1-1111")
+    static let eventTransfer = Event(name: .eventName, type: "Przeniesienie zajęć", startDate: .now, endDate: .now, place: .place, isRemoteClass: true, isEventTransfer: true, note: "na 17.01.2024", teacher: .teacher, teacherProfileUrl: .profileUrl, facultyGroup: "ZIIAS1-1111")
 }
 
 extension FacultyGroupEvent {

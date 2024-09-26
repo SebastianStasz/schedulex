@@ -10,7 +10,7 @@ import Resources
 
 extension Event {
     var nameLocalized: String {
-        name ?? L10n.eventUnknownTitle
+        name ?? note ?? L10n.eventUnknownTitle
     }
 
     var placeLocalized: String? {

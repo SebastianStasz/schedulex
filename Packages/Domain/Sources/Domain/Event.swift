@@ -17,7 +17,7 @@ public struct Event: Hashable, Identifiable {
     public let teamsUrl: URL?
     public let isRemoteClass: Bool
     public let isEventTransfer: Bool
-    public let eventTransferNote: String?
+    public let note: String?
     public let teacher: String?
     public let teacherProfileUrl: URL?
     public let facultyGroup: String?
@@ -31,7 +31,7 @@ public struct Event: Hashable, Identifiable {
         teamsUrl: URL? = nil,
         isRemoteClass: Bool,
         isEventTransfer: Bool,
-        eventTransferNote: String? = nil,
+        note: String? = nil,
         teacher: String? = nil,
         teacherProfileUrl: URL? = nil,
         facultyGroup: String? = nil
@@ -44,7 +44,7 @@ public struct Event: Hashable, Identifiable {
         self.teamsUrl = teamsUrl
         self.isRemoteClass = isRemoteClass
         self.isEventTransfer = isEventTransfer
-        self.eventTransferNote = eventTransferNote
+        self.note = note
         self.teacher = teacher
         self.teacherProfileUrl = teacherProfileUrl
         self.facultyGroup = facultyGroup
@@ -55,7 +55,7 @@ public struct Event: Hashable, Identifiable {
         guard isEventTransfer else {
             return type
         }
-        let note = eventTransferNote ?? " "
+        let note = note ?? " "
         return "\(type) \(note)"
     }
 
