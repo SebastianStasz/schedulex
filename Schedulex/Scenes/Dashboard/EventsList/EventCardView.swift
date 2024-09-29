@@ -36,6 +36,7 @@ struct EventCardView: View {
 
                     if !event.isEventTransfer, !isCancelled {
                         Text(placeOrFacultyGroup, style: .footnote)
+                    if isEventActive {
                             .opacity(showTeamsButton ? 0 : 1)
                     }
 
@@ -46,7 +47,7 @@ struct EventCardView: View {
 
                         Spacer()
 
-                        if let status, !event.isEventTransfer, !isCancelled {
+                        if let status, isEventActive {
                             Text(status, style: .footnote)
                         }
                     }
@@ -58,7 +59,7 @@ struct EventCardView: View {
         .padding(.medium)
         .background(color.shade4)
         .clipShape(RoundedRectangle(cornerRadius: 12))
-        .overlay(teamsButton.padding(.medium), alignment: .bottomLeading)
+        .overlay(openTeamsButton, alignment: .bottomLeading)
     }
 
     private var placeOrFacultyGroup: String {
@@ -85,26 +86,19 @@ struct EventCardView: View {
         }
     }
 
+    private var isEventActive: Bool {
+        !event.isEventTransfer && !isCancelled
+    }
+
     private var showTeamsButton: Bool {
         isEventInProgress && event.teamsUrl != nil
     }
 
     @ViewBuilder
-    private var teamsButton: some View {
+    private var openTeamsButton: some View {
         if showTeamsButton, let teamsUrl = event.teamsUrl {
-            HStack(spacing: .small) {
-                Image.teamsLogo
-                    .resizable()
-                    .scaledToFit()
-                    .frame(height: 16)
-
-                Text(L10n.dashboardOpenTeams, style: .footnote)
-                    .foregroundStyle(Color.white)
-            }
-            .padding(.small)
-            .background(Color.black.opacity(0.5))
-            .cornerRadius(.medium)
-            .onTapGesture { openURL(teamsUrl) }
+            OpenTeamsButton(url: teamsUrl)
+                .padding(.medium)
         }
     }
 }
