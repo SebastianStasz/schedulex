@@ -14,7 +14,7 @@ struct EventDetailsView: View {
     @Environment(\.openURL) private var openURL
 
     let event: Event
-    var isForFacultyGroup = true
+    let displayType: EventDisplayType
 
     var body: some View {
         VStack(alignment: .leading, spacing: 28) {
@@ -28,9 +28,9 @@ struct EventDetailsView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
 
             VStack(alignment: .leading, spacing: .medium) {
-                line(title: event.teacher ?? "", icon: .person)
-                line(title: placeOrFacultyGroup, icon: .building)
-                line(title: event.type ?? "", icon: .paperPlane)
+                line(title: displayType.getFirstRowText(from: event) ?? "", icon: .person)
+                line(title: displayType.getSecondRowText(from: event) ?? "", icon: .building)
+                line(title: displayType.getThirdRowText(from: event, isCancelled: false), icon: .paperPlane)
             }
 
             VStack(spacing: .medium) {
@@ -49,12 +49,6 @@ struct EventDetailsView: View {
         .presentationDragIndicator(.visible)
         .presentationDetents([UIDevice.current.hasNotch ? .medium : .height(440)])
     }
-
-    private var placeOrFacultyGroup: String {
-        let text = isForFacultyGroup ? event.placeLocalized : event.facultyGroup
-        return text ?? ""
-    }
-
     private func line(title: String, icon: Icon) -> some View {
         HStack(spacing: .medium) {
             Image.icon(icon)
@@ -78,6 +72,6 @@ struct EventDetailsView: View {
 #Preview {
     Text("Some content")
         .sheet(isPresented: .constant(true)) {
-            EventDetailsView(event: .sample)
+            EventDetailsView(event: .sample, displayType: .facultyGroup)
         }
 }

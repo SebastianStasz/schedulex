@@ -34,7 +34,7 @@ struct EventsList: View {
                 }
             }
         }
-        .sheet(item: $selectedEvent) { EventDetailsView(event: $0.event) }
+        .sheet(item: $selectedEvent) { EventDetailsView(event: $0.event, displayType: .facultyGroup) }
     }
 
     private func getBreakTimeComponents(startDate: Date, endDate: Date) -> DateComponents? {

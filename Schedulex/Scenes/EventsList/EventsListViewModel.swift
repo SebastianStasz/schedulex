@@ -23,9 +23,11 @@ final class EventsListStore: RootStore {
     let color: FacultyGroupColor
     let isLoading = DriverState(false)
     let scrollToSection = DriverSubject<Void>()
+    let eventDisplayType: EventDisplayType
 
-    init(color: FacultyGroupColor) {
+    init(color: FacultyGroupColor, eventDisplayType: EventDisplayType) {
         self.color = color
+        self.eventDisplayType = eventDisplayType
     }
 }
 
@@ -34,7 +36,7 @@ struct EventsListViewModel: ViewModel {
     let input: EventsListInput
 
     func makeStore(context: Context) -> EventsListStore {
-        let store = EventsListStore(color: input.color)
+        let store = EventsListStore(color: input.color, eventDisplayType: input.eventDisplayType)
         let eventsPublisher = DriverSubject<[Event]>()
         var scrollToSectionOnViewDidAppear = false
 

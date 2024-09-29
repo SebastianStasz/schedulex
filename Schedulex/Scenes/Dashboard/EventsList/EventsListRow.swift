@@ -48,7 +48,7 @@ struct EventsListRow: View {
 
                 switch element {
                 case let .event(event, color, _, isLast, _):
-                    EventCardView(event: event, color: color, currentDate: timeline.date, isEventInProgress: isEventInProgress, isCancelled: element.isCancelled)
+                    EventCardView(event: event, color: color, currentDate: timeline.date, isEventInProgress: isEventInProgress, isCancelled: element.isCancelled, displayType: .facultyGroup)
                         .padding(.bottom, isLast ? 0 : .medium)
                 case let .break(_, _, breakTimeComponents):
                     BreakCardView(breakTimeComponents: breakTimeComponents)

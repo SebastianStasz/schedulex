@@ -31,4 +31,15 @@ enum EventsListInput {
             return .blue
         }
     }
+
+    var eventDisplayType: EventDisplayType {
+        switch self {
+        case .facultyGroup:
+            return .facultyGroup
+        case .classroom:
+            return .classroom
+        case .teacher:
+            return .teacher
+        }
+    }
 }

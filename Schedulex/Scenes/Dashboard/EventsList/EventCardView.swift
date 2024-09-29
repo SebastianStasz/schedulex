@@ -11,14 +11,12 @@ import SwiftUI
 import Widgets
 
 struct EventCardView: View {
-    @Environment(\.openURL) private var openURL
-
     let event: Event
     let color: FacultyGroupColor
     let currentDate: Date
     let isEventInProgress: Bool
     let isCancelled: Bool
-    var isForFacultyGroup = true
+    let displayType: EventDisplayType
 
     var body: some View {
         HStack(spacing: .medium) {
@@ -27,27 +25,26 @@ struct EventCardView: View {
                     Text(event.nameLocalized, style: .bodyMedium)
                         .frame(maxWidth: .infinity, alignment: .leading)
 
-                    Image(systemName: "info.square")
+//                    Image(systemName: "info.square")
                 }
                 .foregroundStyle(color.shade1)
 
                 VStack(alignment: .leading, spacing: .micro) {
-                    Text(event.teacher ?? "", style: .footnote)
+                    Text(displayType.getFirstRowText(from: event) ?? "", style: .footnote)
 
-                    if !event.isEventTransfer, !isCancelled {
-                        Text(placeOrFacultyGroup, style: .footnote)
                     if isEventActive {
+                        Text(displayType.getSecondRowText(from: event) ?? "", style: .footnote)
                             .opacity(showTeamsButton ? 0 : 1)
                     }
 
                     HStack(spacing: 0) {
-                        Text(eventDescription, style: .footnote)
-                            .foregroundStyle(event.isEventTransfer || isCancelled ? .red : color.shade2)
+                        Text(displayType.getThirdRowText(from: event, isCancelled: isCancelled), style: .footnote)
+                            .foregroundStyle(isEventActive ? color.shade2 : .red)
                             .opacity(showTeamsButton ? 0 : 1)
 
                         Spacer()
 
-                        if let status, isEventActive {
+                        if let status {
                             Text(status, style: .footnote)
                         }
                     }
@@ -62,18 +59,8 @@ struct EventCardView: View {
         .overlay(openTeamsButton, alignment: .bottomLeading)
     }
 
-    private var placeOrFacultyGroup: String {
-        let text = isForFacultyGroup ? event.placeLocalized : event.facultyGroup
-        return text ?? ""
-    }
-
-    private var eventDescription: String {
-        guard !event.isEventTransfer else { return event.typeDescription }
-        return isCancelled ? L10n.eventCancelled : event.typeDescription
-    }
-
     private var status: String? {
-        if event.endDate <= currentDate {
+        if !isEventActive, event.endDate <= currentDate {
             return nil
         } else {
             let formatter = RelativeDateTimeFormatter()
@@ -97,16 +84,15 @@ struct EventCardView: View {
     @ViewBuilder
     private var openTeamsButton: some View {
         if showTeamsButton, let teamsUrl = event.teamsUrl {
-            OpenTeamsButton(url: teamsUrl)
-                .padding(.medium)
+            OpenTeamsButton(url: teamsUrl).padding(.medium)
         }
     }
 }
 
 #Preview {
     VStack(spacing: .large) {
-        EventCardView(event: .sample, color: .blue, currentDate: .now, isEventInProgress: false, isCancelled: false)
-        EventCardView(event: .eventTransfer, color: .green, currentDate: .now, isEventInProgress: false, isCancelled: false)
+        EventCardView(event: .sample, color: .blue, currentDate: .now, isEventInProgress: false, isCancelled: false, displayType: .facultyGroup)
+        EventCardView(event: .eventTransfer, color: .green, currentDate: .now, isEventInProgress: false, isCancelled: false, displayType: .facultyGroup)
     }
     .padding(.large)
 }

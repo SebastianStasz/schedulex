@@ -22,7 +22,7 @@ struct EventsListView: RootView {
 
             ScrollViewReader { proxy in
                 SectionedList(store.sections, pinnedHeaders: true, separatorHeight: .medium) { _, event in
-                    EventCardView(event: event, color: store.color, currentDate: .now, isEventInProgress: false, isCancelled: false, isForFacultyGroup: false)
+                    EventCardView(event: event, color: store.color, currentDate: .now, isEventInProgress: false, isCancelled: false, displayType: store.eventDisplayType)
                         .onTapGesture { selectedEvent = event }
                 }
                 .onReceive(store.scrollToSection) {
@@ -34,7 +34,7 @@ struct EventsListView: RootView {
             }
         }
         .baseListStyle(isEmpty: store.isListEmpty, isLoading: store.isLoading.value, isSearching: store.isSearching)
-        .sheet(item: $selectedEvent) { EventDetailsView(event: $0, isForFacultyGroup: false) }
+        .sheet(item: $selectedEvent) { EventDetailsView(event: $0, displayType: store.eventDisplayType) }
     }
 }
 
@@ -46,5 +46,5 @@ final class EventsListViewController: SwiftUIViewController<EventsListViewModel,
 }
 
 #Preview {
-    EventsListView(store: EventsListStore(color: .blue))
+    EventsListView(store: EventsListStore(color: .blue, eventDisplayType: .facultyGroup))
 }
