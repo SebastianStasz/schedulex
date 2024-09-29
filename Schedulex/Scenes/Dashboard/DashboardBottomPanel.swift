@@ -32,6 +32,7 @@ struct DashboardBottomPanel: View {
             SetDefaultDateButton(isDefaultDateSelected: isDefaultDateSelected, action: selectDefaultDate)
         }
         .padding(.horizontal, .large)
+        .padding(.bottom, UIDevice.current.hasNotch ? 0 : .small)
         .animation(.easeInOut(duration: 0.2), value: isDefaultDateSelected)
     }
 }

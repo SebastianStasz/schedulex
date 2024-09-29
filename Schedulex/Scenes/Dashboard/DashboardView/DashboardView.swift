@@ -53,11 +53,7 @@ struct DashboardView: RootView {
             .doubleNavigationTitle(title: title, subtitle: subtitle, showBadge: store.showSettingsBadge, showSettings: { store.navigateTo.send(.settings) }, showGroups: { store.navigateTo.send(.observedFacultyGroups) })
         }
         .sheet(isPresented: $isDatePickerPresented) { datePicker }
-        .overlay(alignment: .bottom) { DashboardBottomPanel(isDefaultDateSelected: store.isDefaultDateSelected,
-                                                            showDatePicker: showDatePicker,
-                                                            selectDefaultDate: selectDefaultDate,
-                                                            showTeachersList: { store.navigateTo.send(.teacherGroupsList) },
-                                                            showPavilionsList: { store.navigateTo.send(.roomsList) }) }
+        .overlay(alignment: .bottom) { dashboardBottomPanel() }
     }
 
     private var eventsToDisplay: [FacultyGroupEvent] {
@@ -150,6 +146,14 @@ struct DashboardView: RootView {
         .multilineTextAlignment(.center)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding(.horizontal, .xlarge)
+    }
+
+    private func dashboardBottomPanel() -> some View {
+        DashboardBottomPanel(isDefaultDateSelected: store.isDefaultDateSelected,
+                             showDatePicker: showDatePicker,
+                             selectDefaultDate: selectDefaultDate,
+                             showTeachersList: { store.navigateTo.send(.teacherGroupsList) },
+                             showPavilionsList: { store.navigateTo.send(.roomsList) })
     }
 
     private func selectDefaultDate() {
