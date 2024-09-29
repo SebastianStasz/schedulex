@@ -53,7 +53,7 @@ struct DetailsDecoder {
             type: cells[3].nilIfEmpty(),
             date: cells[0],
             time: cells[1],
-            place: decodingType.getPlace(from: cells[5]),
+            place: decodingType.getPlace(cell4: cells[4], cell5: cells[5]),
             teacher: decodingType.getTeacher(from: cells[4]),
             teamsLink: teamsLink,
             facultyGroup: decodingType.getFacultyGroup(from: cells[5]),
