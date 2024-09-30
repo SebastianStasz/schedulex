@@ -15,7 +15,8 @@ struct DatesDecoder {
     }()
 
     func getDates(date: String, time: String) -> (Date, Date)? {
-        guard let startDate = getDate(date: date, time: time, hourRange: 3 ..< 5, minutesRange: 6 ..< 8),
+        guard time.count > 21,
+              let startDate = getDate(date: date, time: time, hourRange: 3 ..< 5, minutesRange: 6 ..< 8),
               let endDate = getDate(date: date, time: time, hourRange: 11 ..< 13, minutesRange: 14 ..< 16)
         else { return nil }
         return (startDate, endDate)
