@@ -13,6 +13,7 @@ extension DashboardViewModel {
         case roomsList
         case teacherGroupsList
         case observedFacultyGroups
+        case campusMap
     }
 
     func navigate(to destination: Destination) {
@@ -25,6 +26,8 @@ extension DashboardViewModel {
             pushTeacherGroupsList()
         case .observedFacultyGroups:
             pushObservedFacultyGroupsView()
+        case .campusMap:
+            pushCampusMapView()
         }
     }
 
@@ -49,6 +52,12 @@ extension DashboardViewModel {
     private func pushObservedFacultyGroupsView() {
         let viewModel = ObservedFacultyGroupsViewModel(navigationController: navigationController)
         let viewController = ObservedFacultyGroupsStoreViewController(viewModel: viewModel)
+        navigationController?.push(viewController)
+    }
+
+    private func pushCampusMapView() {
+        let viewModel = CampusMapViewModel(navigationController: navigationController)
+        let viewController = CampusMapViewController(viewModel: viewModel)
         navigationController?.push(viewController)
     }
 }

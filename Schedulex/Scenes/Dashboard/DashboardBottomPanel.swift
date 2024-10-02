@@ -15,12 +15,14 @@ struct DashboardBottomPanel: View {
     let selectDefaultDate: () -> Void
     let showTeachersList: () -> Void
     let showPavilionsList: () -> Void
+    let showCampusMap: () -> Void
 
     var body: some View {
         HStack(spacing: .large) {
             Menu {
                 Button(L10n.teachersListTitle, icon: .teachersList, action: showTeachersList)
                 Button(L10n.pavilionsListTitle, icon: .pavilionsList, action: showPavilionsList)
+                Button("Campus map", icon: .pavilionsList, action: showCampusMap)
             } label: {
                 Button(L10n.more, action: {})
                     .buttonStyle(.expandableButtonStyle(icon: .more))
@@ -38,5 +40,5 @@ struct DashboardBottomPanel: View {
 }
 
 #Preview {
-    DashboardBottomPanel(isDefaultDateSelected: true, showDatePicker: {}, selectDefaultDate: {}, showTeachersList: {}, showPavilionsList: {})
+    DashboardBottomPanel(isDefaultDateSelected: true, showDatePicker: {}, selectDefaultDate: {}, showTeachersList: {}, showPavilionsList: {}, showCampusMap: {})
 }

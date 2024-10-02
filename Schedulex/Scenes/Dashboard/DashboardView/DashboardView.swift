@@ -153,7 +153,8 @@ struct DashboardView: RootView {
                              showDatePicker: showDatePicker,
                              selectDefaultDate: selectDefaultDate,
                              showTeachersList: { store.navigateTo.send(.teacherGroupsList) },
-                             showPavilionsList: { store.navigateTo.send(.roomsList) })
+                             showPavilionsList: { store.navigateTo.send(.roomsList) },
+                             showCampusMap: { store.navigateTo.send(.campusMap) })
     }
 
     private func selectDefaultDate() {
