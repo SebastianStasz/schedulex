@@ -45,6 +45,7 @@
 "break_card_time_suffix" = "ч.";
 "event_details_link_to_class" = "Ссылка на занятие";
 "event_details_business_card" = "Визитная карточка";
+"event_details_see_on_map" = "Посмотреть на карте";
 "dashboard_title" = "Главная страница";
 "dashboard_all_groups_are_hidden" = "Все подписанные группы скрыты.\nНажмите \"Группы\", чтобы управлять ими.";
 "dashboard_groups_have_no_events" = "Группы, на которые вы подписаны, не содержат занятий.\nНажмите \"Группы\" и добавьте другую группу.";

@@ -5,6 +5,7 @@
 //  Created by Sebastian Staszczyk on 31/01/2024.
 //
 
+import Domain
 import Foundation
 
 extension DashboardViewModel {
@@ -13,7 +14,7 @@ extension DashboardViewModel {
         case roomsList
         case teacherGroupsList
         case observedFacultyGroups
-        case campusMap
+        case campusMap(UekBuilding?)
     }
 
     func navigate(to destination: Destination) {
@@ -26,8 +27,8 @@ extension DashboardViewModel {
             pushTeacherGroupsList()
         case .observedFacultyGroups:
             pushObservedFacultyGroupsView()
-        case .campusMap:
-            pushCampusMapView()
+        case let .campusMap(building):
+            pushCampusMapView(with: building)
         }
     }
 
@@ -53,13 +54,5 @@ extension DashboardViewModel {
         let viewModel = ObservedFacultyGroupsViewModel(navigationController: navigationController)
         let viewController = ObservedFacultyGroupsStoreViewController(viewModel: viewModel)
         navigationController?.push(viewController)
-    }
-
-    private func pushCampusMapView() {
-        if #available(iOS 17.0, *) {
-            let viewModel = CampusMapViewModel(navigationController: navigationController)
-            let viewController = CampusMapViewController(viewModel: viewModel)
-            navigationController?.push(viewController)
-        }
     }
 }

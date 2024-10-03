@@ -45,6 +45,7 @@
 "break_card_time_suffix" = "g.";
 "event_details_link_to_class" = "Link do zajęć";
 "event_details_business_card" = "e-wizytówka";
+"event_details_see_on_map" = "Zobacz na mapie";
 "dashboard_title" = "Strona główna";
 "dashboard_all_groups_are_hidden" = "Wszystkie obserwowane grupy są ukryte.\nKliknij \"Grupy\" aby nimi zarządzać.";
 "dashboard_groups_have_no_events" = "Obserwowane grupy nie zawierają żadnych zajęć.\nKliknij \"Grupy\" i dodaj inną grupę.";

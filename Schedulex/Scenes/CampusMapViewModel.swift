@@ -28,9 +28,11 @@ final class CampusMapStore: RootStore {
 @available(iOS 17.0, *)
 struct CampusMapViewModel: ViewModel {
     var navigationController: UINavigationController?
+    var building: UekBuilding?
 
     func makeStore(context: Context) -> CampusMapStore {
         let store = CampusMapStore(position: .camera(mapCamera))
+        store.selectedBuilding = building
 
         store.resetPosition
             .sink(on: store) {

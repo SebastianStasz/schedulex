@@ -45,6 +45,7 @@
 "break_card_time_suffix" = "h.";
 "event_details_link_to_class" = "Link to class";
 "event_details_business_card" = "Business card";
+"event_details_see_on_map" = "See on the map";
 "dashboard_title" = "Homepage";
 "dashboard_all_groups_are_hidden" = "All subscribed groups are hidden.\nClick \"Groups\" to manage them.";
 "dashboard_groups_have_no_events" = "The groups you follow don't contain any classes.\nClick \"Groups\" and add another group.";

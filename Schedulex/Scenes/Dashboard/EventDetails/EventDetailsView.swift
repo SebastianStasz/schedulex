@@ -15,6 +15,7 @@ struct EventDetailsView: View {
 
     let event: Event
     let displayType: EventDisplayType
+    let openMapWithBuilding: (UekBuilding) -> Void
 
     var body: some View {
         VStack(alignment: .leading, spacing: 28) {
@@ -36,6 +37,9 @@ struct EventDetailsView: View {
             VStack(spacing: .medium) {
                 if let teamsUrl = event.teamsUrl {
                     LinkCard(title: L10n.eventDetailsLinkToClass, subtitle: teamsUrl.description, image: .teamsLogo) { openURL(teamsUrl) }
+                }
+                if let building = event.building {
+                    LinkCard(title: L10n.eventDetailsSeeOnMap, subtitle: building.name, icon: .map) { openMapWithBuilding(building) }
                 }
                 if let teacherProfileUrl = event.teacherProfileUrl {
                     LinkCard(title: L10n.eventDetailsBusinessCard, subtitle: teacherProfileUrl.description, icon: .contactCard) { openURL(teacherProfileUrl) }
@@ -73,6 +77,6 @@ struct EventDetailsView: View {
 #Preview {
     Text("Some content")
         .sheet(isPresented: .constant(true)) {
-            EventDetailsView(event: .sample, displayType: .facultyGroup)
+            EventDetailsView(event: .sample, displayType: .facultyGroup, openMapWithBuilding: { _ in })
         }
 }

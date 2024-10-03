@@ -141,4 +141,35 @@ public enum UekBuilding: Int, Identifiable, CaseIterable {
             return CLLocationCoordinate2D(latitude: 50.069172, longitude: 19.957654)
         }
     }
+
+    var eventPlaceCode: String? {
+        switch self {
+        case .mainBuilding:
+            return "Bud.gł."
+        case .mainLibrary:
+            return "Bibl."
+        case .ustronieBuilding:
+            return "Paw.U"
+        case .teachingAndSportsBuilding:
+            return "Paw.S"
+        case .pavilionA:
+            return "Paw.A"
+        case .pavilionB:
+            return "Paw.B"
+        case .pavilionC:
+            return "Paw.C"
+        case .pavilionD:
+            return "Paw.D"
+        case .pavilionE:
+            return "Paw.E"
+        case .pavilionF:
+            return "Paw.F"
+        case .pavilionG:
+            return "Paw.G"
+        case .pavilionH:
+            return "Paw.H"
+        default:
+            return nil
+        }
+    }
 }

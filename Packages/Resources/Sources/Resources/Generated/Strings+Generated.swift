@@ -94,6 +94,8 @@ public enum L10n {
   public static let eventDetailsBusinessCard = L10n.tr("Localizable", "event_details_business_card", fallback: "Business card")
   /// Link to class
   public static let eventDetailsLinkToClass = L10n.tr("Localizable", "event_details_link_to_class", fallback: "Link to class")
+  /// See on the map
+  public static let eventDetailsSeeOnMap = L10n.tr("Localizable", "event_details_see_on_map", fallback: "See on the map")
   /// Ended
   public static let eventFinished = L10n.tr("Localizable", "event_finished", fallback: "Ended")
   /// Ends
