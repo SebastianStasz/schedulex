@@ -25,7 +25,7 @@ final class EventsListStore: RootStore {
     let scrollToSection = DriverSubject<Void>()
     let eventDisplayType: EventDisplayType
 
-    var openMapWithBuilding: (UekBuilding) -> Void = { _ in}
+    var openMapWithBuilding: (UekBuilding) -> Void = { _ in }
 
     init(color: FacultyGroupColor, eventDisplayType: EventDisplayType) {
         self.color = color
