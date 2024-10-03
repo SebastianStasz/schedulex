@@ -78,13 +78,11 @@ public extension UIColor {
 public extension Image {
   // Colors.xcassets
   // Images.xcassets
-  static var camusMap : Image { Image("camus_map", bundle: .module) }
   static var emptyStateCat : Image { Image("empty_state_cat", bundle: .module) }
   static var teamsLogo : Image { Image("teams_logo", bundle: .module) }
 }
 
 public extension UIImage {
-    static let camusMap = UIImage(named: "camus_map", in: .module, with: nil)!
     static let emptyStateCat = UIImage(named: "empty_state_cat", in: .module, with: nil)!
     static let teamsLogo = UIImage(named: "teams_logo", in: .module, with: nil)!
 }
