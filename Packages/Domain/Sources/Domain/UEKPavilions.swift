@@ -5,9 +5,9 @@
 //  Created by Sebastian Staszczyk on 03/10/2024.
 //
 
-import Foundation
 import MapKit
 import Resources
+import SwiftUI
 
 public enum UEKPavilions: Int, Identifiable, CaseIterable {
     case mainBuilding
@@ -86,6 +86,26 @@ public enum UEKPavilions: Int, Identifiable, CaseIterable {
         }
     }
 
+    public var color: Color {
+        switch self {
+        case .mainBuilding:
+            return .red
+        case .mainLibrary:
+            return .blue
+        case .priestHouse:
+            return .purple
+        case .gardenerHouse:
+            return .green
+        case .watchmanHouse:
+            return .gray
+        case .ustronieBuilding:
+            return .green
+        case .teachingAndSportsBuilding:
+            return .teal
+        default:
+            return .orange
+        }
+    }
 
     public var coordinate: CLLocationCoordinate2D {
         switch self {

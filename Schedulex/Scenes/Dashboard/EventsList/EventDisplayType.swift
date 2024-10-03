@@ -6,8 +6,8 @@
 //
 
 import Domain
-import Resources
 import Foundation
+import Resources
 
 enum EventDisplayType {
     case teacher

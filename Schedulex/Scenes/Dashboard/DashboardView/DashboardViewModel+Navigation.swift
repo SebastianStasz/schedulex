@@ -56,8 +56,10 @@ extension DashboardViewModel {
     }
 
     private func pushCampusMapView() {
-        let viewModel = CampusMapViewModel(navigationController: navigationController)
-        let viewController = CampusMapViewController(viewModel: viewModel)
-        navigationController?.push(viewController)
+        if #available(iOS 17.0, *) {
+            let viewModel = CampusMapViewModel(navigationController: navigationController)
+            let viewController = CampusMapViewController(viewModel: viewModel)
+            navigationController?.push(viewController)
+        }
     }
 }

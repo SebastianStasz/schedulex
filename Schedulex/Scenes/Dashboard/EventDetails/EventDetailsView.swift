@@ -49,6 +49,7 @@ struct EventDetailsView: View {
         .presentationDragIndicator(.visible)
         .presentationDetents([UIDevice.current.hasNotch ? .medium : .height(440)])
     }
+
     private func line(title: String, icon: Icon) -> some View {
         HStack(spacing: .medium) {
             Image.icon(icon)
