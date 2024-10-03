@@ -66,4 +66,14 @@ public struct Event: Hashable, Identifiable {
     public var startDateWithoutTime: Date {
         Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: startDate) ?? startDate
     }
+
+    public var building: UekBuilding? {
+        guard !isRemoteClass, let place else { return nil }
+        let buildings = UekBuilding.allCases
+        return buildings.first { building in
+            guard let buildingCode = building.eventPlaceCode?.filter({ !$0.isWhitespace }).lowercased() else { return false }
+            let placeCode = place.filter { !$0.isWhitespace }.lowercased()
+            return placeCode.contains(buildingCode)
+        }
+    }
 }

@@ -25,6 +25,8 @@ final class EventsListStore: RootStore {
     let scrollToSection = DriverSubject<Void>()
     let eventDisplayType: EventDisplayType
 
+    var openMapWithBuilding: (UekBuilding) -> Void = { _ in }
+
     init(color: FacultyGroupColor, eventDisplayType: EventDisplayType) {
         self.color = color
         self.eventDisplayType = eventDisplayType
@@ -50,6 +52,10 @@ struct EventsListViewModel: ViewModel {
         store.viewDidAppear
             .filter { scrollToSectionOnViewDidAppear }
             .sink(on: store) { $0.scrollToSection.send() }
+
+        store.openMapWithBuilding = {
+            pushCampusMapView(with: $0)
+        }
 
         switch input {
         case let .facultyGroup(_, events):

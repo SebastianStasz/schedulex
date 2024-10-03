@@ -15,12 +15,16 @@ struct DashboardBottomPanel: View {
     let selectDefaultDate: () -> Void
     let showTeachersList: () -> Void
     let showPavilionsList: () -> Void
+    let showCampusMap: () -> Void
 
     var body: some View {
         HStack(spacing: .large) {
             Menu {
                 Button(L10n.teachersListTitle, icon: .teachersList, action: showTeachersList)
                 Button(L10n.pavilionsListTitle, icon: .pavilionsList, action: showPavilionsList)
+                if #available(iOS 17.0, *) {
+                    Button(L10n.campusMapTitle, icon: .map, action: showCampusMap)
+                }
             } label: {
                 Button(L10n.more, action: {})
                     .buttonStyle(.expandableButtonStyle(icon: .more))
@@ -29,7 +33,7 @@ struct DashboardBottomPanel: View {
             Button(L10n.calendar, action: showDatePicker)
                 .buttonStyle(.expandableButtonStyle(icon: .calendar, fillMaxWidth: true, isExpanded: true))
 
-            SetDefaultDateButton(isDefaultDateSelected: isDefaultDateSelected, action: selectDefaultDate)
+            ResetExpandableButton(title: L10n.today, isDefaultValueSelected: isDefaultDateSelected, action: selectDefaultDate)
         }
         .padding(.horizontal, .large)
         .padding(.bottom, UIDevice.current.hasNotch ? 0 : .small)
@@ -38,5 +42,5 @@ struct DashboardBottomPanel: View {
 }
 
 #Preview {
-    DashboardBottomPanel(isDefaultDateSelected: true, showDatePicker: {}, selectDefaultDate: {}, showTeachersList: {}, showPavilionsList: {})
+    DashboardBottomPanel(isDefaultDateSelected: true, showDatePicker: {}, selectDefaultDate: {}, showTeachersList: {}, showPavilionsList: {}, showCampusMap: {})
 }

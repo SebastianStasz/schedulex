@@ -29,6 +29,7 @@ public enum Icon: String, Identifiable, CaseIterable {
     case freeHoursCircleFill
     case calendar
     case chevronForwardCircle
+    case map
 
     public var id: String {
         rawValue
@@ -82,6 +83,8 @@ public enum Icon: String, Identifiable, CaseIterable {
             return "ellipsis.circle"
         case .chevronForwardCircle:
             return "chevron.forward.circle"
+        case .map:
+            return "map.fill"
         }
     }
 }

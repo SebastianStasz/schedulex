@@ -34,7 +34,12 @@ struct EventsListView: RootView {
             }
         }
         .baseListStyle(isEmpty: store.isListEmpty, isLoading: store.isLoading.value, isSearching: store.isSearching)
-        .sheet(item: $selectedEvent) { EventDetailsView(event: $0, displayType: store.eventDisplayType) }
+        .sheet(item: $selectedEvent) { EventDetailsView(event: $0, displayType: store.eventDisplayType, openMapWithBuilding: openCampusMap) }
+    }
+
+    private func openCampusMap(with building: UekBuilding) {
+        selectedEvent = nil
+        store.openMapWithBuilding(building)
     }
 }
 

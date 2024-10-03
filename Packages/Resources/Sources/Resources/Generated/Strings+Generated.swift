@@ -20,8 +20,42 @@ public enum L10n {
   public static let breakCardTimeSuffix = L10n.tr("Localizable", "break_card_time_suffix", fallback: "h.")
   /// Break
   public static let breakCardTitle = L10n.tr("Localizable", "break_card_title", fallback: "Break")
+  /// Gardener's House
+  public static let buldingGardenerHouse = L10n.tr("Localizable", "bulding_gardener_house", fallback: "Gardener's House")
+  /// Main Building
+  public static let buldingMainBuilding = L10n.tr("Localizable", "bulding_main_building", fallback: "Main Building")
+  /// Main Library
+  public static let buldingMainLibrary = L10n.tr("Localizable", "bulding_main_library", fallback: "Main Library")
+  /// Building A
+  public static let buldingPavilionA = L10n.tr("Localizable", "bulding_pavilion_A", fallback: "Building A")
+  /// Building B
+  public static let buldingPavilionB = L10n.tr("Localizable", "bulding_pavilion_B", fallback: "Building B")
+  /// Building C
+  public static let buldingPavilionC = L10n.tr("Localizable", "bulding_pavilion_C", fallback: "Building C")
+  /// Building D
+  public static let buldingPavilionD = L10n.tr("Localizable", "bulding_pavilion_D", fallback: "Building D")
+  /// Building E
+  public static let buldingPavilionE = L10n.tr("Localizable", "bulding_pavilion_E", fallback: "Building E")
+  /// Building F
+  public static let buldingPavilionF = L10n.tr("Localizable", "bulding_pavilion_F", fallback: "Building F")
+  /// Building G
+  public static let buldingPavilionG = L10n.tr("Localizable", "bulding_pavilion_G", fallback: "Building G")
+  /// Building H
+  public static let buldingPavilionH = L10n.tr("Localizable", "bulding_pavilion_H", fallback: "Building H")
+  /// Priest's House
+  public static let buldingPriestHouse = L10n.tr("Localizable", "bulding_priest_house", fallback: "Priest's House")
+  /// Teaching and Sports Building
+  public static let buldingTeachingAndSports = L10n.tr("Localizable", "bulding_teaching_and_sports", fallback: "Teaching and Sports Building")
+  /// Ustronie Building
+  public static let buldingUstronie = L10n.tr("Localizable", "bulding_ustronie", fallback: "Ustronie Building")
+  /// Watchman's House
+  public static let buldingWatchmanHouse = L10n.tr("Localizable", "bulding_watchman_house", fallback: "Watchman's House")
   /// Calendar
   public static let calendar = L10n.tr("Localizable", "calendar", fallback: "Calendar")
+  /// Reset
+  public static let campusMapReset = L10n.tr("Localizable", "campus_map_reset", fallback: "Reset")
+  /// Campus map
+  public static let campusMapTitle = L10n.tr("Localizable", "campus_map_title", fallback: "Campus map")
   /// Cancel
   public static let cancelButton = L10n.tr("Localizable", "cancel_button", fallback: "Cancel")
   /// Change color of events
@@ -60,6 +94,8 @@ public enum L10n {
   public static let eventDetailsBusinessCard = L10n.tr("Localizable", "event_details_business_card", fallback: "Business card")
   /// Link to class
   public static let eventDetailsLinkToClass = L10n.tr("Localizable", "event_details_link_to_class", fallback: "Link to class")
+  /// See on the map
+  public static let eventDetailsSeeOnMap = L10n.tr("Localizable", "event_details_see_on_map", fallback: "See on the map")
   /// Ended
   public static let eventFinished = L10n.tr("Localizable", "event_finished", fallback: "Ended")
   /// Ends

@@ -1,3 +1,20 @@
+// building
+"bulding_main_building" = "Main Building";
+"bulding_main_library" = "Main Library";
+"bulding_priest_house" = "Priest's House";
+"bulding_gardener_house" = "Gardener's House";
+"bulding_watchman_house" = "Watchman's House";
+"bulding_ustronie" = "Ustronie Building";
+"bulding_teaching_and_sports" = "Teaching and Sports Building";
+"bulding_pavilion_A" = "Building A";
+"bulding_pavilion_B" = "Building B";
+"bulding_pavilion_C" = "Building C";
+"bulding_pavilion_D" = "Building D";
+"bulding_pavilion_E" = "Building E";
+"bulding_pavilion_F" = "Building F";
+"bulding_pavilion_G" = "Building G";
+"bulding_pavilion_H" = "Building H";
+
 // button
 "cancel_button" = "Cancel";
 "next_button" = "Next";
@@ -15,6 +32,10 @@
 "weekday_saturday_short" = "SAT";
 "weekday_sunday_short" = "SUN";
 
+// campus_map
+"campus_map_title" = "Campus map";
+"campus_map_reset" = "Reset";
+
 // dashboard
 "event_finished" = "Ended";
 "event_finishing_in" = "Ends";
@@ -24,6 +45,7 @@
 "break_card_time_suffix" = "h.";
 "event_details_link_to_class" = "Link to class";
 "event_details_business_card" = "Business card";
+"event_details_see_on_map" = "See on the map";
 "dashboard_title" = "Homepage";
 "dashboard_all_groups_are_hidden" = "All subscribed groups are hidden.\nClick \"Groups\" to manage them.";
 "dashboard_groups_have_no_events" = "The groups you follow don't contain any classes.\nClick \"Groups\" and add another group.";

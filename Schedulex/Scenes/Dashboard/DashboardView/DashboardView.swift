@@ -38,7 +38,7 @@ struct DashboardView: RootView {
                                 DashboardEventsCancelled(dayOff: dayOff)
                             }
 
-                            EventsList(events: eventsToDisplay, dayOff: store.dayOff)
+                            EventsList(events: eventsToDisplay, dayOff: store.dayOff, openMapWithBuilding: { store.navigateTo.send(.campusMap($0)) })
                                 .padding(.vertical, .medium)
                         }
                     }
@@ -153,7 +153,8 @@ struct DashboardView: RootView {
                              showDatePicker: showDatePicker,
                              selectDefaultDate: selectDefaultDate,
                              showTeachersList: { store.navigateTo.send(.teacherGroupsList) },
-                             showPavilionsList: { store.navigateTo.send(.roomsList) })
+                             showPavilionsList: { store.navigateTo.send(.roomsList) },
+                             showCampusMap: { store.navigateTo.send(.campusMap(nil)) })
     }
 
     private func selectDefaultDate() {

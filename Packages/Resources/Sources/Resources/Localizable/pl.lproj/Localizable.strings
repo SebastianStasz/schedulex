@@ -1,3 +1,20 @@
+// building
+"bulding_main_building" = "Budynek Główny";
+"bulding_main_library" = "Biblioteka Główna";
+"bulding_priest_house" = "Księżówka";
+"bulding_gardener_house" = "Dom Ogrodnika";
+"bulding_watchman_house" = "Stróżówka";
+"bulding_ustronie" = "Ustronie";
+"bulding_teaching_and_sports" = "Pawilon Dydaktyczno-Sportowy";
+"bulding_pavilion_A" = "Pawilon A";
+"bulding_pavilion_B" = "Pawilon B";
+"bulding_pavilion_C" = "Pawilon C";
+"bulding_pavilion_D" = "Pawilon D";
+"bulding_pavilion_E" = "Pawilon E";
+"bulding_pavilion_F" = "Pawilon F";
+"bulding_pavilion_G" = "Pawilon G";
+"bulding_pavilion_H" = "Pawilon H";
+
 // button
 "cancel_button" = "Anuluj";
 "next_button" = "Dalej";
@@ -15,6 +32,10 @@
 "weekday_saturday_short" = "SOB.";
 "weekday_sunday_short" = "NIEDZ.";
 
+// campus_map
+"campus_map_title" = "Mapa kampusu";
+"campus_map_reset" = "Reset";
+
 // dashboard
 "event_finished" = "Zakończone";
 "event_finishing_in" = "Koniec";
@@ -24,6 +45,7 @@
 "break_card_time_suffix" = "g.";
 "event_details_link_to_class" = "Link do zajęć";
 "event_details_business_card" = "e-wizytówka";
+"event_details_see_on_map" = "Zobacz na mapie";
 "dashboard_title" = "Strona główna";
 "dashboard_all_groups_are_hidden" = "Wszystkie obserwowane grupy są ukryte.\nKliknij \"Grupy\" aby nimi zarządzać.";
 "dashboard_groups_have_no_events" = "Obserwowane grupy nie zawierają żadnych zajęć.\nKliknij \"Grupy\" i dodaj inną grupę.";

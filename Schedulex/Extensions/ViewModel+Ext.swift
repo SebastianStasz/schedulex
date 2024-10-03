@@ -21,4 +21,12 @@ extension ViewModel {
         let viewController = EventsListViewController(viewModel: viewModel)
         navigationController?.push(viewController)
     }
+
+    func pushCampusMapView(with building: UekBuilding? = nil) {
+        if #available(iOS 17.0, *) {
+            let viewModel = CampusMapViewModel(navigationController: navigationController, building: building)
+            let viewController = CampusMapViewController(viewModel: viewModel)
+            navigationController?.push(viewController)
+        }
+    }
 }

@@ -43,7 +43,7 @@ public struct CalendarPicker: View {
 
                 Spacer()
 
-                SetDefaultDateButton(isDefaultDateSelected: isDefaultDateSelected, action: onSelectDefaultDate)
+                ResetExpandableButton(title: L10n.today, isDefaultValueSelected: isDefaultDateSelected, action: onSelectDefaultDate)
             }
             .padding(.horizontal, .large)
 

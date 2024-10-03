@@ -5,6 +5,7 @@
 //  Created by Sebastian Staszczyk on 31/01/2024.
 //
 
+import Domain
 import Foundation
 
 extension DashboardViewModel {
@@ -13,6 +14,7 @@ extension DashboardViewModel {
         case roomsList
         case teacherGroupsList
         case observedFacultyGroups
+        case campusMap(UekBuilding?)
     }
 
     func navigate(to destination: Destination) {
@@ -25,6 +27,8 @@ extension DashboardViewModel {
             pushTeacherGroupsList()
         case .observedFacultyGroups:
             pushObservedFacultyGroupsView()
+        case let .campusMap(building):
+            pushCampusMapView(with: building)
         }
     }
 
