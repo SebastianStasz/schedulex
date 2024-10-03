@@ -24,6 +24,7 @@ public struct ResetExpandableButton: View {
             .buttonStyle(.expandableButtonStyle(icon: dateSelectionButtonIcon, isExpanded: !isDefaultValueSelected))
             .disabled(isDefaultValueSelected)
             .animation(.easeInOut(duration: 0.2), value: isDefaultValueSelected)
+            .contentShape(Rectangle())
     }
 
     private var dateSelectionButtonIcon: Icon {
