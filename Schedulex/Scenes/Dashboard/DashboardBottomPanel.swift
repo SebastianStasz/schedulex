@@ -33,7 +33,7 @@ struct DashboardBottomPanel: View {
             Button(L10n.calendar, action: showDatePicker)
                 .buttonStyle(.expandableButtonStyle(icon: .calendar, fillMaxWidth: true, isExpanded: true))
 
-            SetDefaultDateButton(isDefaultDateSelected: isDefaultDateSelected, action: selectDefaultDate)
+            ResetExpandableButton(title: L10n.today, isDefaultValueSelected: isDefaultDateSelected, action: selectDefaultDate)
         }
         .padding(.horizontal, .large)
         .padding(.bottom, UIDevice.current.hasNotch ? 0 : .small)

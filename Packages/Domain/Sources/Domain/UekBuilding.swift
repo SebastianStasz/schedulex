@@ -1,5 +1,5 @@
 //
-//  UEKPavilions.swift
+//  UekBuilding.swift
 //  Domain
 //
 //  Created by Sebastian Staszczyk on 03/10/2024.
@@ -9,7 +9,7 @@ import MapKit
 import Resources
 import SwiftUI
 
-public enum UEKPavilions: Int, Identifiable, CaseIterable {
+public enum UekBuilding: Int, Identifiable, CaseIterable {
     case mainBuilding
     case mainLibrary
     case priestHouse
