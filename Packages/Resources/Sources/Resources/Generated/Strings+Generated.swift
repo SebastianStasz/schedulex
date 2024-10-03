@@ -52,6 +52,10 @@ public enum L10n {
   public static let buldingWatchmanHouse = L10n.tr("Localizable", "bulding_watchman_house", fallback: "Watchman's House")
   /// Calendar
   public static let calendar = L10n.tr("Localizable", "calendar", fallback: "Calendar")
+  /// Reset
+  public static let campusMapReset = L10n.tr("Localizable", "campus_map_reset", fallback: "Reset")
+  /// Campus map
+  public static let campusMapTitle = L10n.tr("Localizable", "campus_map_title", fallback: "Campus map")
   /// Cancel
   public static let cancelButton = L10n.tr("Localizable", "cancel_button", fallback: "Cancel")
   /// Change color of events

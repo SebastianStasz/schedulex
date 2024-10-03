@@ -32,6 +32,10 @@
 "weekday_saturday_short" = "СБ";
 "weekday_sunday_short" = "ВС";
 
+// campus_map
+"campus_map_title" = "Карта кампуса";
+"campus_map_reset" = "Сброс";
+
 // dashboard
 "event_finished" = "Завершено";
 "event_finishing_in" = "Конец";

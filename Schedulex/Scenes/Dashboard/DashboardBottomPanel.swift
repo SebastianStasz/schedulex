@@ -23,7 +23,7 @@ struct DashboardBottomPanel: View {
                 Button(L10n.teachersListTitle, icon: .teachersList, action: showTeachersList)
                 Button(L10n.pavilionsListTitle, icon: .pavilionsList, action: showPavilionsList)
                 if #available(iOS 17.0, *) {
-                    Button("Campus map", icon: .pavilionsList, action: showCampusMap)
+                    Button(L10n.campusMapTitle, icon: .map, action: showCampusMap)
                 }
             } label: {
                 Button(L10n.more, action: {})

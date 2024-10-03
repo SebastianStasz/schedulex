@@ -32,6 +32,10 @@
 "weekday_saturday_short" = "SAT";
 "weekday_sunday_short" = "SUN";
 
+// campus_map
+"campus_map_title" = "Campus map";
+"campus_map_reset" = "Reset";
+
 // dashboard
 "event_finished" = "Ended";
 "event_finishing_in" = "Ends";
