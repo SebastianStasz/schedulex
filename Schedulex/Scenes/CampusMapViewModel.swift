@@ -46,9 +46,8 @@ struct CampusMapViewModel: ViewModel {
     }
 
     private func checkIsRegionDifferent(region: MKCoordinateRegion) -> Bool {
-        let tolerance: CLLocationDegrees = 0.002
-        return abs(region.center.latitude - defaultCoordinate.latitude) > tolerance ||
-            abs(region.center.longitude - defaultCoordinate.longitude) > tolerance
+        abs(region.center.latitude - defaultCoordinate.latitude) > 0.001 ||
+            abs(region.center.longitude - defaultCoordinate.longitude) > 0.002
     }
 
     private var mapCamera: MapCamera {
