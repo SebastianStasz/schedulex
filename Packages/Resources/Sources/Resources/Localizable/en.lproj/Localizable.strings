@@ -1,3 +1,20 @@
+// building
+"bulding_main_building" = "Main Building";
+"bulding_main_library" = "Main Library";
+"bulding_priest_house" = "Priest's House";
+"bulding_gardener_house" = "Gardener's House";
+"bulding_watchman_house" = "Watchman's House";
+"bulding_ustronie" = "Ustronie Building";
+"bulding_teaching_and_sports" = "Teaching and Sports Building";
+"bulding_pavilion_A" = "Building A";
+"bulding_pavilion_B" = "Building B";
+"bulding_pavilion_C" = "Building C";
+"bulding_pavilion_D" = "Building D";
+"bulding_pavilion_E" = "Building E";
+"bulding_pavilion_F" = "Building F";
+"bulding_pavilion_G" = "Building G";
+"bulding_pavilion_H" = "Building H";
+
 // button
 "cancel_button" = "Cancel";
 "next_button" = "Next";

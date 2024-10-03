@@ -1,3 +1,20 @@
+// building
+"bulding_main_building" = "Главное здание";
+"bulding_main_library" = "Главная библиотека";
+"bulding_priest_house" = "Дом священника";
+"bulding_gardener_house" = "Дом садовника";
+"bulding_watchman_house" = "Дом сторожа";
+"bulding_ustronie" = "Здание Устроние";
+"bulding_teaching_and_sports" = "Учебно-спортивное здание";
+"bulding_pavilion_A" = "Павильон А";
+"bulding_pavilion_B" = "Павильон Б";
+"bulding_pavilion_C" = "Павильон С";
+"bulding_pavilion_D" = "Павильон Д";
+"bulding_pavilion_E" = "Павильон Е";
+"bulding_pavilion_F" = "Павильон Ф";
+"bulding_pavilion_G" = "Павильон Г";
+"bulding_pavilion_H" = "Павильон H";
+
 // button
 "cancel_button" = "Отменить";
 "next_button" = "Далее";

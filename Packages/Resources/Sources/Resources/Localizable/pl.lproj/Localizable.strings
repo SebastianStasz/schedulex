@@ -1,3 +1,20 @@
+// building
+"bulding_main_building" = "Budynek Główny";
+"bulding_main_library" = "Biblioteka Główna";
+"bulding_priest_house" = "Księżówka";
+"bulding_gardener_house" = "Dom Ogrodnika";
+"bulding_watchman_house" = "Stróżówka";
+"bulding_ustronie" = "Ustronie";
+"bulding_teaching_and_sports" = "Pawilon Dydaktyczno-Sportowy";
+"bulding_pavilion_A" = "Pawilon A";
+"bulding_pavilion_B" = "Pawilon B";
+"bulding_pavilion_C" = "Pawilon C";
+"bulding_pavilion_D" = "Pawilon D";
+"bulding_pavilion_E" = "Pawilon E";
+"bulding_pavilion_F" = "Pawilon F";
+"bulding_pavilion_G" = "Pawilon G";
+"bulding_pavilion_H" = "Pawilon H";
+
 // button
 "cancel_button" = "Anuluj";
 "next_button" = "Dalej";
