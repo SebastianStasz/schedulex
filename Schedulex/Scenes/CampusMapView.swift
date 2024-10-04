@@ -24,7 +24,7 @@ struct CampusMapView: RootView {
         Map(position: $store.position, selection: $store.selectedBuilding) {
             ForEach(UekBuilding.allCases, content: makeMarker)
         }
-        .mapStyle(.standard(pointsOfInterest: .including([.cafe, .restaurant, .parking])))
+        .mapStyle(.standard(pointsOfInterest: .including([.cafe, .restaurant, .brewery, .bakery, .winery, .parking])))
         .mapControls {
             MapPitchToggle()
         }
