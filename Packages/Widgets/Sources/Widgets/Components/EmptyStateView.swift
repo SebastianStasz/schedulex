@@ -14,16 +14,6 @@ public struct EmptyStateView: View {
     public init() {}
 
     public var body: some View {
-//        VStack(spacing: .medium) {
-//            Image(systemName: "magnifyingglass")
-//                .resizable()
-//                .aspectRatio(contentMode: .fit)
-//                .frame(height: 26)
-//
-//            Text(L10n.noResultMessage, style: .body)
-//        }
-//        .foregroundStyle(.grayShade1)
-
         VStack(spacing: .xlarge) {
             Image.emptyStateCat
                 .resizable()
