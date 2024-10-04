@@ -29,7 +29,7 @@ struct SettingsView: RootView {
                     sectionHeader(L10n.settingsSectionHeaderConfiguration)
 
                     VStack(spacing: .large) {
-                        MenuPicker(title: L10n.settingsAppThemeTitle, options: AppColorScheme.allCases, selectedOption: $store.appColorScheme)
+                        LabeledPicker(title: L10n.settingsAppThemeTitle, options: AppColorScheme.allCases, selectedOption: $store.appColorScheme)
 
                         Separator()
 

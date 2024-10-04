@@ -28,7 +28,7 @@ struct ClassNotificationsToggle: View {
 
             if areNotificationsEnabled {
                 Separator()
-                MenuPicker(title: L10n.settingsClassNotificationsTimeTitle, options: ClassNotificationTime.allCases, selectedOption: $classNotificationsTime)
+                LabeledPicker(title: L10n.settingsClassNotificationsTimeTitle, options: ClassNotificationTime.allCases, selectedOption: $classNotificationsTime)
             }
         }
         .card()

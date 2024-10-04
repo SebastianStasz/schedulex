@@ -1,5 +1,5 @@
 //
-//  MenuPicker.swift
+//  LabeledPicker.swift
 //  Widgets
 //
 //  Created by Sebastian Staszczyk on 24/12/2023.
@@ -11,7 +11,7 @@ public protocol Pickable: Hashable {
     var title: String { get }
 }
 
-public struct MenuPicker<T: Pickable>: View {
+public struct LabeledPicker<T: Pickable>: View {
     @Binding private var selectedOption: T
     private let title: String
     private let options: [T]
