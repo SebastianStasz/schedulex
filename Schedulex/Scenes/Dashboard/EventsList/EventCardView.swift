@@ -60,7 +60,7 @@ struct EventCardView: View {
     }
 
     private var status: String? {
-        if !isEventActive, event.endDate <= currentDate {
+        if !isEventActive || event.endDate <= currentDate {
             return nil
         } else {
             let formatter = RelativeDateTimeFormatter()
