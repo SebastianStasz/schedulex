@@ -7,7 +7,6 @@ options:
   minimumXcodeGenVersion: 2.24
   bundleIdPrefix: sebastian-staszczyk
   groupSortPosition: bottom
-  platform: iOS
   deploymentTarget:
     iOS: 16.0
 
@@ -16,26 +15,19 @@ settingGroups:
     PRODUCT_NAME: UEK Schedule
     MARKETING_VERSION: 1.0.25
     TARGETED_DEVICE_FAMILY: 1
+    CODE_SIGN_STYLE: Automatic
+    DEVELOPMENT_TEAM: 7TDCFNV5T6
 
 targets:
   Schedulex:
     info:
       path: Schedulex/Info.plist
-      properties:
-        UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
-        UILaunchStoryboardName: LaunchScreen
-        LSApplicationQueriesSchemes:
-          - googlegmail
-          - ms-outlook
-          - readdle-spark
-          - ymail
     scheme:
       testTargets:
         - name: SchedulexTests
           parallelizable: true
-      gatherCoverageData: true
     templates:
-      - Schedulex
+      - SchedulexApp
     dependencies:
       - package: Domain
       - package: Widgets
@@ -46,40 +38,55 @@ targets:
       - package: SchedulexViewModel
       - package: SwiftSoup
       - package: Firebase
-        product: FirebaseAuth
-      - package: Firebase
-        product: FirebaseFirestore
-      - package: Firebase
-        product: FirebaseFirestoreSwift
+        products:
+          - FirebaseAuth
+          - FirebaseFirestore
+          - FirebaseFirestoreSwift
 
   SchedulexTests:
-    type: bundle.unit-test
-    platform: iOS
-    sources:
-      - SchedulexTests
-    scheme:
-      testTargets:
-        - SchedulexTests
-      gatherCoverageData: true
-    settings:
-      INFOPLIST_FILE: Schedulex/Info.plist
+    templates:
+      - CommonTest
     dependencies:
       - target: Schedulex
-      - package: Firebase
-        product: FirebaseAuth
-      - package: Firebase
-        product: FirebaseFirestore
-      - package: Firebase
-        product: FirebaseFirestoreSwift
 
 targetTemplates:
-  Schedulex:
+  SchedulexApp:
     platform: iOS
     type: application
     sources: [Schedulex]
     settings:
       groups:
         - common
+    info:
+      properties:
+        UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
+        UILaunchStoryboardName: LaunchScreen
+        LSApplicationQueriesSchemes:
+          - googlegmail
+          - ms-outlook
+          - readdle-spark
+          - ymail
+        CFBundleDisplayName: $(PRODUCT_NAME)
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        LSApplicationCategoryType: public.app-category.education
+        ITSAppUsesNonExemptEncryption: false
+        UIApplicationSceneManifest:
+          UIApplicationSupportsMultipleScenes: true
+          UISceneConfigurations:
+            UIWindowSceneSessionRoleApplication:
+              - UISceneDelegateClassName: $(PRODUCT_MODULE_NAME).SceneDelegate
+                UISceneConfigurationName: Default Configuration
+
+  CommonTest:
+    type: bundle.unit-test
+    platform: iOS
+    sources: [SchedulexTests]
+    scheme:
+      testTargets:
+        - SchedulexTests
+      gatherCoverageData: true
+    settings:
+      INFOPLIST_FILE: Schedulex/Info.plist
 
 localPackages:
   - ./Packages/Domain
