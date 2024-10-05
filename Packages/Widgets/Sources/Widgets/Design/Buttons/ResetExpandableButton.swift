@@ -20,15 +20,19 @@ public struct ResetExpandableButton: View {
     }
 
     public var body: some View {
-        Button(title, action: action)
+        Button(title, action: performAction)
             .buttonStyle(.expandableButtonStyle(icon: dateSelectionButtonIcon, isExpanded: !isDefaultValueSelected))
             .disabled(isDefaultValueSelected)
             .animation(.easeInOut(duration: 0.2), value: isDefaultValueSelected)
-            .contentShape(Rectangle())
     }
 
     private var dateSelectionButtonIcon: Icon {
         isDefaultValueSelected ? .recordCircle : .chevronForwardCircle
+    }
+
+    private func performAction() {
+        action()
+        UIImpactFeedbackGenerator(style: .soft).impactOccurred()
     }
 }
 

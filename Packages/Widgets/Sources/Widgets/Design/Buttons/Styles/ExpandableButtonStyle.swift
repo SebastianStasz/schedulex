@@ -9,13 +9,11 @@ import SwiftUI
 
 struct ExpandableButtonStyle: ButtonStyle {
     var icon: Icon?
-    var fillMaxWidth = false
+    var fillMaxWidth = true
     var isExpanded = false
 
     func makeBody(configuration: Configuration) -> some View {
         HStack(spacing: .small) {
-            if fillMaxWidth { Spacer() }
-
             if let icon {
                 Image.icon(icon)
                     .resizable()
@@ -30,11 +28,11 @@ struct ExpandableButtonStyle: ButtonStyle {
                     .foregroundStyle(.textTertiary)
                     .transition(.move(edge: .trailing).combined(with: .opacity))
             }
-
-            if fillMaxWidth { Spacer() }
         }
         .padding(.medium)
+        .frame(maxWidth: .infinity)
         .background(.grayShade2)
         .cornerRadius(100)
+        .fixedSize(horizontal: !fillMaxWidth, vertical: false)
     }
 }
