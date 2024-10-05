@@ -49,7 +49,7 @@ struct EventsListViewModel: ViewModel {
                 $0.sections = mapToListSections(eventsByDate: $1)
             }
 
-        store.viewDidAppear
+        store.viewDidAppearForTheFirstTime
             .filter { scrollToSectionOnViewDidAppear }
             .sink(on: store) { $0.scrollToSection.send() }
 

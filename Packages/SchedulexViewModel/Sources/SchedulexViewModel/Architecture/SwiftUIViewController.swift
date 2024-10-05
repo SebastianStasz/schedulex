@@ -11,6 +11,7 @@ import SwiftUI
 open class SwiftUIViewController<VM: ViewModel, View: RootView>: UIViewController where VM.Store == View.Store {
     private lazy var store = viewModel.makeStore(context: coreEnvironment.context)
     public let viewModel: VM
+    private var viewDidAppear = false
 
     public init(viewModel: VM) {
         self.viewModel = viewModel
@@ -32,6 +33,10 @@ open class SwiftUIViewController<VM: ViewModel, View: RootView>: UIViewControlle
     override open func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         store.viewDidAppear.send()
+        if !viewDidAppear {
+            store.viewDidAppearForTheFirstTime.send()
+            viewDidAppear = true
+        }
     }
 
     override open func viewWillDisappear(_ animated: Bool) {

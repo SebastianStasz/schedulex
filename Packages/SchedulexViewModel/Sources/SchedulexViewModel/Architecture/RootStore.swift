@@ -16,6 +16,7 @@ open class RootStore: ObservableObject, CombineHelper {
     public let viewDidLoad = PassthroughSubject<Void, Never>()
     public let viewWillAppear = PassthroughSubject<Void, Never>()
     public let viewDidAppear = PassthroughSubject<Void, Never>()
+    public let viewDidAppearForTheFirstTime = PassthroughSubject<Void, Never>()
     public let viewWillDisappear = PassthroughSubject<Void, Never>()
     public let viewDidDisappear = PassthroughSubject<Void, Never>()
 }

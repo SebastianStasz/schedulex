@@ -17,7 +17,7 @@ extension ViewModel {
     }
 
     func pushEventsListView(input: EventsListInput) {
-        let viewModel = EventsListViewModel(input: input)
+        let viewModel = EventsListViewModel(navigationController: navigationController, input: input)
         let viewController = EventsListViewController(viewModel: viewModel)
         navigationController?.push(viewController)
     }
