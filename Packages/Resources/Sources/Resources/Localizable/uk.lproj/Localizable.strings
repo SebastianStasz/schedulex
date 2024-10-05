@@ -108,6 +108,8 @@
 "event_unknown_title" = "Без названия";
 "list_empty_state_title" = "Здесь ничего нет";
 "list_empty_state_description" = "Пожалуйста, попробуйте позже";
+"classes_visibility_section_hidden_empty_message" = "Нет скрытых предметов";
+"classes_visibility_section_visible_empty_message" = "Нет видимых предметов";
 
 // pavilions_list
 "pavilions_list_title" = "Павильоны";

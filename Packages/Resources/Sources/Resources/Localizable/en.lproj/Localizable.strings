@@ -108,6 +108,8 @@
 "event_unknown_title" = "Unknown title";
 "list_empty_state_title" = "Nothing here";
 "list_empty_state_description" = "Please check back later";
+"classes_visibility_section_hidden_empty_message" = "No hidden classes";
+"classes_visibility_section_visible_empty_message" = "No visible classes";
 
 // pavilions_list
 "pavilions_list_title" = "Pavilions";

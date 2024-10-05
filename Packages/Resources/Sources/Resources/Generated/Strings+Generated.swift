@@ -62,6 +62,10 @@ public enum L10n {
   public static let changeColorOfEvents = L10n.tr("Localizable", "change_color_of_events", fallback: "Change color of events")
   /// Classes
   public static let classes = L10n.tr("Localizable", "classes", fallback: "Classes")
+  /// No hidden classes
+  public static let classesVisibilitySectionHiddenEmptyMessage = L10n.tr("Localizable", "classes_visibility_section_hidden_empty_message", fallback: "No hidden classes")
+  /// No visible classes
+  public static let classesVisibilitySectionVisibleEmptyMessage = L10n.tr("Localizable", "classes_visibility_section_visible_empty_message", fallback: "No visible classes")
   /// Title, teacher, classroom, type
   public static let classroomEventsListSearchPrompt = L10n.tr("Localizable", "classroom_events_list_search_prompt", fallback: "Title, teacher, classroom, type")
   /// Classroom name

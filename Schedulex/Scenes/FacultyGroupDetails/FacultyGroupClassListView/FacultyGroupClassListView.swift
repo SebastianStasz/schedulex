@@ -17,25 +17,28 @@ struct FacultyGroupClassListView: RootView {
     var rootBody: some View {
         Group {
             if store.viewType == .preview {
-                BaseList(store.classes, id: \.self) { FacultyGroupClassListItem(facultyGroupClass: $0.facultyGroupClass, isSelected: true, action: nil) }
+                BaseList(store.classes, id: \.self) { FacultyGroupClassListItem(facultyGroupClass: $0.facultyGroupClass, isSelected: nil) }
             } else {
                 SectionedList(sections, pinnedHeaders: true) { sectionIndex, groupClass in
-                    FacultyGroupClassListItem(facultyGroupClass: groupClass.facultyGroupClass, isSelected: sectionIndex == 0) {
-                        if sectionIndex == 0 {
-                            store.hideFacultyGroupClass.send(groupClass)
-                        } else {
-                            store.unhideFacultyGroupClass.send(groupClass)
-                        }
-                    }
+                    FacultyGroupClassListItem(facultyGroupClass: groupClass.facultyGroupClass, isSelected: sectionIndex == 1)
+                        .onTapGesture { hideOrShow(groupClass) }
                 }
                 .animation(.easeInOut, value: store.hiddenClasses)
             }
         }
     }
 
+    private func hideOrShow(_ groupClass: EditableFacultyGroupClass) {
+        if store.hiddenClasses.contains(groupClass) {
+            store.unhideFacultyGroupClass.send(groupClass)
+        } else {
+            store.hideFacultyGroupClass.send(groupClass)
+        }
+    }
+
     private var sections: [ListSection<EditableFacultyGroupClass>] {
-        [ListSection(title: L10n.visible, items: store.visibleClasses),
-         ListSection(title: L10n.hidden, items: store.hiddenClasses)]
+        [ListSection(title: L10n.hidden, items: store.hiddenClasses, emptyLabel: L10n.classesVisibilitySectionHiddenEmptyMessage),
+         ListSection(title: L10n.visible, items: store.visibleClasses, emptyLabel: L10n.classesVisibilitySectionVisibleEmptyMessage)]
     }
 }
 

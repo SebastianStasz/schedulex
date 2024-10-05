@@ -11,8 +11,7 @@ import Widgets
 
 struct FacultyGroupClassListItem: View {
     let facultyGroupClass: FacultyGroupClass
-    let isSelected: Bool
-    let action: (() -> Void)?
+    let isSelected: Bool?
 
     var body: some View {
         HStack(spacing: .medium) {
@@ -28,10 +27,9 @@ struct FacultyGroupClassListItem: View {
             .padding(.vertical, .micro)
             .frame(maxWidth: .infinity, alignment: .leading)
 
-            if let action {
+            if let isSelected {
                 SelectionIcon(isSelected: isSelected)
                     .frame(height: .xlarge)
-                    .onTapGesture(perform: action)
             }
         }
         .card(vertical: .medium)
@@ -40,5 +38,5 @@ struct FacultyGroupClassListItem: View {
 }
 
 #Preview {
-    FacultyGroupClassListItem(facultyGroupClass: .sample, isSelected: true, action: {})
+    FacultyGroupClassListItem(facultyGroupClass: .sample, isSelected: true)
 }

@@ -108,6 +108,8 @@
 "event_unknown_title" = "Brak tytułu";
 "list_empty_state_title" = "Lista jest pusta";
 "list_empty_state_description" = "Spróbuj ponownie później";
+"classes_visibility_section_hidden_empty_message" = "Brak ukrytych przedmiotów";
+"classes_visibility_section_visible_empty_message" = "Brak widocznych przedmiotów";
 
 // pavilions_list
 "pavilions_list_title" = "Pawilony";
