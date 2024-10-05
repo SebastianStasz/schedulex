@@ -30,6 +30,7 @@ struct CampusMapView: RootView {
         }
         .onMapCameraChange { store.visibleRegion = $0.region }
         .safeAreaInset(edge: .bottom, content: makeBottomMenu)
+        .animation(.easeInOut, value: store.position)
     }
 
     private func makeMarker(for building: UekBuilding) -> some MapContent {

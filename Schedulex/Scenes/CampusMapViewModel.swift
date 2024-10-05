@@ -31,12 +31,18 @@ struct CampusMapViewModel: ViewModel {
     var building: UekBuilding?
 
     func makeStore(context: Context) -> CampusMapStore {
-        let store = CampusMapStore(position: .camera(mapCamera))
+        let store = CampusMapStore(position: .camera(makeMapCamera()))
         store.selectedBuilding = building
+
+        store.viewDidAppear
+            .sink(on: store) {
+                guard let selectedBuilding = $0.selectedBuilding else { return }
+                $0.position = .camera(makeMapCamera(coordinate: selectedBuilding.coordinate))
+            }
 
         store.resetPosition
             .sink(on: store) {
-                $0.position = .camera(mapCamera)
+                $0.position = .camera(makeMapCamera())
             }
 
         store.$visibleRegion
@@ -52,8 +58,8 @@ struct CampusMapViewModel: ViewModel {
             abs(region.center.longitude - defaultCoordinate.longitude) > 0.002
     }
 
-    private var mapCamera: MapCamera {
-        MapCamera(centerCoordinate: defaultCoordinate, distance: 980, heading: 110, pitch: 30)
+    private func makeMapCamera(coordinate: CLLocationCoordinate2D? = nil) -> MapCamera {
+        MapCamera(centerCoordinate: coordinate ?? defaultCoordinate, distance: 980, heading: 110, pitch: 30)
     }
 
     private var defaultCoordinate: CLLocationCoordinate2D {
