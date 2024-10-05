@@ -34,8 +34,13 @@ struct CampusMapView: RootView {
 
     private func makeMarker(for building: UekBuilding) -> some MapContent {
         Marker(building.name, systemImage: building.systemImage, coordinate: building.coordinate)
-            .tint(building.color)
+            .tint(getMarkerColor(for: building))
             .tag(building)
+    }
+
+    private func getMarkerColor(for building: UekBuilding) -> Color {
+        guard let selectedBuilding = store.selectedBuilding else { return building.color }
+        return selectedBuilding == building ? building.color : building.color.opacity(0.7)
     }
 
     private func makeBottomMenu() -> some View {
