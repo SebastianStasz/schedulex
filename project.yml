@@ -13,7 +13,7 @@ options:
 settingGroups:
   common:
     PRODUCT_NAME: UEK Schedule
-    MARKETING_VERSION: 1.0.25
+    MARKETING_VERSION: 1.0.26
     TARGETED_DEVICE_FAMILY: 1
     CODE_SIGN_STYLE: Automatic
     DEVELOPMENT_TEAM: 7TDCFNV5T6
