@@ -30,14 +30,6 @@ final class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCent
         completionHandler([.banner, .sound])
     }
 
-    static func setUIBarButtonItemColorToClear() {
-        setBarButtonItemColor(to: .clear)
-    }
-
-    static func resetBarButtonItemColor() {
-        setBarButtonItemColor(to: .textPrimary)
-    }
-
     private static func setBarButtonItemColor(to color: UIColor) {
         UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: color], for: .normal)
         UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: color], for: UIControl.State.highlighted)
@@ -52,7 +44,6 @@ final class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCent
 
         UINavigationBar.appearance().backIndicatorImage = backButtonImage
         UINavigationBar.appearance().backIndicatorTransitionMaskImage = backButtonImage
-        AppDelegate.setUIBarButtonItemColorToClear()
     }
 
     private func configureNavigationBarTitle() {

@@ -22,6 +22,7 @@ open class SwiftUIViewController<VM: ViewModel, View: RootView>: UIViewControlle
         super.viewDidLoad()
         let view = View(store: store)
         displayView(view)
+        navigationItem.backButtonDisplayMode = .minimal
         store.viewDidLoad.send()
     }
 

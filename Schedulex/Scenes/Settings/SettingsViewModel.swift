@@ -101,7 +101,6 @@ struct SettingsViewModel: ViewModel {
               let emailContent = EmailContent.defaultContact(recipient: recipient, appVersion: appVersion, facultyGroups: facultyGroups)
         else { return }
 
-        AppDelegate.resetBarButtonItemColor()
         let viewController = SendEmailViewController(emailContent: emailContent)
         navigationController?.presentModally(viewController)
     }

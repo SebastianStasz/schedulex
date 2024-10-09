@@ -21,11 +21,6 @@ final class SendEmailViewController: MFMailComposeViewController, MFMailComposeV
         }
     }
 
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        AppDelegate.setUIBarButtonItemColorToClear()
-    }
-
     func mailComposeController(_: MFMailComposeViewController, didFinishWith _: MFMailComposeResult, error _: Error?) {
         dismiss()
     }
