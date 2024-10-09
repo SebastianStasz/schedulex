@@ -31,7 +31,6 @@ final class DashboardStore: RootStore {
     let navigateTo = DriverSubject<DashboardViewModel.Destination>()
     let markSwipeTipAsPresented = DriverSubject<Void>()
     let selectDefaultDate = DriverSubject<Void>()
-    let scrollToDate = DriverSubject<Void>()
     let refresh = DriverSubject<Void>()
 
     var isDefaultDateSelected: Bool {
@@ -69,10 +68,6 @@ struct DashboardViewModel: ViewModel {
 
         let setDefaultSelectedDate = { [weak store] in
             let dateToSelect = store?.getDefaultSelectedDate() ?? .now
-            guard !(store?.selectedDate.isSameDay(as: dateToSelect) ?? true) else {
-                store?.scrollToDate.send()
-                return
-            }
             store?.selectedDate = dateToSelect
         }
 

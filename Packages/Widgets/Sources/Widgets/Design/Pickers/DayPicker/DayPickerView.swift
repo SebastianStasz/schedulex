@@ -13,12 +13,10 @@ public struct DayPickerView: View {
 
     @Binding var items: [DayPickerItem]?
     @Binding private var selectedDate: Date
-    private var scrollToDate: AnyPublisher<Void, Never>
 
-    public init(items: Binding<[DayPickerItem]?>, selection: Binding<Date>, scrollToDate: AnyPublisher<Void, Never>) {
+    public init(items: Binding<[DayPickerItem]?>, selection: Binding<Date>) {
         _items = items
         _selectedDate = selection
-        self.scrollToDate = scrollToDate
     }
 
     public var body: some View {
@@ -39,7 +37,6 @@ public struct DayPickerView: View {
             }
             .onAppear { scrollToSelectedDate(proxy: proxy, animate: false) }
             .onChange(of: selectedDate) { _ in scrollToSelectedDate(proxy: proxy, animate: true) }
-            .onReceive(scrollToDate) { scrollToSelectedDate(proxy: proxy, animate: true) }
             .scrollIndicators(.hidden)
         }
     }

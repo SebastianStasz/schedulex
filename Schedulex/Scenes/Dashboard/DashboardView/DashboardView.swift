@@ -21,7 +21,7 @@ struct DashboardView: RootView {
         NavigationStack {
             VStack(spacing: 0) {
                 LazyVStack {
-                    DayPickerView(items: $store.dayPickerItems, selection: $store.selectedDate, scrollToDate: store.scrollToDate.asDriver())
+                    DayPickerView(items: $store.dayPickerItems, selection: $store.selectedDate)
                 }
                 .padding(.top, .xlarge)
                 .padding(.bottom, .medium)
