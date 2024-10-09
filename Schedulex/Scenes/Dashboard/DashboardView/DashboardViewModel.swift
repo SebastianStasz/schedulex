@@ -67,8 +67,7 @@ struct DashboardViewModel: ViewModel {
         let daysOff = context.storage.appConfiguration.map { $0.daysOff }
 
         let setDefaultSelectedDate = { [weak store] in
-            let dateToSelect = store?.getDefaultSelectedDate() ?? .now
-            store?.selectedDate = dateToSelect
+            store?.selectedDate = store?.getDefaultSelectedDate() ?? .now
         }
 
         NotificationCenter.didEnterBackground

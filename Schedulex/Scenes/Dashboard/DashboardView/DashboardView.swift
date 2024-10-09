@@ -44,7 +44,7 @@ struct DashboardView: RootView {
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
                     .padding(.medium)
-                    .padding(.bottom, 40)
+                    .padding(.bottom, 48)
                     .background(.backgroundPrimary)
                 }
                 .gesture(dragGesture)

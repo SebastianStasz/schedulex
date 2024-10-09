@@ -44,7 +44,7 @@ public struct DayPickerView: View {
     private func scrollToSelectedDate(proxy: ScrollViewProxy, animate: Bool) {
         if let item = items?.first(where: { $0.date.isSameDay(as: selectedDate) }) {
             if animate {
-                withAnimation(.easeInOut) { proxy.scrollTo(item.id, anchor: .center) }
+                withAnimation(.easeInOut(duration: 0.2)) { proxy.scrollTo(item.id, anchor: .center) }
             } else {
                 proxy.scrollTo(item.id, anchor: .center)
             }
