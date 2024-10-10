@@ -20,6 +20,12 @@ public enum L10n {
   public static let breakCardTimeSuffix = L10n.tr("Localizable", "break_card_time_suffix", fallback: "h.")
   /// Break
   public static let breakCardTitle = L10n.tr("Localizable", "break_card_title", fallback: "Break")
+  /// Rakowicka 16
+  public static let buildingRakowicka16 = L10n.tr("Localizable", "building_rakowicka_16", fallback: "Rakowicka 16")
+  /// Sienkiewicza 4
+  public static let buildingSienkiewicza4 = L10n.tr("Localizable", "building_sienkiewicza_4", fallback: "Sienkiewicza 4")
+  /// Sienkiewicza 5
+  public static let buildingSienkiewicza5 = L10n.tr("Localizable", "building_sienkiewicza_5", fallback: "Sienkiewicza 5")
   /// Gardener's House
   public static let buldingGardenerHouse = L10n.tr("Localizable", "bulding_gardener_house", fallback: "Gardener's House")
   /// Main Building

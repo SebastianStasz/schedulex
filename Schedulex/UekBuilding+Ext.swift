@@ -41,6 +41,12 @@ extension UekBuilding {
             return L10n.buldingPavilionG
         case .pavilionH:
             return L10n.buldingPavilionH
+        case .rakowicka16:
+            return L10n.buildingRakowicka16
+        case .sienkiewicza4:
+            return L10n.buildingSienkiewicza4
+        case .sienkiewicza5:
+            return L10n.buildingSienkiewicza5
         }
     }
 }

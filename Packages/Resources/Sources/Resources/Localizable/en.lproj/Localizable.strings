@@ -14,6 +14,9 @@
 "bulding_pavilion_F" = "Building F";
 "bulding_pavilion_G" = "Building G";
 "bulding_pavilion_H" = "Building H";
+"building_rakowicka_16" = "Rakowicka 16";
+"building_sienkiewicza_4" = "Sienkiewicza 4";
+"building_sienkiewicza_5" = "Sienkiewicza 5";
 
 // button
 "cancel_button" = "Cancel";

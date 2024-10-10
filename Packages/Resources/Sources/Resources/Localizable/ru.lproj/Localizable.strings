@@ -14,6 +14,9 @@
 "bulding_pavilion_F" = "Павильон Ф";
 "bulding_pavilion_G" = "Павильон Г";
 "bulding_pavilion_H" = "Павильон H";
+"building_rakowicka_16" = "Rakowicka 16";
+"building_sienkiewicza_4" = "Sienkiewicza 4";
+"building_sienkiewicza_5" = "Sienkiewicza 5";
 
 // button
 "cancel_button" = "Отменить";

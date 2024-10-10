@@ -24,6 +24,9 @@ public enum UekBuilding: Int, Identifiable, CaseIterable {
     case pavilionF
     case pavilionG
     case pavilionH
+    case rakowicka16
+    case sienkiewicza4
+    case sienkiewicza5
 
     public var id: Int {
         rawValue
@@ -103,6 +106,12 @@ public enum UekBuilding: Int, Identifiable, CaseIterable {
             return CLLocationCoordinate2D(latitude: 50.069522, longitude: 19.953919)
         case .pavilionH:
             return CLLocationCoordinate2D(latitude: 50.069172, longitude: 19.957654)
+        case .rakowicka16:
+            return CLLocationCoordinate2D(latitude: 50.067060, longitude: 19.952268)
+        case .sienkiewicza4:
+            return CLLocationCoordinate2D(latitude: 50.070356, longitude: 19.925804)
+        case .sienkiewicza5:
+            return CLLocationCoordinate2D(latitude: 50.070291, longitude: 19.926177)
         }
     }
 
@@ -132,6 +141,12 @@ public enum UekBuilding: Int, Identifiable, CaseIterable {
             return "Paw.G"
         case .pavilionH:
             return "Paw.H"
+        case .rakowicka16:
+            return "Rakowicka 16"
+        case .sienkiewicza4:
+            return "Sienk. 4"
+        case .sienkiewicza5:
+            return "Sienk. 5"
         default:
             return nil
         }
