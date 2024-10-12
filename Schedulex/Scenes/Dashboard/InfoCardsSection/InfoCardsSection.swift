@@ -32,9 +32,9 @@ struct InfoCardsSection: View {
                         .frame(width: cardWidth)
                 }
             }
-            .padding(.horizontal, .medium)
+            .scrollTargetLayoutOrPadding()
         }
-        .padding(.horizontal, -.medium)
+        .scrollTargetBehaviorViewAligned()
     }
 
     private var swipeTip: some View {
@@ -49,6 +49,28 @@ struct InfoCardsSection: View {
     private var cardWidth: CGFloat {
         let factor: CGFloat = store.infoCards.count > 1 ? 3 : 2
         return UIScreen.main.bounds.size.width - factor * .medium
+    }
+}
+
+private extension View {
+    @ViewBuilder
+    func scrollTargetBehaviorViewAligned() -> some View {
+        if #available(iOS 17.0, *) {
+            self.padding(.horizontal, -.medium)
+                .scrollTargetBehavior(.viewAligned)
+                .contentMargins(.horizontal, .medium, for: .scrollContent)
+        } else {
+            padding(.horizontal, -.medium)
+        }
+    }
+
+    @ViewBuilder
+    func scrollTargetLayoutOrPadding() -> some View {
+        if #available(iOS 17.0, *) {
+            scrollTargetLayout()
+        } else {
+            padding(.horizontal, .medium)
+        }
     }
 }
 
