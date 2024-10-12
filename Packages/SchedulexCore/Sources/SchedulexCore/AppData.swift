@@ -15,25 +15,19 @@ public final class AppData {
     @Published public private(set) var subscribedFacultyGroups: [FacultyGroup] = [] {
         didSet {
             let groups = subscribedFacultyGroups.sorted(by: { $0.name < $1.name })
-            let data = try! JSONEncoder().encode(groups)
-            let json = String(data: data, encoding: .utf8)
-            defaults.setValue(json, forKey: "subscribedFacultyGroups")
+            saveDataAsJson(groups, forKey: "subscribedFacultyGroups")
         }
     }
 
     @Published public private(set) var allHiddenClasses: [EditableFacultyGroupClass] = [] {
-        didSet {
-            let data = try! JSONEncoder().encode(allHiddenClasses)
-            let json = String(data: data, encoding: .utf8)
-            defaults.setValue(json, forKey: "allHiddenClasses")
-        }
+        didSet { saveDataAsJson(allHiddenClasses, forKey: "allHiddenClasses") }
     }
 
     @Published public private(set) var hiddenInfoCards: [InfoCard] = [] {
         didSet { defaults.set(hiddenInfoCards.map { $0.rawValue }, forKey: "hiddenInfoCards") }
     }
 
-    @Published public var classNotificationsEnabled: Bool = false {
+    @Published public var classNotificationsEnabled = false {
         didSet { defaults.set(classNotificationsEnabled, forKey: "classNotificationsEnabled") }
     }
 
@@ -41,7 +35,7 @@ public final class AppData {
         didSet { defaults.set(classNotificationsTime.rawValue, forKey: "classNotificationsTime") }
     }
 
-    @Published public var dashboardSwipeTipPresented: Bool = true {
+    @Published public var dashboardSwipeTipPresented = true {
         didSet { defaults.setValue(dashboardSwipeTipPresented, forKey: "dashboardSwipeTipPresented") }
     }
 
@@ -49,34 +43,22 @@ public final class AppData {
         didSet { defaults.set(appColorScheme.rawValue, forKey: "appColorScheme") }
     }
 
-    private var didResetRateTheApplicationInfoCard: Bool
+    private var didResetRateTheApplicationInfoCard = true
 
     init(defaults: UserDefaults = .standard) {
         self.defaults = defaults
 
+        subscribedFacultyGroups = getObject(ofType: [FacultyGroup].self, forKey: "subscribedFacultyGroups") ?? []
+        allHiddenClasses = getObject(ofType: [EditableFacultyGroupClass].self, forKey: "allHiddenClasses") ?? []
+
         classNotificationsEnabled = defaults.bool(forKey: "classNotificationsEnabled")
         dashboardSwipeTipPresented = defaults.bool(forKey: "dashboardSwipeTipPresented")
+        
+        appColorScheme = getEnum(ofType: AppColorScheme.self, forKey: "appColorScheme") ?? .system
+        classNotificationsTime = getEnum(ofType: ClassNotificationTime.self, forKey: "classNotificationsTime") ?? .oneHourBefore
 
         if let rawValues = defaults.stringArray(forKey: "hiddenInfoCards") {
             hiddenInfoCards = rawValues.compactMap { InfoCard(rawValue: $0) }
-        }
-
-        if let rawValue = defaults.string(forKey: "appColorScheme"), let appColorScheme = AppColorScheme(rawValue: rawValue) {
-            self.appColorScheme = appColorScheme
-        }
-
-        if let rawValue = defaults.string(forKey: "classNotificationsTime"), let classNotificationsTime = ClassNotificationTime(rawValue: rawValue) {
-            self.classNotificationsTime = classNotificationsTime
-        }
-
-        if let string = UserDefaults.standard.value(forKey: "subscribedFacultyGroups") as? String, let data = string.data(using: .utf8) {
-            let subscribedFacultyGroups = try? JSONDecoder().decode([FacultyGroup].self, from: data)
-            self.subscribedFacultyGroups = subscribedFacultyGroups ?? []
-        }
-
-        if let string = UserDefaults.standard.value(forKey: "allHiddenClasses") as? String, let data = string.data(using: .utf8) {
-            let subscribedFacultyGroups = try? JSONDecoder().decode([EditableFacultyGroupClass].self, from: data)
-            allHiddenClasses = subscribedFacultyGroups ?? []
         }
 
         didResetRateTheApplicationInfoCard = defaults.bool(forKey: "didResetRateTheApplicationInfoCard")
@@ -85,11 +67,32 @@ public final class AppData {
             defaults.set(true, forKey: "didResetRateTheApplicationInfoCard")
         }
     }
+}
 
-    private var availableColors: [FacultyGroupColor] {
+private extension AppData {
+    var availableColors: [FacultyGroupColor] {
         FacultyGroupColor.allCases.filter { color in
             !subscribedFacultyGroups.contains(where: { $0.color == color })
         }
+    }
+
+    func saveDataAsJson<T: Encodable>(_ data: T, forKey key: String) {
+        guard let data = try? JSONEncoder().encode(data),
+              let json = String(data: data, encoding: .utf8)
+        else { return }
+        defaults.setValue(json, forKey: key)
+    }
+
+    func getObject<T: Decodable>(ofType type: T.Type, forKey key: String) -> T? {
+        guard let string = defaults.value(forKey: key) as? String,
+              let data = string.data(using: .utf8)
+        else { return nil }
+        return try? JSONDecoder().decode(type.self, from: data)
+    }
+
+    func getEnum<T: RawRepresentable>(ofType: T.Type, forKey key: String) -> T? where T.RawValue == String {
+        guard let rawValue = defaults.string(forKey: key) else { return nil }
+        return T(rawValue: rawValue)
     }
 }
 
