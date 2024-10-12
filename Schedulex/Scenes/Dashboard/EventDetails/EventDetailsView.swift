@@ -38,7 +38,7 @@ struct EventDetailsView: View {
                 if let teamsUrl = event.teamsUrl {
                     LinkCard(title: L10n.eventDetailsLinkToClass, subtitle: teamsUrl.description, image: .teamsLogo) { openURL(teamsUrl) }
                 }
-                if let building = event.building {
+                if #available(iOS 17.0, *), let building = event.building {
                     LinkCard(title: L10n.eventDetailsSeeOnMap, subtitle: building.name, icon: .map) { openMapWithBuilding(building) }
                 }
                 if let teacherProfileUrl = event.teacherProfileUrl {
