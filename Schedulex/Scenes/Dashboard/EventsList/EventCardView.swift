@@ -54,7 +54,7 @@ struct EventCardView: View {
         }
         .lineLimit(1, reservesSpace: true)
         .padding(.medium)
-        .background(color.shade4)
+        .background(color.shade4.gradient)
         .clipShape(RoundedRectangle(cornerRadius: 12))
         .overlay(openTeamsButton, alignment: .bottomLeading)
     }

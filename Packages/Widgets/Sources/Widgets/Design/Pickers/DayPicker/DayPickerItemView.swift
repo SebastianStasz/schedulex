@@ -23,7 +23,7 @@ struct DayPickerItemView: View {
             }
             .padding(.vertical, .medium)
             .frame(maxWidth: .infinity)
-            .background(backgroundColor)
+            .background(backgroundColor.gradient)
             .overlay(border)
             .clipShape(RoundedRectangle(cornerRadius: 12))
             .overlay(hasFreeHoursBadge, alignment: .bottom)

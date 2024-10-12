@@ -17,7 +17,7 @@ struct BreakCardView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.large)
             .foregroundStyle(.white)
-            .background(.accentPrimary)
+            .background(Color.accentPrimary.gradient)
             .clipShape(RoundedRectangle(cornerRadius: 12))
     }
 
