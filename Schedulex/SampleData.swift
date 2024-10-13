@@ -27,13 +27,46 @@ extension FacultyGroupClass {
 }
 
 extension Event {
-    static let sample = Event(name: .eventName, type: "wykład do wyboru", startDate: .now, endDate: .now, place: .place, isRemoteClass: false, isEventTransfer: false, teacher: .teacher, teacherProfileUrl: .profileUrl, facultyGroup: "ZIIAS1-1111")
+    static let sample = Event(name: .eventName,
+                              type: "wykład do wyboru",
+                              startDate: .now,
+                              endDate: Calendar.current.date(byAdding: .minute, value: 1, to: .now)!,
+                              place: .place,
+                              isRemoteClass: false,
+                              isEventTransfer: false,
+                              teacher: .teacher,
+                              teacherProfileUrl: .profileUrl,
+                              facultyGroup: "ZIIAS1-1111")
+
+    static let sample2 = Event(name: "Historia myśli ekonomicznej",
+                               type: "ćwiczenia",
+                               startDate: Calendar.current.date(byAdding: .minute, value: 2, to: .now)!,
+                               endDate: Calendar.current.date(byAdding: .minute, value: 3, to: .now)!,
+                               place: .place,
+                               isRemoteClass: false,
+                               isEventTransfer: false,
+                               teacher: .teacher,
+                               teacherProfileUrl: .profileUrl,
+                               facultyGroup: "ZIIAS1-1111")
+
+    static let sample3 = Event(name: "Prognozowanie procesów ekonomicznych",
+                               type: "ćwiczenia",
+                               startDate: Calendar.current.date(byAdding: .minute, value: 4, to: .now)!,
+                               endDate: Calendar.current.date(byAdding: .minute, value: 5, to: .now)!,
+                               place: .place,
+                               isRemoteClass: false,
+                               isEventTransfer: false,
+                               teacher: .teacher,
+                               teacherProfileUrl: .profileUrl,
+                               facultyGroup: "ZIIAS1-1111")
 
     static let eventTransfer = Event(name: .eventName, type: "Przeniesienie zajęć", startDate: .now, endDate: .now, place: .place, isRemoteClass: true, isEventTransfer: true, note: "na 17.01.2024", teacher: .teacher, teacherProfileUrl: .profileUrl, facultyGroup: "ZIIAS1-1111")
 }
 
 extension FacultyGroupEvent {
-    static let sample = FacultyGroupEvent(facultyGroupName: "ZIIAS1-1111", color: .blue, event: .sample)
+    static let sample = FacultyGroupEvent(facultyGroupName: "ZIIAS1-1111", color: .orange, event: .sample)
+    static let sample2 = FacultyGroupEvent(facultyGroupName: "ZIIAS1-1111", color: .orange, event: .sample2)
+    static let sample3 = FacultyGroupEvent(facultyGroupName: "ZIIAS1-1111", color: .orange, event: .sample3)
 }
 
 private extension String {

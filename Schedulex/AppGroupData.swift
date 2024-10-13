@@ -9,7 +9,7 @@ import Foundation
 
 struct AppGroupData {
     private let defaults = UserDefaults(suiteName: "group.com.Schedulex")
-    
+
     func saveFacultyGroupEventsByDate(_ events: [FacultyGroupEventsByDate]) {
         guard let data = try? JSONEncoder().encode(events) else { return }
         defaults?.set(data, forKey: "facultyGroupEventsByDate")
