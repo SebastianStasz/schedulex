@@ -35,16 +35,13 @@ struct ObservedFacultyGroupsViewModel: ViewModel {
             .assign(to: &store.$subscribedGroups)
 
         store.presentFacultiesList
-            .sink { _ in presentFacultiesList() }
-            .store(in: &store.cancellables)
+            .sink(on: store) { _ in presentFacultiesList() }
 
         store.editFacultyGroup
-            .sink { pushFacultyGroupDetailsView($0, viewType: .editable) }
-            .store(in: &store.cancellables)
+            .sink(on: store) { pushFacultyGroupDetailsView($0, viewType: .editable) }
 
         store.toggleFacultyGroupVisibility
-            .sink { context.appData.toggleFacultyGroupVisibility($0) }
-            .store(in: &store.cancellables)
+            .sink(on: store) { context.appData.toggleFacultyGroupVisibility($0) }
 
         store.deleteFacultyGroup
             .sink(on: store) {

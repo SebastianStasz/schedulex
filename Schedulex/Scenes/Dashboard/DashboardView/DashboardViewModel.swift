@@ -71,8 +71,7 @@ struct DashboardViewModel: ViewModel {
         }
 
         NotificationCenter.didEnterBackground
-            .sink { nextSelectedDateResetDate = Calendar.current.date(byAdding: .minute, value: 5, to: .now)! }
-            .store(in: &store.cancellables)
+            .sink(on: store) { nextSelectedDateResetDate = Calendar.current.date(byAdding: .minute, value: 5, to: .now)! }
 
         viewWillEnterForeground
             .sink(on: store) {
@@ -129,8 +128,7 @@ struct DashboardViewModel: ViewModel {
             }
 
         dashboardEventsOutput.facultiesGroupsDetails
-            .sink { context.appData.updateNumberOfEventsForSubscribedFacultyGroups(from: $0) }
-            .store(in: &store.cancellables)
+            .sink(on: store) { context.appData.updateNumberOfEventsForSubscribedFacultyGroups(from: $0) }
 
         let classNotificationServiceInput = ClassNotificationService.Input(
             events: dashboardEventsOutput.eventsToDisplay.map { $0.map { $0.event } }.asDriver(),
@@ -158,12 +156,10 @@ struct DashboardViewModel: ViewModel {
             .assign(to: &store.$showDashboardSwipeTip)
 
         store.markSwipeTipAsPresented
-            .sink { context.appData.dashboardSwipeTipPresented = true }
-            .store(in: &store.cancellables)
+            .sink(on: store) { context.appData.dashboardSwipeTipPresented = true }
 
         store.navigateTo
-            .sink { navigate(to: $0) }
-            .store(in: &store.cancellables)
+            .sink(on: store) { navigate(to: $0) }
 
         return store
     }

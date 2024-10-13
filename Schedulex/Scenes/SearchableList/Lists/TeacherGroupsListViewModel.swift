@@ -35,8 +35,7 @@ struct TeacherGroupsListViewModel: ViewModel {
             .assign(to: &store.$items)
 
         store.onSelectListItem
-            .sink { navigateToTeachersList(for: $0) }
-            .store(in: &store.cancellables)
+            .sink(on: store) { navigateToTeachersList(for: $0) }
 
         return store
     }

@@ -41,8 +41,7 @@ struct InfoCardsSectionViewModel {
             .sink(on: store)
 
         store.closeInfoCard
-            .sink { appData.hideInfoCard($0) }
-            .store(in: &store.cancellables)
+            .sink(on: store) { appData.hideInfoCard($0) }
 
         return store
     }

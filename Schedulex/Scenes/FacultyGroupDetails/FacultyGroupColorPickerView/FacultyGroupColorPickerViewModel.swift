@@ -28,11 +28,10 @@ struct FacultyGroupColorPickerViewModel: ViewModel {
         let store = FacultyGroupColorPickerStore(facultyGroup: facultyGroup)
 
         store.setFacultyGroupColor
-            .sink {
+            .sink(on: store) {
                 context.appData.setFacultyGroupColor(for: facultyGroup, color: $0)
                 navigationController?.pop()
             }
-            .store(in: &store.cancellables)
 
         return store
     }

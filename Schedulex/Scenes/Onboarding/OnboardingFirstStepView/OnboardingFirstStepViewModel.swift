@@ -45,8 +45,7 @@ struct OnboardingFirstStepViewModel: ViewModel {
             }
 
         store.onConfirmationAlertContinueButton
-            .sink { _ in presentStartSecondStepView.send() }
-            .store(in: &store.cancellables)
+            .sink(on: store) { _ in presentStartSecondStepView.send() }
 
         presentStartSecondStepView
             .sink(on: store) { store in

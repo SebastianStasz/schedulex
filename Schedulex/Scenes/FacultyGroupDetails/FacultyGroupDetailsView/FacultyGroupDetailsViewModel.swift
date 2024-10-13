@@ -55,26 +55,22 @@ struct FacultyGroupDetailsViewModel: ViewModel {
             .assign(to: &store.$isFacultyGroupSubscribed)
 
         store.unsubscribeFacultyGroup
-            .sink {
+            .sink(on: store) {
                 context.appData.unsubscribeFacultyGroup(facultyGroup)
                 dismissOrPop()
             }
-            .store(in: &store.cancellables)
 
         store.subscribeFacultyGroup
-            .sink {
+            .sink(on: store) {
                 context.appData.subscribeFacultyGroup(facultyGroup)
                 dismissOrPop()
             }
-            .store(in: &store.cancellables)
 
         store.navigateToColorSelection
-            .sink { navigateToFacultyGroupColorSelection() }
-            .store(in: &store.cancellables)
+            .sink(on: store) { navigateToFacultyGroupColorSelection() }
 
         store.navigateToClassList
-            .sink { navigateToFacultyGroupClassList(classes: store.facultyGroupDetails?.classes ?? []) }
-            .store(in: &store.cancellables)
+            .sink(on: store) { navigateToFacultyGroupClassList(classes: store.facultyGroupDetails?.classes ?? []) }
 
         store.navigateToEventsList
             .sink(on: store) { store in

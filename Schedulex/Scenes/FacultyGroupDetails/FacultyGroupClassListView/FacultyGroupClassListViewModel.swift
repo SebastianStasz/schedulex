@@ -46,12 +46,10 @@ struct FacultyGroupClassListViewModel: ViewModel {
             .assign(to: &store.$visibleClasses)
 
         store.hideFacultyGroupClass
-            .sink { context.appData.hideFacultyGroupClass($0) }
-            .store(in: &store.cancellables)
+            .sink(on: store) { context.appData.hideFacultyGroupClass($0) }
 
         store.unhideFacultyGroupClass
-            .sink { context.appData.unhideFacultyGroupClass($0) }
-            .store(in: &store.cancellables)
+            .sink(on: store) { context.appData.unhideFacultyGroupClass($0) }
 
         return store
     }

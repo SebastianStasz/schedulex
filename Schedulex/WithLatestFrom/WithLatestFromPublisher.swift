@@ -10,8 +10,8 @@ import Foundation
 
 extension Publishers {
     struct WithLatestFrom<Upstream: Publisher,
-                          Other: Publisher,
-                          Output>: Publisher where Upstream.Failure == Other.Failure
+        Other: Publisher,
+        Output>: Publisher where Upstream.Failure == Other.Failure
     {
         typealias Failure = Upstream.Failure
         typealias ResultSelector = (Upstream.Output, Other.Output) -> Output

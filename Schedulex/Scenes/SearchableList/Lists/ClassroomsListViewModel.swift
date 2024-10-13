@@ -31,8 +31,7 @@ struct ClassroomsListViewModel: ViewModel {
             .assign(to: &store.$items)
 
         store.onSelectListItem
-            .sink { navigateToEventsListView(classroom: $0) }
-            .store(in: &store.cancellables)
+            .sink(on: store) { navigateToEventsListView(classroom: $0) }
 
         return store
     }

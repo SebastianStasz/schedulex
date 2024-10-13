@@ -53,7 +53,7 @@ struct SettingsViewModel: ViewModel {
 
         Merge(store.viewWillAppear, NotificationCenter.willEnterForeground)
             .perform { await notificationsManager.updateNotificationsPermission() }
-            .sink {}.store(in: &store.cancellables)
+            .sink(on: store)
 
         CombineLatest(context.appData.$classNotificationsEnabled, notificationsManager.isNotificationsAccessGranted)
             .map { $0 && $1 }
@@ -61,13 +61,11 @@ struct SettingsViewModel: ViewModel {
 
         store.$classNotificationsTime
             .dropFirst()
-            .sink { context.appData.classNotificationsTime = $0 }
-            .store(in: &store.cancellables)
+            .sink(on: store) { context.appData.classNotificationsTime = $0 }
 
         store.$appColorScheme
             .dropFirst()
-            .sink { context.appData.appColorScheme = $0 }
-            .store(in: &store.cancellables)
+            .sink(on: store) { context.appData.appColorScheme = $0 }
 
         store.enableNotifications
             .perform { [weak store] in
@@ -80,14 +78,14 @@ struct SettingsViewModel: ViewModel {
                     }
                 }
             }
-            .sink {}.store(in: &store.cancellables)
+            .sink(on: store)
 
         store.disableNotifications
             .perform {
                 context.appData.classNotificationsEnabled = false
                 notificationsManager.removeAllPendingNotifications()
             }
-            .sink {}.store(in: &store.cancellables)
+            .sink(on: store)
 
         store.presentSendEmailSheet = { [weak store] in
             presentSendEmailSheet(recipient: store?.contactMail, appVersion: store?.appVersion, facultyGroups: context.appData.subscribedFacultyGroups)
