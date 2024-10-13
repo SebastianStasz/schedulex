@@ -27,11 +27,9 @@ struct EventsList: View {
                     .onTapGesture { selectedEvent = event }
 
                 if let nextEvent,
-                   let startDate = event.endDate,
-                   let endDate = nextEvent.startDate,
-                   let breakTimeComponents = getBreakTimeComponents(startDate: startDate, endDate: endDate)
+                   let breakTimeComponents = getBreakTimeComponents(startDate: event.endDate, endDate: nextEvent.startDate)
                 {
-                    EventsListRow(element: .break(from: startDate, to: endDate, timeComponents: breakTimeComponents))
+                    EventsListRow(element: .break(from: event.endDate, to: nextEvent.startDate, timeComponents: breakTimeComponents))
                 }
             }
         }

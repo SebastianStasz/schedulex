@@ -13,8 +13,8 @@ struct FacultyGroupEvent: Hashable, Identifiable {
     let color: FacultyGroupColor
     let event: Event
 
-    var startDate: Date? { event.startDate }
-    var endDate: Date? { event.endDate }
+    var startDate: Date { event.startDate }
+    var endDate: Date { event.endDate }
 
     var id: UUID { event.id }
 }
