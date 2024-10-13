@@ -19,9 +19,9 @@ struct FacultyGroupEvent: Hashable, Identifiable {
     var id: UUID { event.id }
 }
 
-typealias FacultyGroupEventsByDate = [Date: [FacultyGroupEvent]]
+typealias facultyGroupEventsByDay = [Date: [FacultyGroupEvent]]
 
-extension FacultyGroupEventsByDate {
+extension facultyGroupEventsByDay {
     var allEvents: [Event] {
         flatMap { $0.value.map { $0.event } }
     }

@@ -24,7 +24,7 @@ struct DashboardEventsViewModel {
     struct Output {
         let dayPickerItems: Driver<[DayPickerItem]?>
         let facultiesGroupsDetails: Driver<[FacultyGroupDetails]>
-        let facultyGroupEventsByDate: Driver<FacultyGroupEventsByDate>
+        let facultyGroupEventsByDay: Driver<facultyGroupEventsByDay>
         let isLoading: Driver<Bool>
         let errorTracker: Driver<Error>
     }
@@ -54,13 +54,13 @@ struct DashboardEventsViewModel {
             .onNext { _ in nextUpdateDate = Calendar.current.date(byAdding: .minute, value: 5, to: .now) }
             .share()
 
-        let facultyGroupEventsByDate = CombineLatest(allFacultiesGroupsDetails, input.hiddenClasses)
+        let facultyGroupEventsByDay = CombineLatest(allFacultiesGroupsDetails, input.hiddenClasses)
             .onNext { _ in isLoading.send(true) }
             .map { $0.0.mapToEventsWithoutHiddenClasses(hiddenClasses: $0.1) }
             .map { groupEventsByDate($0) }
             .share()
 
-        let dayPickerItems = CombineLatest(facultyGroupEventsByDate, input.daysOff)
+        let dayPickerItems = CombineLatest(facultyGroupEventsByDay, input.daysOff)
             .receive(on: DispatchQueue.global(qos: .background))
             .map { $0.0.mapToDayPickerItems(daysOff: $0.1) }
             .receive(on: DispatchQueue.main)
@@ -68,7 +68,7 @@ struct DashboardEventsViewModel {
 
         return Output(dayPickerItems: dayPickerItems.asDriver(),
                       facultiesGroupsDetails: allFacultiesGroupsDetails.asDriver(),
-                      facultyGroupEventsByDate: facultyGroupEventsByDate.asDriver(),
+                      facultyGroupEventsByDay: facultyGroupEventsByDay.asDriver(),
                       isLoading: isLoading.asDriver(),
                       errorTracker: errorHandler.asDriver())
     }
@@ -87,7 +87,7 @@ struct DashboardEventsViewModel {
         return facultyGroupsDetails
     }
 
-    private func groupEventsByDate(_ events: [FacultyGroupEvent]) -> FacultyGroupEventsByDate {
+    private func groupEventsByDate(_ events: [FacultyGroupEvent]) -> facultyGroupEventsByDay {
         Dictionary(grouping: events, by: { Calendar.current.startOfDay(for: $0.startDate) })
             .mapValues { $0.sorted(by: { $0.startDate < $1.startDate }) }
     }
@@ -112,7 +112,7 @@ private extension [FacultyGroupDetails] {
     }
 }
 
-private extension FacultyGroupEventsByDate {
+private extension facultyGroupEventsByDay {
     func mapToDayPickerItems(daysOff: [DayOff]) -> [DayPickerItem]? {
         guard let startDate = keys.min(), let endDate = keys.max() else { return nil }
 
