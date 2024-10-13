@@ -127,6 +127,15 @@ struct DashboardViewModel: ViewModel {
                 }
             }
 
+        dashboardEventsOutput.facultyGroupEventsByDay
+            .sink(on: store) {
+                let now = Date.now
+                let futureEvents = $0.filter { $0.key >= Calendar.current.startOfDay(for: now) }
+                let events = futureEvents.mapToFacultyGroupEventsByDate()
+                let limitedEvents = Array(events.prefix(2))
+                AppGroupData().saveFacultyGroupEventsByDate(limitedEvents)
+            }
+
         dashboardEventsOutput.facultiesGroupsDetails
             .sink(on: store) { context.appData.updateNumberOfEventsForSubscribedFacultyGroups(from: $0) }
 

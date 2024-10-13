@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Event: Hashable, Identifiable {
+public struct Event: Hashable, Identifiable, Codable {
     public let id = UUID()
     public let name: String?
     public let type: String?

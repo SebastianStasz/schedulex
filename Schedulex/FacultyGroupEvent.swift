@@ -8,7 +8,7 @@
 import Domain
 import Foundation
 
-struct FacultyGroupEvent: Hashable, Identifiable {
+struct FacultyGroupEvent: Hashable, Identifiable, Codable {
     let facultyGroupName: String
     let color: FacultyGroupColor
     let event: Event
@@ -25,4 +25,12 @@ extension FacultyGroupEventsByDay {
     var allEvents: [Event] {
         flatMap { $0.value.map { $0.event } }
     }
+
+    func mapToFacultyGroupEventsByDate() -> [FacultyGroupEventsByDate] {
+        keys.sorted().compactMap { key in
+            guard let events = self[key] else { return nil }
+            return FacultyGroupEventsByDate(date: key, events: events)
+        }
+    }
 }
+
