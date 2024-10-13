@@ -131,7 +131,7 @@ struct DashboardViewModel: ViewModel {
             .sink(on: store) { context.appData.updateNumberOfEventsForSubscribedFacultyGroups(from: $0) }
 
         let classNotificationServiceInput = ClassNotificationService.Input(
-            events: dashboardEventsOutput.eventsToDisplay.map { $0.map { $0.event } }.asDriver(),
+            events: dashboardEventsOutput.facultyGroupEventsByDate.map { $0.allEvents }.asDriver(),
             classNotificationsEnabled: context.appData.$classNotificationsEnabled.asDriver(),
             classNotificationsTime: context.appData.$classNotificationsTime.asDriver()
         )
@@ -140,8 +140,8 @@ struct DashboardViewModel: ViewModel {
             .registerForEventsNotifications(input: classNotificationServiceInput)
             .sink(on: store)
 
-        CombineLatest(store.$selectedDate, dashboardEventsOutput.eventsToDisplay)
-            .map { getSelectedDayEvents(date: $0, events: $1) }
+        CombineLatest(store.$selectedDate, dashboardEventsOutput.facultyGroupEventsByDate)
+            .compactMap { getEvents(forDate: $0, eventsByDate: $1) }
             .assign(to: &store.$selectedDateEvents)
 
         CombineLatest(store.$selectedDate, daysOff)
@@ -164,9 +164,8 @@ struct DashboardViewModel: ViewModel {
         return store
     }
 
-    private func getSelectedDayEvents(date: Date, events: [FacultyGroupEvent]) -> [FacultyGroupEvent] {
-        events
-            .filter { $0.startDate?.isSameDay(as: date) ?? false }
-            .sorted(by: { $0.startDate! < $1.startDate! })
+    private func getEvents(forDate date: Date, eventsByDate: FacultyGroupEventsByDate) -> [FacultyGroupEvent]? {
+        let specificDate = Calendar.current.startOfDay(for: date)
+        return eventsByDate[specificDate]
     }
 }
