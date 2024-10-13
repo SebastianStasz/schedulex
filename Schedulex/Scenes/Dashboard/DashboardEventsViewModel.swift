@@ -24,7 +24,7 @@ struct DashboardEventsViewModel {
     struct Output {
         let dayPickerItems: Driver<[DayPickerItem]?>
         let facultiesGroupsDetails: Driver<[FacultyGroupDetails]>
-        let facultyGroupEventsByDay: Driver<facultyGroupEventsByDay>
+        let facultyGroupEventsByDay: Driver<FacultyGroupEventsByDay>
         let isLoading: Driver<Bool>
         let errorTracker: Driver<Error>
     }
@@ -87,7 +87,7 @@ struct DashboardEventsViewModel {
         return facultyGroupsDetails
     }
 
-    private func groupEventsByDate(_ events: [FacultyGroupEvent]) -> facultyGroupEventsByDay {
+    private func groupEventsByDate(_ events: [FacultyGroupEvent]) -> FacultyGroupEventsByDay {
         Dictionary(grouping: events, by: { Calendar.current.startOfDay(for: $0.startDate) })
             .mapValues { $0.sorted(by: { $0.startDate < $1.startDate }) }
     }
@@ -112,7 +112,7 @@ private extension [FacultyGroupDetails] {
     }
 }
 
-private extension facultyGroupEventsByDay {
+private extension FacultyGroupEventsByDay {
     func mapToDayPickerItems(daysOff: [DayOff]) -> [DayPickerItem]? {
         guard let startDate = keys.min(), let endDate = keys.max() else { return nil }
 

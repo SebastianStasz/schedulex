@@ -164,7 +164,7 @@ struct DashboardViewModel: ViewModel {
         return store
     }
 
-    private func getEvents(forDate date: Date, eventsByDate: facultyGroupEventsByDay) -> [FacultyGroupEvent]? {
+    private func getEvents(forDate date: Date, eventsByDate: FacultyGroupEventsByDay) -> [FacultyGroupEvent]? {
         let specificDate = Calendar.current.startOfDay(for: date)
         return eventsByDate[specificDate]
     }
