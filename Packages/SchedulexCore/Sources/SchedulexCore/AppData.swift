@@ -43,8 +43,6 @@ public final class AppData {
         didSet { defaults.set(appColorScheme.rawValue, forKey: "appColorScheme") }
     }
 
-    private var didResetRateTheApplicationInfoCard = true
-
     init(defaults: UserDefaults = .standard) {
         self.defaults = defaults
 
@@ -53,7 +51,7 @@ public final class AppData {
 
         classNotificationsEnabled = defaults.bool(forKey: "classNotificationsEnabled")
         dashboardSwipeTipPresented = defaults.bool(forKey: "dashboardSwipeTipPresented")
-        
+
         appColorScheme = getEnum(ofType: AppColorScheme.self, forKey: "appColorScheme") ?? .system
         classNotificationsTime = getEnum(ofType: ClassNotificationTime.self, forKey: "classNotificationsTime") ?? .oneHourBefore
 
@@ -61,7 +59,7 @@ public final class AppData {
             hiddenInfoCards = rawValues.compactMap { InfoCard(rawValue: $0) }
         }
 
-        didResetRateTheApplicationInfoCard = defaults.bool(forKey: "didResetRateTheApplicationInfoCard")
+        let didResetRateTheApplicationInfoCard = defaults.bool(forKey: "didResetRateTheApplicationInfoCard")
         if !didResetRateTheApplicationInfoCard {
             hiddenInfoCards.removeAll(where: { $0 == .rateTheApplication })
             defaults.set(true, forKey: "didResetRateTheApplicationInfoCard")
