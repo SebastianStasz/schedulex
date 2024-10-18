@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct NextDaySchedule {
+struct NextDaySchedule: Equatable {
     let date: Date
     let events: [FacultyGroupEvent]
 

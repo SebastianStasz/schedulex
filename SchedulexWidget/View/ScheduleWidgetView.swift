@@ -6,17 +6,25 @@
 //
 
 import Domain
+import Resources
 import SwiftUI
 import WidgetKit
 import Widgets
 
-@available(iOS 17.0, *)
 struct ScheduleWidgetView: View {
+    @Environment(\.colorScheme) private var colorScheme
     let entry: ScheduleWidgetProvider.Entry
 
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
-            headerView
+            VStack(alignment: .leading, spacing: 0) {
+                Text(L10n.today, style: .body)
+
+                Text(todayNote)
+                    .font(.caption)
+                    .foregroundStyle(.grayShade1)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
 
             VStack(alignment: .leading, spacing: 0) {
                 VStack(alignment: .leading, spacing: 4) {
@@ -25,26 +33,22 @@ struct ScheduleWidgetView: View {
                     }
                 }
 
-                if entry.events.count <= 1, let nextDaySchedule = entry.nextDaySchedule {
+                if entry.events.count <= 1, let nextDateSchedule = entry.nextDaySchedule {
                     Spacer()
 
                     VStack(alignment: .leading, spacing: 4) {
-                        Text(nextDateDescription(nextDaySchedule.date))
-                            .font(.caption)
-                            .textCase(.uppercase)
-                            .fontWeight(.semibold)
-                            .foregroundStyle(.textSecondary)
+                        nextDayWithEventsHeader(date: nextDateSchedule.date)
 
                         if entry.events.isEmpty {
-                            if let nextDayScheduleFirstEvent = nextDaySchedule.events.first {
+                            if let nextDayScheduleFirstEvent = nextDateSchedule.events.first {
                                 EventWidgetCardView(event: nextDayScheduleFirstEvent)
                             }
-                            if nextDaySchedule.numberOfEvents > 1 {
-                                let message = nextDayEventsIndicatorMessage(nextDaySchedule: nextDaySchedule)
+                            if nextDateSchedule.numberOfEvents > 1 {
+                                let message = nextDayEventsIndicatorMessage(nextDaySchedule: nextDateSchedule)
                                 numberOfEventsIndicator(message: message)
                             }
                         } else {
-                            let message = eventsNumberMessage(count: nextDaySchedule.numberOfEvents)
+                            let message = eventsNumberMessage(count: nextDateSchedule.numberOfEvents)
                             numberOfEventsIndicator(message: message)
                         }
                     }
@@ -52,24 +56,21 @@ struct ScheduleWidgetView: View {
             }
             .frame(maxHeight: .infinity, alignment: .top)
         }
-        .containerBackground(.fill.tertiary, for: .widget)
+        .widgetContainer()
     }
 
-    private var headerView: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            Text("Today", style: .body)
-
-            Text(todayNote)
-                .font(.caption)
-                .foregroundStyle(.grayShade1)
-        }
-        .frame(maxWidth: .infinity, alignment: .leading)
+    private func nextDayWithEventsHeader(date: Date) -> some View {
+        Text(date.isInTomorrow ? L10n.tomorrow : date.formatted(style: .dateLong))
+            .font(.caption)
+            .textCase(.uppercase)
+            .fontWeight(.semibold)
+            .foregroundStyle(.textSecondary)
     }
 
     private func numberOfEventsIndicator(message: String) -> some View {
         HStack(spacing: .micro) {
             RoundedRectangle(cornerRadius: 100)
-                .fill(.accentPrimary)
+                .fill(entry.events.first?.primaryColor(for: colorScheme) ?? entry.nextDaySchedule?.events.first?.primaryColor(for: colorScheme) ?? .accentPrimary)
                 .frame(width: 3, height: 16)
             Text(message, style: .footnote)
         }
@@ -77,7 +78,7 @@ struct ScheduleWidgetView: View {
 
     private var todayNote: String {
         guard !entry.events.isEmpty else {
-            return "No more events"
+            return L10n.widgetNoMoreEvents
         }
         let numberOfEvents = entry.events.count
         return "\(eventsNumberMessage(count: numberOfEvents)) left"
@@ -93,11 +94,15 @@ struct ScheduleWidgetView: View {
         let eventMessage = count == 1 ? "event" : "events"
         return "\(count) \(eventMessage)"
     }
+}
 
-    private func nextDateDescription(_ date: Date) -> String {
-        guard let tomorrowDate = Calendar.current.date(byAdding: .day, value: 1, to: .now) else {
-            return date.formatted(style: .dateLong)
+private extension View {
+    @ViewBuilder
+    func widgetContainer() -> some View {
+        if #available(iOS 17, *) {
+            containerBackground(.fill.tertiary, for: .widget)
+        } else {
+            padding(.large).background(.grayShade2)
         }
-        return date.isSameDay(as: tomorrowDate) ? "Tomorrow" : date.formatted(style: .dateLong)
     }
 }

@@ -77,6 +77,7 @@
 // main
 "add_group" = "Add group";
 "today" = "Today";
+"tomorrow" = "Tomorrow";
 "calendar" = "Calendar";
 "more" = "More";
 "classes" = "Classes";
@@ -165,4 +166,8 @@
 "teacher_list_search_prompt" = "Teacher";
 "teacher_groups_list_search_prompt" = "Last name initial";
 "teacher_groups_list_number_of_teachers" = "Number of teachers:";
+
+// widget
+"widget_no_more_events" = "No more events";
+"widget_no_events" = "No events";
 

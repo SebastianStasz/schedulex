@@ -22,6 +22,7 @@ struct ScheduleWidgetSmall: Widget {
     }
 }
 
+@available(iOS 17.0, *)
 #Preview(as: .systemSmall) {
     ScheduleWidgetSmall()
 } timeline: {

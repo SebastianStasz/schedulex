@@ -25,7 +25,7 @@ struct EventWidgetCardView: View {
         .padding(.vertical, 4)
         .padding(.horizontal, 5)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(backgroundColor)
+        .background(event.primaryColor(for: colorScheme))
         .cornerRadius(.mini)
     }
 
@@ -38,9 +38,11 @@ struct EventWidgetCardView: View {
         let endTime = event.endDate.formatted(style: .timeOnly)
         return "\(startTime) - \(endTime)"
     }
+}
 
-    private var backgroundColor: Color {
-        colorScheme == .dark ? event.color.shade1 : event.color.shade2
+extension FacultyGroupEvent {
+    func primaryColor(for colorScheme: ColorScheme) -> Color {
+        colorScheme == .dark ? color.shade1 : color.shade2
     }
 }
 

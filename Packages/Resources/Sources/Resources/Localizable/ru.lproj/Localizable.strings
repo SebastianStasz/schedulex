@@ -77,6 +77,7 @@
 // main
 "add_group" = "Добавить группу";
 "today" = "Сегодня";
+"tomorrow" = "Завтра";
 "calendar" = "Календарь";
 "more" = "Больше";
 "classes" = "Предметы";
@@ -165,4 +166,8 @@
 "teacher_list_search_prompt" = "Преподаватель";
 "teacher_groups_list_search_prompt" = "Первая буква фамилии";
 "teacher_groups_list_number_of_teachers" = "Количество преподавателей:";
+
+// widget
+"widget_no_more_events" = " ";
+"widget_no_events" = " ";
 

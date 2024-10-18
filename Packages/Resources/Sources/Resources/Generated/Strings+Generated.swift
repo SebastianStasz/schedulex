@@ -280,6 +280,8 @@ public enum L10n {
   public static let teachersListTitle = L10n.tr("Localizable", "teachers_list_title", fallback: "Teachers")
   /// Today
   public static let today = L10n.tr("Localizable", "today", fallback: "Today")
+  /// Tomorrow
+  public static let tomorrow = L10n.tr("Localizable", "tomorrow", fallback: "Tomorrow")
   /// Unfollow
   public static let unfollow = L10n.tr("Localizable", "unfollow", fallback: "Unfollow")
   /// Do you want to unfollow group
@@ -300,6 +302,10 @@ public enum L10n {
   public static let weekdayTuesdayShort = L10n.tr("Localizable", "weekday_tuesday_short", fallback: "TUE")
   /// WED
   public static let weekdayWednesdayShort = L10n.tr("Localizable", "weekday_wednesday_short", fallback: "WED")
+  /// No events
+  public static let widgetNoEvents = L10n.tr("Localizable", "widget_no_events", fallback: "No events")
+  /// No more events
+  public static let widgetNoMoreEvents = L10n.tr("Localizable", "widget_no_more_events", fallback: "No more events")
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:enable nesting type_body_length type_name vertical_whitespace_opening_braces

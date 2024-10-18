@@ -8,7 +8,7 @@
 import Domain
 import WidgetKit
 
-struct ScheduleEventsEntry: TimelineEntry {
+struct ScheduleEventsEntry: TimelineEntry, Equatable {
     let date: Date
     let events: [FacultyGroupEvent]
     let nextDaySchedule: NextDaySchedule?

@@ -12,6 +12,10 @@ public extension Date {
         Calendar.current.isDate(self, inSameDayAs: date)
     }
 
+    var isInTomorrow: Bool {
+        Calendar.current.isDateInTomorrow(self)
+    }
+
     var year: Int {
         Calendar.current.component(.year, from: self)
     }
