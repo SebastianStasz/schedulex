@@ -29,7 +29,7 @@ extension FacultyGroupClass {
 extension Event {
     static let sample = Event(name: .eventName,
                               type: "wykład do wyboru",
-                              startDate: .now,
+                              startDate: Calendar.current.date(byAdding: .second, value: 1, to: .now)!,
                               endDate: Calendar.current.date(byAdding: .minute, value: 1, to: .now)!,
                               place: .place,
                               isRemoteClass: false,

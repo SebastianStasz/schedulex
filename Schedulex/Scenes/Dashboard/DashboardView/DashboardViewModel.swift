@@ -12,6 +12,7 @@ import SchedulexViewModel
 import UEKScraper
 import UIKit
 import Widgets
+import WidgetKit
 
 final class DashboardStore: RootStore {
     @Published var selectedDate: Date = .now
@@ -128,13 +129,14 @@ struct DashboardViewModel: ViewModel {
             }
 
         dashboardEventsOutput.facultyGroupEventsByDay
-            .sink(on: store) {
+            .debounce(for: .seconds(2), scheduler: DispatchQueue.main)
+            .onNext {
                 let now = Date.now
                 let futureEvents = $0.filter { $0.key >= Calendar.current.startOfDay(for: now) }
-                let events = futureEvents.mapToFacultyGroupEventsByDate()
-                let limitedEvents = Array(events.prefix(2))
-                AppGroupData().saveFacultyGroupEventsByDate(limitedEvents)
+                AppGroupData().saveFacultyGroupEventsByDate(futureEvents)
             }
+            .debounce(for: .seconds(2), scheduler: DispatchQueue.main)
+            .sink(on: store) { _ in WidgetCenter.shared.reloadAllTimelines() }
 
         dashboardEventsOutput.facultiesGroupsDetails
             .sink(on: store) { context.appData.updateNumberOfEventsForSubscribedFacultyGroups(from: $0) }
@@ -150,7 +152,7 @@ struct DashboardViewModel: ViewModel {
             .sink(on: store)
 
         CombineLatest(store.$selectedDate, dashboardEventsOutput.facultyGroupEventsByDay)
-            .compactMap { getEvents(forDate: $0, eventsByDate: $1) }
+            .map { getEvents(forDate: $0, eventsByDate: $1) ?? [] }
             .assign(to: &store.$selectedDateEvents)
 
         CombineLatest(store.$selectedDate, daysOff)

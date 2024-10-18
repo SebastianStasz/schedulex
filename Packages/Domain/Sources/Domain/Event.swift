@@ -8,7 +8,7 @@
 import Foundation
 
 public struct Event: Hashable, Identifiable, Codable {
-    public let id = UUID()
+    public let id: UUID
     public let name: String?
     public let type: String?
     public let startDate: Date
@@ -23,6 +23,7 @@ public struct Event: Hashable, Identifiable, Codable {
     public let facultyGroup: String?
 
     public init(
+        id: UUID = UUID(),
         name: String? = nil,
         type: String? = nil,
         startDate: Date,
@@ -36,6 +37,7 @@ public struct Event: Hashable, Identifiable, Codable {
         teacherProfileUrl: URL? = nil,
         facultyGroup: String? = nil
     ) {
+        self.id = id
         self.name = name
         self.type = type
         self.startDate = startDate

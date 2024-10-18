@@ -8,7 +8,7 @@
 import Domain
 import Foundation
 
-struct FacultyGroupEvent: Hashable, Identifiable, Codable {
+struct FacultyGroupEvent: Hashable, Identifiable, Equatable, Codable {
     let facultyGroupName: String
     let color: FacultyGroupColor
     let event: Event
@@ -17,19 +17,4 @@ struct FacultyGroupEvent: Hashable, Identifiable, Codable {
     var endDate: Date { event.endDate }
 
     var id: UUID { event.id }
-}
-
-typealias FacultyGroupEventsByDay = [Date: [FacultyGroupEvent]]
-
-extension FacultyGroupEventsByDay {
-    var allEvents: [Event] {
-        flatMap { $0.value.map { $0.event } }
-    }
-
-    func mapToFacultyGroupEventsByDate() -> [FacultyGroupEventsByDate] {
-        keys.sorted().compactMap { key in
-            guard let events = self[key] else { return nil }
-            return FacultyGroupEventsByDate(date: key, events: events)
-        }
-    }
 }
